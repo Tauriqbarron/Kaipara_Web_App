@@ -10,25 +10,56 @@ h1
     left: 90%;
 }
 .homeNav{
-
+    background-color: #333;
+    margin: 0;
+    padding: 0;
+    height:80px;
 }
 .homeNavCon{
     position: relative;
-    left: 60%;
+    left: 55%;
+    margin: 0;
+    padding: 0;
+    top: 50%;
 }
 .navBar{
     list-style-type: none;
-
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 .topNav{
     display: inline;
+    margin-left: 50px;
+    margin-right: 50px;
+    color: white;
 }
 .footer{
+    float: right;
 
+    margin-right: 30px;
 }
 .footerCon{
-
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:60px;
 }
 .footerLinks{
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
 
+}
+.MainCon{
+    min-height: 100%;
+}
+body{
+    margin:0;
+    padding:0;
+    height:100%;
+}
+.content{
+    padding:10px;
+    padding-bottom:60px
 }

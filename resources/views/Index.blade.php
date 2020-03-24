@@ -22,8 +22,11 @@
         </div>
     </div>
     <hr>
-    <div class="footer">
-        <div class="footerCon">
+    <div class="content">
+
+    </div>
+    <div class="footerCon">
+        <div class="footer">
             <ul class="footerLinks">
                 <li>Contact Us</li>
                 <li>About Us</li>
@@ -31,7 +34,6 @@
             </ul>
         </div>
     </div>
-    <p>Test</p>
 </div>
 
 </body>
