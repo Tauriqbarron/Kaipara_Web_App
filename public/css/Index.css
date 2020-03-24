@@ -1,0 +1,34 @@
+h1
+{
+    font-size: 100px;
+}
+.header{
+
+}
+.headerCon{
+    position: relative;
+    left: 90%;
+}
+.homeNav{
+
+}
+.homeNavCon{
+    position: relative;
+    left: 60%;
+}
+.navBar{
+    list-style-type: none;
+
+}
+.topNav{
+    display: inline;
+}
+.footer{
+
+}
+.footerCon{
+
+}
+.footerLinks{
+
+}
