@@ -23,7 +23,7 @@
     </div>
     <hr>
     <div class="content">
-
+        @yield('mainContent')
     </div>
     <div class="footerCon">
         <div class="footer">
