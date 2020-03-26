@@ -19,3 +19,9 @@ Route::get('/', function () {
 Route::get('/service', function () {
     return view('Service.serviceProfileTemplate');
 }) ->name('service.home');
+
+
+/*Administrator part (Jay) */
+Route::get('/admin', function () {
+    return view('Administration.index');
+});
