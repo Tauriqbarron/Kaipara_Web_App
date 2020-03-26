@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="{{url('css/Index.css')}}" type="text/css"/>
+    <title>@yield('title') - KSPMS</title>
 </head>
 <body>
 <div class="MainCon">
