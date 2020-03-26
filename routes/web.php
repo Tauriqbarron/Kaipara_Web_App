@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('profileTemplate');
+    return view('index');
 });
 Route::get('/service', function () {
     return view('Service.serviceProfileTemplate');
