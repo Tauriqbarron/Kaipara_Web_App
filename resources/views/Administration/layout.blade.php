@@ -16,9 +16,18 @@
     <div class="homeNav">
         <div class="homeNavCon">
             <ul class="navBar">
-                <li class="topNav">Security</li>
-                <li class="topNav">Property</li>
-                <li class="topNav">News</li>
+                <li class="topNav">
+                    <a href="#">Client Management</a>
+                </li>
+                <li class="topNav">
+                    <a href="#">Staff Management</a>
+                </li>
+                <li class="topNav">
+                    <a href="#">Service Provider Management</a>
+                </li>
+                <li class="topNav">
+                    <a href="#">Assignment Management</a>
+                </li>
             </ul>
         </div>
     </div>
