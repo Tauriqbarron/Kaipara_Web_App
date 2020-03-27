@@ -6,8 +6,8 @@
 </head>
 <body>
 <div class="MainCon">
-    <div class="header">
-        <div class="headerCon">
+    <div class="headerCon">
+        <div class="header">
             <button class="login">Login</button>
             <button class="login">Sign up</button>
         </div>

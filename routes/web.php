@@ -19,8 +19,12 @@ Route::get('/', function () {
 
 /*Service Provider Profile*/
 Route::get('/service', function () {
-    return view('Service.serviceBookings');
+    return view('Service.serviceProfileTemplate');
 }) ->name('service.home');
+/*Service Provider Booking Application Page*/
+Route::get('/service/bookings', function () {
+    return view('Service.serviceBookings');
+}) ->name('service.Bookings');
 
 
 /*Administrator part (Jay) */
