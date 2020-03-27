@@ -16,8 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+
+/*Service Provider Profile*/
 Route::get('/service', function () {
-    return view('Service.serviceProfileTemplate');
+    return view('Service.serviceBookings');
 }) ->name('service.home');
 
 

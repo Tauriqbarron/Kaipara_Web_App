@@ -22,16 +22,17 @@
             <li class="contextMenuCon">
                     <img href="contextMenu.png" style="width:100%">
             </li>
-
         </ul>
     </div>
     <hr>
     <div class="homeNav">
         <div class="homeNavCon">
+        @yield('homeNavCon')
             <ul class="navBar">
-                <li class="topNav">Schedule</li>
-                <li class="topNav">Assignments</li>
-                <li class="topNav">Roster</li>
+                <li class="topNav">Booking Applications</li>
+                <li class="topNav">Quotes</li>
+                <li class="topNav">Current Booking</li>
+                <li class="topNav">Availability Schedule</li>
             </ul>
         </div>
     </div>
@@ -49,6 +50,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>
