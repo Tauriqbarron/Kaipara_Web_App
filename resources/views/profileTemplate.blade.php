@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="{{url('css/Index.css')}}" type="text/css"/>
     <link rel="stylesheet" href="{{url('css/Profile.css')}}" type="text/css"/>
+    <link rel="stylesheet" href="{{url('css/service.css')}}" type="text/css"/>
     <title>@yield('title') - KSPMS</title>
 </head>
 <body>
@@ -25,15 +26,10 @@
         </ul>
     </div>
     <hr>
-    <div class="homeNav">
+    <div class="homeNav" >
+
         <div class="homeNavCon">
-        @yield('homeNavCon')
-            <ul class="navBar">
-                <li class="topNav">Booking Applications</li>
-                <li class="topNav">Quotes</li>
-                <li class="topNav">Current Booking</li>
-                <li class="topNav">Availability Schedule</li>
-            </ul>
+            @yield('homeNavCon')
         </div>
     </div>
     <hr>

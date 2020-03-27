@@ -1,0 +1,16 @@
+#appMap{
+    display:none;
+}
+.bookCon{
+    position: relative;
+
+    width:100%;
+}
+.jobList{
+    border: 5px solid red;
+    height: 400px;
+    width: 400px;
+    max-width: 400px;
+    overflow: hidden;
+    margin: auto;
+}
