@@ -56,14 +56,13 @@ h1
     color: white;
 }
 .MainCon{
-    min-height: 100%;
+
 }
 body{
     margin:0;
     padding:0;
-    height:100%;
     max-width: 100%;
 }
 .content{
-    padding-bottom:60px
+    height: 100%;
 }

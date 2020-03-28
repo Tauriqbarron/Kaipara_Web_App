@@ -3,14 +3,15 @@
 }
 .bookCon{
     position: relative;
-
-    width:100%;
+    border: 1px solid green;
+    width: 1700px;
+    height: 1000px;
 }
 .jobList{
     border: 5px solid red;
-    height: 400px;
-    width: 400px;
-    max-width: 400px;
-    overflow: hidden;
-    margin: auto;
+    height: 80%;
+    width: 70%;
+    margin: 2px;
+    position: absolute;
+    left: 15%;
 }
