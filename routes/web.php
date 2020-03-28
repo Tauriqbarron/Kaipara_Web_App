@@ -31,3 +31,26 @@ Route::get('/service/bookings', function () {
 Route::get('/admin', function () {
     return view('Administration.index');
 });
+
+Route::get('/admin/assignment', function () {
+    return view('Administration.assignment_management');
+});
+
+Route::get('/admin/client', function () {
+    return view('Administration.client_management');
+});
+
+Route::get('/admin/staff', function () {
+    return view('Administration.staff_management');
+});
+
+Route::get('/admin/provider', function () {
+    return view('Administration.service_provider_management');
+});
+
+
+
+
+
+
+
