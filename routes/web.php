@@ -14,44 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('profileTemplate');
 });
-
-/*Service Provider Profile*/
 Route::get('/service', function () {
-    return view('Service.index');
+    return view('Service.serviceProfileTemplate');
 }) ->name('service.home');
 
-/*Service Provider Booking Application Page*/
-Route::get('/service/applications', function () {
-    return view('Service.applications');
-}) ->name('service.Bookings');
-
-
-/*Administrator part (Jay) */
-Route::get('/admin', function () {
-    return view('Administration.index');
-});
-
-Route::get('/admin/assignment', function () {
-    return view('Administration.assignment_management');
-});
-
-Route::get('/admin/client', function () {
-    return view('Administration.client_management');
-});
-
-Route::get('/admin/staff', function () {
-    return view('Administration.staff_management');
-});
-
-Route::get('/admin/provider', function () {
-    return view('Administration.service_provider_management');
-});
-
-
-
-
-
-
-
+Route::get('/security', function () {
+    return view('Security.SecurityProfileTemplate');
+}) ->name('service.home');

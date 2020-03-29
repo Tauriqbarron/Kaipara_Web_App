@@ -1,4 +1,22 @@
-.profileImg{
-    height: 150px;
+.profilePicCon{
     width: 150px;
+    height: 150px;
+    background-color: cornflowerblue;
+}
+.contextMenuCon{
+    background-color: grey;
+    width: 40px;
+    height: 40px;
+}
+.profileBar{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: auto;
+}
+
+.profileBar li{
+    display: inline-block;
+    vertical-align: bottom;
 }
