@@ -4,14 +4,15 @@
 .bookCon{
     position: relative;
     border: 1px solid green;
-    width: 1700px;
+    width: 100%;
     height: 1000px;
 }
 .jobList{
     border: 5px solid red;
-    height: 80%;
-    width: 70%;
+    height: 100%;
+    width: 95%;
     margin: 2px;
     position: absolute;
-    left: 15%;
+    left: 2.5%;
+    overflow: scroll;
 }

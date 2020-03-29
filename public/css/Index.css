@@ -1,68 +1,10 @@
-h1
-{
-    font-size: 100px;
-}
-.header{
-
-}
-.header{
-    position: absolute;
-    left: 90%;
-}
-.headerCon{
-    position: relative;
-}
-.homeNav{
-    background-color: #333;
-    margin: 0;
-    padding: 0;
-    height:80px;
-    position: relative;
-}
-.homeNavCon{
-    position: absolute;
-    left: 55%;
-    margin: 0;
-    padding: 0;
-    top: 50%;
-    overflow: hidden;
-}
-.navBar{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-.topNav{
-    display: inline;
-    margin-left: 50px;
-    margin-right: 50px;
-    color: white;
+.title{
+    font-size: 50px;
+    background: -webkit-linear-gradient(#fff700, #237d00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 .footer{
-    float: right;
-    margin-right: 30px;
-}
-.footerCon{
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height:100px;
-    background-color: #333;
-}
-.footerLinks{
-    list-style-type: none;
-    padding: 0;
-    overflow: hidden;
-    color: white;
-}
-.MainCon{
-
-}
-body{
-    margin:0;
-    padding:0;
-    max-width: 100%;
-}
-.content{
-    height: 100%;
+    padding-top: 150px;
+    margin-top: 150px;
 }

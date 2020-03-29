@@ -1,1 +1,1 @@
-@extends('profileTemplate')
+@extends('Profile.profileTemplate')

@@ -1,4 +1,4 @@
-@extends('Service.serviceProfileTemplate')
+@extends('Service.layout')
 
 
 @section('mainContent')

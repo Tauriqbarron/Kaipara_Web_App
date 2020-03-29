@@ -19,11 +19,12 @@ Route::get('/', function () {
 
 /*Service Provider Profile*/
 Route::get('/service', function () {
-    return view('Service.serviceProfileTemplate');
+    return view('Service.index');
 }) ->name('service.home');
+
 /*Service Provider Booking Application Page*/
-Route::get('/service/bookings', function () {
-    return view('Service.serviceBookings');
+Route::get('/service/applications', function () {
+    return view('Service.applications');
 }) ->name('service.Bookings');
 
 
