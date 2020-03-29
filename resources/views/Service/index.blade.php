@@ -1,1 +1,1 @@
-@extends('Service.layout')
+@extends('Profile.layout')

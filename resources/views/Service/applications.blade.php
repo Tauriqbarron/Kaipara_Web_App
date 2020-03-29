@@ -1,11 +1,6 @@
-@extends('Service.layout')
-
-
+@extends('Service.index')
 @section('mainContent')
     <div class="bookCon">
-        <div name="appMap">
-            /*map style Interface with available jobs marked */
-        </div>
         <div class="jobList">
             <div class="jobListCon">
                 <div class="card w-auto">
