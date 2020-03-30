@@ -1,26 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand text-primary" href="#">KSPMS</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="{{ url('/admin/assignment') }}">Assignment Management <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="{{ url('/admin/staff') }}">Staff Management</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="{{ url('/admin/provider') }}">Service Provider Management</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="{{ url('/admin/client') }}">Client Management</a>
-            </li>
-        </ul>
-    </div>
-    <form class="form-inline my-2 my-lg-0">
-        <button class="btn btn-outline-primary mr-2">Admin</button>
-        <button class="btn btn-outline-warning my-2 my-sm-2" type="submit">logout</button>
-    </form>
+<nav class="navbar navbar-light bg-light justify-content-end">
+    <a class="nav-link active btn-lg mx-3 pt-2" href="{{url('/admin')}}">Overview</a>
+    <a class="nav-link active btn-lg mx-3 pt-2" href="{{url('/admin/assignment')}}">Assignment Management</a>
+    <a class="nav-link active btn-lg mx-3 pt-2" href="{{url('/admin/staff')}}">Staff Management</a>
+    <a class="nav-link active btn-lg mx-3 pt-2" href="{{url('/admin/client')}}">Client Management</a>
+    <a class="nav-link active btn-lg mx-3 pt-2" href="{{url('/admin/provider')}}">Service Provider Management</a>
 </nav>
+
