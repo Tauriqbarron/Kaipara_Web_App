@@ -41,9 +41,10 @@ Route::get('/admin/client', function () {
     return view('Administration.client_management');
 });
 
-Route::get('/admin/staff', function () {
-    return view('Administration.staff_management');
-});
+Route::get('/admin/staff',[
+   'uses' => 'StaffController@getIndex',
+   'as' => "staff.index"
+]);
 
 Route::get('/admin/provider', function () {
     return view('Administration.service_provider_management');
