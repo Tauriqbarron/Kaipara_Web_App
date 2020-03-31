@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light bg-light justify-content-center">
+<nav class="navbar navbar-light bg-light justify-content-center shadow">
     <a class="nav-link active btn-lg mx-5" href="#">Security</a>
     <a class="nav-link active btn-lg mx-5" href="{{ url('/service') }}">Service</a>
     <a class="nav-link active btn-lg mx-5" href="#">News</a>
