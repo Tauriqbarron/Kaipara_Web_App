@@ -21,7 +21,7 @@ class applicationsTableSeeder extends Seeder
 
         $application = new \App\applications([
             'imagePath' => 'https://www.slipperelectrical.co.nz/wp-content/uploads/2017/08/Residential-Electrician-Services.jpg',
-            'title' => 'Power Outlet Relocatiion',
+            'title' => 'Power Outlet Relocation',
             'description' => 'Needing a power outlet moved about 5m',
             'price' => 300
         ]);

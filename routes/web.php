@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+Route::get('/test', function () {
+    phpinfo();
+});
 
 /*Service Provider Profile*/
 Route::get('/service', function () {
@@ -23,9 +26,9 @@ Route::get('/service', function () {
 }) ->name('service.home');
 
 /*Service Provider Booking Application Page*/
-Route::get('/service/applications', function () {
-    return view('Service.applications');
-}) ->name('service.Bookings');
+Route::get('/service/applications', [
+    'uses' => 'ApplicationsController@getApps', 'as' => 'service.applications'
+]) ->name('service.Bookings');
 
 
 /*Administrator part (Jay) */
