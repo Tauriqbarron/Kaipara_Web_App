@@ -46,6 +46,26 @@ Route::get('/admin/staff',[
    'as' => "staff.index"
 ]);
 
+Route::get('/admin/staff/create',[
+    'uses' => 'StaffController@getCreate',
+    'as' => "staff.create"
+]);
+
+Route::post('/admin/staff/create',[
+    'uses' => 'StaffController@postCreate',
+    'as' => "staff.create"
+]);
+
+Route::get('/admin/staff/{id}',[
+    'uses' => 'StaffController@getEdit',
+    'as' => "staff.edit"
+]);
+
+Route::post('/admin/staff/{id}',[
+    'uses' => 'StaffController@postEdit',
+    'as' => "staff.edit"
+]);
+
 Route::get('/admin/provider', function () {
     return view('Administration.service_provider_management');
 });
