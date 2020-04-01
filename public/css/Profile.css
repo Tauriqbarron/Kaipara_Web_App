@@ -16,6 +16,9 @@ body{
 body, html{
     height: 100%;
 }
+.pHeader{
+
+}
 
 .container-fluid{
     margin-right: auto;
@@ -24,3 +27,10 @@ body, html{
 }
 
 
+.profileImg{
+    height: 150px;
+    width: 150px;
+}
+.pHeader{
+
+}

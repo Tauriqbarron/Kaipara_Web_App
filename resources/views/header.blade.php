@@ -1,5 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex">
-    <h1 class="title mr-auto">Kaipara Property & Security</h1>
-    <a href="#" class="btn btn-primary  mx-1">Login</a>
-    <a href="#" class="btn btn-primary  mx-1">Sign up</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex shadow">
+    <img src="{{url('images/KaiparaLogo.png')}}" alt="" class=" mr-auto">
+    <a href="{{url('/admin')}}" class="btn btn-primary  mx-1 align-self-start shadow">Admin</a>
+    <a href="#" class="btn btn-primary  mx-1 align-self-start shadow">Login</a>
+    <a href="#" class="btn btn-primary  mx-1 align-self-start shadow">Sign up</a>
 </nav>
