@@ -14,12 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('profileTemplate');
+    return view('index');
 });
 Route::get('/service', function () {
     return view('Service.serviceProfileTemplate');
 }) ->name('service.home');
 
 Route::get('/security', function () {
-    return view('Security.SecurityProfileTemplate');
+    return view('Security.index');
 }) ->name('service.home');
+
