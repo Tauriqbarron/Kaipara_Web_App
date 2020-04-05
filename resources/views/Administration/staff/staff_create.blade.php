@@ -1,5 +1,4 @@
 @extends('Administration.layout')
-
 @section('mainContent')
     <h1 class="ml-5">Create staff</h1>
     @if(count($errors) > 0)
@@ -46,7 +45,5 @@
                 </div>
             </form>
         </div>
-    </div>
-
-
+    </div
 @endsection

@@ -1,7 +1,5 @@
-<?php
-
+<?
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Staff;
 use Illuminate\Support\Facades\Validator;
@@ -11,12 +9,9 @@ class StaffController extends Controller
         $staffs = Staff::all();
         return view('Administration.staff.staff_management', ['staffs' => $staffs]);
     }
-
     public function getCreate() {
         return view('Administration.staff.staff_create');
-
     }
-
     public function postCreate(Request $request) {
         $validator = Validator::make($request->all(), [
             'fName'=>'required|max:50',
@@ -28,7 +23,6 @@ class StaffController extends Controller
         if($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
-
         $staff = new Staff([
             'first_name' => $request->input('fName'),
             'last_name' => $request->input('lName'),
@@ -39,13 +33,11 @@ class StaffController extends Controller
         $staff->save();
         return redirect()->route('staff.index');
     }
-
     public function  getEdit($id) {
         $staff = Staff::find($id);
         return view('Administration.staff.staff_edit', ['staff' => $staff]);
 
     }
-
     public function postEdit(Request $request, $id) {
         $validator = Validator::make($request->all(), [
             'fName'=>'required|max:50',
