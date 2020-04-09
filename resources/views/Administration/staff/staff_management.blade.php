@@ -26,7 +26,7 @@
                 <td>{{$staff->email}}</td>
                 <td>{{$staff->phone_number}}</td>
                 <td><a class="btn btn-primary" href="{{route('staff.edit', ['id' => $staff->id])}}">Edit</a></td>
-                <td><a class="btn btn-danger">Delete</a></td>
+                <td><a class="btn btn-danger" href="{{route('staff.delete', ['id' => $staff->id])}}">Delete</a></td>
             </tr>
             @endforeach
         </tbody>
