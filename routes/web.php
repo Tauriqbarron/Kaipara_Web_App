@@ -68,14 +68,24 @@ Route::post('/admin/staff/create',[
     'as' => "staff.create"
 ]);
 
-Route::get('/admin/staff/{id}',[
+Route::get('/admin/staff/edit/{id}',[
     'uses' => 'StaffController@getEdit',
     'as' => "staff.edit"
 ]);
 
-Route::post('/admin/staff/{id}',[
+Route::post('/admin/staff/edit/{id}',[
     'uses' => 'StaffController@postEdit',
     'as' => "staff.edit"
+]);
+
+Route::get('/admin/staff/delete/{id}',[
+    'uses' => 'StaffController@getDelete',
+    'as' => "staff.delete"
+]);
+
+Route::post('/admin/staff/delete/{id}',[
+    'uses' => 'StaffController@postDelete',
+    'as' => "staff.delete"
 ]);
 
 Route::get('/admin/provider', function () {

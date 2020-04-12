@@ -1,8 +1,10 @@
-<?
+<?php
+
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
+
 use App\Staff;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+
 class StaffController extends Controller
 {
     public function getIndex() {
@@ -58,4 +60,16 @@ class StaffController extends Controller
         $staff->save();
         return redirect()->route('staff.index');
     }
+
+    public function getDelete($id) {
+        $staff = Staff::find($id);
+        return view('Administration.staff.staff_delete', ['staff' => $staff]);
+    }
+
+    public function postDelete($id) {
+        $staff = Staff::find($id);
+        $staff->delete();
+        return redirect()->route('staff.index');
+    }
+
 }
