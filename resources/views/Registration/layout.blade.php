@@ -9,7 +9,7 @@
     </head>
     <body>
         @include('header')
-        <div >
+        <div class="my-5">
             <div class="regformcontainer mx-auto">
                 @include('Registration.regform')
             </div>
