@@ -9,11 +9,23 @@ class StaffController extends Controller
 {
     public function getIndex() {
         $staffs = Staff::all();
-        return view('Administration.staff.staff_management', ['staffs' => $staffs]);
+        return view('Administration.staff.index', ['staffs' => $staffs]);
     }
+
+    public function getSearch(Request $request) {
+        $search = $request->input('search');
+        $staffs = Staff::where('first_name', 'like', '%'.$search.'%')
+            ->orWhere('last_name', 'like', '%'.$search.'%')
+            ->orWhere('id', 'like', '%'.$search.'%')
+            ->paginate(5);
+        $staffs->appends(['search' => $search]);
+        return view('Administration.staff.index', ['staffs' => $staffs]);
+    }
+
     public function getCreate() {
         return view('Administration.staff.staff_create');
     }
+
     public function postCreate(Request $request) {
         $validator = Validator::make($request->all(), [
             'fName'=>'required|max:50',

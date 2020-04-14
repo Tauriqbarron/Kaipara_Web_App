@@ -2,9 +2,13 @@
 
 @section('mainContent')
     <h1>Staff Management</h1>
-    <p>
-        <a href="{{route('staff.create')}}" class="btn btn-primary ml-2">Create</a>
-    </p>
+    <form style="padding-top: 25px;" class="form-inline my-2 my-lg-3 ml-2" method="get" action="{{route('staff.search')}}">
+        <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <div>
+    <a href="{{route('staff.create')}}" class="btn btn-primary ml-2">Create</a>
+
     <table class="table">
         <thead>
         <tr>
@@ -31,6 +35,6 @@
             @endforeach
         </tbody>
     </table>
-
+    </div>
 
 @endsection
