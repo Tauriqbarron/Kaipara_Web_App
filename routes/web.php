@@ -30,10 +30,15 @@ Route::get('/service/applications', [
     'uses' => 'ApplicationsController@getApps', 'as' => 'service.applications'
 ]) ->name('service.Bookings');
 
+/*Service Provider jobs Page*/
 Route::get('/service/jobs', function () {
     return view('Service.jobs');
 }) ->name('service.jobs');
 
+/*Registration*/
+Route::get('/registration', function () {
+    return view('Registration.index');
+}) ->name('Registration.index');
 
 /*Administrator part (Jay) */
 Route::get('/admin', function () {
