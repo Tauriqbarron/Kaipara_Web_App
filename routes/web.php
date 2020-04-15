@@ -43,6 +43,7 @@ Route::get('/registration', function () {
     return view('Registration.index');
 }) ->name('Registration.index');
 
+
 /*Administrator part (Jay) */
 Route::get('/admin', function () {
     return view('Administration.index');
@@ -97,9 +98,11 @@ Route::post('/admin/staff/delete/{id}',[
     'as' => "staff.delete"
 ]);
 
-Route::get('/admin/provider', function () {
-    return view('Administration.service_provider_management');
-});
+/*Service Provider*/
+Route::get('/admin/serviceProvider', [
+    'uses' => 'ServiceProviderController@getIndex',
+    'as' => 'serviceProvider.index'
+]);
 
 
 
