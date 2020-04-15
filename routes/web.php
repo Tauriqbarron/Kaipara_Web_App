@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*Function Routes */
+Route::post('register','RegistrationController@createServiceProvider');
+
 Route::get('/', function () {
     return view('index');
 });
