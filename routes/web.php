@@ -56,9 +56,15 @@ Route::get('/admin/client', function () {
     return view('Administration.client_management');
 });
 
+/*staff*/
 Route::get('/admin/staff',[
    'uses' => 'StaffController@getIndex',
    'as' => "staff.index"
+]);
+
+Route::get('/admin/result', [
+    'uses' => 'StaffController@getSearch',
+    'as' => 'staff.search'
 ]);
 
 Route::get('/admin/staff/create',[
