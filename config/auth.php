@@ -76,7 +76,7 @@ return [
         ],
         'serviceprovider' =>[
             'driver' => 'eloquent',
-            'model' => App\ServiceProvider::class,
+            'model' => App\serviceprovider::class,
         ],
         // 'users' => [
         //     'driver' => 'database',

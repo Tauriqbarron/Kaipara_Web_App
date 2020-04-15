@@ -43,7 +43,6 @@ Route::get('/registration', function () {
     return view('Registration.index');
 }) ->name('Registration.index');
 
-
 /*Administrator part (Jay) */
 Route::get('/admin', function () {
     return view('Administration.index');

@@ -11,7 +11,7 @@ class RegisrationController extends Controller
 
 
 
-        $user = new \App\ServiceProvider(
+        $user = new \App\serviceprovider(
             [
                 'firstname' => 'John',
                 'lastname' => 'Storm',

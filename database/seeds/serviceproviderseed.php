@@ -11,7 +11,7 @@ class serviceproviderseed extends Seeder
      */
     public function run()
     {
-        $serviceprovider = new \App\ServiceProvider(
+        $serviceprovider = new \App\serviceprovider(
         [
             'firstname' => 'John',
             'lastname' => 'Storm',

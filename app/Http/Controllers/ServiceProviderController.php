@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\ServiceProvider;
+
+use App\serviceprovider;
 use Illuminate\Http\Request;
 
 class ServiceProviderController extends Controller
 {
     public function getIndex() {
-        $serviceProviders = ServiceProvider::all();
+        $serviceProviders = serviceprovider::all();
         return view('Administration.serviceProvider.index', ['serviceProviders' => $serviceProviders]);
     }
 }

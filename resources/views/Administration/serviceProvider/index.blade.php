@@ -25,8 +25,8 @@
             @foreach($serviceProviders as $serviceProvider)
                 <tr>
                     <td>{{$serviceProvider->id}}</td>
-                    <td>{{$serviceProvider->first_name}}</td>
-                    <td>{{$serviceProvider->last_name}}</td>
+                    <td>{{$serviceProvider->firstname}}</td>
+                    <td>{{$serviceProvider->lastname}}</td>
                     <td>{{$serviceProvider->email}}</td>
                     <td>{{$serviceProvider->phone_number}}</td>
                     <td><a class="btn btn-primary" href="#">Edit</a></td>
