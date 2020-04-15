@@ -21,5 +21,6 @@ class serviceproviderseed extends Seeder
             'phone_number'=>'0213456782'
         ]
         );
+        $serviceprovider ->save();
     }
 }

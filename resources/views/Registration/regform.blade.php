@@ -1,4 +1,5 @@
 <form method="POST" action="/register">
+    {{csrf_field()}}
     <div class="form-group row">
         <label for="firstname" class="col-sm-2 col-form-label">First Name</label>
         <div class="col-sm-10">
@@ -35,6 +36,6 @@
             <input type="password" class="form-control" id="phone">
         </div>
     </div>
-    {{csrf_field()}}
+
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

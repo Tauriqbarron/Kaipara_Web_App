@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 
 class RegisrationController extends Controller
 {
-    public function createServiceProvider($input){
+    public function createServiceProvider(){
+
+
+
+
         $user = new \App\ServiceProvider(
             [
                 'firstname' => 'John',
