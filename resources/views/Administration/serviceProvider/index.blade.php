@@ -7,7 +7,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
     <div>
-        <a href="#" class="btn btn-primary ml-2">Create</a>
+        <a href="{{route('serviceProvider.create')}}" class="btn btn-primary ml-2">Create</a>
 
         <table class="table">
             <thead>

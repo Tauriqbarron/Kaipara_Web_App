@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Staff;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class StaffController extends Controller
 {
@@ -31,7 +32,7 @@ class StaffController extends Controller
             'fName'=>'required|max:50',
             'lName'=>'required|max:50',
             'email'=>'required|email',
-            'pNumber'=>'required|max:10',
+            'pNumber'=>'required|max:20',
             'password' => 'required|confirmed|min:6'
         ]);
         if($validator->fails()) {
@@ -47,6 +48,7 @@ class StaffController extends Controller
         $staff->save();
         return redirect()->route('staff.index');
     }
+
     public function  getEdit($id) {
         $staff = Staff::find($id);
         return view('Administration.staff.staff_edit', ['staff' => $staff]);

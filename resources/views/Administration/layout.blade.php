@@ -11,8 +11,9 @@
 <div class="MainCon">
     @include('Profile.header')
     @include('Profile.ProfileBar')
+    <div>
     @include('Administration.nav')
-
+    </div>
     <div class="content">
         @yield('mainContent')
     </div>

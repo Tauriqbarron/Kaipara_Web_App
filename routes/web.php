@@ -103,7 +103,15 @@ Route::get('/admin/serviceProvider', [
     'as' => 'serviceProvider.index'
 ]);
 
+Route::get('/admin/serviceProvider/create', [
+    'uses' => 'ServiceProviderController@getCreate',
+    'as' => 'serviceProvider.create'
+]);
 
+Route::post('/admin/serviceProvider/create', [
+    'uses' => 'ServiceProviderController@postCreate',
+    'as' => 'serviceProvider.create'
+]);
 
 
 
