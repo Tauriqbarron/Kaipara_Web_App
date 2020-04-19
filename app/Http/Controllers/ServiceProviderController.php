@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Validator;
 class ServiceProviderController extends Controller
 {
     public function getIndex() {
-        $serviceProviders = serviceprovider::all();
-        return view('Administration.serviceProvider.index', ['serviceProviders' => $serviceProviders]);
+        $sps = serviceprovider::all();
+        return view('Administration.serviceProvider.index', ['sps' => $sps]);
     }
 
     public function getCreate() {
@@ -39,7 +39,34 @@ class ServiceProviderController extends Controller
             'password'=> $request->input('password')
         ]);
         $serviceProvider->save();
-        return redirect()->route('serviceProvider.index');
+        return redirect()->route('sp.index');
+    }
+
+    public function getEdit($id) {
+        $sp = serviceprovider::find($id);
+        return view('Administration.serviceProvider.sp_edit', ['sp' => $sp]);
+    }
+
+    public function postEdit(Request $request, $id) {
+        $validator = Validator::make($request->all(), [
+            'fName'=>'required|max:50',
+            'lName'=>'required|max:50',
+            'email'=>'required|email',
+            'pNumber'=>'required|max:10',
+        ]);
+        if($validator->fails()) {
+            return redirect()->route('sp.edit', ['id' => $id])
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $sp = serviceprovider::find($id);
+        $sp->firstname = $request->input('fName');
+        $sp->lastname = $request->input('lName');
+        $sp->email = $request->input('email');
+        $sp->phone_number = $request->input('pNumber');
+        $sp->save();
+        return redirect()->route('sp.index');
     }
 
 }

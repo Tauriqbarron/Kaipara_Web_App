@@ -7,7 +7,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
     <div>
-        <a href="{{route('serviceProvider.create')}}" class="btn btn-primary ml-2">Create</a>
+        <a href="{{route('sp.create')}}" class="btn btn-primary ml-2">Create</a>
 
         <table class="table">
             <thead>
@@ -22,14 +22,14 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($serviceProviders as $serviceProvider)
+            @foreach($sps as $sp)
                 <tr>
-                    <td>{{$serviceProvider->id}}</td>
-                    <td>{{$serviceProvider->firstname}}</td>
-                    <td>{{$serviceProvider->lastname}}</td>
-                    <td>{{$serviceProvider->email}}</td>
-                    <td>{{$serviceProvider->phone_number}}</td>
-                    <td><a class="btn btn-primary" href="#">Edit</a></td>
+                    <td>{{$sp->id}}</td>
+                    <td>{{$sp->firstname}}</td>
+                    <td>{{$sp->lastname}}</td>
+                    <td>{{$sp->email}}</td>
+                    <td>{{$sp->phone_number}}</td>
+                    <td><a class="btn btn-primary" href="{{route('sp.edit', ['id' => $sp->id])}}">Edit</a></td>
                     <td><a class="btn btn-danger" href="#">Delete</a></td>
                 </tr>
             @endforeach

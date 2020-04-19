@@ -100,17 +100,27 @@ Route::post('/admin/staff/delete/{id}',[
 /*Service Provider*/
 Route::get('/admin/serviceProvider', [
     'uses' => 'ServiceProviderController@getIndex',
-    'as' => 'serviceProvider.index'
+    'as' => 'sp.index'
 ]);
 
 Route::get('/admin/serviceProvider/create', [
     'uses' => 'ServiceProviderController@getCreate',
-    'as' => 'serviceProvider.create'
+    'as' => 'sp.create'
 ]);
 
 Route::post('/admin/serviceProvider/create', [
     'uses' => 'ServiceProviderController@postCreate',
-    'as' => 'serviceProvider.create'
+    'as' => 'sp.create'
+]);
+
+Route::get('/admin/serviceProvider/edit/{id}', [
+    'uses' => 'ServiceProviderController@getEdit',
+    'as' => 'sp.edit'
+]);
+
+Route::post('/admin/serviceProvider/edit/{id}', [
+    'uses' => 'ServiceProviderController@postEdit',
+    'as' => 'sp.edit'
 ]);
 
 
