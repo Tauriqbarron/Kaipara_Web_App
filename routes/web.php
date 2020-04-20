@@ -123,9 +123,15 @@ Route::post('/admin/serviceProvider/edit/{id}', [
     'as' => 'sp.edit'
 ]);
 
+Route::get('/admin/serviceProvider/delete/{id}',[
+    'uses' => 'ServiceProviderController@getDelete',
+    'as' => "sp.delete"
+]);
 
-
-
+Route::post('/admin/serviceProvider/delete/{id}',[
+    'uses' => 'ServiceProviderController@postDelete',
+    'as' => "sp.delete"
+]);
 
 
 Auth::routes();

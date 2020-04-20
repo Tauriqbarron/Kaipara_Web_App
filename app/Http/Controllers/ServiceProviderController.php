@@ -69,4 +69,15 @@ class ServiceProviderController extends Controller
         return redirect()->route('sp.index');
     }
 
+    public function getDelete($id) {
+        $sp = serviceprovider::find($id);
+        return view('Administration.serviceProvider.sp_delete', ['sp' => $sp]);
+    }
+
+    public function postDelete($id) {
+        $sp = serviceprovider::find($id);
+        $sp->delete();
+        return redirect()->route('sp.index');
+    }
+
 }

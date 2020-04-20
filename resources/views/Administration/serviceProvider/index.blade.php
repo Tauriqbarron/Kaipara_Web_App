@@ -30,7 +30,7 @@
                     <td>{{$sp->email}}</td>
                     <td>{{$sp->phone_number}}</td>
                     <td><a class="btn btn-primary" href="{{route('sp.edit', ['id' => $sp->id])}}">Edit</a></td>
-                    <td><a class="btn btn-danger" href="#">Delete</a></td>
+                    <td><a class="btn btn-danger" href="{{route('sp.delete', ['id' => $sp->id])}}">Delete</a></td>
                 </tr>
             @endforeach
             </tbody>
