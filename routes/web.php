@@ -13,12 +13,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*Login Routes */
+Route::get('/selectuser', function () {
+    return view('login/userselect.usertype');
+});
+Route::get('/client', function () {
+    return view('login.userlogin');
+});
+Route::get('/provider', function () {
+    return view('login.servicelogin');
+});
+
+Route::post('/provider','ServiceProviderController@login')->name('service.login.submit');
+
+
 /*Function Routes */
 Route::post('register','RegistrationController@createServiceProvider');
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('home.index');
 Route::get('/test', function () {
     phpinfo();
 });

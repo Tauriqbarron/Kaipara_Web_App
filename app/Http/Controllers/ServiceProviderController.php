@@ -3,11 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\serviceprovider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class ServiceProviderController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('guest:serviceprovider');
+    }
+
     public function getIndex() {
         $sps = serviceprovider::all();
         return view('Administration.serviceProvider.index', ['sps' => $sps]);
@@ -72,6 +80,28 @@ class ServiceProviderController extends Controller
     public function getDelete($id) {
         $sp = serviceprovider::find($id);
         return view('Administration.serviceProvider.sp_delete', ['sp' => $sp]);
+    }
+
+    public function login(Request $request){
+        //validate form
+        try {
+            $this->validate($request, [
+                'email' => 'required|email',
+                'password' => 'required|min:3'
+            ]);
+        } catch (ValidationException $e) {
+        }
+
+        // attempt login
+      if(Auth::guard('serviceprovider')->attempt(['email'=>$request->email, 'password'=>$request->password]))
+        {
+            //if success redirect to profile
+            return redirect()->intended(route('service.home'));
+        }
+        //if unsuccessful redirect back to login
+        return redirect(route('home.index'));
+
+
     }
 
     public function postDelete($id) {
