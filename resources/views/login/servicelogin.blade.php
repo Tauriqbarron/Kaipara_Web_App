@@ -10,18 +10,32 @@
     <body>
         <form role="form" method="POST" action="{{route('service.login.submit')}}">
             {{csrf_field()}}
-
+            @if ($message = Session::get('error'))
+                <div class="alert alert-danger alert-block">
+                  <button type="button" class="close" data-dismiss="alert">X</button>
+                    <strong>{{$message}}</strong>
+                </div>
+            @endif
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="form-group w-75 mx-auto">
                 <label for="exampleInputEmail1">Email address</label>
-                <input id="email" name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input id="email" name="email" type="email" class="form-control"  aria-describedby="emailHelp">
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group w-75 mx-auto">
                 <label for="exampleInputPassword1">Password</label>
-                <input id="password" name="password" type="password" class="form-control" id="exampleInputPassword1">
+                <input id="password" name="password" type="password" class="form-control" >
             </div>
             <div class="form-group w-75 mx-auto">
-                <button type="submit" class="btn btn-primary shadow">Submit</button>
+                <button type="submit" name="login" class="btn btn-primary shadow" value="login">Submit</button>
             </div>
         </form>
 

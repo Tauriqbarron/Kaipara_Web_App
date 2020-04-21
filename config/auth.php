@@ -40,9 +40,9 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'serviceprovider' =>[
+        'service_provider' =>[
             'driver' => 'session',
-            'provider'=>'serviceprovider',
+            'provider'=>'service_provider',
         ],
 
         'api' => [
@@ -74,9 +74,9 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-        'serviceprovider' =>[
+        'service_provider' =>[
             'driver' => 'eloquent',
-            'model' => App\serviceprovider::class,
+            'model' => App\service_provider::class,
         ],
         // 'users' => [
         //     'driver' => 'database',

@@ -13,16 +13,17 @@ class CreateServiceProvidersTable extends Migration
      */
     public function up()
     {
-        Schema::create('serviceproviders', function (Blueprint $table) {
+        Schema::create('service_providers', function (Blueprint $table) {
             $table->id();
             $table->string('firstname',50);
             $table->string('lastname',50);
             $table->string('username',50);
             $table->string('email',50) ->unique();
-            $table->string('password',20);
+            $table->string('password',100);
             $table->string('phone_number',20);
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -30,6 +31,6 @@ class CreateServiceProvidersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('serviceproviders');
+        Schema::dropIfExists('service_providers');
     }
 }
