@@ -26,6 +26,11 @@ class StaffController extends Controller
     public function getCreate() {
         return view('Administration.staff.staff_create');
     }
+    public function getHome() {
+        $currentStaff = Staff::find(1);
+
+        return view('Security.index', ['staff' => $currentStaff]);
+    }
 
     public function postCreate(Request $request) {
         $validator = Validator::make($request->all(), [

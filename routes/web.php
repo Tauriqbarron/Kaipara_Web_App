@@ -23,6 +23,11 @@ Route::get('/test', function () {
     phpinfo();
 });
 
+/*Security Guard Profile*/
+Route::get('/security', [
+    'uses' => 'StaffController@getHome', 'as' => 'security.index'
+]) ->name('security.home');
+
 /*Service Provider Profile*/
 Route::get('/service', function () {
     return view('Service.index');
