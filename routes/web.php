@@ -33,6 +33,7 @@ Route::post('register','RegistrationController@createServiceProvider');
 Route::get('/', function () {
     return view('index');
 })->name('home.index');
+
 Route::get('/test', function () {
     phpinfo();
 });
@@ -78,6 +79,11 @@ Route::get('admin/login', [
 Route::post('admin/login', [
     'uses' => 'Auth\AdminController@postLogin',
     'as' => 'admin.login'
+]);
+
+Route::get('admin/logout', [
+    'uses' => 'Auth\AdminController@logout',
+    'as' => 'admin.logout'
 ]);
 
 Route::get('/admin/assignment', function () {

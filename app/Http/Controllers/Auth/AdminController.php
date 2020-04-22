@@ -30,6 +30,11 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+    public function logout() {
+        Auth::guard('admin')->logout();
+        return redirect('/');
+    }
+
     public function adminIndex() {
         return view('Administration.index');
     }
