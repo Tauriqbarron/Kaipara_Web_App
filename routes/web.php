@@ -63,9 +63,22 @@ Route::get('/registration', function () {
 }) ->name('Registration.index');
 
 /*Administrator part (Jay) */
-Route::get('/admin', function () {
-    return view('Administration.index');
-});
+
+/*Admin login*/
+Route::get('/admin/home', [
+    'uses' => 'Auth\AdminController@adminIndex',
+    'as' => 'admin.index'
+]);
+
+Route::get('admin/login', [
+    'uses' => 'Auth\AdminController@getLoginForm',
+    'as' => 'admin.login'
+]);
+
+Route::post('admin/login', [
+    'uses' => 'Auth\AdminController@postLogin',
+    'as' => 'admin.login'
+]);
 
 Route::get('/admin/assignment', function () {
     return view('Administration.assignment_management');
