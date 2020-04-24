@@ -14,11 +14,12 @@
         <link href="https://fonts.googleapis.com/css?family=Asap:700&display=swap" rel="stylesheet">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="{{url('js/app.js')}}"></script>
 
         <script src="https://kit.fontawesome.com/c3929064ae.js" crossorigin="anonymous"></script>
 
     </head>
-    <body id="bod">
+    <body id="bod" onload="loaded()">
         @include('Security.header')
         <div class="container-fluid" style="min-width: 1200px">
             @include('Security.nav')
