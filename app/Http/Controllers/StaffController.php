@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Address;
+use App\Booking;
 use App\Staff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -28,8 +30,10 @@ class StaffController extends Controller
     }
     public function getHome() {
         $currentStaff = Staff::find(1);
+        $bookings = Booking::all();
+        $addresses = Address::all();
 
-        return view('Security.index', ['staff' => $currentStaff]);
+        return view('Security.index', ['staff' => $currentStaff, 'bookings' => $bookings, 'addresses' => $addresses]);
     }
 
     public function postCreate(Request $request) {

@@ -1,0 +1,68 @@
+h1, h2, h3, h4, h5, li{
+    font-family: 'Asap', sans-serif;
+    font-weight: bold;
+}
+
+nav li {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+body{
+    background: rgb(241, 243, 244);
+    background: linear-gradient(180deg, rgb(241, 243, 244) 0%, rgb(202, 204, 205) 100%);
+}
+
+body, html{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.container-fluid{
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1300px;
+}
+
+
+.profileImg{
+    height: 150px;
+    width: 150px;
+}
+#kaiparaLogo {
+    object-position: Left;
+    width: 250px;
+}
+.card-body h5{
+    line-height: 50%;
+    font-weight: normal;
+    font-size: large;
+}
+.card-img-top {
+    opacity: 1;
+}
+
+.card{
+    float: left;
+
+}
+
+#schedule{
+    float: right;
+}
+#nav{
+
+    background: rgb(241, 243, 244);
+    background: linear-gradient(180deg, rgb(28,83,143) 0%, rgb(84,36,119) 100%);
+}
+.border-3{
+    border: solid 5px white;
+}
+#cardHeader{
+    opacity: 0;
+}

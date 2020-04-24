@@ -43,85 +43,63 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+
+                                    @foreach($bookings as $booking )
+
+
                                         <tr>
                                             <td class="text-center">
                                                 <h6>9:00</h6>
                                             </td>
+
+                                            @foreach($addresses as $address)
+                                                @if($address->id == $booking->address_id)
                                             <td>
-                                                <h6>70  Kentucky Street</h6>
+                                                <h6>{{$address->street}}</h6>
                                             </td>
                                             <td class="text-center">
-                                                <h6 class="label label-default">Greenlane</h6>
+                                                <h6 class="label label-default">{{$address->suburb}}</h6>
                                             </td>
                                             <td>
-                                                <h6>Auckland</h6>
+                                                <h6>{{$address->city}}</h6>
                                             </td>
+                                                @endif
+                                            @endforeach
                                             <td style="width: 20%;">
-                                                <a href="#" class="table-link fa-pull-right" data-toggle="collapse" data-target="#demo" id="downButton" on>
+                                                <a href="#" class="table-link fa-pull-right" data-toggle="collapse" data-target="#n{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}n','n{{$booking->id}}')" >
                                                     <span class="fa-stack">
                                                         <i class="fa fa-square fa-stack-2x"></i>
-                                                        <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="arrow"></i>
+                                                        <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}n"></i>
                                                     </span>
+                                                </a>
                                                 </a>
 
                                             </td>
                                         </tr>
                                         <tr >
-                                            <td colspan="5" style="padding: 0px">
-                                                <div class="collapse"  id="demo" style="padding: 10px">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                            <td colspan="4" style="padding: 0px" class="bg-white">
+                                                <div class="collapse"  id="n{{$booking->id}}" style="padding: 10px">
+                                                    {{$booking->description}}
+                                                </div>
+                                            </td>
+                                            <td style="padding: 0px" class="bg-white">
+                                                <div class="collapse btn-group-lg"  id="n{{$booking->id}}" style="padding: 10px">
+                                                    <!--<button class="btn-primary text-white w-100 rounded border-0" type="submit"><h6>Accept</h6></button>-->
+                                                    <button class="btn-danger text-white w-100 rounded border-0"><h6>Decline</h6></button>
                                                 </div>
                                             </td>
                                         </tr>
+                                    @endforeach
 
 
                                     </tbody>
                                 </table>
                             </div>
-                            <ul class="pagination pull-right">
-                                <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-    <script>
-        n =  new Date();
-        y = n.getFullYear();
-        m = n.getMonth() + 1;
-        d = n.getDate();
-        document.getElementById("date").innerHTML = d + "/" + m + "/" + y;
-
-        getButton = document.getElementById('arrow');
-        getButton.onmouseup = f;
-
-        theButton = document.getElementById('demo');
-
-
-
-
-        degrees = 0;
-
-        function f(){
-            if(!(theButton.classList.contains('collapsing')))
-            {
-                degrees += 180;
-                getButton.style.transform = "rotate("+degrees+"deg)";
-                getButton.style.transition = "transform 500ms";
-            }
-
-        }
-    </script>
 
 
 @endsection

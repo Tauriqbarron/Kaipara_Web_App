@@ -29,7 +29,7 @@
                     <label  class="control-label">Username</label>
                     <input name="uName" class="form-control" placeholder="Username" value="{{old('uName')}}"/>
                 </div>
-                <div class="form-group">
+                <div class="form-group">1
                     <label  class="control-label">Phone Number</label>
                     <input name="pNumber" class="form-control" placeholder="Phone Number" value="{{old('pNumber')}}"/>
                 </div>
