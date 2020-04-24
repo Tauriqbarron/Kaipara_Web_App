@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class RegisrationController extends Controller
+class RegistrationController extends Controller
 {
     public function createServiceProvider(Request $request){
 
