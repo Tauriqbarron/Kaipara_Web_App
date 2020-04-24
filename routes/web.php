@@ -13,13 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+//Client Route
+
+
+
 /*Login Routes */
 Route::get('/selectuser', function () {
     return view('login/userselect.usertype');
 });
-Route::get('/client', function () {
-    return view('login.userlogin');
-});
+
+
+
 Route::get('/provider', function () {
     return view('login.servicelogin');
 });

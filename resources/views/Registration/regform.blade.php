@@ -1,6 +1,5 @@
 <form method="POST" action="/register">
-    {{csrf_field()}}
-    <div class="form-group row">
+     <div class="form-group row">
         <label for="firstname" class="col-sm-2 col-form-label">First Name</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="firstname" name="firstname">

@@ -41,6 +41,11 @@ return [
             'provider' => 'users',
         ],
 
+        'client' =>[
+            'driver' => 'session',
+            'provider'=>'Client',
+        ],
+
         'service_provider' =>[
             'driver' => 'session',
             'provider'=>'service_provider',
@@ -79,6 +84,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'Client' =>[
+            'driver' => 'eloquent',
+            'model' => App\Client::class,
         ],
 
         'service_provider' =>[
