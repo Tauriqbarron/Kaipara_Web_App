@@ -10,7 +10,7 @@
 <body>
 <form class="w-75 mx-auto" role="form" method="POST" action="{{route('admin.login')}}">
     <a class="btn btn-danger" href="{{url('/')}}">Back</a>
-    <h1 class="form-group ">Admin Login</h1>
+    <h1 class="form-group ">Security Officer Login</h1>
     {{csrf_field()}}
 
     @if ($message = Session::get('error'))
