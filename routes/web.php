@@ -14,9 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 /*Login Routes */
+
+  /*Select User Type*/
 Route::get('/selectuser', function () {
     return view('login/userselect.usertype');
 });
+
+  /*Select Staff Type*/
+Route::get('/selectstaff', function () {
+    return view('login.userselect.stafftype');
+});
+
 Route::get('/client', function () {
     return view('login.userlogin');
 });
@@ -43,6 +51,11 @@ Route::get('/security', [
     'uses' => 'StaffController@getHome', 'as' => 'security.index'
 ]) ->name('security.home');
 
+  /*Security officer login page link*/
+Route::get('/security/login', function () {
+    return view('login.securitylogin');
+});
+
 /*Service Provider Profile*/
 Route::get('/service', function () {
     return view('Service.index');
@@ -62,6 +75,7 @@ Route::get('/service/jobs', function () {
 Route::get('/registration', function () {
     return view('Registration.index');
 }) ->name('Registration.index');
+
 
 /*Administrator part (Jay) */
 
