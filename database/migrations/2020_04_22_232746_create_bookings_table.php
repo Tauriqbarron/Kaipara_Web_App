@@ -21,6 +21,7 @@ class CreateBookingsTable extends Migration
             $table->foreignId('address_id')->references('id')->on('addresses');
             $table->string('description');
             $table->date('date');
+            $table->string('start_time');
 
         });
     }

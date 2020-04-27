@@ -54,6 +54,7 @@
 
                                             @foreach($addresses as $address)
                                                 @if($address->id == $booking->address_id)
+
                                             <td>
                                                 <h6>{{$address->street}}</h6>
                                             </td>
@@ -67,6 +68,7 @@
                                             @endforeach
                                             <td style="width: 20%;">
                                                 <a href="#" class="table-link fa-pull-right" data-toggle="collapse" data-target="#n{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}n','n{{$booking->id}}')" >
+                                                    More info
                                                     <span class="fa-stack">
                                                         <i class="fa fa-square fa-stack-2x"></i>
                                                         <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}n"></i>
@@ -85,7 +87,7 @@
                                             <td style="padding: 0px" class="bg-white">
                                                 <div class="collapse btn-group-lg"  id="n{{$booking->id}}" style="padding: 10px">
                                                     <!--<button class="btn-primary text-white w-100 rounded border-0" type="submit"><h6>Accept</h6></button>-->
-                                                    <button class="btn-danger text-white w-100 rounded border-0"><h6>Decline</h6></button>
+                                                    <!--<button class="btn-danger text-white w-100 rounded border-0"><h6>Decline</h6></button>-->
                                                 </div>
                                             </td>
                                         </tr>

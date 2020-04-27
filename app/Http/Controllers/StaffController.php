@@ -30,7 +30,7 @@ class StaffController extends Controller
     }
     public function getHome() {
         $currentStaff = Staff::find(1);
-        $bookings = Booking::all();
+        $bookings = Booking::where('id', '=', $currentStaff->id);
         $addresses = Address::all();
 
         return view('Security.index', ['staff' => $currentStaff, 'bookings' => $bookings, 'addresses' => $addresses]);
