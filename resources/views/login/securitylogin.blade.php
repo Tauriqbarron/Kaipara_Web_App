@@ -8,7 +8,7 @@
     @yield('styles')
 </head>
 <body>
-<form class="w-75 mx-auto" role="form" method="POST" action="{{route('admin.login')}}">
+<form class="w-75 mx-auto" role="form" method="POST" action="{{route('staff.login')}}">
     <a class="btn btn-danger" href="{{url('/')}}">Back</a>
     <h1 class="form-group ">Security Officer Login</h1>
     {{csrf_field()}}
@@ -30,7 +30,7 @@
     @endif
 
     <div class="form-group">
-        <label for="exampleInputEmail1">Admin email address</label>
+        <label for="exampleInputEmail1">Security email address</label>
         <input id="email" name="email" type="email" class="form-control"  aria-describedby="emailHelp">
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
