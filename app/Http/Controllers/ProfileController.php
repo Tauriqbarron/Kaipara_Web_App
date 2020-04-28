@@ -10,7 +10,8 @@ class ProfileController extends Controller
 {
 
 
-    public function profileIndex()
+
+    public function getprofileIndex()
     {
         $user = service_provider::query()->where('email',$email)->first();
         return view('Service.index');

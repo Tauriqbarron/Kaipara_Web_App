@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\ProfileController;
-
+use Illuminate\Support\Facades\Session;
 class ServiceProviderController extends Controller
 {
 
@@ -103,6 +103,8 @@ class ServiceProviderController extends Controller
             {
 
                 $user = service_provider::query()->where('email',$email)->first();
+                $request->session()->put('user',$user);
+                //Session::put('user',$user);
                 //if success redirect to profile
                 return view('Service.index',['user'=>$user]) ;
 
