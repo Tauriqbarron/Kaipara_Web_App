@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as Auth;
 use Illuminate\Auth\Authenticatable;
+
 class service_provider extends Model implements Auth
 {
     use Authenticatable;

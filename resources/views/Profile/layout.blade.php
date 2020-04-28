@@ -12,6 +12,7 @@
         <div class="MainCon">
             @include('Profile.header')
             @include('Profile.ProfileBar')
+            @yield('name')
             @include('Profile.nav')
 
             <div class="content">

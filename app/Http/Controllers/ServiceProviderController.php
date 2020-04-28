@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use App\Http\Controllers\ProfileController;
 
 class ServiceProviderController extends Controller
 {
@@ -96,17 +97,25 @@ class ServiceProviderController extends Controller
                 'email'=> $request->get('email'),
                 'password' => $request->get('password')
             );
-
+            $email = $request->get('email');
         // attempt login
         if(Auth::guard('service_provider')->attempt($user_data))
             {
+
+                $user = service_provider::query()->where('email',$email)->first();
                 //if success redirect to profile
-                return redirect(route('service.home'));
+                return view('Service.index',['user'=>$user]) ;
+
             }
+
         //if unsuccessful redirect back to login
         else{
             return back()->with('error','Wrong Login Details');
         }
+    }
+
+    public function loginSuccess(){
+
     }
 
     public function postDelete($id) {
