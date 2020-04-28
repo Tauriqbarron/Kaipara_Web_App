@@ -13,7 +13,7 @@ class CreateStaffAssignmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('staff_assignments', function (Blueprint $table) {
+        Schema::create('staff__assignments', function (Blueprint $table) {
             $table->primary(['staff_id', 'assignment_id']);
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateStaffAssignmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('staff_assignments');
+        Schema::dropIfExists('staff__assignments');
     }
 }

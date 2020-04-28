@@ -36,6 +36,6 @@ class RegistrationController extends Controller
             ]
         );
         $user->save();
-        return view('')
+        return view('');
     }
 }

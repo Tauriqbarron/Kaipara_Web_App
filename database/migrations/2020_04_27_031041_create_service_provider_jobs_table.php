@@ -13,7 +13,7 @@ class CreateServiceProviderJobsTable extends Migration
      */
     public function up()
     {
-        Schema::create('service_provider_jobs', function (Blueprint $table) {
+        Schema::create('service__provider__jobs', function (Blueprint $table) {
             $table->primary(['service_provider_id', 'job_id']);
             $table->timestamps();
 
@@ -27,6 +27,6 @@ class CreateServiceProviderJobsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_provider_jobs');
+        Schema::dropIfExists('service__provider__jobs');
     }
 }

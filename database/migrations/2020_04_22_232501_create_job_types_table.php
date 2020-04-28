@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTimesheetsTable extends Migration
+class CreateJobTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateTimesheetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('timesheets', function (Blueprint $table) {
+        Schema::create('job__types', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('start_time');
-            $table->string('stop_time');
-            $table->foreignId('staff_assignment_id')->references('id')->on('staff__assignments');
+            $table->string('description');
         });
     }
 
@@ -29,6 +27,6 @@ class CreateTimesheetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('timesheets');
+        Schema::dropIfExists('job__types');
     }
 }

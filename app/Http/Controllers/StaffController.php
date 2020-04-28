@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Address;
 use App\Booking;
 use App\Staff;
+use App\Staff_Assignment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use phpDocumentor\Reflection\Types\Array_;
 
 class StaffController extends Controller
 {
@@ -30,10 +32,12 @@ class StaffController extends Controller
     }
     public function getHome() {
         $currentStaff = Staff::find(1);
-        $bookings = Booking::where('id', '=', $currentStaff->id);
+
+        $staffIndex = $currentStaff -> id;
+        $assignments = app('App\Http\Controllers\AssignmentsController')->getStaffAssignments($staffIndex);
         $addresses = Address::all();
 
-        return view('Security.index', ['staff' => $currentStaff, 'bookings' => $bookings, 'addresses' => $addresses]);
+        return view('Security.index', ['staff' => $currentStaff, 'assignments' => $assignments, 'addresses' => $addresses]);
     }
 
     public function postCreate(Request $request) {
