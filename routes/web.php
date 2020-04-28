@@ -31,6 +31,8 @@ Route::get('/provider', function () {
     return view('login.servicelogin');
 });
 
+Route::get('Profile','ProfileController@profileIndex');
+
 Route::post('/provider','ServiceProviderController@login')->name('service.login.submit');
 
 

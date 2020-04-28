@@ -1,4 +1,8 @@
+
+
 @extends('Service.index')
+
+
 
 @section('nav')
     <a class="nav-link active btn-lg mx-5 pt-2 bg-secondary text-white" href="{{ url('/service/applications')}}">Applications</a>
@@ -19,7 +23,6 @@
                             <h5 class="card-title">{{$app->price}}</h5>
                             <p class="card-text">{{$app->description}}</p>
                             <a href="#" class="btn btn-primary float-right mx-1">Accept</a>
-                            <a href="#" class="btn btn-primary float-right mx-1">Decline</a>
                         </div>
                     </div>
                 @endforeach
