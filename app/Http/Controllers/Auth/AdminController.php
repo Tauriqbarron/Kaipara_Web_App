@@ -13,22 +13,22 @@ class AdminController extends Controller
     }
 
     public function postLogin(Request $request) {
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required|min:6'
-        ]);
+    $this->validate($request, [
+        'email' => 'required|email',
+        'password' => 'required|min:6'
+    ]);
 
-        $credentials = array(
-            'email' => $request->input('email'),
-            'password' => $request->input('password')
-        );
+    $credentials = array(
+        'email' => $request->input('email'),
+        'password' => $request->input('password')
+    );
 
-        if(Auth::guard('admin')->attempt($credentials)){
+    if(Auth::guard('admin')->attempt($credentials)){
 
-            return redirect()->route('admin.index');
-        }
-        return redirect()->back();
+        return redirect()->route('admin.index');
     }
+    return redirect()->back();
+}
 
     public function logout() {
         Auth::guard('admin')->logout();

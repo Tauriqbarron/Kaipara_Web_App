@@ -70,7 +70,12 @@ Route::get('/registration', function () {
     return view('Registration.index');
 }) ->name('Registration.index');
 
+
 /*Administrator part (Jay) */
+/*Select Staff Type*/
+Route::get('/selectstaff', function () {
+    return view('login.userselect.stafftype');
+});
 
 /*Admin login*/
 Route::get('/admin/home', [
@@ -102,6 +107,16 @@ Route::get('/admin/client', function () {
 });
 
 /*staff*/
+Route::get('/security/login', [
+    'uses' => 'StaffController@getLoginForm',
+    'as' => 'staff.login'
+]);
+
+Route::post('security/login', [
+    'uses' => 'StaffController@postLogin',
+    'as' => 'staff.login'
+]);
+
 Route::get('/admin/staff',[
    'uses' => 'StaffController@getIndex',
    'as' => "staff.index"

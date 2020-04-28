@@ -7,6 +7,7 @@ use App\Booking;
 use App\Staff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Auth;
 
 class StaffController extends Controller
 {
@@ -28,6 +29,7 @@ class StaffController extends Controller
     public function getCreate() {
         return view('Administration.staff.staff_create');
     }
+
     public function getHome() {
         $currentStaff = Staff::find(1);
         $bookings = Booking::all();
@@ -93,6 +95,38 @@ class StaffController extends Controller
         $staff = Staff::find($id);
         $staff->delete();
         return redirect()->route('staff.index');
+    }
+
+    /*login Part*/
+    public function getLoginForm() {
+        return view('login.securitylogin');
+    }
+
+    /*Currently not finish*/
+    public function postLogin(Request $request) {
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+
+        $credentials = array(
+            'email' => $request->input('email'),
+            'password' => $request->input('password')
+        );
+
+        if(Auth::guard('staff')->attempt($credentials)){
+            $staff = Staff::where('email', $request->input('email'))->firstOrFail();
+            $bookings = Booking::all();
+            $addresses = Address::all();
+            $infore = [$staff, $bookings, $addresses];
+            return view('Security.index', ['staff' => $staff, 'bookings' => $bookings, 'addresses' => $addresses]);
+        }
+        return redirect()->back();
+    }
+
+    public function logout() {
+        Auth::guard('staff')->logout();
+        return redirect('/');
     }
 
 }
