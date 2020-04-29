@@ -16,7 +16,8 @@ class BookingTableSeeder extends Seeder
             'booking_type_id' => 1,
             'description' => 'Bouncer',
             'address_id' => 3,
-            'date' => today()
+            'date' => today(),
+            'start_time' => '14:00'
 
         ]);
         $booking->save();
@@ -26,7 +27,8 @@ class BookingTableSeeder extends Seeder
             'booking_type_id' => 2,
             'description' => 'Wedding Security',
             'address_id' => 1,
-            'date' => today()
+            'date' => today(),
+            'start_time' => '08:00'
 
         ]);
         $booking->save();
@@ -36,7 +38,8 @@ class BookingTableSeeder extends Seeder
             'booking_type_id' => 3,
             'description' => 'Security',
             'address_id' => 2,
-            'date' => today()
+            'date' => today(),
+            'start_time' => '06:00'
         ]);
         $booking->save();
 
