@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\applications;
+use App\jobs;
 use App\service_provider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -116,8 +118,21 @@ class ServiceProviderController extends Controller
         }
     }
 
-    public function loginSuccess(){
-
+    public function acceptJob($id){
+        $app = applications::query()->where('id',$id)->first();
+        $user = Session::has('user') ? Session::get('user'): null;
+        $job = new jobs([
+                'SPID' => $user->id,
+                'imagePath' => $app->imagePath,
+                'title' => $app->title,
+                'description' => $app ->title,
+                'price' => $app->price
+            ]
+        );
+        $job ->save();
+        // below needs to be changed to a query to only show unaccpeted applications
+        $applications = Session::has('applications') ? Session::get('applications'): null;
+        return view('Service.applications')->with('applications' , $applications)->with('user',$user);
     }
 
     public function postDelete($id) {

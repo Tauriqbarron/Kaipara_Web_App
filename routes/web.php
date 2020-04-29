@@ -31,7 +31,10 @@ Route::get('/provider', function () {
     return view('login.servicelogin');
 });
 
-Route::get('Profile','ProfileController@profileIndex');
+Route::get('/acceptJob/{id}',[
+    'uses' =>'ServiceProviderController@acceptJob',
+    'as' => 'service.acceptJob'
+]);
 
 Route::post('/provider','ServiceProviderController@login')->name('service.login.submit');
 

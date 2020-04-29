@@ -22,7 +22,7 @@
                             <h5 class="card-title">{{$app->title}}</h5>
                             <h5 class="card-title">{{$app->price}}</h5>
                             <p class="card-text">{{$app->description}}</p>
-                            <a href="#" class="btn btn-primary float-right mx-1">Accept</a>
+                            <a href="{{route('service.acceptJob',['id' => $app->id])}}" class="btn btn-primary float-right mx-1">Accept</a>
                         </div>
                     </div>
                 @endforeach
