@@ -25,6 +25,16 @@ class ServiceProviderController extends Controller
         return view('Administration.serviceProvider.index', ['sps' => $sps]);
     }
 
+    public function getSearch(Request $request) {
+        $search = $request->input('search');
+        $sps = service_provider::where('firstname', 'like', '%'.$search.'%')
+            ->orWhere('lastname', 'like', '%'.$search.'%')
+            ->orWhere('id', 'like', '%'.$search.'%')
+            ->paginate(5);
+        $sps->appends(['search' => $search]);
+        return view('Administration.serviceProvider.index', ['sps' => $sps]);
+    }
+
     public function getCreate() {
         return view('Administration.serviceProvider.sp_create');
     }
