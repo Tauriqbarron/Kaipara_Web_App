@@ -6,6 +6,7 @@
         <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
+
     <div>
     <a href="{{route('staff.create')}}" class="btn btn-primary ml-2">Create</a>
 

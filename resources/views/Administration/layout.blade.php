@@ -10,7 +10,7 @@
 <body>
 <div class="MainCon">
     @include('Administration.header')
-    @include('Profile.ProfileBar')
+    @include('Administration.ProfileBar')
     <div>
     @include('Administration.nav')
     </div>

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class jobs extends Model
+class Jobs extends Model
 {
-    protected $fillable = ['SPID','title','imagePath','description','price'];
+    protected $fillable = ['address_id','price', 'date', 'client_id','job_type_id'];
 }
