@@ -15,8 +15,10 @@ class CreateServiceProviderJobsTable extends Migration
     {
         Schema::create('service__provider__jobs', function (Blueprint $table) {
             $table->id();
+            $table->integer('jobs_id')->unsigned();
+            $table->foreign('jobs_id')->references('id')->on('service_provider_jobs');
             $table->integer('service_provider_id')->unsigned();
-            $table->foreign('service_provider_id')->references('id')->on('service_provider_table');
+            $table->foreign('service_provider_id')->references('id')->on('service_providers');
             $table->timestamps();
         });
     }
