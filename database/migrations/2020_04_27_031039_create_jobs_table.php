@@ -15,13 +15,12 @@ class CreateJobsTable extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('SPID')->references('id')->on('service_providers');
             $table->timestamps();
-            $table->foreignId('address_id')->references('id')->on('addresses');
-            $table->float('price');
-            $table->date('date');
-            $table->foreignId('client_id')->references('id')->on('clients');
-            $table->foreignId('job_type_id')->references('id')->on('job__types');
-
+            $table->string('imagePath');
+            $table->string('title');
+            $table->text('description');
+            $table->integer('price');
         });
     }
 

@@ -20,8 +20,6 @@ class CreateFeedbackTable extends Migration
             $table->bigInteger('rating');
             $table->foreignId('staff_assignment_id')->references('id')->on('staff__assignments');
             $table->foreignId('service_provider_job_id')->references('id')->on('service__provider__jobs');
-            $table->bigInteger('rating');
-
 
         });
     }

@@ -14,7 +14,9 @@ class CreateStaffAssignmentsTable extends Migration
     public function up()
     {
         Schema::create('staff__assignments', function (Blueprint $table) {
-            $table->primary(['staff_id', 'assignment_id']);
+            $table->id();
+            $table->foreignId("staff_id")->references('id')->on('staff');
+            $table->foreignId("assignment_id")->references('id')->on('assignments');
             $table->timestamps();
         });
     }
