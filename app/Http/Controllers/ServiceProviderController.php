@@ -129,14 +129,11 @@ class ServiceProviderController extends Controller
     }
 
     public function acceptJob($id){
-        $app = applications::query()->where('id',$id)->first();
+
         $user = Session::has('user') ? Session::get('user'): null;
         $job = new jobs([
-                'SPID' => $user->id,
-                'imagePath' => $app->imagePath,
-                'title' => $app->title,
-                'description' => $app ->title,
-                'price' => $app->price
+                'service_provider_id' => $user->id,
+                'job_id' => $id
             ]
         );
         $job ->save();
