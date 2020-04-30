@@ -127,7 +127,7 @@ Route::get('/admin/staff',[
    'as' => "staff.index"
 ]);
 
-Route::get('/admin/result', [
+Route::get('/admin/staff/result', [
     'uses' => 'StaffController@getSearch',
     'as' => 'staff.search'
 ]);
@@ -166,6 +166,11 @@ Route::post('/admin/staff/delete/{id}',[
 Route::get('/admin/serviceProvider', [
     'uses' => 'ServiceProviderController@getIndex',
     'as' => 'sp.index'
+]);
+
+Route::get('/admin/serviceProvider/result', [
+    'uses' => 'ServiceProviderController@getSearch',
+    'as' => 'sp.search'
 ]);
 
 Route::get('/admin/serviceProvider/create', [

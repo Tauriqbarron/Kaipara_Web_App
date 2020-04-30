@@ -25,6 +25,16 @@ class ServiceProviderController extends Controller
         return view('Administration.serviceProvider.index', ['sps' => $sps]);
     }
 
+    public function getSearch(Request $request) {
+        $search = $request->input('search');
+        $sps = service_provider::where('firstname', 'like', '%'.$search.'%')
+            ->orWhere('lastname', 'like', '%'.$search.'%')
+            ->orWhere('id', 'like', '%'.$search.'%')
+            ->paginate(5);
+        $sps->appends(['search' => $search]);
+        return view('Administration.serviceProvider.index', ['sps' => $sps]);
+    }
+
     public function getCreate() {
         return view('Administration.serviceProvider.sp_create');
     }
@@ -119,14 +129,11 @@ class ServiceProviderController extends Controller
     }
 
     public function acceptJob($id){
-        $app = applications::query()->where('id',$id)->first();
+
         $user = Session::has('user') ? Session::get('user'): null;
         $job = new jobs([
-                'SPID' => $user->id,
-                'imagePath' => $app->imagePath,
-                'title' => $app->title,
-                'description' => $app ->title,
-                'price' => $app->price
+                'service_provider_id' => $user->id,
+                'job_id' => $id
             ]
         );
         $job ->save();
