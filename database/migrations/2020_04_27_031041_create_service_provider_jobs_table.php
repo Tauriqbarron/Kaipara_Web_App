@@ -16,7 +16,7 @@ class CreateServiceProviderJobsTable extends Migration
         Schema::create('service__provider__jobs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('service_provider_id')->references('id')->on('service_providers');
-            $table->foreignId('job_id')->references('id')->on('jobs');
+            $table->foreignId('job_id')->references('id')->on('applications');
             $table->timestamps();
 
         });
