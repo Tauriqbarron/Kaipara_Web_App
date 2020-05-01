@@ -12,12 +12,8 @@ class BookingsController extends Controller
 {
     public function getStaffBookings(Staff $staff){
         $staffId = $staff->id;
-        error_log($staffId);
-        error_log('staff '.$staff->id);
-        $staffAssignments = Staff_Assignment::query()->select('assignment_id')->where('staff_id', '=', $staffId)->get();
-        $assignments = Assignment::query()->select('booking_id')->whereIn('id', $staffAssignments )->get();
-        $bookings = Booking::query()->select('*')->whereIn('id', $assignments)->get();
-
-        return $bookings;
+        return Booking::query()->select('*')->whereIn('id',
+            Assignment::query()->select('booking_id')->whereIn('id',
+                Staff_Assignment::query()->select('assignment_id')->where('staff_id', '=', $staffId)->get() )->get())->get();
     }
 }
