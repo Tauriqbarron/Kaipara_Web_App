@@ -32,11 +32,12 @@ class StaffController extends Controller
     public function getHome() {
         $currentStaff = Staff::find(1);
 
-        $staffIndex = $currentStaff -> id;
-        $assignments = app('App\Http\Controllers\AssignmentsController')->getStaffAssignments($staffIndex);
+        $bookings = app('App\Http\Controllers\BookingsController')->getStaffBookings($currentStaff);
+
+
         $addresses = Address::all();
 
-        return view('Security.index', ['staff' => $currentStaff, 'assignments' => $assignments, 'addresses' => $addresses]);
+        return view('Security.index', ['staff' => $currentStaff, 'bookings'=> $bookings, 'addresses' => $addresses]);
     }
 
     public function postCreate(Request $request) {
