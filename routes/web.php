@@ -118,6 +118,16 @@ Route::get('/admin/client/{id}', [
     'as' => 'client.view'
 ]);
 
+Route::get('/admin/client/edit/{id}', [
+    'uses' => 'Auth\AdminClientController@getEdit',
+    'as' => 'client.edit'
+]);
+
+Route::post('/admin/client/edit/{id}', [
+    'uses' => 'Auth\AdminClientController@postEdit',
+    'as' => 'client.edit'
+]);
+
 
 
 /*staff*/

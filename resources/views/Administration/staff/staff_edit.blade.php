@@ -2,6 +2,13 @@
 
 @section('mainContent')
     <h1 class="ml-5">Staff id: {{ $staff->id }}</h1>
+    @if(count($errors) > 0)
+        <div class="alert alert-danger">
+            @foreach($errors->all() as $error)
+                <p>{{$error}}</p>
+            @endforeach
+        </div>
+    @endif
     <hr/>
     <div class="row ml-5">
         <div class="col-md-4">

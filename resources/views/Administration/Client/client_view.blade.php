@@ -2,6 +2,7 @@
 
 @section('mainContent')
     <h1 class="ml-5">Client id: {{$client->id}}</h1>
+    <hr/>
     <form class="ml-2">
         <div class="form-row">
             <div class="form-group col-md-6">
