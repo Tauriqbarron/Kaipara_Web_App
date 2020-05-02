@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\applications;
 use App\jobs;
 use App\service_provider;
+use App\Service_Provider_Job;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -131,15 +133,19 @@ class ServiceProviderController extends Controller
     public function acceptJob($id){
 
         $user = Session::has('user') ? Session::get('user'): null;
-        $job = new jobs([
+        $job = new Service_Provider_Job([
                 'service_provider_id' => $user->id,
                 'job_id' => $id
             ]
         );
         $job ->save();
-        // below needs to be changed to a query to only show unaccpeted applications
-        $applications = Session::has('applications') ? Session::get('applications'): null;
-        return view('Service.applications')->with('applications' , $applications)->with('user',$user);
+
+        $jobUpdate = applications::query()->where('id',$id)->first();
+        $jobUpdate->status= '2';
+        $jobUpdate->save();
+
+        $applications = applications::query()->select('*')->where('status','=','1')->get();
+        return view('Service.applications',['applications' => $applications, 'user'=>$user]);
     }
 
     public function postDelete($id) {
