@@ -13,4 +13,9 @@ class AdminClientController extends Controller
         $clients = Clients::all();
         return view('Administration.Client.index', ['clients' => $clients]);
     }
+
+    public function viewClient($id) {
+        $client = Clients::find($id);
+        return view('Administration.Client.client_view', ['client' => $client]);
+    }
 }

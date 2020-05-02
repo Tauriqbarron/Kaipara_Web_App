@@ -107,9 +107,18 @@ Route::get('/admin/assignment', function () {
     return view('Administration.assignment_management');
 });
 
-Route::get('/admin/client', function () {
-    return view('Administration.client_management');
-});
+/*Client*/
+Route::get('/admin/client', [
+    'uses' => 'Auth\AdminClientController@getIndex',
+    'as' => 'client.index'
+]);
+
+Route::get('/admin/client/{id}', [
+    'uses' => 'Auth\AdminClientController@viewClient',
+    'as' => 'client.view'
+]);
+
+
 
 /*staff*/
 Route::get('/security/login', [
