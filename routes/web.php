@@ -109,9 +109,28 @@ Route::get('/admin/assignment', function () {
     return view('Administration.assignment_management');
 });
 
-Route::get('/admin/client', function () {
-    return view('Administration.client_management');
-});
+/*Client*/
+Route::get('/admin/client', [
+    'uses' => 'Auth\AdminClientController@getIndex',
+    'as' => 'client.index'
+]);
+
+Route::get('/admin/client/{id}', [
+    'uses' => 'Auth\AdminClientController@viewClient',
+    'as' => 'client.view'
+]);
+
+Route::get('/admin/client/edit/{id}', [
+    'uses' => 'Auth\AdminClientController@getEdit',
+    'as' => 'client.edit'
+]);
+
+Route::post('/admin/client/edit/{id}', [
+    'uses' => 'Auth\AdminClientController@postEdit',
+    'as' => 'client.edit'
+]);
+
+
 
 /*staff*/
 Route::get('/security/login', [

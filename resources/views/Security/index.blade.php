@@ -46,7 +46,6 @@
 
                                     @foreach($bookings as $booking )
 
-
                                         <tr>
                                             <td class="text-center">
                                                 <h6>9:00</h6>
