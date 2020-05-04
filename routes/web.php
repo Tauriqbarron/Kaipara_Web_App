@@ -64,15 +64,17 @@ Route::get('/service', function () {
     return view('Service.index');
 }) ->name('service.home');
 
+Route::get('/service/jobs', [
+    'uses' => 'ServiceProviderController@getJobs', 'as' => 'service.jobs'
+]) ->name('service.jobs');
+
 /*Service Provider Booking Application Page*/
 Route::get('/service/applications', [
     'uses' => 'ApplicationsController@getApps', 'as' => 'service.applications'
 ]) ->name('service.Bookings');
 
 /*Service Provider jobs Page*/
-Route::get('/service/jobs', function () {
-    return view('Service.jobs');
-}) ->name('service.jobs');
+
 
 /*Registration*/
 Route::get('/registration', function () {
@@ -111,9 +113,53 @@ Route::get('/admin/assignment', function () {
     return view('Administration.assignment_management');
 });
 
-Route::get('/admin/client', function () {
-    return view('Administration.client_management');
-});
+/*Client*/
+Route::get('/admin/client', [
+    'uses' => 'Auth\AdminClientController@getIndex',
+    'as' => 'client.index'
+]);
+
+Route::get('/admin/client/result', [
+    'uses' => 'Auth\AdminClientController@search',
+    'as' => 'client.search'
+]);
+
+Route::get('/admin/client/create', [
+    'uses' => 'Auth\AdminClientController@getCreate',
+    'as' => 'client.create'
+]);
+
+Route::post('/admin/client/create', [
+    'uses' => 'Auth\AdminClientController@postCreate',
+    'as' => 'client.create'
+]);
+
+Route::get('/admin/client/{id}', [
+    'uses' => 'Auth\AdminClientController@viewClient',
+    'as' => 'client.view'
+]);
+
+Route::get('/admin/client/edit/{id}', [
+    'uses' => 'Auth\AdminClientController@getEdit',
+    'as' => 'client.edit'
+]);
+
+Route::post('/admin/client/edit/{id}', [
+    'uses' => 'Auth\AdminClientController@postEdit',
+    'as' => 'client.edit'
+]);
+
+Route::get('/admin/client/delete/{id}', [
+    'uses' => 'Auth\AdminClientController@getDelete',
+    'as' => 'client.delete'
+]);
+
+Route::post('/admin/client/delete/{id}', [
+    'uses' => 'Auth\AdminClientController@postDelete',
+    'as' => 'client.delete'
+]);
+
+
 
 /*staff*/
 Route::get('/security/login', [

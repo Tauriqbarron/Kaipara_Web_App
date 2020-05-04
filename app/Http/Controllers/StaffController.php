@@ -7,7 +7,7 @@ use App\Booking;
 use App\Staff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use phpDocumentor\Reflection\Types\This;
+use Illuminate\Support\Facades\Hash;
 
 class StaffController extends Controller
 {
@@ -43,7 +43,7 @@ class StaffController extends Controller
         $validator = Validator::make($request->all(), [
             'fName'=>'required|max:50',
             'lName'=>'required|max:50',
-            'email'=>'required|email',
+            'email'=>'required|email|unique:staff',
             'pNumber'=>'required|max:20',
             'password' => 'required|confirmed|min:6'
         ]);
@@ -55,7 +55,7 @@ class StaffController extends Controller
             'last_name' => $request->input('lName'),
             'email' => $request->input('email'),
             'phone_number' => $request->input('pNumber'),
-            'password' => $request->input('password'),
+            'password' => Hash::make($request->input('password')),
         ]);
         $staff->save();
         return redirect()->route('staff.index');

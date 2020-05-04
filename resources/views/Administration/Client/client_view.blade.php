@@ -3,7 +3,7 @@
 @section('mainContent')
     <h1 class="ml-5">Client id: {{$client->id}}</h1>
     <hr/>
-    <form class="ml-2" method="post" action="{{route('client.delete', ['id' => $client->id])}}">
+    <form class="ml-2">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputEmail4">First Name</label>
@@ -44,7 +44,9 @@
                 <p class="form-control">{{$client->address->postcode}}</p>
             </div>
         </div>
-        <a class="btn btn-primary" href="{{route('client.index')}}">back</a>
-        <button type="submit" class="btn btn-danger float-right">Delete</button>
+        <a class="btn btn-danger" href="{{route('client.index')}}">back</a>
     </form>
+
+
+
 @endsection
