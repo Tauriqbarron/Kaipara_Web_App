@@ -60,15 +60,17 @@ Route::get('/service', function () {
     return view('Service.index');
 }) ->name('service.home');
 
+Route::get('/service/jobs', [
+    'uses' => 'ServiceProviderController@getJobs', 'as' => 'service.jobs'
+]) ->name('service.jobs');
+
 /*Service Provider Booking Application Page*/
 Route::get('/service/applications', [
     'uses' => 'ApplicationsController@getApps', 'as' => 'service.applications'
 ]) ->name('service.Bookings');
 
 /*Service Provider jobs Page*/
-Route::get('/service/jobs', function () {
-    return view('Service.jobs');
-}) ->name('service.jobs');
+
 
 /*Registration*/
 Route::get('/registration', function () {
