@@ -13,6 +13,7 @@ class ApplicationsController extends Controller
     public function getApps(){
         $user = Session::has('user') ? Session::get('user'): null;
         $applications = applications::query()->select('*')->where('status','=','1')->get();
+        //$applications = applications::all();
         return view('Service.applications',['applications' => $applications],['user' =>$user]);
     }
 }

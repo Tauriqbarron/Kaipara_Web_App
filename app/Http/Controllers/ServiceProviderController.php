@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\applications;
-use App\jobs;
 use App\service_provider;
 use App\Service_Provider_Job;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +13,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Session;
+use function GuzzleHttp\Promise\all;
+
 class ServiceProviderController extends Controller
 {
 
@@ -154,4 +155,15 @@ class ServiceProviderController extends Controller
         return redirect()->route('sp.index');
     }
 
+    public function getJobs(){
+        $user = Session::has('user') ? Session::get('user'): null;
+        $userID = $user->id;
+        $jobs = applications::query()
+            ->join('service__provider__jobs','applications.id','=','service__provider__jobs.job_id')
+            ->select('applications.*')->where('service__provider__jobs.service_provider_id',$userID)->get();
+
+       // $jobs = applications::query()->select('*')->whereIn('id', Service_Provider_Job::query()->select('job_id')->where('service_provider_id',$userID)->get())->get();
+       // $jobs = applications::all();
+        return view('Service.jobs',['jobs'=>$jobs],['user'=>$user]);
+    }
 }
