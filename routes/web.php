@@ -115,6 +115,16 @@ Route::get('/admin/client', [
     'as' => 'client.index'
 ]);
 
+Route::get('/admin/client/result', [
+    'uses' => 'Auth\AdminClientController@search',
+    'as' => 'client.search'
+]);
+
+Route::get('/admin/client/create', [
+    'uses' => 'Auth\AdminClientController@getCreate',
+    'as' => 'client.create'
+]);
+
 Route::get('/admin/client/{id}', [
     'uses' => 'Auth\AdminClientController@viewClient',
     'as' => 'client.view'

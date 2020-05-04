@@ -15,6 +15,20 @@ class AdminClientController extends Controller
         return view('Administration.Client.index', ['clients' => $clients]);
     }
 
+    public function search(Request $request) {
+        $search = $request->input('search');
+        $clients = Clients::where('first_name', 'like', '%'.$search.'%')
+            ->orWhere('last_name', 'like', '%'.$search.'%')
+            ->orWhere('id', 'like', '%'.$search.'%')
+            ->paginate(5);
+        $clients->appends(['search' => $search]);
+        return view('Administration.Client.index', ['clients' => $clients]);
+    }
+
+    public function getCreate() {
+        return view('Administration.Client.client_create');
+    }
+
     public function viewClient($id) {
         $client = Clients::find($id);
         return view('Administration.Client.client_view', ['client' => $client]);
