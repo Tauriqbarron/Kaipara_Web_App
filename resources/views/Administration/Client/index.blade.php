@@ -33,7 +33,7 @@
                         <td>{{$client->phone_number}}</td>
                         <td><a class="btn btn-success" href="{{route('client.view', ['id' => $client->id])}}">View</a></td>
                         <td><a class="btn btn-primary" href="{{route('client.edit', ['id' => $client->id])}}">Edit</a></td>
-                        <td><a class="btn btn-danger" href="#">Delete</a></td>
+                        <td><a class="btn btn-danger" href="{{route('client.delete', ['id' => $client->id])}}">Delete</a></td>
                     </tr>
                 @endforeach
                 </tbody>

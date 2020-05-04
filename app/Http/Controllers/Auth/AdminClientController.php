@@ -58,4 +58,15 @@ class AdminClientController extends Controller
         $address->save();
         return redirect()->route('client.index');
     }
+
+    public function getDelete($id) {
+        $client = Clients::find($id);
+        return view('Administration.Client.client_delete', ['client' => $client]);
+    }
+
+    public function postDelete($id) {
+        $client = Clients::find($id);
+        $client->Delete();
+        return redirect()->route('client.index');
+    }
 }

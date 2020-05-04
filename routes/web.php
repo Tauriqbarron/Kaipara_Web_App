@@ -128,6 +128,16 @@ Route::post('/admin/client/edit/{id}', [
     'as' => 'client.edit'
 ]);
 
+Route::get('/admin/client/delete/{id}', [
+    'uses' => 'Auth\AdminClientController@getDelete',
+    'as' => 'client.delete'
+]);
+
+Route::post('/admin/client/delete/{id}', [
+    'uses' => 'Auth\AdminClientController@postDelete',
+    'as' => 'client.delete'
+]);
+
 
 
 /*staff*/
