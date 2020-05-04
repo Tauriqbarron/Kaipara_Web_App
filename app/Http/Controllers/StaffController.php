@@ -7,6 +7,7 @@ use App\Booking;
 use App\Staff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use phpDocumentor\Reflection\Types\This;
 
 class StaffController extends Controller
 {
@@ -28,18 +29,16 @@ class StaffController extends Controller
     public function getCreate() {
         return view('Administration.staff.staff_create');
     }
-
-    public function getHome() {
+    public function getPage($pageString) {
         $currentStaff = Staff::find(1);
-
         $bookings = app('App\Http\Controllers\BookingsController')->getStaffBookings($currentStaff);
-
-
         $addresses = Address::all();
-
-        return view('Security.index', ['staff' => $currentStaff, 'bookings'=> $bookings, 'addresses' => $addresses]);
+        return view('Security.index', ['staff' => $currentStaff, 'bookings'=> $bookings, 'addresses' => $addresses, 'pageString' => $pageString]);
     }
 
+    public function getHome() {
+        return StaffController::getPage('profile');
+    }
     public function postCreate(Request $request) {
         $validator = Validator::make($request->all(), [
             'fName'=>'required|max:50',

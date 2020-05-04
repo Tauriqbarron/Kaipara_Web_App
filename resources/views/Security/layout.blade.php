@@ -23,7 +23,7 @@
         @include('Security.header')
         <div class="container-fluid" style="min-width: 1200px">
             @include('Security.nav')
-            <div class="jumbotron bg-white w-100 h-100 rounded-bottom-lg" style="overflow: hidden;">
+            <div class="jumbotron bg-white w-100 h-100 rounded-bottom-lg" style="overflow: hidden;" id="mainContent">
                 @yield('mainContent')
             </div>
 

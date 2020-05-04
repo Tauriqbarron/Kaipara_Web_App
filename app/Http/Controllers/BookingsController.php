@@ -10,6 +10,9 @@ use App\Booking;
 
 class BookingsController extends Controller
 {
+    public function index(){
+
+    }
     public function getStaffBookings(Staff $staff){
         $staffId = $staff->id;
         return Booking::query()->select('*')->whereIn('id',

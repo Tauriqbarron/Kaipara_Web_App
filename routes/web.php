@@ -55,6 +55,10 @@ Route::get('/security', [
     'uses' => 'StaffController@getHome', 'as' => 'security.index'
 ]) ->name('security.home');
 
+Route::get('/security/{pageString}', [
+    'uses' => 'StaffController@getPage', 'as' => 'security.page'
+]);
+
 /*Service Provider Profile*/
 Route::get('/service', function () {
     return view('Service.index');
