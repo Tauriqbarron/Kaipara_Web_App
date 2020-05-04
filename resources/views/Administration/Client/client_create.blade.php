@@ -23,8 +23,18 @@
         </div>
         <div class="form-group">
             <label for="inputAddress">Email</label>
-            <input name="email" class="form-control" placeholder="Email" />
+            <input name="email" type="email" class="form-control" placeholder="Email" />
         </div>
+        <div class="form-group">
+            <label for="inputAddress">Password</label>
+            <input name="password" type="password" class="form-control" placeholder="password" />
+        </div>
+        <div class="form-group">
+            <label for="inputAddress">Confirm Password</label>
+            <input name="password_confirmation" type="password" class="form-control" placeholder="confirm password" />
+        </div>
+
+
         <div class="form-group">
             <label for="inputAddress2">Phone Number</label>
             <input name="pNumber" class="form-control" placeholder="Phone Number" />

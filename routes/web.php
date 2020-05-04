@@ -125,6 +125,11 @@ Route::get('/admin/client/create', [
     'as' => 'client.create'
 ]);
 
+Route::post('/admin/client/create', [
+    'uses' => 'Auth\AdminClientController@postCreate',
+    'as' => 'client.create'
+]);
+
 Route::get('/admin/client/{id}', [
     'uses' => 'Auth\AdminClientController@viewClient',
     'as' => 'client.view'

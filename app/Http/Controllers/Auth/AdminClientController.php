@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Clients;
 use App\Address;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class AdminClientController extends Controller
 {
@@ -27,6 +28,48 @@ class AdminClientController extends Controller
 
     public function getCreate() {
         return view('Administration.Client.client_create');
+    }
+
+    public function postCreate(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'fName'=>'required|max:50',
+            'lName'=>'required|max:50',
+            'email'=>'required|email|unique:clients',
+            'pNumber'=>'required|max:50',
+            'password'=>'required|confirmed|min:6',
+            'street'=>'required',
+            'suburb'=>'required',
+            'city'=>'required',
+            'country'=>'required',
+            'postcode'=>'required'
+        ]);
+        if($validator->fails()) {
+            return redirect()->route('client.create')
+                ->withErrors($validator)
+                ->withInput($request->all());
+        }
+
+        $address = new Address([
+            'street' => $request->input('street'),
+            'suburb' => $request->input('suburb'),
+            'city' => $request->input('city'),
+            'country' => $request->input('country'),
+            'postcode' => $request->input('postcode')
+        ]);
+        $address->save();
+
+        $client = new Clients([
+            'first_name' => $request->input('fName'),
+            'last_name' => $request->input('lName'),
+            'email' => $request->input('email'),
+            'phone_number' => $request->input('pNumber'),
+            'password' => Hash::make($request->input('password')),
+            'address_id' => $address->id
+        ]);
+        $client->save();
+        return redirect()->route('client.index');
+
+
     }
 
     public function viewClient($id) {

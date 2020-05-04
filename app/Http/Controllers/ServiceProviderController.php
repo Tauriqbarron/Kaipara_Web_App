@@ -61,7 +61,7 @@ class ServiceProviderController extends Controller
             'email' => $request->input('email'),
             'username' => $request->input('uName'),
             'phone_number' => $request->input('pNumber'),
-            'password'=> $request->input('password')
+            'password'=> Hash::make($request->input('password'))
         ]);
         $serviceProvider->save();
         return redirect()->route('sp.index');
