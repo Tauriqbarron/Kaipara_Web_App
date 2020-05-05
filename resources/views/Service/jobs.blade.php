@@ -1,7 +1,7 @@
 @extends('Service.index')
 @section('styles')
     <link rel="stylesheet" href="{{url('css/calendar.css')}}" type="text/css"/>
-    <link rel="stylesheet" href="{{url('css/service.css')}}" type="text/css"/>
+
 
 @endsection
 @section('nav')
@@ -23,6 +23,7 @@
                             <h5 class="card-title">{{$job->title}}</h5>
                             <h5 class="card-title">{{$job->price}}</h5>
                             <p class="card-text">{{$job->description}}</p>
+                            <a href="{{route('service.canceljob',['id' => $job->id])}}" class="btn btn-primary float-right mx-1">Cancel</a>
                         </div>
                     </div>
                 @endforeach

@@ -37,4 +37,9 @@ class RegistrationController extends Controller
         $user->save();
 
     }
+
+
+    public function getUserType(){
+        return view('Registration.usertype');
+    }
 }
