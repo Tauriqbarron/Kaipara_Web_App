@@ -149,6 +149,19 @@ class ServiceProviderController extends Controller
         return view('Service.applications',['applications' => $applications, 'user'=>$user]);
     }
 
+    public function canceljob($id){
+        $user = Session::has('user') ? Session::get('user'): null;
+        $userID = $user->id;
+        $jobupdate = applications::query()->select('*')->where('id',$id)->first();
+        $jobupdate->status='1';
+        $jobupdate->save();
+        Service_Provider_Job::query()->where('job_id',$id)->delete();
+        $jobs = applications::query()
+            ->join('service__provider__jobs','applications.id','=','service__provider__jobs.job_id')
+            ->select('applications.*')->where('service__provider__jobs.service_provider_id',$userID)->get();
+        return view('Service.Jobs',['jobs'=>$jobs],['user'=>$user]);
+    }
+
     public function postDelete($id) {
         $sp = service_provider::find($id);
         $sp->delete();

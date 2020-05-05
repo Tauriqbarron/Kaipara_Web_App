@@ -50,6 +50,9 @@ Route::get('/test', function () {
     phpinfo();
 });
 
+
+
+
 /*Security Guard Profile*/
 Route::get('/security', [
     'uses' => 'StaffController@getHome', 'as' => 'security.index'
@@ -59,10 +62,21 @@ Route::get('/security/{pageString}', [
     'uses' => 'StaffController@getPage', 'as' => 'security.page'
 ]);
 
+// SERVICE
 /*Service Provider Profile*/
 Route::get('/service', function () {
     return view('Service.index');
 }) ->name('service.home');
+
+Route::get('/canceljob/{id}',[
+    'uses' =>'ServiceProviderController@canceljob',
+    'as' => 'service.canceljob'
+]);
+
+Route::get('/acceptJob/{id}',[
+    'uses' =>'ServiceProviderController@acceptJob',
+    'as' => 'service.acceptJob'
+]);
 
 Route::get('/service/jobs', [
     'uses' => 'ServiceProviderController@getJobs', 'as' => 'service.jobs'
@@ -80,6 +94,14 @@ Route::get('/service/applications', [
 Route::get('/registration', function () {
     return view('Registration.index');
 }) ->name('Registration.index');
+
+Route::get('/registration/usertype',[
+    'uses' => 'RegistrationController@getUserType',
+    'as' => "reg.type"
+]);
+
+
+
 
 
 /*Administrator part (Jay) */
@@ -147,16 +169,6 @@ Route::get('/admin/client/edit/{id}', [
 Route::post('/admin/client/edit/{id}', [
     'uses' => 'Auth\AdminClientController@postEdit',
     'as' => 'client.edit'
-]);
-
-Route::get('/admin/client/delete/{id}', [
-    'uses' => 'Auth\AdminClientController@getDelete',
-    'as' => 'client.delete'
-]);
-
-Route::post('/admin/client/delete/{id}', [
-    'uses' => 'Auth\AdminClientController@postDelete',
-    'as' => 'client.delete'
 ]);
 
 
