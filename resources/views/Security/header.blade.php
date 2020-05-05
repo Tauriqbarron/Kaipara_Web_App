@@ -21,7 +21,7 @@
                 </ul>
                 <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end">
                     <li class="nav-item">
-                        <a class="navbar-text text-dark" id="txtUsername">Username</a>
+                        <a class="navbar-text text-dark" id="txtUsername">{{$staff->first_name}} {{$staff->last_name}}</a>
                     </li>
                     <li class="nav-item">
                         <img class="float-right rounded-circle shadow" style="display: block;" src="{{url('images/Profile_Placeholder.png')}}" alt="profileImage">

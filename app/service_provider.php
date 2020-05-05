@@ -10,6 +10,6 @@ class service_provider extends Model implements Auth
 {
     use Authenticatable;
     protected $guard = 'service_provider';
-    protected $fillable = ['firstname','lastname','username','email','password','phone_number'];
+    protected $fillable = ['firstname','lastname','username','email','password','phone_number','street', 'suburb', 'city', 'postcode'];
     public $timestamps = false;
 }

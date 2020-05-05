@@ -18,10 +18,14 @@ class CreateBookingsTable extends Migration
             $table->timestamps();
             $table->foreignId('client_id')->references('id')->on('clients');
             $table->foreignId('booking_type_id')->references('id')->on('booking__types');
-            $table->foreignId('address_id')->references('id')->on('addresses');
+            $table->string('street');
+            $table->string('suburb');
+            $table->string('city');
+            $table->bigInteger('postcode');
             $table->string('description');
             $table->date('date');
             $table->string('start_time');
+            $table->string('status')->default('Available');
 
         });
     }

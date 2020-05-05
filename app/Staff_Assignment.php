@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Staff_Assignment extends Model
 {
-    protected $fillable = ['staff_id', 'assignment_id'];
+    protected $fillable = ['staff_id', 'booking_id'];
 }

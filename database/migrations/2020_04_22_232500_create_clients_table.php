@@ -21,7 +21,10 @@ class CreateClientsTable extends Migration
             $table->string('email', 50)->unique();
             $table->string('phone_number', 50);
             $table->string('password');
-            $table->foreignId('address_id')->references('id')->on('addresses');
+            $table->string('street');
+            $table->string('suburb');
+            $table->string('city');
+            $table->bigInteger('postcode');
         });
     }
 

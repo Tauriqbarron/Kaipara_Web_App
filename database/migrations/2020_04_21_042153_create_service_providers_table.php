@@ -21,6 +21,11 @@ class CreateServiceProvidersTable extends Migration
             $table->string('email',50) ->unique();
             $table->string('password',100);
             $table->string('phone_number',20);
+            $table->string('street');
+            $table->string('suburb');
+            $table->string('city');
+            $table->bigInteger('postcode');
+            $table->rememberToken();
         });
     }
 

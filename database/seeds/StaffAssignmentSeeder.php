@@ -14,21 +14,21 @@ class StaffAssignmentSeeder extends Seeder
         $staff_assignment = new \App\Staff_Assignment(
             [
                 'staff_id'=>1,
-                'assignment_id'=>1
+                'booking_id'=>1
             ]
         );
         $staff_assignment ->save();
         $staff_assignment = new \App\Staff_Assignment(
             [
                 'staff_id'=>1,
-                'assignment_id'=>2
+                'booking_id'=>2
             ]
         );
         $staff_assignment ->save();
         $staff_assignment = new \App\Staff_Assignment(
             [
                 'staff_id'=>1,
-                'assignment_id'=>3
+                'booking_id'=>3
             ]
         );
         $staff_assignment ->save();

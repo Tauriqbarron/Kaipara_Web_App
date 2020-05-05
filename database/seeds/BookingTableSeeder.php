@@ -15,9 +15,13 @@ class BookingTableSeeder extends Seeder
             'client_id' => 1,
             'booking_type_id' => 1,
             'description' => 'Bouncer',
-            'address_id' => 3,
+            'street' => '67  Caroni Way',
+            'suburb' => 'Ohariu',
+            'city' => 'Wellington',
+            'postcode' => 6037,
             'date' => today(),
-            'start_time' => '14:00'
+            'start_time' => '14:00',
+            'status' => 'assigned'
 
         ]);
         $booking->save();
@@ -26,9 +30,13 @@ class BookingTableSeeder extends Seeder
             'client_id' => 2,
             'booking_type_id' => 2,
             'description' => 'Wedding Security',
-            'address_id' => 1,
+            'street' => '67  Caroni Way',
+            'suburb' => 'Ohariu',
+            'city' => 'Wellington',
+            'postcode' => 6037,
             'date' => today(),
-            'start_time' => '08:00'
+            'start_time' => '08:00',
+            'status' => 'assigned'
 
         ]);
         $booking->save();
@@ -37,9 +45,13 @@ class BookingTableSeeder extends Seeder
             'client_id' => 3,
             'booking_type_id' => 3,
             'description' => 'Security',
-            'address_id' => 2,
+            'street' => '67  Caroni Way',
+            'suburb' => 'Ohariu',
+            'city' => 'Wellington',
+            'postcode' => 6037,
             'date' => today(),
-            'start_time' => '06:00'
+            'start_time' => '06:00',
+            'status' => 'assigned'
         ]);
         $booking->save();
 

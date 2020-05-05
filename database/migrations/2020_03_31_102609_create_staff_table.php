@@ -20,6 +20,10 @@ class CreateStaffTable extends Migration
             $table->string('email', 50)->unique();
             $table->string('phone_number');
             $table->string('password');
+            $table->string('street');
+            $table->string('suburb');
+            $table->string('city');
+            $table->bigInteger('postcode');
             $table->rememberToken();
             $table->timestamps();
         });

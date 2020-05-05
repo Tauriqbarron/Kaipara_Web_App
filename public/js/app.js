@@ -57,3 +57,34 @@ function getRotation(element){
 
     return angle;
 }
+
+function pageToggle(button, target){
+    profilePage = document.getElementById('profileContainer').style;
+    assignmentPage = document.getElementById('assignmentContainer').style;
+    schedulePage = document.getElementById('scheduleContainer').style;
+    rosterPage = document.getElementById('rosterContainer').style;
+
+    profileBtn = document.getElementById('profileBtn').classList;
+    scheduleBtn = document.getElementById('scheduleBtn').classList;
+    assignmentBtn = document.getElementById('assignmentBtn').classList;
+    rosterBtn = document.getElementById('rosterBtn').classList;
+
+    pages = [profilePage,assignmentPage,schedulePage,rosterPage];
+
+    btns = [profileBtn, scheduleBtn, assignmentBtn, rosterBtn]
+
+    for(i = 0; i < pages.length; i+=1){
+        pages[i].display = 'none';
+    }
+
+    for(i = 0; i < btns.length; i+=1){
+        btns[i].remove('active');
+    }
+
+    document.getElementById(button)
+    document.getElementById(target).style.display = 'block';
+
+
+
+
+}

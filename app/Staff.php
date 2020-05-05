@@ -9,5 +9,5 @@ class Staff extends Model implements Auth
 {
     use Authenticatable;
     protected $guard = 'staff';
-    protected  $fillable = ['first_name', 'last_name', 'email', 'phone_number', 'password'];
+    protected  $fillable = ['first_name', 'last_name', 'email', 'phone_number', 'password', 'street', 'suburb', 'city', 'postcode'];
 }

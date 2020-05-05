@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class ClientTableSeeder extends Seeder
 {
@@ -17,7 +18,11 @@ class ClientTableSeeder extends Seeder
             'email' => 'pk6tnhwuz0n@groupbuff.com',
             'phone_number' => '(020) 1807-878',
             'password' => Hash::make('Admin123'),
-            'address_id' => 1
+            'street' => '67  Caroni Way',
+            'suburb' => 'Ohariu',
+            'city' => 'Wellington',
+            'postcode' => 6037,
+
 
         ]);
         $client->save();
@@ -28,7 +33,10 @@ class ClientTableSeeder extends Seeder
             'email' => 'duane.reyes@example.com',
             'phone_number' => '(167)-814-6525',
             'password' => Hash::make('disney'),
-            'address_id' => 1
+            'street' => '67  Caroni Way',
+            'suburb' => 'Ohariu',
+            'city' => 'Wellington',
+            'postcode' => 6037,
 
         ]);
         $client->save();
@@ -39,7 +47,10 @@ class ClientTableSeeder extends Seeder
             'email' => 'candyce.payne@example.com',
             'phone_number' => '(099)-970-3459',
             'password' => Hash::make('chilli'),
-            'address_id' => 2
+            'street' => '67  Caroni Way',
+            'suburb' => 'Ohariu',
+            'city' => 'Wellington',
+            'postcode' => 6037,
 
         ]);
         $client->save();
@@ -50,7 +61,10 @@ class ClientTableSeeder extends Seeder
             'email' => 'leo.gilbert@example.com',
             'phone_number' => '(000)-406-3920',
             'password' => Hash::make('weston'),
-            'address_id' => 3
+            'street' => '67  Caroni Way',
+            'suburb' => 'Ohariu',
+            'city' => 'Wellington',
+            'postcode' => 6037,
 
         ]);
         $client->save();

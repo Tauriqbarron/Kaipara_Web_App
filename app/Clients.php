@@ -6,10 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Clients extends Model
 {
-    protected $fillable = ['first_name', 'last_name', 'email', 'phone_number', 'password', 'address_id'];
+    protected $fillable = ['first_name', 'last_name', 'email', 'phone_number', 'password', 'street', 'suburb', 'city', 'postcode'];
 
-    public function address() {
-
-        return $this->belongsTo('App\Address', 'address_id', 'id');
-    }
 }

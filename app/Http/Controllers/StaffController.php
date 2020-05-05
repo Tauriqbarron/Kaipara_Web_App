@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Address;
 use App\Booking;
 use App\Staff;
 use Illuminate\Http\Request;
@@ -30,10 +29,10 @@ class StaffController extends Controller
         return view('Administration.staff.staff_create');
     }
     public function getPage($pageString) {
-        $currentStaff = Staff::find(1);
+        $currentStaff = Staff::query()->find(1);
         $bookings = app('App\Http\Controllers\BookingsController')->getStaffBookings($currentStaff);
-        $addresses = Address::all();
-        return view('Security.index', ['staff' => $currentStaff, 'bookings'=> $bookings, 'addresses' => $addresses, 'pageString' => $pageString]);
+        $availableBookings = Booking::query()->where('status', "!=", "assigned");
+        return view('Security.index', ['staff' => $currentStaff, 'bookings'=> $bookings, 'pageString' => $pageString, 'availableBookings'=>$availableBookings]);
     }
 
     public function getHome() {
