@@ -1,41 +1,41 @@
 <div style="width:26%; height: 100%; float: left">
-    <div  class="card bg-light shadow p-3 mb-5 border-0 card-image rounded-lg shadow col-sm-0" style="width: 18rem; background-image: url({{url('images/Card_BG.jpg')}}); background-size: cover">
-        <h6>Assignment</h6>
-    </div>
-
-
+    <div style="height: 48px"></div>
+    <div class="rounded" style="background-color: #636b6f; width: 105%; height: 400px" id="map"></div>
 
 </div>
 <div style="width:74%; float: left; padding-left: 20px">
+    <h2 class="text-center">Available Assignments</h2>
     <div class="container jumbotron bg-light" id="schedule">
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="text-center">Available Assignments</h2>
                 <div class="main-box clearfix">
                     <div class="table-responsive">
                         <table class="table user-list">
                             <tbody>
 
-                            @foreach($bookings as $booking )
+                            @foreach($availableBookings as $booking )
+                                <script style="display: none">
+                                    addAddress('{{$booking->street}} {{$booking->suburb}} {{$booking->city}} New Zealand');
+                                </script>
                                 <tr>
                                     <td class="text-center">
-                                        <h6>9:00</h6>
+                                        <h6>{{$booking->start_time}}</h6>
                                     </td>
                                     <td>
-                                        <h6>{{$booking->street}}</h6>
+                                        <h6>{{$booking->date}}</h6>
                                     </td>
                                     <td class="text-center">
-                                        <h6 class="label label-default">{{$booking->suburb}}</h6>
+                                        <h6 class="label label-default">{{$booking->description}}</h6>
                                     </td>
                                     <td>
                                         <h6>{{$booking->city}}</h6>
                                     </td>
                                     <td style="width: 20%;">
-                                        <a href="#" class="table-link fa-pull-right" data-toggle="collapse" data-target="#n{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}n','n{{$booking->id}}')" >
-                                            More info
+                                        <a href="#" title="More Infomation" class="table-link fa-pull-right" data-toggle="collapse" data-target="#a{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}a','a{{$booking->id}}')" >
+
                                             <span class="fa-stack">
                                                         <i class="fa fa-square fa-stack-2x"></i>
-                                                        <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}n"></i>
+                                                        <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}a"></i>
                                                     </span>
                                         </a>
 
@@ -43,12 +43,12 @@
                                 </tr>
                                 <tr >
                                     <td colspan="4" style="padding: 0px" class="bg-white">
-                                        <div class="collapse"  id="n{{$booking->id}}" style="padding: 10px">
-                                            {{$booking->description}}
+                                        <div class="collapse"  id="a{{$booking->id}}" style="padding: 10px">
+                                            {{$booking->description}} required at {{$booking->street}}, {{$booking->suburb}}, {{$booking->city}} at {{$booking->start_time}} on {{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}
                                         </div>
                                     </td>
                                     <td style="padding: 0px" class="bg-white">
-                                        <div class="collapse btn-group-lg"  id="n{{$booking->id}}" style="padding: 10px">
+                                        <div class="collapse btn-group-lg"  id="a{{$booking->id}}" style="padding: 10px">
                                             <button class="btn-primary text-white w-100 rounded border-0" type="submit"><h6>Accept</h6></button>
                                             <button class="btn-danger text-white w-100 rounded border-0"><h6>Decline</h6></button>
                                         </div>

@@ -20,6 +20,7 @@
 
 </div>
 <div style="width:74%; float: left; padding-left: 20px">
+    <h2 class="text-center">Your Assignments</h2>
     <div class="container jumbotron bg-light" id="schedule">
         <div class="row">
             <div class="col-lg-12">
@@ -29,7 +30,7 @@
                             <thead>
                             <tr>
                                 <th >
-                                    <a href="#"><i class="fa fa-chevron-left fa-2x date-arrow" id="dateLeft"></i></a>
+                                    <a href="#" onclick="dateChangeRight()"><i class="fa fa-chevron-left fa-2x date-arrow" id="dateLeft" ></i></a>
                                 </th>
                                 <th colspan="3" class="text-center text-secondary" style="vertical-align: bottom">
                                     <h3 id="date"></h3>
@@ -45,7 +46,7 @@
 
                                 <tr>
                                     <td class="text-center">
-                                        <h6>9:00</h6>
+                                        <h6>{{$booking->start_time}}</h6>
                                     </td>
 
                                             <td>
@@ -59,7 +60,7 @@
                                             </td>
                                     <td style="width: 20%;">
                                         <a href="#" class="table-link fa-pull-right" data-toggle="collapse" data-target="#n{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}n','n{{$booking->id}}')" >
-                                            More info
+
                                             <span class="fa-stack">
                                                         <i class="fa fa-square fa-stack-2x"></i>
                                                         <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}n"></i>

@@ -1,3 +1,6 @@
+var map;
+var addresses = [];
+
 function loaded(){
 
     n =  new Date();
@@ -5,6 +8,53 @@ function loaded(){
     m = n.getMonth() + 1;
     d = n.getDate();
     document.getElementById("date").innerHTML = d + "/" + m + "/" + y;
+    document.getElementById("scheduleDate").innerHTML = d + "/" + m + "/" + y;
+
+}
+
+function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -36.8742039, lng: 174.809371},
+        zoom: 12
+    });
+    addresses.forEach(getMarker);
+
+}
+
+function addAddress(address){
+    addresses.push(address);
+}
+
+function dateChangeRight(){
+    n = new Date();
+    n.setFullYear(2020);
+    n.setMonth(9);
+    n.setDate(20);
+    console.log(n.toDateString());
+}
+
+//getMarker(string: address)
+//converts an address string to lat and lng co-ordinates and places a marker on the map
+//Code by rafon: https://stackoverflow.com/questions/46868703/google-maps-api-add-marker-by-address-javascript/46906152
+function getMarker(address) {
+    console.log(address);
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': address}, function(results, status) {
+        if (status === 'OK') {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location
+
+            });
+
+
+            console.log('Geocode was successful');
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+            console.log('Geocode not succ');
+        }
+    });
 }
 
 function f(button, target){
@@ -45,15 +95,11 @@ function getRotation(element){
     var d = values[3];
 
     var scale = Math.sqrt(a*a + b*b);
-
-    console.log('Scale: ' + scale);
-
 // arc sin, convert from radians to degrees, round
     var sin = b/scale;
 // next line works for 30deg but not 130deg (returns 50);
 // var angle = Math.round(Math.asin(sin) * (180/Math.PI));
     var angle = Math.round(Math.atan2(b, a) * (180/Math.PI));
-    console.log('Angle: ' + angle + 'deg');
 
     return angle;
 }
@@ -81,7 +127,7 @@ function pageToggle(button, target){
         btns[i].remove('active');
     }
 
-    document.getElementById(button)
+    document.getElementById(button).classList.add('active');
     document.getElementById(target).style.display = 'block';
 
 
