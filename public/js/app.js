@@ -15,7 +15,7 @@ function loaded(){
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -36.8742039, lng: 174.809371},
-        zoom: 12
+        zoom: 10
     });
     addresses.forEach(getMarker);
 
@@ -41,7 +41,7 @@ function getMarker(address) {
     geocoder = new google.maps.Geocoder();
     geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
-            map.setCenter(results[0].geometry.location);
+            //map.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
                 map: map,
                 position: results[0].geometry.location

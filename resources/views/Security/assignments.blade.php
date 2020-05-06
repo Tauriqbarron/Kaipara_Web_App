@@ -22,7 +22,7 @@
                                         <h6>{{$booking->start_time}}</h6>
                                     </td>
                                     <td>
-                                        <h6>{{$booking->date}}</h6>
+                                        <h6>{{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}</h6>
                                     </td>
                                     <td class="text-center">
                                         <h6 class="label label-default">{{$booking->description}}</h6>
@@ -31,7 +31,7 @@
                                         <h6>{{$booking->city}}</h6>
                                     </td>
                                     <td style="width: 20%;">
-                                        <a href="#" title="More Infomation" class="table-link fa-pull-right" data-toggle="collapse" data-target="#a{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}a','a{{$booking->id}}')" >
+                                        <a href="#" title="More Information" class="table-link fa-pull-right" data-toggle="collapse" data-target="#a{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}a','a{{$booking->id}}')" >
 
                                             <span class="fa-stack">
                                                         <i class="fa fa-square fa-stack-2x"></i>
