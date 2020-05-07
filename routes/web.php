@@ -256,6 +256,11 @@ Route::post('/admin/serviceProvider/create', [
     'as' => 'sp.create'
 ]);
 
+Route::get('/admin/serviceProvider/view/{id}', [
+    'uses' => 'Auth\AdminSpController@viewSp',
+    'as' => 'sp.view'
+]);
+
 Route::get('/admin/serviceProvider/edit/{id}', [
     'uses' => 'Auth\AdminSpController@getEdit',
     'as' => 'sp.edit'

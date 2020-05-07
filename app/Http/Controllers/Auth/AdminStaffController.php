@@ -40,7 +40,7 @@ class AdminStaffController extends Controller
             'street'=>'required',
             'suburb'=>'required',
             'city'=>'required',
-            'country'=>'required',
+            //'country'=>'required',
             'postcode'=>'required'
         ]);
         if($validator->fails()) {
@@ -69,7 +69,6 @@ class AdminStaffController extends Controller
     public function  getEdit($id) {
         $staff = Staff::find($id);
         return view('Administration.staff.staff_edit', ['staff' => $staff]);
-
     }
 
     public function postEdit(Request $request, $id) {
@@ -81,7 +80,7 @@ class AdminStaffController extends Controller
             'street'=>'required',
             'suburb'=>'required',
             'city'=>'required',
-            'country'=>'required',
+            //'country'=>'required',
             'postcode'=>'required'
         ]);
         if($validator->fails()) {

@@ -36,7 +36,12 @@ class AdminSpController extends Controller
             'email'=>'required|email|max:50|unique:service_providers',
             'uName'=>'required|max:50',
             'pNumber'=>'required|max:20',
-            'password' => 'required|confirmed|max:20'
+            'password' => 'required|confirmed|max:20',
+            'street'=>'required',
+            'suburb'=>'required',
+            'city'=>'required',
+            //'country'=>'required',
+            'postcode'=>'required'
         ]);
         if($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all());
@@ -48,10 +53,19 @@ class AdminSpController extends Controller
             'email' => $request->input('email'),
             'username' => $request->input('uName'),
             'phone_number' => $request->input('pNumber'),
-            'password'=> Hash::make($request->input('password'))
+            'password'=> Hash::make($request->input('password')),
+            'street' => $request->input('street'),
+            'suburb' => $request->input('suburb'),
+            'city' => $request->input('city'),
+            'postcode' => $request->input('postcode')
         ]);
         $serviceProvider->save();
         return redirect()->route('sp.index');
+    }
+
+    public function viewSp($id) {
+        $sp = service_provider::find($id);
+        return view('Administration.serviceProvider.sp_view', ['sp' => $sp]);
     }
 
     public function getEdit($id) {
@@ -65,6 +79,11 @@ class AdminSpController extends Controller
             'lName'=>'required|max:50',
             'email'=>'required|email',
             'pNumber'=>'required|max:10',
+            'street'=>'required',
+            'suburb'=>'required',
+            'city'=>'required',
+            //'country'=>'required',
+            'postcode'=>'required'
         ]);
         if($validator->fails()) {
             return redirect()->route('sp.edit', ['id' => $id])
@@ -77,6 +96,11 @@ class AdminSpController extends Controller
         $sp->lastname = $request->input('lName');
         $sp->email = $request->input('email');
         $sp->phone_number = $request->input('pNumber');
+        $sp->street = $request->input('street');
+        $sp->suburb = $request->input('suburb');
+        $sp->city = $request->input('city');
+        //$sp->country = $request->input('country');
+        $sp->postcode = $request->input('postcode');
         $sp->save();
         return redirect()->route('sp.index');
     }

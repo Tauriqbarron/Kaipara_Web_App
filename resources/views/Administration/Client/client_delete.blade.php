@@ -4,6 +4,7 @@
     <h1 class="ml-5">Client id: {{$client->id}}</h1>
     <hr/>
     <form class="ml-2" method="post" action="{{route('client.delete', ['id' => $client->id])}}">
+        @csrf
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputEmail4">First Name</label>
