@@ -15,7 +15,8 @@ class CreateServiceProviderServicesTable extends Migration
     {
         Schema::create('service__provider__services', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('service_provider_id')->references('id')->on('service_provider');
+            $table->foreignId('service_id')->references('id')->on('service');
         });
     }
 
