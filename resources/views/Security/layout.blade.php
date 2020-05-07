@@ -17,12 +17,12 @@
         <script src="{{url('js/app.js')}}"></script>
 
         <script src="https://kit.fontawesome.com/c3929064ae.js" crossorigin="anonymous"></script>
-
     </head>
     <body id="bod" onload="loaded()">
         @include('Security.header')
         <div class="container-fluid" style="min-width: 1200px">
             @include('Security.nav')
+
             <div class="jumbotron bg-white w-100 h-100 rounded-bottom-lg" style="overflow: hidden;" id="mainContent">
                 @yield('mainContent')
             </div>
@@ -32,6 +32,9 @@
 
 
         </div>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoA571QZSNmBnGSO2B0AO6hA1XSlcgicI&callback=initMap" async defer></script>
+
     </body>
 
 </html>

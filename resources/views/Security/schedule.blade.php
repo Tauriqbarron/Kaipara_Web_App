@@ -19,7 +19,7 @@
                                     <a href="#"><i class="fa fa-chevron-left fa-2x date-arrow" id="dateLeft"></i></a>
                                 </th>
                                 <th colspan="3" class="text-center text-secondary" style="vertical-align: bottom">
-                                    <h3 id="date"></h3>
+                                    <h3 id="scheduleDate"></h3>
                                 </th>
                                 <th>
                                     <a href="#"> <i class="fa fa-chevron-right fa-pull-right fa-2x date-arrow"></i></a>
@@ -27,47 +27,6 @@
                             </tr>
                             </thead>
                             <tbody>
-
-                            @foreach($bookings as $booking )
-
-                                <tr>
-                                    <td class="text-center">
-                                        <h6>9:00</h6>
-                                    </td>
-                                    <td>
-                                        <h6>{{$booking->street}}</h6>
-                                    </td>
-                                    <td class="text-center">
-                                        <h6 class="label label-default">{{$booking->suburb}}</h6>
-                                    </td>
-                                    <td>
-                                        <h6>{{$booking->city}}</h6>
-                                    </td>
-                                    <td style="width: 20%;">
-                                        <a href="#" class="table-link fa-pull-right" data-toggle="collapse" data-target="#n{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}n','n{{$booking->id}}')" >
-                                            More info
-                                            <span class="fa-stack">
-                                                <i class="fa fa-square fa-stack-2x"></i>
-                                                <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}n"></i>
-                                            </span>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr >
-                                    <td colspan="4" style="padding: 0px" class="bg-white">
-                                        <div class="collapse"  id="n{{$booking->id}}" style="padding: 10px">
-                                            {{$booking->description}}
-                                        </div>
-                                    </td>
-                                    <td style="padding: 0px" class="bg-white">
-                                        <div class="collapse btn-group-lg"  id="n{{$booking->id}}" style="padding: 10px">
-                                            <button class="btn-primary text-white w-100 rounded border-0" type="submit"><h6>Accept</h6></button>
-                                            <button class="btn-danger text-white w-100 rounded border-0"><h6>Decline</h6></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-
 
                             </tbody>
                         </table>

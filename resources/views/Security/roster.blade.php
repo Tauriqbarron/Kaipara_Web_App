@@ -32,11 +32,11 @@
                                                 <h6>{{$booking->city}}</h6>
                                             </td>
                                     <td style="width: 20%;">
-                                        <a href="#" class="table-link fa-pull-right" data-toggle="collapse" data-target="#n{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}n','n{{$booking->id}}')" >
+                                        <a href="#" class="table-link fa-pull-right" data-toggle="collapse" data-target="#r{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}r','r{{$booking->id}}')" >
                                             More info
                                             <span class="fa-stack">
                                                         <i class="fa fa-square fa-stack-2x"></i>
-                                                        <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}n"></i>
+                                                        <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}r"></i>
                                                     </span>
                                         </a>
                                         </a>
@@ -45,12 +45,12 @@
                                 </tr>
                                 <tr >
                                     <td colspan="4" style="padding: 0px" class="bg-white">
-                                        <div class="collapse"  id="n{{$booking->id}}" style="padding: 10px">
+                                        <div class="collapse"  id="r{{$booking->id}}" style="padding: 10px">
                                             {{$booking->description}}
                                         </div>
                                     </td>
                                     <td style="padding: 0px" class="bg-white">
-                                        <div class="collapse btn-group-lg"  id="n{{$booking->id}}" style="padding: 10px">
+                                        <div class="collapse btn-group-lg"  id="r{{$booking->id}}" style="padding: 10px">
                                             <button class="btn-primary text-white w-100 rounded border-0" type="submit"><h6>Accept</h6></button>
                                             <button class="btn-danger text-white w-100 rounded border-0"><h6>Decline</h6></button>
                                         </div>

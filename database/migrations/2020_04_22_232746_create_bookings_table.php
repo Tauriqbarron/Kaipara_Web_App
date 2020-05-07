@@ -25,7 +25,7 @@ class CreateBookingsTable extends Migration
             $table->string('description');
             $table->date('date');
             $table->string('start_time');
-            $table->string('status')->default('Available');
+            $table->string('status')->default('available');
 
         });
     }

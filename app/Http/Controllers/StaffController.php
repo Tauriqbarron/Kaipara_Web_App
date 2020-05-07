@@ -28,15 +28,15 @@ class StaffController extends Controller
     public function getCreate() {
         return view('Administration.staff.staff_create');
     }
-    public function getPage($pageString) {
-        $currentStaff = Staff::query()->find(1);
-        $bookings = app('App\Http\Controllers\BookingsController')->getStaffBookings($currentStaff);
-        $availableBookings = Booking::query()->where('status', "!=", "assigned");
-        return view('Security.index', ['staff' => $currentStaff, 'bookings'=> $bookings, 'pageString' => $pageString, 'availableBookings'=>$availableBookings]);
-    }
 
     public function getHome() {
-        return StaffController::getPage('profile');
+        $currentStaff = Staff::query()->find(1);
+        $bookings = app('App\Http\Controllers\BookingsController')->getStaffBookings($currentStaff);
+        $availableBookings = Booking::query()->where('status', "=", 'available')
+            ->orderBy('date','asc')
+            ->orderBy('start_time', 'asc')
+            ->get();
+        return view('Security.index', ['staff' => $currentStaff, 'bookings'=> $bookings, 'availableBookings'=>$availableBookings]);
     }
     public function postCreate(Request $request) {
         $validator = Validator::make($request->all(), [
