@@ -36,7 +36,12 @@ class AdminStaffController extends Controller
             'lName'=>'required|max:50',
             'email'=>'required|email|unique:staff',
             'pNumber'=>'required|max:20',
-            'password' => 'required|confirmed|min:6'
+            'password' => 'required|confirmed|min:6',
+            'street'=>'required',
+            'suburb'=>'required',
+            'city'=>'required',
+            'country'=>'required',
+            'postcode'=>'required'
         ]);
         if($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all());
@@ -47,9 +52,18 @@ class AdminStaffController extends Controller
             'email' => $request->input('email'),
             'phone_number' => $request->input('pNumber'),
             'password' => Hash::make($request->input('password')),
+            'street' => $request->input('street'),
+            'suburb' => $request->input('suburb'),
+            'city' => $request->input('city'),
+            'postcode' => $request->input('postcode')
         ]);
         $staff->save();
         return redirect()->route('staff.index');
+    }
+
+    public function viewStaff($id) {
+        $staff = Staff::find($id);
+        return view('Administration.staff.staff_view', ['staff' => $staff]);
     }
 
     public function  getEdit($id) {
@@ -64,6 +78,11 @@ class AdminStaffController extends Controller
             'lName'=>'required|max:50',
             'email'=>'required|email',
             'pNumber'=>'required|max:10',
+            'street'=>'required',
+            'suburb'=>'required',
+            'city'=>'required',
+            'country'=>'required',
+            'postcode'=>'required'
         ]);
         if($validator->fails()) {
             return redirect()->route('staff.edit', ['id' => $id])
@@ -75,6 +94,11 @@ class AdminStaffController extends Controller
         $staff->last_name = $request->input('lName');
         $staff->email = $request->input('email');
         $staff->phone_number = $request->input('pNumber');
+        $staff->street = $request->input('street');
+        $staff->suburb = $request->input('suburb');
+        $staff->city = $request->input('city');
+        //$staff->country = $request->input('country');
+        $staff->postcode = $request->input('postcode');
         $staff->save();
         return redirect()->route('staff.index');
     }

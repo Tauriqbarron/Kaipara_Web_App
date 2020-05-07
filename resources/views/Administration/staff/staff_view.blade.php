@@ -1,9 +1,9 @@
 @extends('Administration.layout')
 
 @section('mainContent')
-    <h1 class="ml-5">Staff id: {{ $staff->id }}</h1>
+    <h1 class="ml-5">Staff id: {{$staff->id}}</h1>
     <hr/>
-    <form class="ml-2" method="post" action="{{route('staff.delete', ['id' => $staff->id])}}">
+    <form class="ml-2">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputEmail4">First Name</label>
@@ -29,7 +29,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputCity">Suburb</label>
-                <<p class="form-control">{{$staff->suburb}}</p>
+                <p class="form-control">{{$staff->suburb}}</p>
             </div>
             <div class="form-group col-md-4">
                 <label for="inputState">City</label>
@@ -44,7 +44,9 @@
                 <p class="form-control">{{$staff->postcode}}</p>
             </div>
         </div>
-        <a class="btn btn-primary" href="{{route('staff.index')}}">back</a>
-        <button type="submit" class="btn btn-danger float-right">Delete</button>
+        <a class="btn btn-danger" href="{{route('staff.index')}}">back</a>
     </form>
+
+
+
 @endsection

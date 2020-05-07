@@ -200,7 +200,7 @@ Route::get('/admin/staff/result', [
     'as' => 'staff.search'
 ]);
 
-Route::get('/admin/staff/create',[
+Route::get('/admin/staff/create', [
     'uses' => 'Auth\AdminStaffController@getCreate',
     'as' => "staff.create"
 ]);
@@ -208,6 +208,11 @@ Route::get('/admin/staff/create',[
 Route::post('/admin/staff/create',[
     'uses' => 'Auth\AdminStaffController@postCreate',
     'as' => "staff.create"
+]);
+
+Route::get('/admin/staff/view/{id}', [
+    'uses' => 'Auth\AdminStaffController@viewStaff',
+    'as' => "staff.view"
 ]);
 
 Route::get('/admin/staff/edit/{id}',[
