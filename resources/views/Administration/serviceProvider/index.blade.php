@@ -19,6 +19,7 @@
                 <th scope="col">Phone number</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -29,6 +30,7 @@
                     <td>{{$sp->lastname}}</td>
                     <td>{{$sp->email}}</td>
                     <td>{{$sp->phone_number}}</td>
+                    <td><a class="btn btn-success" href="{{route('sp.view', ['id' => $sp->id])}}">View</a></td>
                     <td><a class="btn btn-primary" href="{{route('sp.edit', ['id' => $sp->id])}}">Edit</a></td>
                     <td><a class="btn btn-danger" href="{{route('sp.delete', ['id' => $sp->id])}}">Delete</a></td>
                 </tr>

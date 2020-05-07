@@ -20,6 +20,7 @@
             <th scope="col">Phone number</th>
             <th scope="col"></th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -30,6 +31,7 @@
                 <td>{{$staff->last_name}}</td>
                 <td>{{$staff->email}}</td>
                 <td>{{$staff->phone_number}}</td>
+                <td><a class="btn btn-success" href="{{route('staff.view', ['id' => $staff->id])}}">view</a></td>
                 <td><a class="btn btn-primary" href="{{route('staff.edit', ['id' => $staff->id])}}">Edit</a></td>
                 <td><a class="btn btn-danger" href="{{route('staff.delete', ['id' => $staff->id])}}">Delete</a></td>
             </tr>

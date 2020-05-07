@@ -32,24 +32,24 @@
         </div>
         <div class="form-group">
             <label for="inputAddress2">Street</label>
-            <input name="street" class="form-control" value="{{$client->address->street}}" />
+            <input name="street" class="form-control" value="{{$client->street}}" />
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputCity">Suburb</label>
-                <input name="suburb" class="form-control" value="{{$client->address->suburb}}" />
+                <input name="suburb" class="form-control" value="{{$client->suburb}}" />
             </div>
             <div class="form-group col-md-4">
                 <label for="inputState">City</label>
-                <input name="city" class="form-control" value="{{$client->address->city}}" />
+                <input name="city" class="form-control" value="{{$client->city}}" />
             </div>
             <div class="form-group col-md-4">
                 <label for="inputZip">Country</label>
-                <input name="country" class="form-control" value="{{$client->address->country}}" />
+                <input name="country" class="form-control" value="" />
             </div>
             <div class="form-group col-md-2">
                 <label for="inputZip">Zip</label>
-                <input name="postcode" class="form-control" value="{{$client->address->postcode}}" />
+                <input name="postcode" class="form-control" value="{{$client->postcode}}" />
             </div>
         </div>
         <a type="button" class="btn btn-danger" href="{{route('client.index')}}">Back</a>
