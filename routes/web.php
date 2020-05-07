@@ -135,9 +135,21 @@ Route::get('admin/logout', [
     'as' => 'admin.logout'
 ]);
 
-Route::get('/admin/assignment', function () {
-    return view('Administration.assignment_management');
-});
+/*Security Assignment Part*/
+Route::get('/admin/assignment', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@getIndex',
+    'as' => 'security_assignment.index'
+]);
+
+Route::get('/admin/assignment/result', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@search',
+    'as' => 'security_assignment.search'
+]);
+
+
+
+/*Service Assignment Part*/
+
 
 /*Client*/
 Route::get('/admin/client', [
