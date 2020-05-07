@@ -181,93 +181,93 @@ Route::post('/admin/client/delete/{id}' , [
 
 /*staff*/
 Route::get('/security/login', [
-    'uses' => 'StaffController@getLoginForm',
+    'uses' => 'Auth\AdminStaffController@getLoginForm',
     'as' => 'staff.login'
 ]);
 
 Route::post('security/login', [
-    'uses' => 'StaffController@postLogin',
+    'uses' => 'Auth\AdminStaffController@postLogin',
     'as' => 'staff.login'
 ]);
 
 Route::get('/admin/staff',[
-   'uses' => 'StaffController@getIndex',
+   'uses' => 'Auth\AdminStaffController@getIndex',
    'as' => "staff.index"
 ]);
 
 Route::get('/admin/staff/result', [
-    'uses' => 'StaffController@getSearch',
+    'uses' => 'Auth\AdminStaffController@getSearch',
     'as' => 'staff.search'
 ]);
 
 Route::get('/admin/staff/create',[
-    'uses' => 'StaffController@getCreate',
+    'uses' => 'Auth\AdminStaffController@getCreate',
     'as' => "staff.create"
 ]);
 
 Route::post('/admin/staff/create',[
-    'uses' => 'StaffController@postCreate',
+    'uses' => 'Auth\AdminStaffController@postCreate',
     'as' => "staff.create"
 ]);
 
 Route::get('/admin/staff/edit/{id}',[
-    'uses' => 'StaffController@getEdit',
+    'uses' => 'Auth\AdminStaffController@getEdit',
     'as' => "staff.edit"
 ]);
 
 Route::post('/admin/staff/edit/{id}',[
-    'uses' => 'StaffController@postEdit',
+    'uses' => 'Auth\AdminStaffController@postEdit',
     'as' => "staff.edit"
 ]);
 
 Route::get('/admin/staff/delete/{id}',[
-    'uses' => 'StaffController@getDelete',
+    'uses' => 'Auth\AdminStaffController@getDelete',
     'as' => "staff.delete"
 ]);
 
 Route::post('/admin/staff/delete/{id}',[
-    'uses' => 'StaffController@postDelete',
+    'uses' => 'Auth\AdminStaffController@postDelete',
     'as' => "staff.delete"
 ]);
 
 /*Service Provider*/
 Route::get('/admin/serviceProvider', [
-    'uses' => 'ServiceProviderController@getIndex',
+    'uses' => 'Auth\AdminSpController@getIndex',
     'as' => 'sp.index'
 ]);
 
 Route::get('/admin/serviceProvider/result', [
-    'uses' => 'ServiceProviderController@getSearch',
+    'uses' => 'Auth\AdminSpController@getSearch',
     'as' => 'sp.search'
 ]);
 
 Route::get('/admin/serviceProvider/create', [
-    'uses' => 'ServiceProviderController@getCreate',
+    'uses' => 'Auth\AdminSpController@getCreate',
     'as' => 'sp.create'
 ]);
 
 Route::post('/admin/serviceProvider/create', [
-    'uses' => 'ServiceProviderController@postCreate',
+    'uses' => 'Auth\AdminSpController@postCreate',
     'as' => 'sp.create'
 ]);
 
 Route::get('/admin/serviceProvider/edit/{id}', [
-    'uses' => 'ServiceProviderController@getEdit',
+    'uses' => 'Auth\AdminSpController@getEdit',
     'as' => 'sp.edit'
 ]);
 
 Route::post('/admin/serviceProvider/edit/{id}', [
-    'uses' => 'ServiceProviderController@postEdit',
+    'uses' => 'Auth\AdminSpController@postEdit',
     'as' => 'sp.edit'
 ]);
 
 Route::get('/admin/serviceProvider/delete/{id}',[
-    'uses' => 'ServiceProviderController@getDelete',
+    'uses' => 'Auth\AdminSpController@getDelete',
     'as' => "sp.delete"
 ]);
 
 Route::post('/admin/serviceProvider/delete/{id}',[
-    'uses' => 'ServiceProviderController@postDelete',
+    'uses' => 'Auth\AdminSpController@postDelete',
     'as' => "sp.delete"
 ]);
 
