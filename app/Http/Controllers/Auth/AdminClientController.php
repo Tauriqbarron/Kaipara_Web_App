@@ -49,22 +49,16 @@ class AdminClientController extends Controller
                 ->withInput($request->all());
         }
 
-        $address = new Address([
-            'street' => $request->input('street'),
-            'suburb' => $request->input('suburb'),
-            'city' => $request->input('city'),
-            'country' => $request->input('country'),
-            'postcode' => $request->input('postcode')
-        ]);
-        $address->save();
-
         $client = new Clients([
             'first_name' => $request->input('fName'),
             'last_name' => $request->input('lName'),
             'email' => $request->input('email'),
             'phone_number' => $request->input('pNumber'),
             'password' => Hash::make($request->input('password')),
-            'address_id' => $address->id
+            'street' => $request->input('street'),
+            'suburb' => $request->input('suburb'),
+            'city' => $request->input('city'),
+            'postcode' => $request->input('postcode')
         ]);
         $client->save();
         return redirect()->route('client.index');
@@ -104,15 +98,13 @@ class AdminClientController extends Controller
         $client->last_name = $request->input('lName');
         $client->email = $request->input('email');
         $client->phone_number = $request->input('pNumber');
+        $client->street = $request->input('street');
+        $client->suburb = $request->input('suburb');
+        $client->city = $request->input('city');
+        //$client->country = $request->input('country');
+        $client->postcode = $request->input('postcode');
         $client->save();
 
-        $address = Address::find($client->address_id);
-        $address->street = $request->input('street');
-        $address->suburb = $request->input('suburb');
-        $address->city = $request->input('city');
-        $address->country = $request->input('country');
-        $address->postcode = $request->input('postcode');
-        $address->save();
         return redirect()->route('client.index');
     }
 
