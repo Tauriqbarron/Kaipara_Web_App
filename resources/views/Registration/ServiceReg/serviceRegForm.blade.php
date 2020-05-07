@@ -1,40 +1,19 @@
-<form method="POST" action="/register">
-     <div class="form-group row">
-        <label for="firstname" class="col-sm-2 col-form-label">First Name</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="firstname" name="firstname">
-        </div>
+<html>
+<head>
+    <link rel="stylesheet" href="{{url('css/Index.css')}}" type="text/css"/>
+    <link rel="stylesheet" href="{{url('css/registration.css')}}" type="text/css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/c3929064ae.js" crossorigin="anonymous"></script>
+    <title>@yield('title') - KSPMS</title>
+    @yield('styles')
+</head>
+<body>
+@include('header')
+<div class="my-5">
+    <div class="regformcontainer mx-auto">
+        @include('Registration.ServiceReg.regformService')
     </div>
-    <div class="form-group row">
-        <label for="lastnname" class="col-sm-2 col-form-label">Last Name</label>
-        <div class="col-sm-10">
-            <input type="password" class="form-control" id="lastname" name="lastname">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="username" class="col-sm-2 col-form-label">User Name</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="username" name="username">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="password" class="col-sm-2 col-form-label">Password</label>
-        <div class="col-sm-10">
-            <input type="password" class="form-control" id="password" name="password">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="email" class="col-sm-2 col-form-label">Email</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control" id="email" name="email">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="phone" class="col-sm-2 col-form-label">Phone Number</label>
-        <div class="col-sm-10">
-            <input type="password" class="form-control" id="phone">
-        </div>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+</div>
+@include('footer')
+</body>
+</html>

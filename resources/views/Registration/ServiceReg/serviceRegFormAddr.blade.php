@@ -8,11 +8,12 @@
     @yield('styles')
 </head>
 <body>
-
-<div class="row mx-md-n5 ">
-    <div class="col px-md-5 "><a href=""  class="btn btn-primary btn-lg col p-3 mb-5 mt-5 h-100 d-flex justify-content-center"><div class='align-self-center'>Client</div></a></div>
-    <div class="col px-md-5 "><a href="{{ url('/registration/servicepage1') }}"  class="btn btn-primary btn-lg col p-3 mb-5 mt-5 h-100 d-flex justify-content-center"><div class='align-self-center'>Service Provider</div></a></div>
+@include('header')
+<div class="my-5">
+    <div class="regformcontainer mx-auto">
+        @include('Registration.addrRegForm')
+    </div>
 </div>
-<div class="fixed-bottom">@include('footer')</div>
+@include('footer')
 </body>
 </html>

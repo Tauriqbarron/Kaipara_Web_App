@@ -31,16 +31,13 @@ Route::get('/provider', function () {
     return view('login.servicelogin');
 });
 
-Route::get('/acceptJob/{id}',[
-    'uses' =>'ServiceProviderController@acceptJob',
-    'as' => 'service.acceptJob'
-]);
 
-Route::post('/provider','ServiceProviderController@login')->name('service.login.submit');
 
 
 /*Function Routes */
 Route::post('register','RegistrationController@createServiceProvider');
+Route::post('/provider','ServiceProviderController@login')->name('service.login.submit');
+Route::post('registerAddrS','RegistrationController@storeServiceProvider' );
 
 Route::get('/', function () {
     return view('index');
@@ -61,6 +58,7 @@ Route::get('/security', [
 
 // SERVICE
 /*Service Provider Profile*/
+
 Route::get('/service', function () {
     return view('Service.index');
 }) ->name('service.home');
@@ -84,19 +82,28 @@ Route::get('/service/applications', [
     'uses' => 'ApplicationsController@getApps', 'as' => 'service.applications'
 ]) ->name('service.Bookings');
 
-/*Service Provider jobs Page*/
 
 
 /*Registration*/
-Route::get('/registration', function () {
-    return view('Registration.index');
-}) ->name('Registration.index');
+
+Route::post('register','RegistrationController@createServiceProvider');
+
 
 Route::get('/registration/usertype',[
     'uses' => 'RegistrationController@getUserType',
     'as' => "reg.type"
 ]);
 
+Route::get('/registration/servicepage1',[
+    'uses'=> 'RegistrationController@getServicePage1',
+    'as'=>'reg.service.1'
+]);
+
+
+Route::get('/registration/servicepage2',[
+    'uses'=> 'RegistrationController@getServicePage2',
+    'as'=>'reg.service.1'
+]);
 
 
 

@@ -1,5 +1,5 @@
 <form method="POST" action="/register">
-    <div class="form-group row">
+     <div class="form-group row">
         <label for="firstname" class="col-sm-2 col-form-label">First Name</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="firstname" name="firstname">
@@ -32,7 +32,20 @@
     <div class="form-group row">
         <label for="phone" class="col-sm-2 col-form-label">Phone Number</label>
         <div class="col-sm-10">
-            <input type="password" class="form-control" id="phone">
+            <input type="text" class="form-control" id="phone">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="service">Please Select at least one Service</label>
+            </div>
+            <select class="custom-select" id="service">
+                <option selected>Choose...</option>
+                <option value="1">Plumbing</option>
+                <option value="2">Electrical</option>
+                <option value="3">Landscaping</option>
+            </select>
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
