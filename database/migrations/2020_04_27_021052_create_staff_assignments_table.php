@@ -15,7 +15,6 @@ class CreateStaffAssignmentsTable extends Migration
     public function up()
     {
         Schema::create('staff__assignments', function (Blueprint $table) {
-            //TODO: add imgPath
             $table->id();
             $table->foreignId("staff_id")->references('id')->on('staff');
             $table->foreignId("booking_id")->references('id')->on('bookings');

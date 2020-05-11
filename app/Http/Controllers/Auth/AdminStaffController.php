@@ -133,7 +133,8 @@ class AdminStaffController extends Controller
             'email' => $request->input('email'),
             'password' => $request->input('password')
         );
-        //TODO: Delete this
+
+        //TODO: Delete this block
         //Unassign bookings for testing
         $bookings = Booking::all();
         foreach ($bookings as $booking){
@@ -144,7 +145,7 @@ class AdminStaffController extends Controller
         foreach($staff_assignments as $sa){
             $sa->delete();
         }
-        //TODO: Delete this
+        //
 
         if(Auth::guard('staff')->attempt($credentials)){
             $currentStaff = Staff::query()->where('email', $request->input('email'))->firstOrFail();

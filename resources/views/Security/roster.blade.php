@@ -1,6 +1,6 @@
 <div style="width:26%; height: 100%; float: left">
-    <div  class="card bg-light shadow p-3 mb-5 border-0 card-image rounded-lg shadow col-sm-0" style="width: 18rem; background-image: url({{url('images/Card_BG.jpg')}}); background-size: cover">
-        <h6>Roster</h6>
+    <div  class="card bg-light shadow p-3 mb-5 border-0 card-image rounded-lg shadow col-sm-0" style="width: 18rem; background-size: cover">
+        <h4>Roster</h4>
     </div>
 
 
@@ -13,50 +13,39 @@
                 <div class="main-box clearfix">
                     <div class="table-responsive">
                         <table class="table user-list">
+                            <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                                <th>Saturday</th>
+                                <th>Sunday</th>
+                            </tr>
+                            </thead>
                             <tbody>
+                                    @for($i = 0; $i < 12; $i++)
 
-                            @foreach($bookings as $booking )
+                                        <tr>
+                                        <th>
+                                            {{$i+5}}:00
+                                        </th>
+                                        @for($j=0;$j<7;$j++)
+                                            @foreach($bookings as $booking)
+                                                @if($booking->start_time == (5+$i.':00') )
+                                                    <td rowspan="5" style="color: #262525; background-color: #dd504c"></td>
+                                                @else
+                                                    <td></td>
+                                                @endif
 
-                                <tr>
-                                    <td class="text-center">
-                                        <h6>9:00</h6>
-                                    </td>
+                                            @endforeach
+                                            <td></td>
+                                        @endfor
 
-                                            <td>
-                                                <h6>{{$booking->street}}</h6>
-                                            </td>
-                                            <td class="text-center">
-                                                <h6 class="label label-default">{{$booking->suburb}}</h6>
-                                            </td>
-                                            <td>
-                                                <h6>{{$booking->city}}</h6>
-                                            </td>
-                                    <td style="width: 20%;">
-                                        <a href="#" class="table-link fa-pull-right" data-toggle="collapse" data-target="#r{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}r','r{{$booking->id}}')" >
-                                            More info
-                                            <span class="fa-stack">
-                                                        <i class="fa fa-square fa-stack-2x"></i>
-                                                        <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}r"></i>
-                                                    </span>
-                                        </a>
-                                        </a>
+                                    @endfor
 
-                                    </td>
-                                </tr>
-                                <tr >
-                                    <td colspan="4" style="padding: 0px" class="bg-white">
-                                        <div class="collapse"  id="r{{$booking->id}}" style="padding: 10px">
-                                            {{$booking->description}}
-                                        </div>
-                                    </td>
-                                    <td style="padding: 0px" class="bg-white">
-                                        <div class="collapse btn-group-lg"  id="r{{$booking->id}}" style="padding: 10px">
-                                            <button class="btn-primary text-white w-100 rounded border-0" type="submit"><h6>Accept</h6></button>
-                                            <button class="btn-danger text-white w-100 rounded border-0"><h6>Decline</h6></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
 
 
                             </tbody>

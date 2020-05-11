@@ -22,6 +22,7 @@ class StaffController extends Controller
                 ->orderBy('date', 'asc')
                 ->orderBy('start_time', 'asc')
                 ->get();
+
             return view('Security.index', ['staff' => $currentStaff, 'bookings' => $bookings, 'availableBookings' => $availableBookings]);
         }
         else {
@@ -45,5 +46,6 @@ class StaffController extends Controller
 
         return redirect()->route('security.index');
     }
+
 
 }

@@ -14,6 +14,8 @@ class CreateStaffTable extends Migration
     public function up()
     {
         Schema::create('staff', function (Blueprint $table) {
+
+            //TODO: add imgPath
             $table->id();
             $table->string('first_name', 50);
             $table->string('last_name', 50);
