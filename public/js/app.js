@@ -18,7 +18,6 @@ function initMap() {
         zoom: 10
     });
     addresses.forEach(getMarker);
-
 }
 
 function addAddress(address){
@@ -37,7 +36,6 @@ function dateChangeRight(){
 //converts an address string to lat and lng co-ordinates and places a marker on the map
 //Code by rafon: https://stackoverflow.com/questions/46868703/google-maps-api-add-marker-by-address-javascript/46906152
 function getMarker(address) {
-    console.log(address);
     geocoder = new google.maps.Geocoder();
     geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
@@ -49,12 +47,9 @@ function getMarker(address) {
             });
 
 
-            console.log('Geocode was successful');
-        } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-            console.log('Geocode not succ');
         }
     });
+
 }
 
 function f(button, target){
@@ -85,9 +80,6 @@ function getRotation(element){
 
 // With rotate(30deg)...
 // matrix(0.866025, 0.5, -0.5, 0.866025, 0px, 0px)
-    console.log('Matrix: ' + tr);
-
-
     var values = tr.split('(')[1].split(')')[0].split(',');
     var a = values[0];
     var b = values[1];
@@ -97,11 +89,8 @@ function getRotation(element){
     var scale = Math.sqrt(a*a + b*b);
 // arc sin, convert from radians to degrees, round
     var sin = b/scale;
-// next line works for 30deg but not 130deg (returns 50);
-// var angle = Math.round(Math.asin(sin) * (180/Math.PI));
-    var angle = Math.round(Math.atan2(b, a) * (180/Math.PI));
 
-    return angle;
+    return Math.round(Math.atan2(b, a) * (180 / Math.PI));
 }
 
 function pageToggle(button, target){
@@ -117,7 +106,7 @@ function pageToggle(button, target){
 
     pages = [profilePage,assignmentPage,schedulePage,rosterPage];
 
-    btns = [profileBtn, scheduleBtn, assignmentBtn, rosterBtn]
+    btns = [profileBtn, scheduleBtn, assignmentBtn, rosterBtn];
 
     for(i = 0; i < pages.length; i+=1){
         pages[i].display = 'none';

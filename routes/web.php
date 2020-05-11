@@ -53,7 +53,11 @@ Route::get('/test', function () {
 /*Security Guard Profile*/
 Route::get('/security', [
     'uses' => 'StaffController@getHome', 'as' => 'security.index'
-]) ->name('security.home');
+]);
+
+Route::get('/security/accept/staffid={staff_id}bookingid={booking_id}', [
+    'uses' => "StaffController@acceptBooking", 'as' => 'security.acceptBooking'
+]);
 
 
 // SERVICE

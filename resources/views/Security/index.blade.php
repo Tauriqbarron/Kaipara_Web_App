@@ -1,7 +1,7 @@
 @extends('Security.layout')
 @section('pageTitle','My Profile ')
 @section('mainContent')
-    <div id="profileContainer" >
+    <div id="profileContainer">
         @include('Security.profile')
     </div>
     <div id="rosterContainer" style="display: none">

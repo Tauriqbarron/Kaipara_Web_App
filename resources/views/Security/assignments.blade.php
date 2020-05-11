@@ -49,8 +49,7 @@
                                     </td>
                                     <td style="padding: 0px" class="bg-white">
                                         <div class="collapse btn-group-lg"  id="a{{$booking->id}}" style="padding: 10px">
-                                            <button class="btn-primary text-white w-100 rounded border-0" type="submit"><h6>Accept</h6></button>
-                                            <button class="btn-danger text-white w-100 rounded border-0"><h6>Decline</h6></button>
+                                            <a type="button" class="btn-primary text-white w-100 rounded border-0 text-center" href="{{route('security.acceptBooking', ['staff_id' => $staff->id, 'booking_id' => $booking->id])}}"><h6>Accept</h6></a>
                                         </div>
                                     </td>
                                 </tr>

@@ -40,7 +40,6 @@ class AdminClientController extends Controller
             'street'=>'required',
             'suburb'=>'required',
             'city'=>'required',
-            //'country'=>'required',
             'postcode'=>'required'
         ]);
         if($validator->fails()) {
@@ -48,6 +47,7 @@ class AdminClientController extends Controller
                 ->withErrors($validator)
                 ->withInput($request->all());
         }
+
 
         $client = new Clients([
             'first_name' => $request->input('fName'),
