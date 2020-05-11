@@ -51,11 +51,11 @@ Route::get('/test', function () {
 
 
 /*Security Guard Profile*/
-Route::get('/security', [
+Route::get('/security/profile', [
     'uses' => 'StaffController@getHome', 'as' => 'security.index'
 ]);
 
-Route::get('/security/accept/staffid={staff_id}bookingid={booking_id}', [
+Route::get('/security/accept/bookingid={booking_id}', [
     'uses' => "StaffController@acceptBooking", 'as' => 'security.acceptBooking'
 ]);
 
@@ -208,6 +208,10 @@ Route::get('/security/login', [
     'as' => 'staff.login'
 ]);
 
+Route::get('security/logout', [
+    'uses' => 'Auth\AdminStaffController@logout',
+    'as' => 'staff.logout'
+]);
 Route::post('security/login', [
     'uses' => 'Auth\AdminStaffController@postLogin',
     'as' => 'staff.login'

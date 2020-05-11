@@ -20,11 +20,16 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end">
-                    <li class="nav-item">
-                        <a class="navbar-text text-dark" id="txtUsername">{{$staff->first_name}} {{$staff->last_name}}</a>
+                    <li class="nav-item dropdown border-0 ">
+                            <button class="btn-light rounded border-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{$staff->first_name}} {{$staff->last_name}}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="{{route('staff.logout')}}">Logout</a>
+                            </div>
                     </li>
-                    <li class="nav-item">
-                        <img class="float-right rounded-circle shadow" style="display: block;" src="{{url('images/Profile_Placeholder.png')}}" alt="profileImage">
+                    <li class="nav-item" id="headerProfileImage">
+                        <img class="float-right rounded-circle shadow" style="display: block; width: 54px; height: 54px" src="{{url('images/Profile_Placeholder_large.jpg')}}" alt="profileImage">
                     </li>
                 </ul>
             </div>

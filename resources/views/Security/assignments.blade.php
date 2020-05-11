@@ -49,7 +49,7 @@
                                     </td>
                                     <td style="padding: 0px" class="bg-white">
                                         <div class="collapse btn-group-lg"  id="a{{$booking->id}}" style="padding: 10px">
-                                            <a type="button" class="btn-primary text-white w-100 rounded border-0 text-center" href="{{route('security.acceptBooking', ['staff_id' => $staff->id, 'booking_id' => $booking->id])}}"><h6>Accept</h6></a>
+                                            <a type="button" class="btn-primary text-white w-100 rounded border-0 text-center text-decoration-none" href="{{route('security.acceptBooking', ['booking_id' => $booking->id])}}"><h6>Accept</h6></a>
                                         </div>
                                     </td>
                                 </tr>

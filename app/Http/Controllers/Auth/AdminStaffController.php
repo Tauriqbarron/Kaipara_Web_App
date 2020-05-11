@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Booking;
 use App\Http\Controllers\Controller;
+use App\Staff_Assignment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Query\Builder;
 use App\Staff;
 
 class AdminStaffController extends Controller
@@ -88,7 +92,7 @@ class AdminStaffController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        $staff = Staff::find($id);
+        $staff = Staff::query()->find($id);
         $staff->first_name = $request->input('fName');
         $staff->last_name = $request->input('lName');
         $staff->email = $request->input('email');
@@ -103,12 +107,12 @@ class AdminStaffController extends Controller
     }
 
     public function getDelete($id) {
-        $staff = Staff::find($id);
+        $staff = Staff::query()->find($id);
         return view('Administration.staff.staff_delete', ['staff' => $staff]);
     }
 
     public function postDelete($id) {
-        $staff = Staff::find($id);
+        $staff = Staff::query()->find($id);
         $staff->delete();
         return redirect()->route('staff.index');
     }
@@ -129,19 +133,39 @@ class AdminStaffController extends Controller
             'email' => $request->input('email'),
             'password' => $request->input('password')
         );
+        //TODO: Delete this
+        //Unassign bookings for testing
+        $bookings = Booking::all();
+        foreach ($bookings as $booking){
+            $booking->status = 'available';
+            $booking->save();
+        }
+        $staff_assignments = Staff_Assignment::all();
+        foreach($staff_assignments as $sa){
+            $sa->delete();
+        }
+        //TODO: Delete this
 
         if(Auth::guard('staff')->attempt($credentials)){
-            $staff = Staff::where('email', $request->input('email'))->firstOrFail();
-            $bookings = Booking::all();
-            $addresses = Address::all();
-            $infore = [$staff, $bookings, $addresses];
-            return view('Security.index', ['staff' => $staff, 'bookings' => $bookings, 'addresses' => $addresses]);
+            $currentStaff = Staff::query()->where('email', $request->input('email'))->firstOrFail();
+            $request->session()->put('user', $currentStaff);
+            return redirect()->route('security.index');
         }
-        return redirect()->back();
+
+
+        return redirect()->back()->with('error','Email Address or Password not recognised');
     }
 
+
     public function logout() {
-        Auth::guard('staff')->logout();
-        return redirect('/');
+        Auth::logout();
+        Session::flush();
+        if(!(Auth::check() || (Session::has('user')))){
+            return redirect('/');
+        }
+        //TODO: do something if user isn't logged out
     }
+
+
+
 }

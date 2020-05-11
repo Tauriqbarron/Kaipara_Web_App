@@ -25,4 +25,6 @@ class AdminSecurityAssignmentController extends Controller
         return view('Administration.security_Assignment.index', ['assignments' => $assignments]);
     }
 
+
+
 }
