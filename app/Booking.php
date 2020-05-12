@@ -20,6 +20,6 @@ class Booking extends Model
 
     public function staff_Assignment() {
 
-        return $this->hasOne('App\Staff_Assignment');
+        return $this->hasMany('App\Staff_Assignment');
     }
 }

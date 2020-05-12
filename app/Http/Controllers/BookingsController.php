@@ -20,4 +20,9 @@ class BookingsController extends Controller
             ->orderBy('start_time', 'asc')
             ->get();
     }
+
+    public function getCreate(){
+
+        return view('Security.booking.create');
+    }
 }

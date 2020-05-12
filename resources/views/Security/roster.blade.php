@@ -16,6 +16,7 @@
                             <thead>
                             <tr>
                                 <th>Time</th>
+
                                 <th>Monday</th>
                                 <th>Tuesday</th>
                                 <th>Wednesday</th>
@@ -26,25 +27,61 @@
                             </tr>
                             </thead>
                             <tbody>
-                                    @for($i = 0; $i < 12; $i++)
 
-                                        <tr>
-                                        <th>
+                            @php
+                                $noJob = 1;
+                                $hours = 0;
+                                $day = -1;
+                            @endphp
+
+                            @for($i = 0; $i < 19; $i++)
+                                <tr>
+                                    <th>
+                                        @if(($i+5) < 10 )
+                                        0{{$i+5}}:00
+                                            @else
                                             {{$i+5}}:00
-                                        </th>
-                                        @for($j=0;$j<7;$j++)
-                                            @foreach($bookings as $booking)
-                                                @if($booking->start_time == (5+$i.':00') )
-                                                    <td rowspan="5" style="color: #262525; background-color: #dd504c"></td>
-                                                @else
-                                                    <td></td>
-                                                @endif
+                                        @endif
+                                    </th>
+                                    @for($j=0;$j<7;$j++)
+                                        @foreach($bookings as $booking)
+                                            @php
+                                                $noJob = 1;
+                                                $time = '';
+                                                if(($i+5) < 10){
+                                                    $time = '0'.(5+$i).':00';
 
-                                            @endforeach
+                                                }else{
+                                                    $time = (5+$i).':00';
+                                                }
+
+                                            @endphp
+                                            @if($booking->start_time == $time && ((\Carbon\Carbon::parse($booking->date)->dayOfWeek) == $j) )
+                                                <td class="text-center"rowspan="5" style="color: #262525; background-color: #dd504c"> {{$booking->start_time}} - {{10+$i}}:00<br>{{$booking->description}} </td>
+                                                @php
+                                                    $noJob = 0;
+                                                    $day = $j;
+                                                    $hours = 4;
+                                                @endphp
+                                                @else
+
+                                            @endif
+
+
+                                        @endforeach
+                                        @if($noJob && ($day != $j))
                                             <td></td>
-                                        @endfor
+                                            @elseif($hours == 0)
+                                                @php($day = -1)
+                                            @else
+                                                @php($hours--)
+                                        @endif
 
                                     @endfor
+
+                                </tr>
+
+                            @endfor
 
 
 

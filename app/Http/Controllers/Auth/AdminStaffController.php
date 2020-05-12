@@ -150,10 +150,11 @@ class AdminStaffController extends Controller
         if(Auth::guard('staff')->attempt($credentials)){
             $currentStaff = Staff::query()->where('email', $request->input('email'))->firstOrFail();
             $request->session()->put('user', $currentStaff);
+            $request->session()->put('date1', today());
+            $request->session()->put('date2', today());
+            //load data and show profile page
             return redirect()->route('security.index');
         }
-
-
         return redirect()->back()->with('error','Email Address or Password not recognised');
     }
 
@@ -164,7 +165,7 @@ class AdminStaffController extends Controller
         if(!(Auth::check() || (Session::has('user')))){
             return redirect('/');
         }
-        //TODO: do something if user isn't logged out
+        return redirect()->back()->with('error', 'Logout failed');
     }
 
 

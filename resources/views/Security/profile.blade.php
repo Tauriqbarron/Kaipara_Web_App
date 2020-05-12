@@ -20,6 +20,12 @@
 
 </div>
 <div style="width:74%; float: left; padding-left: 20px">
+    @if ($message = Session::get('error'))
+        <div class="alert alert-danger alert-block">
+            <button type="button" class="close" data-dismiss="alert">X</button>
+            <strong>{{$message}}</strong>
+        </div>
+    @endif
     <h2 class="text-center">Your Assignments</h2>
     <div class="container jumbotron bg-light" id="schedule">
         <div class="row">
@@ -33,7 +39,7 @@
                                     <a href="#" onclick="dateChangeRight()"><i class="fa fa-chevron-left fa-2x date-arrow" id="dateLeft" ></i></a>
                                 </th>
                                 <th colspan="3" class="text-center text-secondary" style="vertical-align: bottom">
-                                    <h3 id="date"></h3>
+                                    <h3>{{$date ?? ''}}</h3>
                                 </th>
                                 <th>
                                     <a href="#"> <i class="fa fa-chevron-right fa-pull-right fa-2x date-arrow"></i></a>
