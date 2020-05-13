@@ -10,7 +10,7 @@ class Booking extends Model
 
     public function client() {
 
-        return $this->belongsTo('App\Clients', 'Client_id', 'id');
+        return $this->belongsTo('App\Clients', 'client_id', 'id');
     }
 
     public function booking_type() {
