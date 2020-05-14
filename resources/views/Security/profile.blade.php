@@ -99,5 +99,6 @@
             </div>
         </div>
     </div>
+        @include('Security.roster')
 </div>
 

@@ -1,12 +1,12 @@
-<div style="width:26%; height: 100%; float: left">
+<!--<div style="width:26%; height: 100%; float: left">
     <div  class="card bg-light text-center shadow p-3 mb-5 border-0 card-image rounded-lg shadow col-sm-0" style="width: 18rem; background-size: cover">
         <h4>Roster</h4>
     </div>
 
 
 
-</div>
-<div style="width:74%; float: left; padding-left: 20px">
+</div>-->
+<div style="width:100%;">
     <div class="container jumbotron bg-light" id="schedule">
         <div class="row">
             <div class="col-lg-12">
@@ -33,8 +33,6 @@
 
 
                                 @php
-                                    error_reporting(E_ALL);
-                                    ini_set('display_errors', 1);
                                         $timetable = array( );
                                         $time_start = round($bookings->min('start_time'))-1;
 
