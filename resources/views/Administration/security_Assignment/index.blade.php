@@ -8,7 +8,7 @@
     </form>
 
     <div>
-        <a href="#" class="btn btn-primary ml-2">Create</a>
+        <a href="{{route('security_assignment.create')}}" class="btn btn-primary ml-2">Create</a>
         <table class="table">
             <thead>
             <tr>
@@ -25,15 +25,15 @@
             <tbody>
             @foreach($assignments as $assignment)
             <tr>
-                <td>{{$assignment->Booking->id}}</td>
-                <td>{{App\Booking_Types::where(['id' => $assignment->Booking->booking_type_id])->pluck('description')->first()}}</td>
-                <td>{{$assignment->Booking->description}}</td>
+                <td>{{$assignment->booking->id}}</td>
+                <td>{{$assignment->booking->booking_type->description}}</td>
+                <td>{{$assignment->booking->description}}</td>
                 <td>
-                    {{App\Clients::where(['id' => $assignment->Booking->client_id])->pluck('first_name')->first()}}
-                    {{App\Clients::where(['id' => $assignment->Booking->client_id])->pluck('last_name')->first()}}
+                    {{$assignment->booking->client->first_name}}
+                    {{$assignment->booking->client->last_name}}
                 </td>
-                <td>{{$assignment->Staff->first_name}} {{$assignment->Staff->last_name}}</td>
-                <td><a class="btn btn-success" href="#">view</a></td>
+                <td>{{$assignment->staff->first_name}} {{$assignment->staff->last_name}}</td>
+                <td><a class="btn btn-success" href="{{route('security_assignment.view', ['id' => $assignment->booking->id])}}">view</a></td>
                 <td><a class="btn btn-primary" href="#">Edit</a></td>
                 <td><a class="btn btn-danger" href="#">Delete</a></td>
             </tr>

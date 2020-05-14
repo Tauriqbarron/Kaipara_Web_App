@@ -140,14 +140,24 @@ Route::get('admin/logout', [
 ]);
 
 /*Security Assignment Part*/
-Route::get('/admin/assignment', [
+Route::get('/admin/sec-assignment', [
     'uses' => 'Auth\AdminSecurityAssignmentController@getIndex',
     'as' => 'security_assignment.index'
 ]);
 
-Route::get('/admin/assignment/result', [
+Route::get('/admin/sec-assignment/result', [
     'uses' => 'Auth\AdminSecurityAssignmentController@search',
     'as' => 'security_assignment.search'
+]);
+
+Route::get('/admin/sec-assignment/create', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@getCreate',
+    'as' => 'security_assignment.create'
+]);
+
+Route::get('/admin/sec-assignment/view/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@view',
+    'as' => 'security_assignment.view'
 ]);
 
 
