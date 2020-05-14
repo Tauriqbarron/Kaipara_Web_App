@@ -19,7 +19,7 @@ class Booking extends Model
         return $this->belongsTo('App\Booking_Types', 'booking_type_id', 'id');
     }
 
-    public function staff_Assignment() {
+    public function staff_assignment() {
 
         return $this->hasMany('App\Staff_Assignment');
     }

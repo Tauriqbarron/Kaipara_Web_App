@@ -24,16 +24,21 @@
             </thead>
             <tbody>
             @foreach($assignments as $assignment)
-            <tr>
-                <td>{{$assignment->booking->id}}</td>
-                <td>{{$assignment->booking->booking_type->description}}</td>
-                <td>{{$assignment->booking->description}}</td>
+                {{$staff_ids = App\Staff_Assignment::where(['booking_id' => $assignment->id])->pluck('staff_id')}}
+                <td>{{$assignment->id}}</td>
+                <td>{{$assignment->booking_type->description}}</td>
+                <td>{{$assignment->description}}</td>
                 <td>
-                    {{$assignment->booking->client->first_name}}
-                    {{$assignment->booking->client->last_name}}
+                    {{$assignment->client->first_name}}
+                    {{$assignment->client->last_name}}
                 </td>
-                <td>{{$assignment->staff->first_name}} {{$assignment->staff->last_name}}</td>
-                <td><a class="btn btn-success" href="{{route('security_assignment.view', ['id' => $assignment->booking->id])}}">view</a></td>
+                <td>
+                @foreach($staff_ids as $staff_id)
+                    {{App\Staff::where(['id' => $staff_id])->pluck('first_name')->first()}}
+                    {{App\Staff::where(['id' => $staff_id])->pluck('last_name')->first()}}
+                @endforeach
+                </td>
+                <td><a class="btn btn-success" href="{{route('security_assignment.view', ['id' => $assignment->id])}}">view</a></td>
                 <td><a class="btn btn-primary" href="#">Edit</a></td>
                 <td><a class="btn btn-danger" href="#">Delete</a></td>
             </tr>

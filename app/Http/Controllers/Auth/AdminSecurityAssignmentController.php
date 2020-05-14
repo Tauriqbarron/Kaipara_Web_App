@@ -14,8 +14,14 @@ use Illuminate\Support\Facades\DB;
 
 class AdminSecurityAssignmentController extends Controller
 {
-    public function getIndex() {
+
+    /*public function getIndex() {
         $assignments = Staff_Assignment::all();
+        return view('Administration.security_Assignment.index', ['assignments' => $assignments]);
+    }*/
+
+    public function getIndex() {
+        $assignments = Booking::all();
         return view('Administration.security_Assignment.index', ['assignments' => $assignments]);
     }
 
@@ -28,7 +34,7 @@ class AdminSecurityAssignmentController extends Controller
     }
 
     public function view($id) {
-        $assignment = Staff_Assignment::find($id);
+        $assignment = Booking::find($id);
         return view('Administration.security_Assignment.sec_view', ['assignment' => $assignment]);
     }
 
