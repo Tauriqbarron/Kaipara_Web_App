@@ -1,5 +1,5 @@
 <div style="width:26%; height: 100%; float: left">
-    <div  class="card bg-light shadow p-3 mb-5 border-0 card-image rounded-lg shadow col-sm-0" style="width: 18rem; background-size: cover">
+    <div  class="card bg-light text-center shadow p-3 mb-5 border-0 card-image rounded-lg shadow col-sm-0" style="width: 18rem; background-size: cover">
         <h4>Roster</h4>
     </div>
 
@@ -11,80 +11,103 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="main-box clearfix">
-                    <div class="table-responsive">
-                        <table class="table user-list">
+                    <div class="table">
+                        <table class="table border" style="table-layout: fixed; width: 100%">
+                            <!--TODO: Add ability to filter by week-->
                             <thead>
                             <tr>
                                 <th>Time</th>
 
+                                <th>Sunday</th>
                                 <th>Monday</th>
                                 <th>Tuesday</th>
                                 <th>Wednesday</th>
                                 <th>Thursday</th>
                                 <th>Friday</th>
                                 <th>Saturday</th>
-                                <th>Sunday</th>
                             </tr>
                             </thead>
                             <tbody>
 
-                            @php
-                                $noJob = 1;
-                                $hours = 0;
-                                $day = -1;
-                            @endphp
+                            @if($firstBooking = $bookings->first())
 
-                            @for($i = 0; $i < 19; $i++)
-                                <tr>
-                                    <th>
-                                        @if(($i+5) < 10 )
-                                        0{{$i+5}}:00
-                                            @else
-                                            {{$i+5}}:00
-                                        @endif
-                                    </th>
-                                    @for($j=0;$j<7;$j++)
-                                        @foreach($bookings as $booking)
-                                            @php
-                                                $noJob = 1;
-                                                $time = '';
-                                                if(($i+5) < 10){
-                                                    $time = '0'.(5+$i).':00';
 
-                                                }else{
-                                                    $time = (5+$i).':00';
+                                @php
+                                    error_reporting(E_ALL);
+                                    ini_set('display_errors', 1);
+                                        $timetable = array( );
+                                        $time_start = round($bookings->min('start_time'))-1;
+
+                                        $time_end = round($bookings->max('finish_time'))+1;
+                                        $time_hours = $time_end - $time_start;
+                                        for($i=0;$i<$time_hours;$i++){
+                                            $leadingZero = '';
+                                            if(($i+$time_start)<10) $leadingZero = '0';
+                                            array_push($timetable, array(array($leadingZero.($i+$time_start).':00')));
+                                        }
+
+                                        for($i=1; $i<8; $i++){
+
+                                            for($j=0; $j<$time_hours;$j++){
+                                                $time = $j+$time_start;
+
+                                                foreach ($bookings as $booking){
+                                                    $start = round($booking->start_time);
+                                                    $startLeadingZero = '';
+                                                    if($start < 10) $startLeadingZero = '0';
+                                                    $finish = round($booking->finish_time);
+                                                    $finishLeadingZero = '';
+                                                    if($finish < 10) $finishLeadingZero = '0';
+
+                                                    $hours = $finish - $start;
+
+                                                    if($start == $time && \Carbon\Carbon::parse($booking->date)->dayOfWeek == $i-1){
+                                                        array_push($timetable[$j],
+                                                            array(
+                                                                $hours,
+                                                                'Booking ID: '.$booking->id,
+                                                                $startLeadingZero.number_format($booking->start_time, 2, ":","")." - ".$finishLeadingZero.number_format($booking->finish_time, 2, ":",""),
+                                                                $booking->description
+                                                            )
+                                                        );
+                                                        $j += $hours;
+                                                        continue;
+                                                    }
                                                 }
-
-                                            @endphp
-                                            @if($booking->start_time == $time && ((\Carbon\Carbon::parse($booking->date)->dayOfWeek) == $j) )
-                                                <td class="text-center"rowspan="5" style="color: #262525; background-color: #dd504c"> {{$booking->start_time}} - {{10+$i}}:00<br>{{$booking->description}} </td>
-                                                @php
-                                                    $noJob = 0;
-                                                    $day = $j;
-                                                    $hours = 4;
-                                                @endphp
-                                                @else
-
-                                            @endif
+                                                if($j < $time_hours){
+                                                array_push($timetable[$j], array("wat"));
+                                                }
+                                            }
+                                        }
+                                @endphp
 
 
-                                        @endforeach
-                                        @if($noJob && ($day != $j))
-                                            <td></td>
-                                            @elseif($hours == 0)
-                                                @php($day = -1)
-                                            @else
-                                                @php($hours--)
-                                        @endif
+                                @foreach($timetable as $row)
 
-                                    @endfor
-
-                                </tr>
-
-                            @endfor
-
-
-
+                                    <tr>
+                                        @foreach($row as $col)
+                                            @if($col == $row[0])
+                                                <th class="border" style="width: 5%">
+                                                    {{$col[0]}}
+                                                </th>
+                                                @elseif($col[0] == 'wat')
+                                                    <td class="border-light bg-white" style="width: 13%"></td>
+                                                    @else
+                                                        <td rowspan="{{$col[0]}}" class="text-center text-light rounded-lg border border-white" style="color: #262525; background-color: #dd504c; width: 13%" >
+                                                            <strong>
+                                                            @foreach($col as $record)
+                                                                @if($record === $col[0])
+                                                                    @continue
+                                                                    @endif
+                                                                {{$record}}<br>
+                                                                @endforeach
+                                                            </strong>
+                                                        </td>
+                                                @endif
+                                            @endforeach
+                                    </tr>
+                                    @endforeach
+                            @endif
                             </tbody>
                         </table>
                     </div>

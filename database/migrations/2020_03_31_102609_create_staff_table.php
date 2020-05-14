@@ -15,7 +15,6 @@ class CreateStaffTable extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
 
-            //TODO: add imgPath
             $table->id();
             $table->string('first_name', 50);
             $table->string('last_name', 50);
@@ -25,6 +24,7 @@ class CreateStaffTable extends Migration
             $table->string('street');
             $table->string('suburb');
             $table->string('city');
+            $table->string('imgPath')->default('images/Profile_Placeholder_large.jpg');
             $table->bigInteger('postcode');
             $table->rememberToken();
             $table->timestamps();

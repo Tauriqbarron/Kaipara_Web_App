@@ -14,7 +14,6 @@ class CreateBookingsTable extends Migration
     public function up()
     {
         Schema::create('bookings', function (Blueprint $table) {
-            //TODO add finish time
             $table->id();
             $table->timestamps();
             $table->foreignId('client_id')->references('id')->on('clients');
@@ -25,7 +24,10 @@ class CreateBookingsTable extends Migration
             $table->bigInteger('postcode');
             $table->string('description');
             $table->date('date');
-            $table->string('start_time');
+            $table->float('start_time');
+            $table->float('finish_time');
+            $table->integer('staff_needed');
+            $table->integer('available_slots');
             $table->string('status')->default('available');
 
         });

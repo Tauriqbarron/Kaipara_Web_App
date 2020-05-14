@@ -3,7 +3,7 @@
         <div id="cardHeader" class="card-header bg-light border-0 rounded">
             <img class="w-100 align-top" src="{{url('images/Card_Header.png')}}" alt="Card top">
         </div>
-        <img class="card-img-top rounded-circle border-light shadow border-3 w-75 mr-auto ml-auto mb-auto" src="{{url('images/Profile_Placeholder_Large.jpg')}}" alt="Card image cap">
+        <img class="card-img-top rounded-circle border-light shadow border-3 w-75 mr-auto ml-auto mb-auto" src="{{url($staff->imgPath)}}" alt="Card image cap">
         <div class="mt-4 card-body text-light">
             <h5 class="card-title text-center">{{$staff->first_name}} {{$staff->last_name}}</h5>
             <h5 class="card-title text-center">{{$staff->phone_number}}</h5>
@@ -39,7 +39,7 @@
                                     <a href="#" onclick="dateChangeRight()"><i class="fa fa-chevron-left fa-2x date-arrow" id="dateLeft" ></i></a>
                                 </th>
                                 <th colspan="3" class="text-center text-secondary" style="vertical-align: bottom">
-                                    <h3>{{$date ?? ''}}</h3>
+                                    <h3>{{Carbon\Carbon::parse(Session::get('date1'))->format('d/m/Y')}}</h3>
                                 </th>
                                 <th>
                                     <a href="#"> <i class="fa fa-chevron-right fa-pull-right fa-2x date-arrow"></i></a>
@@ -52,7 +52,7 @@
 
                                 <tr>
                                     <td class="text-center">
-                                        <h6>{{$booking->start_time}}</h6>
+                                        <h6>{{number_format($booking->start_time, 2, ":","")}}</h6>
                                     </td>
 
                                             <td>
@@ -79,7 +79,7 @@
                                 <tr >
                                     <td colspan="4" style="padding: 0px" class="bg-white">
                                         <div class="collapse"  id="n{{$booking->id}}" style="padding: 10px">
-                                            {{$booking->description}}
+                                            {{$booking->description}} on {{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}
                                         </div>
                                     </td>
                                     <td style="padding: 0px" class="bg-white">

@@ -15,7 +15,7 @@
                     </script>
                     <tr>
                         <td class="text-center">
-                            <h6>{{$booking->start_time}}</h6>
+                            <h6>{{number_format($booking->start_time, 2, ":","")}}</h6>
                         </td>
                         <td>
                             <h6>{{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}</h6>
@@ -38,7 +38,7 @@
                     <tr >
                         <td colspan="4" style="padding: 0px" class="bg-white">
                             <div class="collapse"  id="a{{$booking->id}}" style="padding: 10px">
-                                {{$booking->description}} required at {{$booking->street}}, {{$booking->suburb}}, {{$booking->city}} at {{$booking->start_time}} on {{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}
+                                {{$booking->description}} required at {{$booking->street}}, {{$booking->suburb}}, {{$booking->city}} at {{number_format($booking->start_time, 2, ":","")}} on {{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}
                             </div>
                         </td>
                         <td style="padding: 0px" class="bg-white">

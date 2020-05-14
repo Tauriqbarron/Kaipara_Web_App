@@ -19,8 +19,11 @@ class BookingTableSeeder extends Seeder
             'suburb' => 'Ohariu',
             'city' => 'Wellington',
             'postcode' => 6037,
-            'date' => today(),
-            'start_time' => '14:00',
+            'date' => '2020-05-10',
+            'start_time' => 6.30,
+            'finish_time'=> 14.30,
+            'staff_needed' => 2,
+            'available_slots' => 2,
             'status' => 'assigned'
 
         ]);
@@ -34,8 +37,11 @@ class BookingTableSeeder extends Seeder
             'suburb' => 'Kew',
             'city' => 'Invercargill',
             'postcode' => 9812,
-            'date' => today(),
-            'start_time' => '08:00',
+            'date' => '2020-05-11',
+            'start_time' => 6.00,
+            'finish_time'=> 14.00,
+            'staff_needed' => 2,
+            'available_slots' => 2,
             'status' => 'assigned'
 
         ]);
@@ -49,8 +55,11 @@ class BookingTableSeeder extends Seeder
             'suburb' => 'Onehunga',
             'city' => 'Auckland',
             'postcode' => 1061,
-            'date' => today(),
-            'start_time' => '06:00',
+            'date' => '2020-05-12',
+            'start_time' => 8.30,
+            'finish_time'=> 16.30,
+            'staff_needed' => 2,
+            'available_slots' => 2,
             'status' => 'assigned'
         ]);
         $booking->save();
@@ -63,8 +72,11 @@ class BookingTableSeeder extends Seeder
             'suburb' => 'Meadowbank',
             'city' => 'Auckland',
             'postcode' => 1072,
-            'date' => today(),
-            'start_time' => '14:00'
+            'date' => '2020-05-13',
+            'start_time' => 8.00,
+            'finish_time'=> 16.00,
+            'staff_needed' => 1,
+            'available_slots' => 1,
 
         ]);
         $booking->save();
@@ -77,8 +89,11 @@ class BookingTableSeeder extends Seeder
             'suburb' => 'Freemans Bay',
             'city' => 'Auckland',
             'postcode' => 1011,
-            'date' => today(),
-            'start_time' => '08:00'
+            'date' => '2020-05-12',
+            'start_time' => 14.30,
+            'finish_time'=> 22.30,
+            'staff_needed' => 1,
+            'available_slots' => 1,
 
         ]);
         $booking->save();
@@ -91,8 +106,11 @@ class BookingTableSeeder extends Seeder
             'suburb' => 'Onehunga',
             'city' => 'Auckland',
             'postcode' => 1061,
-            'date' => today(),
-            'start_time' => '06:00'
+            'date' => '2020-05-11',
+            'start_time' => 14.00,
+            'finish_time'=> 22.00,
+            'staff_needed' => 1,
+            'available_slots' => 1,
         ]);
         $booking->save();
 

@@ -19,17 +19,17 @@
                         <a class="nav-link" href="#">About Us</a>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end">
-                    <li class="nav-item dropdown border-0 ">
-                            <button class="btn-light rounded border-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end  dropdown">
+                    <li class="nav-item border-0 ">
+                            <a class="btn-light border-0 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{$staff->first_name}} {{$staff->last_name}}
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right rounded-0" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="{{route('staff.logout')}}">Logout</a>
                             </div>
                     </li>
                     <li class="nav-item" id="headerProfileImage">
-                        <img class="float-right rounded-circle shadow" style="display: block; width: 54px; height: 54px" src="{{url('images/Profile_Placeholder_large.jpg')}}" alt="profileImage">
+                        <img class="float-right rounded-circle shadow dropdown-toggle" style="display: block; width: 54px; height: 54px" src="{{url('images/Profile_Placeholder_large.jpg')}}" alt="profileImage">
                     </li>
                 </ul>
             </div>
