@@ -24,7 +24,6 @@
             </thead>
             <tbody>
             @foreach($assignments as $assignment)
-                {{$staff_ids = App\Staff_Assignment::where(['booking_id' => $assignment->id])->pluck('staff_id')}}
                 <td>{{$assignment->id}}</td>
                 <td>{{$assignment->booking_type->description}}</td>
                 <td>{{$assignment->description}}</td>
@@ -33,9 +32,10 @@
                     {{$assignment->client->last_name}}
                 </td>
                 <td>
-                @foreach($staff_ids as $staff_id)
-                    {{App\Staff::where(['id' => $staff_id])->pluck('first_name')->first()}}
-                    {{App\Staff::where(['id' => $staff_id])->pluck('last_name')->first()}}
+                @foreach($assignment->staff_assignments as $record)
+                    {{$record->staff->first_name}}
+                    {{$record->staff->last_name}}
+
                 @endforeach
                 </td>
                 <td><a class="btn btn-success" href="{{route('security_assignment.view', ['id' => $assignment->id])}}">view</a></td>
