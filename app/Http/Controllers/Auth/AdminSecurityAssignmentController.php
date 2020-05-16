@@ -87,7 +87,42 @@ class AdminSecurityAssignmentController extends Controller
         $booking->save();
         return redirect()->route('security_assignment.index');
 
+    }
 
+    /*Direct to the assign a staff to the assignment page*/
+    public function getAssign(Request $request, $id) {
+        $assignment = Booking::find($id);
+        if($assignment->available_slots != 0){
+            $staffs = Staff::all();
+            return view('Administration.security_Assignment.assign_staff', ['assignment' => $assignment, 'staffs' => $staffs]);
+        }else{
+            return redirect()->route('security_assignment.index')->with('message', 'Successful');
+        }
+
+    }
+
+    /*Assign a staff to the assignment*/
+    public function postAssign(Request $request, $id) {
+        $booking = Booking::find($id);
+        $record = Staff_Assignment::where('staff_id', '=', $request->input('staff'))
+            ->where('booking_id', '=', $id)
+            ->first();
+        if($record == null){
+            $staff_assignment = new Staff_Assignment([
+                'staff_id' => $request->input('staff'),
+                'booking_id' => $id
+            ]);
+            $staff_assignment->save();
+            $booking->available_slots = $booking->available_slots - 1;
+            if($booking->available_slots == 0) {
+                $booking->status = 'assigned';
+            }
+            $booking->save();
+            return redirect()->route('security_assignment.index');
+        }
+        else{
+            return redirect()->back()->withErrors('The staff has already been assign to this assignment.');
+        }
     }
 
 

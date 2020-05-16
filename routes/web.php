@@ -165,6 +165,16 @@ Route::get('/admin/sec-assignment/view/{id}', [
     'as' => 'security_assignment.view'
 ]);
 
+Route::get('/admin/sec-assignment/assign{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@getAssign',
+    'as' => 'security_assignment.assign'
+]);
+
+Route::post('/admin/sec-assignment/assign{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@postAssign',
+    'as' => 'security_assignment.assign'
+]);
+
 
 
 /*Service Assignment Part*/

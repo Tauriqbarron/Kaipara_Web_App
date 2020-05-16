@@ -37,7 +37,7 @@
                 <td><a class="btn btn-primary" href="#">Edit</a></td>
                 <td><a class="btn btn-danger" href="#">Delete</a></td>
                 @if($assignment->status == 'available')
-                    <td><a class="btn btn-warning" href="#">Assign</a></td>
+                    <td><a class="btn btn-warning" href="{{route('security_assignment.assign', ['id' => $assignment->id])}}">Assign</a></td>
                     @else
                         <td></td>
                     @endif
