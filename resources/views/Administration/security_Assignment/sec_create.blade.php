@@ -42,11 +42,18 @@
             </div>
         </div>
         -->
-
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="date">Date</label>
                 <input type="text" name="date" class="form-control" placeholder="dd-mm-YY">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="numOfStaff">Number of Officer</label>
+                <select class="form-control" name="numOfStaff">
+                    @for($i = 1; $i <= 5; $i++)
+                        <option value="{{$i}}">{{$i}}</option>
+                        @endfor
+                </select>
             </div>
             <div class="form-group col-md-6">
                 <label for="inputAddress2">Street</label>

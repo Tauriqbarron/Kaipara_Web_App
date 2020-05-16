@@ -50,7 +50,7 @@ class AdminSecurityAssignmentController extends Controller
             'client_id' => 'required',
             'booking_type' => 'required',
             'description' => 'required',
-            'date' => 'required|date|date_format:d-m-Y|after:today',
+            'date' => 'required|date|date_format:Y-m-d|after:today',
             'street' => 'required',
             'suburb' => 'required',
             'city' => 'required',
@@ -77,7 +77,11 @@ class AdminSecurityAssignmentController extends Controller
             'suburb' => $request->input('suburb'),
             'city' => $request->input('city'),
             'postcode' => $request->input('postcode'),
-            'status' => 'available'
+            'status' => 'available',
+            'staff_needed' => $request->input('numOfStaff'),
+            'available_slots' => $request->input('numOfStaff'),
+            'start_time' => null,
+            'finish_time' => null,
         ]);
 
         $booking->save();
