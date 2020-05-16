@@ -10,33 +10,44 @@
     @endif
     <hr/>
 
-    <form class="ml-2" method="post" action="#" >
+    <form class="ml-2" method="post" action="{{route('security_assignment.create')}}" >
         @csrf
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputEmail4">Client ID</label>
-                <input name="fName" class="form-control" placeholder="Client ID">
+                <label for="client_id">Client ID</label>
+                <input name="client_id" class="form-control" placeholder="Client ID">
             </div>
             <div class="form-group col-md-6">
-                <label for="inputPassword4">Assignment type</label>
-                <select class="form-control" name="Assignment_type">
+                <label for="booking_type">Assignment type</label>
+                <select class="form-control" name="booking_type">
                     @foreach($types as $type)
                         <option value="{{$type->id}}">{{$type->description}}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-6">
+        </div>
+            <div class="form-group">
+                <label for="descripyion">Description</label>
+                <textarea type="text" class="form-control" name="description" rows="3"></textarea>
+            </div>
+        <!--<div class="form-row">
+            <div class="form-group">
                 <label for="inputAddress">Security Officer</label>
                 <select class="form-control" name="security_officer">
                     <option value=" "> </option>
-                    @foreach($staffs as $staff)
+                   {{--@foreach($staffs as $staff)
                         <option value="{{$staff->id}}">{{$staff->first_name}} {{$staff->last_name}}</option>
-                    @endforeach
+                    @endforeach--}}
                 </select>
             </div>
         </div>
+        -->
 
         <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="date">Date</label>
+                <input type="text" name="date" class="form-control" placeholder="dd-mm-YY">
+            </div>
             <div class="form-group col-md-6">
                 <label for="inputAddress2">Street</label>
                 <input name="street" class="form-control" placeholder="Street" />

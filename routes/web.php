@@ -155,6 +155,11 @@ Route::get('/admin/sec-assignment/create', [
     'as' => 'security_assignment.create'
 ]);
 
+Route::post('/admin/sec-assignment/create', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@postCreate',
+    'as' => 'security_assignment.create'
+]);
+
 Route::get('/admin/sec-assignment/view/{id}', [
     'uses' => 'Auth\AdminSecurityAssignmentController@view',
     'as' => 'security_assignment.view'

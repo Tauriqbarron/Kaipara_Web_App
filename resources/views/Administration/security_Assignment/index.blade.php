@@ -20,6 +20,7 @@
                 <th></th>
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -31,16 +32,15 @@
                     {{$assignment->client->first_name}}
                     {{$assignment->client->last_name}}
                 </td>
-                <td>
-                @foreach($assignment->staff_assignments as $record)
-                    {{$record->staff->first_name}}
-                    {{$record->staff->last_name}}
-
-                @endforeach
-                </td>
+                <td>{{$assignment->status}}</td>
                 <td><a class="btn btn-success" href="{{route('security_assignment.view', ['id' => $assignment->id])}}">view</a></td>
                 <td><a class="btn btn-primary" href="#">Edit</a></td>
                 <td><a class="btn btn-danger" href="#">Delete</a></td>
+                @if($assignment->status == 'available')
+                    <td><a class="btn btn-warning" href="#">Assign</a></td>
+                    @else
+                        <td></td>
+                    @endif
             </tr>
             @endforeach
             </tbody>

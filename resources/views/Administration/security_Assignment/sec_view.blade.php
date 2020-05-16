@@ -10,7 +10,6 @@
                 <p class="form-control">
                     {{$assignment->client->first_name}}
                     {{$assignment->client->last_name}}
-
                 </p>
             </div>
             <div class="form-group col-md-6">
@@ -40,17 +39,15 @@
                 <p class="form-control">{{$assignment->postcode}}</p>
             </div>
         </div>
-
-        {{$staff_ids = App\Staff_Assignment::where(['booking_id' => $assignment->id])->pluck('staff_id')}}
-        @foreach($staff_ids as $staff_id)
         <div class="form-group">
             <label for="inputAddress2">Security Officer</label>
             <p class="form-control">
-                {{App\Staff::where(['id' => $staff_id])->pluck('first_name')->first()}}
-                {{App\Staff::where(['id' => $staff_id])->pluck('last_name')->first()}}
+                @foreach($assignment->staff_assignments as $record)
+                    {{$record->staff->first_name}}
+                    {{$record->staff->last_name}}
+                @endforeach
             </p>
         </div>
-        @endforeach
         <div class="form-group">
             <label for="inputAddress2">Status</label>
             <p class="form-control">{{$assignment->status}}</p>
