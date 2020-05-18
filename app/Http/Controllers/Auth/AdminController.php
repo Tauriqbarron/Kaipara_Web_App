@@ -27,7 +27,7 @@ class AdminController extends Controller
 
         return redirect()->route('admin.index');
     }
-    return redirect()->back();
+    return redirect()->back()->withErrors("The email address or password is wrong.");
 }
 
     public function logout() {

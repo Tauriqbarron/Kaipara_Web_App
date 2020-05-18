@@ -16,7 +16,7 @@
                 <th>Booking Type</th>
                 <th>Description</th>
                 <th>Client name</th>
-                <th>Staff name</th>
+                <th>Status</th>
                 <th></th>
                 <th></th>
                 <th></th>
