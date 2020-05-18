@@ -15,7 +15,7 @@
                     </script>
                     <tr>
                         <td class="text-center">
-                            <h6>{{number_format($booking->start_time, 2, ":","")}}</h6>
+                            <a href="#" onclick="setCenter('{{$booking->street}} {{$booking->suburb}} {{$booking->city}} New Zealand')"><i class="fa fa-map-marker fa-2x fa-light fa-pull-left"></i></a><h6>{{number_format($booking->start_time, 2, ":","")}}</h6>
                         </td>
                         <td>
                             <h6>{{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}</h6>

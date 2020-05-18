@@ -86,8 +86,6 @@
                                     </td>
                                     <td style="padding: 0px" class="bg-white">
                                         <div class="collapse btn-group-lg"  id="n{{$booking->id}}" style="padding: 10px">
-                                            <!--<button class="btn-primary text-white w-100 rounded border-0" type="submit"><h6>Accept</h6></button>-->
-                                            <!--<button class="btn-danger text-white w-100 rounded border-0"><h6>Decline</h6></button>-->
                                         </div>
                                     </td>
                                 </tr>

@@ -67,7 +67,7 @@ function getScheduleMarker(address) {
     geocoder = new google.maps.Geocoder();
     geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
-            map.setCenter(results[0].geometry.location);
+            scheduleMap.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
                 map: scheduleMap,
                 position: results[0].geometry.location
@@ -76,6 +76,29 @@ function getScheduleMarker(address) {
         }
     });
 
+}
+
+function setScheduleCenter(address){
+
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': address}, function(results, status) {
+        if (status === 'OK') {
+            scheduleMap.setCenter(results[0].geometry.location);
+            scheduleMap.setZoom(12);
+
+        }
+    });
+}
+function setCenter(address){
+
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': address}, function(results, status) {
+        if (status === 'OK') {
+            map.setCenter(results[0].geometry.location);
+            map.setZoom(12);
+
+        }
+    });
 }
 
 function f(button, target){
