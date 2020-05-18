@@ -11,24 +11,31 @@ use App\Booking_Types;
 use App\Clients;
 use App\Staff;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class AdminSecurityAssignmentController extends Controller
 {
-    public function getIndex() {
+
+    /*public function getIndex() {
         $assignments = Staff_Assignment::all();
+        return view('Administration.security_Assignment.index', ['assignments' => $assignments]);
+    }*/
+
+    public function getIndex() {
+        $assignments = Booking::all();
         return view('Administration.security_Assignment.index', ['assignments' => $assignments]);
     }
 
     public function Search(Request $request) {
         $search = $request->input('search');
-        $assignments = Staff_Assignment::where('booking_id', 'like', '%'.$search.'%')
+        $assignments = Booking::where('booking_id', 'like', '%'.$search.'%')
             ->paginate(5);
         $assignments->appends(['search' => $search]);
         return view('Administration.security_Assignment.index', ['assignments' => $assignments]);
     }
 
     public function view($id) {
-        $assignment = Staff_Assignment::find($id);
+        $assignment = Booking::find($id);
         return view('Administration.security_Assignment.sec_view', ['assignment' => $assignment]);
     }
 
@@ -36,6 +43,86 @@ class AdminSecurityAssignmentController extends Controller
         $types = Booking_Types::all();
         $staffs = Staff::all();
         return view('Administration.security_Assignment.sec_create', ['types' => $types, 'staffs' => $staffs]);
+    }
+
+    public function postCreate(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'client_id' => 'required',
+            'booking_type' => 'required',
+            'description' => 'required',
+            'date' => 'required|date|date_format:Y-m-d|after:today',
+            'street' => 'required',
+            'suburb' => 'required',
+            'city' => 'required',
+            'postcode' => 'required',
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput($request->all());
+        }
+
+        $client = Clients::where('id', '=', $request->input('client_id'));
+        if($client == null) {
+            return redirect()->back()->withErrors('The client does not exist.');
+        }
+
+        $booking = new Booking([
+            'client_id' => $request->input('client_id'),
+            'booking_type_id' => $request->input('booking_type'),
+            'description' => $request->input('description'),
+            'date' => $request->input('date'),
+            'street' => $request->input('street'),
+            'suburb' => $request->input('suburb'),
+            'city' => $request->input('city'),
+            'postcode' => $request->input('postcode'),
+            'status' => 'available',
+            'staff_needed' => $request->input('numOfStaff'),
+            'available_slots' => $request->input('numOfStaff'),
+            'start_time' => null,
+            'finish_time' => null,
+        ]);
+
+        $booking->save();
+        return redirect()->route('security_assignment.index');
+
+    }
+
+    /*Direct to the assign a staff to the assignment page*/
+    public function getAssign(Request $request, $id) {
+        $assignment = Booking::find($id);
+        if($assignment->available_slots != 0){
+            $staffs = Staff::all();
+            return view('Administration.security_Assignment.assign_staff', ['assignment' => $assignment, 'staffs' => $staffs]);
+        }else{
+            return redirect()->route('security_assignment.index')->with('message', 'Successful');
+        }
+
+    }
+
+    /*Assign a staff to the assignment*/
+    public function postAssign(Request $request, $id) {
+        $booking = Booking::find($id);
+        $record = Staff_Assignment::where('staff_id', '=', $request->input('staff'))
+            ->where('booking_id', '=', $id)
+            ->first();
+        if($record == null){
+            $staff_assignment = new Staff_Assignment([
+                'staff_id' => $request->input('staff'),
+                'booking_id' => $id
+            ]);
+            $staff_assignment->save();
+            $booking->available_slots = $booking->available_slots - 1;
+            if($booking->available_slots == 0) {
+                $booking->status = 'assigned';
+            }
+            $booking->save();
+            return redirect()->route('security_assignment.index');
+        }
+        else{
+            return redirect()->back()->withErrors('The staff has already been assign to this assignment.');
+        }
     }
 
 

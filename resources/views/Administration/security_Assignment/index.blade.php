@@ -20,22 +20,27 @@
                 <th></th>
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             @foreach($assignments as $assignment)
-            <tr>
-                <td>{{$assignment->booking->id}}</td>
-                <td>{{$assignment->booking->booking_type->description}}</td>
-                <td>{{$assignment->booking->description}}</td>
+                <td>{{$assignment->id}}</td>
+                <td>{{$assignment->booking_type->description}}</td>
+                <td>{{$assignment->description}}</td>
                 <td>
-                    {{$assignment->booking->client->first_name}}
-                    {{$assignment->booking->client->last_name}}
+                    {{$assignment->client->first_name}}
+                    {{$assignment->client->last_name}}
                 </td>
-                <td>{{$assignment->staff->first_name}} {{$assignment->staff->last_name}}</td>
-                <td><a class="btn btn-success" href="{{route('security_assignment.view', ['id' => $assignment->booking->id])}}">view</a></td>
+                <td>{{$assignment->status}}</td>
+                <td><a class="btn btn-success" href="{{route('security_assignment.view', ['id' => $assignment->id])}}">view</a></td>
                 <td><a class="btn btn-primary" href="#">Edit</a></td>
                 <td><a class="btn btn-danger" href="#">Delete</a></td>
+                @if($assignment->status == 'available')
+                    <td><a class="btn btn-warning" href="{{route('security_assignment.assign', ['id' => $assignment->id])}}">Assign</a></td>
+                    @else
+                        <td></td>
+                    @endif
             </tr>
             @endforeach
             </tbody>

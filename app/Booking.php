@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     protected $fillable = ['client_id', 'booking_type_id', 'description', 'date', 'start_time', 'finish_time',
-        'status','street', 'suburb', 'city', 'postcode','number_of_staff', 'available_slots'];
+        'status','street', 'suburb', 'city', 'postcode','staff_needed', 'available_slots'];
 
     public function client() {
 
@@ -19,7 +19,7 @@ class Booking extends Model
         return $this->belongsTo('App\Booking_Types', 'booking_type_id', 'id');
     }
 
-    public function staff_Assignment() {
+    public function staff_assignments() {
 
         return $this->hasMany('App\Staff_Assignment');
     }

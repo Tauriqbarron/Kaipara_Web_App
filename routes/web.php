@@ -159,9 +159,24 @@ Route::get('/admin/sec-assignment/create', [
     'as' => 'security_assignment.create'
 ]);
 
+Route::post('/admin/sec-assignment/create', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@postCreate',
+    'as' => 'security_assignment.create'
+]);
+
 Route::get('/admin/sec-assignment/view/{id}', [
     'uses' => 'Auth\AdminSecurityAssignmentController@view',
     'as' => 'security_assignment.view'
+]);
+
+Route::get('/admin/sec-assignment/assign{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@getAssign',
+    'as' => 'security_assignment.assign'
+]);
+
+Route::post('/admin/sec-assignment/assign{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@postAssign',
+    'as' => 'security_assignment.assign'
 ]);
 
 
