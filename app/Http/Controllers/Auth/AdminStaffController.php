@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Booking;
 use App\Http\Controllers\Controller;
 use App\Staff_Assignment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -139,6 +140,8 @@ class AdminStaffController extends Controller
         $bookings = Booking::all();
         foreach ($bookings as $booking){
             $booking->status = 'available';
+            $booking->staff_needed = $booking->available_slots;
+
             $booking->save();
         }
         $staff_assignments = Staff_Assignment::all();
@@ -150,8 +153,14 @@ class AdminStaffController extends Controller
         if(Auth::guard('staff')->attempt($credentials)){
             $currentStaff = Staff::query()->where('email', $request->input('email'))->firstOrFail();
             $request->session()->put('user', $currentStaff);
-            $request->session()->put('date1', today());
-            $request->session()->put('date2', today());
+            $date = today();
+            $request->session()->put('date1', $date);
+
+            $d = Carbon::parse(today())->dayOfWeek;
+            $startOfWeek = today()->addDays(-$d);
+            $endOfWeek = today()->addDays((6-$d));
+            $request->session()->put('weekStart', $startOfWeek);
+            $request->session()->put('weekEnd', $endOfWeek);
             //load data and show profile page
             return redirect()->route('security.index');
         }

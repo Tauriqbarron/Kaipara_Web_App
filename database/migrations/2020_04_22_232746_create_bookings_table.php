@@ -14,6 +14,7 @@ class CreateBookingsTable extends Migration
     public function up()
     {
         Schema::create('bookings', function (Blueprint $table) {
+            //TODO: create timesheet table
             $table->id();
             $table->timestamps();
             $table->foreignId('client_id')->references('id')->on('clients');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Booking;
 use App\Staff;
 use App\Staff_Assignment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -20,17 +21,43 @@ class StaffController extends Controller
         if($user != null) {
             $currentStaff = Staff::query()->find($user->id);
             $bookings = app('App\Http\Controllers\BookingsController')->getStaffBookings($currentStaff);
+            $timetable = app('App\Http\Controllers\BookingsController')->getTimetable($currentStaff);
             $availableBookings = Booking::query()->select('*')->whereNotIn('id',
                 Staff_Assignment::query()->select('booking_id')->where('staff_id', '=', $currentStaff->id)->get())
                 ->orderBy('date','asc')
                 ->orderBy('start_time', 'asc')
                 ->get();
 
-            return view('Security.index', ['staff' => $currentStaff, 'bookings' => $bookings, 'availableBookings' => $availableBookings]);
+            return view('Security.index', ['staff' => $currentStaff, 'bookings' => $bookings, 'availableBookings' => $availableBookings, 'timetable' => $timetable]);
         }
         else {
             return redirect()->route('staff.login')->with('error', 'You must log in to view your profile');
         }
+    }
+
+    public function dateChange($i){
+        Session::put('page', 'profile');
+        $currentDate = Session::get('date1');
+        $currentDate->addDays($i);
+
+        Session::put('date1', $currentDate);
+
+        return redirect()->route('security.index');
+
+    }
+
+    public function setWeek($i){
+        $j = $i*7;
+        $weekStart = Session::get('weekStart');
+        $weekEnd = Session::get('weekEnd');
+
+        $weekStart = $weekStart->addDays($j);
+        $weekEnd = $weekEnd->addDays($j);
+
+        Session::put('weekStart', $weekStart);
+        Session::put('weekEnd', $weekEnd);
+
+        return redirect()->route('security.index');
     }
 
     public function acceptBooking($booking_id) {
@@ -76,6 +103,5 @@ class StaffController extends Controller
         }
         return redirect()->route('security.index');
     }
-
 
 }

@@ -59,6 +59,14 @@ Route::get('/security/accept/bookingid={booking_id}', [
     'uses' => "StaffController@acceptBooking", 'as' => 'security.acceptBooking'
 ]);
 
+Route::get('/security/date{i}', [
+    'uses' => "StaffController@dateChange", 'as' => 'security.dateChange'
+]);
+
+Route::get('/security/week{i}', [
+    'uses' => "StaffController@setWeek", 'as' => 'security.setWeek'
+]);
+
 
 // SERVICE
 /*Service Provider Profile*/
