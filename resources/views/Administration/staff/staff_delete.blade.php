@@ -36,10 +36,6 @@
                 <label for="inputState">City</label>
                 <p class="form-control">{{$staff->city}}</p>
             </div>
-            <div class="form-group col-md-4">
-                <label for="inputZip">Country</label>
-                <p class="form-control"></p>
-            </div>
             <div class="form-group col-md-2">
                 <label for="inputZip">Zip</label>
                 <p class="form-control">{{$staff->postcode}}</p>

@@ -43,10 +43,6 @@
                 <label for="inputState">City</label>
                 <input name="city" class="form-control" value="{{$sp->city}}" />
             </div>
-            <div class="form-group col-md-4">
-                <label for="inputZip">Country</label>
-                <input name="country" class="form-control" value="" />
-            </div>
             <div class="form-group col-md-2">
                 <label for="inputZip">Zip</label>
                 <input name="postcode" class="form-control" value="{{$sp->postcode}}" />
