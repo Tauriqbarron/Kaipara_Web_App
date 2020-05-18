@@ -161,6 +161,7 @@ class AdminStaffController extends Controller
             $endOfWeek = today()->addDays((6-$d));
             $request->session()->put('weekStart', $startOfWeek);
             $request->session()->put('weekEnd', $endOfWeek);
+            $request->session()->put('type', 'staff');
             //load data and show profile page
             return redirect()->route('security.index');
         }

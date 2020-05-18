@@ -8,44 +8,46 @@
     @yield('styles')
 </head>
 <body>
-<form class="w-75 mx-auto" role="form" method="POST" action="{{route('staff.login')}}">
-    <a class="btn btn-danger" href="{{url('/')}}">Back</a>
-    <h1 class="form-group ">Security Officer Login</h1>
-    {{csrf_field()}}
+<div class="container-fluid">
+    <form class="w-75 mx-auto" role="form" method="POST" action="{{route('staff.login')}}">
+        <a class="btn btn-danger" href="{{url('/')}}">Back</a>
+        <h1 class="form-group ">Security Officer Login</h1>
+        {{csrf_field()}}
 
-    @if ($message = Session::get('error'))
-        <div class="alert alert-danger alert-block">
-            <button type="button" class="close" data-dismiss="alert">X</button>
-            <strong>{{$message}}</strong>
+        @if ($message = Session::get('error'))
+            <div class="alert alert-danger alert-block">
+                <button type="button" class="close" data-dismiss="alert">X</button>
+                <strong>{{$message}}</strong>
+            </div>
+        @endif
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <div class="form-group">
+            <label for="exampleInputEmail1">Security email address</label>
+            <input id="email" name="email" type="email" class="form-control"  aria-describedby="emailHelp">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
-    @endif
-    @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{$error}}</li>
-                @endforeach
-            </ul>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input id="password" name="password" type="password" class="form-control" >
         </div>
-    @endif
 
-    <div class="form-group">
-        <label for="exampleInputEmail1">Security email address</label>
-        <input id="email" name="email" type="email" class="form-control"  aria-describedby="emailHelp">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-
-    <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input id="password" name="password" type="password" class="form-control" >
-    </div>
-
-    <div class="form-group">
-        <button type="submit" name="login" class="btn btn-primary shadow" value="login">Submit</button>
-    </div>
-</form>
+        <div class="form-group">
+            <button type="submit" name="login" class="btn btn-primary shadow" value="login">Submit</button>
+        </div>
+    </form>
 
 
-<div class="fixed-bottom">@include('footer')</div>
+    <div class="fixed-bottom">@include('footer')</div>
+</div>
 </body>
 </html>

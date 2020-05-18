@@ -43,6 +43,7 @@ class ServiceProviderController extends Controller
 
                 $user = service_provider::query()->where('email',$email)->first();
                 $request->session()->put('user',$user);
+                $request->session()->put('type', 'service');
                 //Session::put('user',$user);
                 //if success redirect to profile
                 return view('Service.index',['user'=>$user]) ;

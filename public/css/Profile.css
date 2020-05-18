@@ -23,12 +23,49 @@ body, html{
     background-attachment: fixed;
 }
 
+#img_waterfall{
+    opacity: .50;
+
+}
+
+.caption{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+
+}
+.caption > h1{
+    font-size: 90pt;
+    opacity: .9;
+}
+
 .container-fluid{
     margin-right: auto;
     margin-left: auto;
     max-width: 1300px;
 }
 
+.service-img{
+    width:200px;
+    height: 200px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.service-container{
+    overflow: hidden;
+    padding-top:30px;
+}
+
+.service-caption-right{
+    text-align: right;
+}
+
+.service-caption-left{
+    text-align: left;
+}
 
 .profileImg{
     height: 150px;

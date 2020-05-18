@@ -24,6 +24,8 @@ class ClientController extends Controller
         if(Auth::guard('client')->attempt($user_data))
         {
             //if success redirect to profile
+
+            $request->session()->put('type', 'client');
             return redirect($this->loginSuccess());
         }
         //if unsuccessful redirect back to login
