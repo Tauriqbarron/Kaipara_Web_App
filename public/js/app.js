@@ -1,14 +1,8 @@
 var map;
 var addresses = [];
+var n = new Date();
 
 function loaded(){
-
-    n =  new Date();
-    y = n.getFullYear();
-    m = n.getMonth() + 1;
-    d = n.getDate();
-    document.getElementById("date").innerHTML = d + "/" + m + "/" + y;
-    document.getElementById("scheduleDate").innerHTML = d + "/" + m + "/" + y;
 
 }
 
@@ -22,14 +16,6 @@ function initMap() {
 
 function addAddress(address){
     addresses.push(address);
-}
-
-function dateChangeRight(){
-    n = new Date();
-    n.setFullYear(2020);
-    n.setMonth(9);
-    n.setDate(20);
-    console.log(n.toDateString());
 }
 
 //getMarker(string: address)

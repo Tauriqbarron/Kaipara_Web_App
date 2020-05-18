@@ -17,6 +17,7 @@
         <script src="{{url('js/app.js')}}"></script>
 
         <script src="https://kit.fontawesome.com/c3929064ae.js" crossorigin="anonymous"></script>
+
     </head>
     <body id="bod" onload="loaded()">
         @include('Security.header')

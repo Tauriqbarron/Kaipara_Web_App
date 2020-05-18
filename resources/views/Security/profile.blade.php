@@ -36,13 +36,13 @@
                             <thead>
                             <tr>
                                 <th >
-                                    <a href="#" onclick="dateChangeRight()"><i class="fa fa-chevron-left fa-2x date-arrow" id="dateLeft" ></i></a>
+                                    <a href="{{route('security.dateChange', ['i' => -1])}}"><i class="fa fa-chevron-left fa-2x date-arrow" id="dateLeft" ></i></a>
                                 </th>
                                 <th colspan="3" class="text-center text-secondary" style="vertical-align: bottom">
-                                    <h3>{{Carbon\Carbon::parse(Session::get('date1'))->format('d/m/Y')}}</h3>
+                                    <h3 id="myAssignmentDate">{{Carbon\Carbon::parse(Session::get('date1'))->format('d/m/Y')}} </h3>
                                 </th>
                                 <th>
-                                    <a href="#"> <i class="fa fa-chevron-right fa-pull-right fa-2x date-arrow"></i></a>
+                                    <a href="{{route('security.dateChange', ['i' => 1])}}"> <i class="fa fa-chevron-right fa-pull-right fa-2x date-arrow"></i></a>
                                 </th>
                             </tr>
                             </thead>

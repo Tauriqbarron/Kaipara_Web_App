@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Booking;
 use App\Staff;
 use App\Staff_Assignment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -19,6 +20,7 @@ class StaffController extends Controller
         $user = Session::has('user') ? Session::get('user'): null;
         if($user != null) {
             $currentStaff = Staff::query()->find($user->id);
+            //TODO:: filter bookings by date, separate booking collections for my assignments and timetable
             $bookings = app('App\Http\Controllers\BookingsController')->getStaffBookings($currentStaff);
             $availableBookings = Booking::query()->select('*')->whereNotIn('id',
                 Staff_Assignment::query()->select('booking_id')->where('staff_id', '=', $currentStaff->id)->get())
@@ -31,6 +33,31 @@ class StaffController extends Controller
         else {
             return redirect()->route('staff.login')->with('error', 'You must log in to view your profile');
         }
+    }
+
+    public function dateChange($i){
+        Session::put('page', 'profile');
+        $currentDate = Session::get('date1');
+        $currentDate->addDays($i);
+
+        Session::put('date1', $currentDate);
+
+        return redirect()->route('security.index');
+
+    }
+
+    public function setWeek($i){
+        $j = $i*7;
+        $weekStart = Session::get('weekStart');
+        $weekEnd = Session::get('weekEnd');
+
+        $weekStart = $weekStart->addDays($j);
+        $weekEnd = $weekEnd->addDays($j);
+
+        Session::put('weekStart', $weekStart);
+        Session::put('weekEnd', $weekEnd);
+
+        return redirect()->route('security.index');
     }
 
     public function acceptBooking($booking_id) {
