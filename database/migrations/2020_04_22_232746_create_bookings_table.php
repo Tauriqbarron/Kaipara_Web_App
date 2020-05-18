@@ -25,8 +25,8 @@ class CreateBookingsTable extends Migration
             $table->bigInteger('postcode');
             $table->string('description');
             $table->date('date');
-            $table->float('start_time')->default(6);
-            $table->float('finish_time')->default(16);
+            $table->float('start_time');
+            $table->float('finish_time');
             $table->integer('staff_needed');
             $table->integer('available_slots');
             $table->string('status')->default('available');
