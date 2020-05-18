@@ -18,8 +18,20 @@
 
         <script src="https://kit.fontawesome.com/c3929064ae.js" crossorigin="anonymous"></script>
 
+
     </head>
     <body id="bod" onload="loaded()">
+    <?php
+    $addresses = array();
+    foreach($bookings as $booking){
+        $addressString = $booking->street.", ".$booking->suburb.", ".$booking->city.", New Zealand";
+
+        array_push($addresses, $addressString);
+    }
+    ?>
+    <script>
+        setAddresses({!! json_encode($addresses)!!});
+    </script>
         @include('Security.header')
         <div class="container-fluid" style="min-width: 1200px">
             @include('Security.nav')

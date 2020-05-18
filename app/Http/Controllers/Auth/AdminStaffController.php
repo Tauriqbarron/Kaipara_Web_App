@@ -140,6 +140,8 @@ class AdminStaffController extends Controller
         $bookings = Booking::all();
         foreach ($bookings as $booking){
             $booking->status = 'available';
+            $booking->staff_needed = $booking->available_slots;
+
             $booking->save();
         }
         $staff_assignments = Staff_Assignment::all();
@@ -154,12 +156,11 @@ class AdminStaffController extends Controller
             $date = today();
             $request->session()->put('date1', $date);
 
-            $d = Carbon::parse($date)->dayOfWeek;
-            $startOfWeek = $date->addDays(-$d);
-            $endOfWeek = $date->addDays((7-$d));
+            $d = Carbon::parse(today())->dayOfWeek;
+            $startOfWeek = today()->addDays(-$d);
+            $endOfWeek = today()->addDays((6-$d));
             $request->session()->put('weekStart', $startOfWeek);
             $request->session()->put('weekEnd', $endOfWeek);
-            $request->session()->put('page', 'profile');
             //load data and show profile page
             return redirect()->route('security.index');
         }

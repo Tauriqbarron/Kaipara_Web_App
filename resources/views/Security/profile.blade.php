@@ -48,6 +48,8 @@
                             </thead>
                             <tbody>
 
+                            @if($firstBookings = $bookings->first())
+
                             @foreach($bookings as $booking )
 
                                 <tr>
@@ -90,6 +92,9 @@
                                     </td>
                                 </tr>
                             @endforeach
+                                @else
+                                <tr><th colspan="5" class="text-center">Nothing to show</th></tr>
+                            @endif
 
 
                             </tbody>

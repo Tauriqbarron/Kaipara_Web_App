@@ -15,6 +15,17 @@
                         <table class="table border" style="table-layout: fixed; width: 100%">
                             <!--TODO: Add ability to filter by week-->
                             <thead>
+                            <tr class="w-100" style="width: 100%">
+                                <th >
+                                    <a href="{{route('security.setWeek', ['i' => -1])}}"><i class="fa fa-chevron-left fa-2x date-arrow" id="dateLeft" ></i></a>
+                                </th>
+                                <th colspan="6" class="text-center text-secondary" style="vertical-align: bottom">
+                                    <h3 id="myAssignmentDate">{{Carbon\Carbon::parse(Session::get('weekStart'))->format('d/m/Y')}} - {{Carbon\Carbon::parse(Session::get('weekEnd'))->format('d/m/Y')}}</h3>
+                                </th>
+                                <th>
+                                    <a href="{{route('security.setWeek', ['i' => 1])}}"> <i class="fa fa-chevron-right fa-pull-right fa-2x date-arrow float-right"></i></a>
+                                </th>
+                            </tr>
                             <tr>
                                 <th>Time</th>
 
@@ -29,19 +40,21 @@
                             </thead>
                             <tbody>
 
-                            @if($firstBooking = $bookings->first())
+                            @if($firstBooking = $timetable->first())
 
 
                                 @php
-                                        $timetable = array( );
-                                        $time_start = round($bookings->min('start_time'))-1;
+                                    error_reporting(E_ALL);
+                                    ini_set('display_errors', 1);
+                                        $timetableArray = array( );
+                                        $time_start = round($timetable->min('start_time'))-1;
 
-                                        $time_end = round($bookings->max('finish_time'))+1;
+                                        $time_end = round($timetable->max('finish_time'))+1;
                                         $time_hours = $time_end - $time_start;
                                         for($i=0;$i<$time_hours;$i++){
                                             $leadingZero = '';
                                             if(($i+$time_start)<10) $leadingZero = '0';
-                                            array_push($timetable, array(array($leadingZero.($i+$time_start).':00')));
+                                            array_push($timetableArray, array(array($leadingZero.($i+$time_start).':00')));
                                         }
 
                                         for($i=1; $i<8; $i++){
@@ -49,23 +62,23 @@
                                             for($j=0; $j<$time_hours;$j++){
                                                 $time = $j+$time_start;
 
-                                                foreach ($bookings as $booking){
-                                                    $start = round($booking->start_time);
+                                                foreach ($timetable as $t){
+                                                    $start = round($t->start_time);
                                                     $startLeadingZero = '';
                                                     if($start < 10) $startLeadingZero = '0';
-                                                    $finish = round($booking->finish_time);
+                                                    $finish = round($t->finish_time);
                                                     $finishLeadingZero = '';
                                                     if($finish < 10) $finishLeadingZero = '0';
 
                                                     $hours = $finish - $start;
 
-                                                    if($start == $time && \Carbon\Carbon::parse($booking->date)->dayOfWeek == $i-1){
-                                                        array_push($timetable[$j],
+                                                    if($start == $time && \Carbon\Carbon::parse($t->date)->dayOfWeek == $i-1){
+                                                        array_push($timetableArray[$j],
                                                             array(
                                                                 $hours,
-                                                                'Booking ID: '.$booking->id,
-                                                                $startLeadingZero.number_format($booking->start_time, 2, ":","")." - ".$finishLeadingZero.number_format($booking->finish_time, 2, ":",""),
-                                                                $booking->description
+                                                                'Booking ID: '.$t->id,
+                                                                $startLeadingZero.number_format($t->start_time, 2, ":","")." - ".$finishLeadingZero.number_format($t->finish_time, 2, ":",""),
+                                                                $t->description
                                                             )
                                                         );
                                                         $j += $hours;
@@ -73,14 +86,14 @@
                                                     }
                                                 }
                                                 if($j < $time_hours){
-                                                array_push($timetable[$j], array("wat"));
+                                                array_push($timetableArray[$j], array("wat"));
                                                 }
                                             }
                                         }
                                 @endphp
 
 
-                                @foreach($timetable as $row)
+                                @foreach($timetableArray as $row)
 
                                     <tr>
                                         @foreach($row as $col)
@@ -104,7 +117,10 @@
                                                 @endif
                                             @endforeach
                                     </tr>
-                                    @endforeach
+                                @endforeach
+
+                                @else
+                                <tr><th colspan="8" class="text-center">Nothing to show</th></tr>
                             @endif
                             </tbody>
                         </table>

@@ -14,6 +14,7 @@ class CreateBookingsTable extends Migration
     public function up()
     {
         Schema::create('bookings', function (Blueprint $table) {
+            //TODO: create timesheet table
             $table->id();
             $table->timestamps();
             $table->foreignId('client_id')->references('id')->on('clients');
@@ -24,8 +25,8 @@ class CreateBookingsTable extends Migration
             $table->bigInteger('postcode');
             $table->string('description');
             $table->date('date');
-            $table->float('start_time');
-            $table->float('finish_time');
+            $table->float('start_time')->default(6);
+            $table->float('finish_time')->default(16);
             $table->integer('staff_needed');
             $table->integer('available_slots');
             $table->string('status')->default('available');

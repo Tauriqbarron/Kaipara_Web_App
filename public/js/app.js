@@ -1,8 +1,22 @@
 var map;
+var scheduleMap;
 var addresses = [];
 var n = new Date();
+var _scAddresses = [];
+
+//TODO: change map location when record is clicked on table.
 
 function loaded(){
+    if(window.sessionStorage.getItem('button')){
+        pageToggle(window.sessionStorage.getItem('button'),window.sessionStorage.getItem('target'));
+    }
+    else{
+        pageToggle('profileBtn', 'profileContainer')
+    }
+}
+
+function setAddresses(scAddresses){
+    _scAddresses = scAddresses;
 
 }
 
@@ -12,6 +26,16 @@ function initMap() {
         zoom: 10
     });
     addresses.forEach(getMarker);
+
+    scheduleMap = new google.maps.Map(document.getElementById('scheduleMap'), {
+        center: {lat: -36.8742039, lng: 174.809371},
+        zoom: 10
+    });
+
+    _scAddresses.forEach(getScheduleMarker);
+
+
+
 }
 
 function addAddress(address){
@@ -38,6 +62,22 @@ function getMarker(address) {
 
 }
 
+function getScheduleMarker(address) {
+    console.log(address);
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': address}, function(results, status) {
+        if (status === 'OK') {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+                map: scheduleMap,
+                position: results[0].geometry.location
+
+            });
+        }
+    });
+
+}
+
 function f(button, target){
     theButton = document.getElementById(button);
     theTarget = document.getElementById(target);
@@ -54,6 +94,7 @@ function f(button, target){
     }
 
 }
+
 
 function getRotation(element){
     var st = window.getComputedStyle(element, null);
@@ -105,7 +146,7 @@ function pageToggle(button, target){
     document.getElementById(button).classList.add('active');
     document.getElementById(target).style.display = 'block';
 
-
-
+    window.sessionStorage.setItem('button', button);
+    window.sessionStorage.setItem('target', target);
 
 }

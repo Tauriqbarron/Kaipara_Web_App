@@ -20,15 +20,15 @@ class StaffController extends Controller
         $user = Session::has('user') ? Session::get('user'): null;
         if($user != null) {
             $currentStaff = Staff::query()->find($user->id);
-            //TODO:: filter bookings by date, separate booking collections for my assignments and timetable
             $bookings = app('App\Http\Controllers\BookingsController')->getStaffBookings($currentStaff);
+            $timetable = app('App\Http\Controllers\BookingsController')->getTimetable($currentStaff);
             $availableBookings = Booking::query()->select('*')->whereNotIn('id',
                 Staff_Assignment::query()->select('booking_id')->where('staff_id', '=', $currentStaff->id)->get())
                 ->orderBy('date','asc')
                 ->orderBy('start_time', 'asc')
                 ->get();
 
-            return view('Security.index', ['staff' => $currentStaff, 'bookings' => $bookings, 'availableBookings' => $availableBookings]);
+            return view('Security.index', ['staff' => $currentStaff, 'bookings' => $bookings, 'availableBookings' => $availableBookings, 'timetable' => $timetable]);
         }
         else {
             return redirect()->route('staff.login')->with('error', 'You must log in to view your profile');
@@ -103,6 +103,5 @@ class StaffController extends Controller
         }
         return redirect()->route('security.index');
     }
-
 
 }
