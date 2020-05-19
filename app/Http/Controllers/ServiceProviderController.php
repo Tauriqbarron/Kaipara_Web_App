@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\applications;
+use App\quote;
 use App\service_provider;
 use App\Service_Provider_Job;
 use Illuminate\Support\Facades\Auth;
@@ -93,13 +94,28 @@ class ServiceProviderController extends Controller
         $jobs = applications::query()
             ->join('service__provider__jobs','applications.id','=','service__provider__jobs.job_id')
             ->select('applications.*')->where('service__provider__jobs.service_provider_id',$userID)->get();
-
-       // $jobs = applications::query()->select('*')->whereIn('id', Service_Provider_Job::query()->select('job_id')->where('service_provider_id',$userID)->get())->get();
-       // $jobs = applications::all();
         return view('Service.jobs',['jobs'=>$jobs],['user'=>$user]);
     }
     public function serviceLogout(){
         Auth::guard('service_provider')->logout();
         return redirect('/');
+    }
+    public function quote($id,Request $request){
+        $user = Session::has('user') ? Session::get('user'): null;
+
+        $jobUpdate = applications::query()->where('id',$id)->first();
+        $jobUpdate->status= '2';
+        $jobUpdate->save();
+
+        $quote = new quote([
+            'service_provider_id' => $user->id,
+            'job_id' => $id,
+            'price'=> $request->input('price'),
+            'message'=>$request->input('message')
+        ]);
+        $quote->save();
+
+        $applications = applications::query()->select('*')->where('status','=','1')->get();
+        return view('Service.applications',['applications' => $applications, 'user'=>$user]);
     }
 }

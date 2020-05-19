@@ -38,6 +38,7 @@ Route::get('/provider', function () {
 Route::post('register','RegistrationController@createServiceProvider');
 Route::post('/provider','ServiceProviderController@login')->name('service.login.submit');
 Route::post('registerAddrS','RegistrationController@storeServiceProvider' );
+Route::post('/quote','ServiceProviderController@quote');
 
 Route::get('/', function () {
     return view('index');
