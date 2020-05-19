@@ -8,7 +8,7 @@
     <div class="form-group row">
         <label for="lastnname" class="col-sm-2 col-form-label">Last Name</label>
         <div class="col-sm-10">
-            <input type="password" class="form-control" id="lastname" name="lastname">
+            <input type="text" class="form-control" id="lastname" name="lastname">
         </div>
     </div>
     <div class="form-group row">
@@ -32,7 +32,7 @@
     <div class="form-group row">
         <label for="phone" class="col-sm-2 col-form-label">Phone Number</label>
         <div class="col-sm-10">
-            <input type="password" class="form-control" id="phone">
+            <input type="text" class="form-control" id="phone">
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>

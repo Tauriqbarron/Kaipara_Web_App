@@ -98,4 +98,8 @@ class ServiceProviderController extends Controller
        // $jobs = applications::all();
         return view('Service.jobs',['jobs'=>$jobs],['user'=>$user]);
     }
+    public function serviceLogout(){
+        Auth::guard('service_provider')->logout();
+        return redirect('/');
+    }
 }

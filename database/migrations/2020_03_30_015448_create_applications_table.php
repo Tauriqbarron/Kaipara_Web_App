@@ -20,7 +20,7 @@ class CreateApplicationsTable extends Migration
             $table->string('imagePath');
             $table->string('title');
             $table->text('description');
-            $table->integer('price');
+            $table->integer('price')->nullable();
             $table->string('street');
             $table->string('suburb');
             $table->string('city');

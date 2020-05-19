@@ -94,6 +94,10 @@ Route::get('/service/applications', [
     'uses' => 'ApplicationsController@getApps', 'as' => 'service.applications'
 ]) ->name('service.Bookings');
 
+Route::get('service/logout', [
+    'uses' => 'ServiceProviderController@serviceLogout',
+    'as' => 'service.logout'
+]);
 
 
 /*Registration*/
