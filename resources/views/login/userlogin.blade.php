@@ -8,7 +8,7 @@
     @yield('styles')
 </head>
     <body>
-        <form role="form" method="POST" action="{{route('service.login.submit')}}">
+        <form role="form" method="POST" action="{{route('client.login.submit')}}">
             {{csrf_field()}}
             @if ($message = Session::get('error'))
                 <div class="alert alert-danger alert-block">

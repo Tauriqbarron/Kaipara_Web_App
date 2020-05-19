@@ -35,7 +35,7 @@
                                 </button>
                                 <div class="collapse my-2" id="{{$app->title}}">
                                     <div class="card card-body">
-                                        <form method="POST" action="/quote">
+                                        <form method="GET" action="{{route('service.quote',['id' => $app->id])}}">
                                             <div class="form-group row">
                                                 <label for="price" class="col-sm-2 col-form-label">Enter Price</label>
                                                 <div class="col-sm-10">

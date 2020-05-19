@@ -32,13 +32,20 @@ Route::get('/provider', function () {
 });
 
 
+/* Client Routes  */
+
+Route::get('/client/index', function () {
+    return view('Client.index');
+}) ->name('client.home');
+
+
 
 
 /*Function Routes */
 Route::post('register','RegistrationController@createServiceProvider');
 Route::post('/provider','ServiceProviderController@login')->name('service.login.submit');
 Route::post('registerAddrS','RegistrationController@storeServiceProvider' );
-Route::post('/quote','ServiceProviderController@quote');
+Route::post('/client','ClientController@login')->name('client.login.submit');
 
 Route::get('/', function () {
     return view('index');
@@ -84,6 +91,11 @@ Route::get('/canceljob/{id}',[
 Route::get('/acceptJob/{id}',[
     'uses' =>'ServiceProviderController@acceptJob',
     'as' => 'service.acceptJob'
+]);
+
+Route::get('/quote/{id}',[
+    'uses' => 'ServiceProviderController@quote',
+    'as' => 'service.quote'
 ]);
 
 Route::get('/service/jobs', [
