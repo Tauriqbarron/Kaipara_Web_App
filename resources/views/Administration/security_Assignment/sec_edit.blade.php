@@ -115,6 +115,7 @@
                 <p class="form-control">Currently no staff in charge this job.</p>
             @endif
         </div>
+
         <a type="button" class="btn btn-danger" href="{{route('security_assignment.index')}}">Back</a>
             <button type="submit" class="btn btn-primary float-right">Submit</button>
     </form>

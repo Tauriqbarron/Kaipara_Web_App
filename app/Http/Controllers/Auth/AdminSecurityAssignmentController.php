@@ -16,16 +16,13 @@ use Illuminate\Support\Facades\Validator;
 class AdminSecurityAssignmentController extends Controller
 {
 
-    /*public function getIndex() {
-        $assignments = Staff_Assignment::all();
-        return view('Administration.security_Assignment.index', ['assignments' => $assignments]);
-    }*/
-
+    /*Get index function*/
     public function getIndex() {
         $assignments = Booking::all();
         return view('Administration.security_Assignment.index', ['assignments' => $assignments]);
     }
 
+    /*Search assignment function*/
     public function Search(Request $request) {
         $search = $request->input('search');
         $assignments = Booking::where('booking_id', 'like', '%'.$search.'%')
@@ -34,11 +31,15 @@ class AdminSecurityAssignmentController extends Controller
         return view('Administration.security_Assignment.index', ['assignments' => $assignments]);
     }
 
+
+    /*View an assignment*/
     public function view($id) {
         $assignment = Booking::find($id);
         return view('Administration.security_Assignment.sec_view', ['assignment' => $assignment]);
     }
 
+
+    /*Create an new assignment*/
     public function getCreate(){
         $types = Booking_Types::all();
         $staffs = Staff::all();
@@ -126,6 +127,7 @@ class AdminSecurityAssignmentController extends Controller
         }
     }
 
+    /*Edit an assignment*/
     public function getEdit($id) {
         $assignment = Booking::find($id);
         $types = Booking_Types::all();
@@ -170,6 +172,9 @@ class AdminSecurityAssignmentController extends Controller
         return redirect()->route('security_assignment.index');
     }
 
+
+
+    /*change the assigned staff for an assignment*/
     public function getChangeStaff($id) {
         $staff_assignment = Staff_Assignment::find($id);
         $staffs = Staff::all();
