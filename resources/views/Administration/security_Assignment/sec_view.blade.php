@@ -39,6 +39,20 @@
                 <p class="form-control">{{$assignment->postcode}}</p>
             </div>
         </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="date">Date</label>
+                <p name="date" class="form-control">{{$assignment->date}}</p>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="start_time">Start Time</label>
+                <p name="start_time" class="form-control">{{$assignment->start_time}}</p>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="finish_time">End Time</label>
+                <div name="finish_time" class="form-control">{{$assignment->finish_time}}</div>
+            </div>
+        </div>
         <div class="form-group">
             <label for="inputAddress2">Security Officer</label>
             <p class="form-control">

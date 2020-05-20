@@ -188,6 +188,26 @@ Route::post('/admin/sec-assignment/assign{id}', [
     'as' => 'security_assignment.assign'
 ]);
 
+Route::get('/admin/sec-assignment/edit/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@getEdit',
+    'as' => 'security_assignment.edit'
+]);
+
+Route::post('/admin/sec-assignment/edit/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@postEdit',
+    'as' => 'security_assignment.edit'
+]);
+
+Route::get('/admin/sec-assignment/edit/change-staff/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@getChangeStaff',
+    'as' => 'security_assignment.change_staff'
+]);
+
+Route::post('/admin/sec-assignment/edit/change-staff/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@postChangeStaff',
+    'as' => 'security_assignment.change_staff'
+]);
+
 
 
 /*Service Assignment Part*/

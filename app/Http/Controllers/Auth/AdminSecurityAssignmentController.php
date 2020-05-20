@@ -55,6 +55,7 @@ class AdminSecurityAssignmentController extends Controller
             'suburb' => 'required',
             'city' => 'required',
             'postcode' => 'required',
+            'numOfStaff' => 'required'
         ]);
 
         if($validator->fails()) {
@@ -80,8 +81,8 @@ class AdminSecurityAssignmentController extends Controller
             'status' => 'available',
             'staff_needed' => $request->input('numOfStaff'),
             'available_slots' => $request->input('numOfStaff'),
-            'start_time' => null,
-            'finish_time' => null,
+            'start_time' => '8.30',
+            'finish_time' => '16.30',
         ]);
 
         $booking->save();
@@ -123,6 +124,82 @@ class AdminSecurityAssignmentController extends Controller
         else{
             return redirect()->back()->withErrors('The staff has already been assign to this assignment.');
         }
+    }
+
+    public function getEdit($id) {
+        $assignment = Booking::find($id);
+        $types = Booking_Types::all();
+        return view('Administration.security_Assignment.sec_edit', ['assignment' => $assignment, 'types' => $types]);
+    }
+
+    public function postEdit(Request $request, $id) {
+        $validator = Validator::make($request->all(), [
+            'booking_type' => 'required',
+            'description' => 'required',
+            'date' => 'required|date|date_format:Y-m-d',
+            'start_time' => 'required',
+            'finish_time' => 'required',
+            'numOfStaff' => 'required',
+            'street' => 'required',
+            'suburb' => 'required',
+            'city' => 'required',
+            'postcode' => 'required',
+            'status' => 'required'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput($request->all());
+        }
+
+        $assignment = Booking::find($id);
+        $assignment->booking_type_id = $request->input('booking_type');
+        $assignment->description = $request->input('description');
+        $assignment->date = $request->input('date');
+        $assignment->start_time = $request->input('start_time');
+        $assignment->finish_time = $request->input('finish_time');
+        $assignment->staff_needed = $request->input('numOfStaff');
+        $assignment->available_slots = $request->input('numOfStaff');
+        $assignment->street = $request->input('street');
+        $assignment->suburb = $request->input('suburb');
+        $assignment->city = $request->input('city');
+        $assignment->postcode = $request->input('postcode');
+        $assignment->status = $request->input('status');
+        $assignment->save();
+        return redirect()->route('security_assignment.index');
+    }
+
+    public function getChangeStaff($id) {
+        $staff_assignment = Staff_Assignment::find($id);
+        $staffs = Staff::all();
+        return view('Administration.security_Assignment.change_staff', ['staff_assignment' => $staff_assignment, 'staffs' => $staffs]);
+    }
+
+    public function postChangeStaff(Request $request, $id) {
+        $validator = Validator::make($request->all(), [
+            'staff' => 'required'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput($request->all());
+        }
+
+        $staff_assignment = Staff_Assignment::find($id);
+        $record = Staff_Assignment::where('staff_id', '=', $request->input('staff'))
+            ->where('booking_id', '=', $staff_assignment->booking_id)
+            ->first();
+        if($record == null) {
+            $staff_assignment->staff_id = $request->input('staff');
+            $staff_assignment->save();
+            return redirect()->route('security_assignment.edit', ['id' => $staff_assignment->booking_id]);
+        }
+        else {
+            return redirect()->back()->withErrors('The staff has already been assign to this assignment.');
+        }
+
     }
 
 
