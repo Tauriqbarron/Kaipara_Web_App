@@ -208,6 +208,15 @@ Route::post('/admin/sec-assignment/edit/change-staff/{id}', [
     'as' => 'security_assignment.change_staff'
 ]);
 
+Route::get('/admin/sec-assignment/delete/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@getDelete',
+    'as' => 'security_assignment.delete'
+]);
+
+Route::post('/admin/sec-assignment/delete/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@postDelete',
+    'as' => 'security_assignment.delete'
+]);
 
 
 /*Service Assignment Part*/

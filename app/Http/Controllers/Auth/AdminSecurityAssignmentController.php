@@ -25,7 +25,7 @@ class AdminSecurityAssignmentController extends Controller
     /*Search assignment function*/
     public function Search(Request $request) {
         $search = $request->input('search');
-        $assignments = Booking::where('booking_id', 'like', '%'.$search.'%')
+        $assignments = Booking::where('id', 'like', '%'.$search.'%')
             ->paginate(5);
         $assignments->appends(['search' => $search]);
         return view('Administration.security_Assignment.index', ['assignments' => $assignments]);
@@ -203,6 +203,30 @@ class AdminSecurityAssignmentController extends Controller
         }
         else {
             return redirect()->back()->withErrors('The staff has already been assign to this assignment.');
+        }
+
+    }
+
+
+    /*Delete an security assignment record*/
+    public function getDelete($id) {
+        $assignment = Booking::find($id);
+        return view('Administration.security_Assignment.sec_delete', ['assignment' => $assignment]);
+    }
+
+    public function postDelete($id) {
+        $assignment = Booking::find($id);
+        $staff_assignments = Staff_Assignment::where('booking_id', '=', $id)->get();
+        if($staff_assignments == null) {
+            $assignment->delete();
+            return redirect()->route('security_assignment.index');
+        }
+        else{
+            foreach ($staff_assignments as $record){
+                $record->delete();
+            }
+            $assignment->delete();
+            return redirect()->route('security_assignment.index');
         }
 
     }
