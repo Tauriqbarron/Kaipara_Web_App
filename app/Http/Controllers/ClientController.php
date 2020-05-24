@@ -6,6 +6,7 @@ use App\Clients;
 use App\service_provider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ClientController extends Controller
 {
@@ -39,7 +40,10 @@ class ClientController extends Controller
             return back()->with('error','Wrong Login Details');
         }
     }
-
+    public function getSecurity(){
+        $user = Session::has('user') ? Session::get('user'): null;
+        return view('Client.security',['user'=>$user]);
+    }
 
 
 }

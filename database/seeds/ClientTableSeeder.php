@@ -69,3 +69,4 @@ class ClientTableSeeder extends Seeder
         $client->save();
     }
 }
+

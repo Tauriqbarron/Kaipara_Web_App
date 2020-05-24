@@ -9,6 +9,7 @@ use Illuminate\Auth\Authenticatable;
 class Clients extends Model implements Auth
 {
     use Authenticatable;
+    protected $guard = 'clients';
     protected $fillable = ['first_name', 'last_name', 'email', 'phone_number', 'password', 'street', 'suburb', 'city', 'postcode'];
 
     public function bookings() {

@@ -38,6 +38,11 @@ Route::get('/client/index', function () {
     return view('Client.index');
 }) ->name('client.home');
 
+Route::get('/client/security', [
+    'uses' => 'ClientController@getSecurity',
+    'as' => 'client.security'
+]);
+
 
 
 
