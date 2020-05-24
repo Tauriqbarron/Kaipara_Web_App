@@ -41,6 +41,9 @@
                 <p class="form-control">{{$client->postcode}}</p>
             </div>
         </div>
+        <div class="float-right text-danger">Are you sure you want to delete this client record?</div>
+        <br/>
+        <br/>
         <a class="btn btn-primary" href="{{route('client.index')}}">back</a>
         <button type="submit" class="btn btn-danger float-right">Delete</button>
     </form>

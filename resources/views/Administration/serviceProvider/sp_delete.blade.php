@@ -52,6 +52,9 @@
                 <p class="form-control">{{$sp->postcode}}</p>
             </div>
         </div>
+        <div class="float-right text-danger">Are you sure you want to delete this service provider record?</div>
+        <br/>
+        <br/>
         <a class="btn btn-primary" href="{{route('sp.index')}}">back</a>
         <button type="submit" class="btn btn-danger float-right">Delete</button>
     </form>

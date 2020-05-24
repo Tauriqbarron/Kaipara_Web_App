@@ -41,6 +41,9 @@
                 <p class="form-control">{{$staff->postcode}}</p>
             </div>
         </div>
+        <div class="float-right text-danger">Are you sure you want to delete this staff record?</div>
+        <br/>
+        <br/>
         <a class="btn btn-primary" href="{{route('staff.index')}}">back</a>
         <button type="submit" class="btn btn-danger float-right">Delete</button>
     </form>

@@ -3,7 +3,8 @@
 @section('mainContent')
     <h1 class="ml-5">Security assignment id: {{$assignment->id}}</h1>
     <hr/>
-    <form class="ml-2">
+    <form class="ml-2" method="post" action="{{route('security_assignment.delete', ['id' => $assignment->id])}}">
+        @csrf
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputEmail4">Client Name</label>
@@ -66,6 +67,10 @@
             <label for="inputAddress2">Status</label>
             <p class="form-control">{{$assignment->status}}</p>
         </div>
-        <a class="btn btn-danger" href="{{route('security_assignment.index')}}">back</a>
+        <div class="float-right text-danger">Are you sure you want to delete this assignment record?</div>
+        <br/>
+        <br/>
+        <a class="btn btn-success" href="{{route('security_assignment.index')}}">back</a>
+        <button type="submit" class="btn btn-danger float-right">Delete</button>
     </form>
 @endsection
