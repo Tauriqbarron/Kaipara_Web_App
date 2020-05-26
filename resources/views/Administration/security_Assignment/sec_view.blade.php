@@ -53,12 +53,16 @@
                 <div name="finish_time" class="form-control">{{$assignment->finish_time}}</div>
             </div>
         </div>
+        <div class="form-group w-25">
+            <label for="inputAddress2">The number of security officers</label>
+            <p class="form-control">{{$assignment->staff_needed}}</p>
+        </div>
         <div class="form-group">
             <label for="inputAddress2">Security Officer</label>
             <p class="form-control">
                 @foreach($assignment->staff_assignments as $record)
                     {{$record->staff->first_name}}
-                    {{$record->staff->last_name}}
+                    {{$record->staff->last_name}}&nbsp;&nbsp;&nbsp;
                 @endforeach
             </p>
         </div>

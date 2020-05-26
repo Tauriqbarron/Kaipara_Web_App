@@ -161,14 +161,36 @@ class AdminSecurityAssignmentController extends Controller
         $assignment->date = $request->input('date');
         $assignment->start_time = $request->input('start_time');
         $assignment->finish_time = $request->input('finish_time');
-        $assignment->staff_needed = $request->input('numOfStaff');
-        $assignment->available_slots = $request->input('numOfStaff');
         $assignment->street = $request->input('street');
         $assignment->suburb = $request->input('suburb');
         $assignment->city = $request->input('city');
         $assignment->postcode = $request->input('postcode');
         $assignment->status = $request->input('status');
-        $assignment->save();
+
+        /*Check if the number of security officer is changed or not.*/
+        if($request->input('numOfStaff') - $assignment->staff_needed > 0) {
+            /*if require more security officers*/
+            $assignment->staff_needed = $request->input('numOfStaff');
+            $assignment->available_slots = $assignment->available_slots + ($request->input('numOfStaff') - $assignment->staff_needed);
+            $assignment->status = 'available';
+            $assignment->save();
+        }elseif ($request->input('numOfStaff') - $assignment->staff_needed < 0) {
+            /*if required less security officers.*/
+            $assignment->staff_needed = $request->input('numOfStaff');
+            $assignment->available_slots = $request->input('numOfStaff');
+            $assignment->status = 'available';
+            $staff_assignments = Staff_Assignment::where('booking_id', '=', $id)->get();
+            if($staff_assignments != null) {
+                foreach ($staff_assignments as $record) {
+                    $record->delete();
+                }
+            }
+            $assignment->save();
+        }else {
+            /*if the number of security officer is not changed.*/
+            $assignment->save();
+        }
+
         return redirect()->route('security_assignment.index');
     }
 
@@ -202,7 +224,7 @@ class AdminSecurityAssignmentController extends Controller
             return redirect()->route('security_assignment.edit', ['id' => $staff_assignment->booking_id]);
         }
         else {
-            return redirect()->back()->withErrors('The staff has already been assign to this assignment.');
+            return redirect()->back()->withErrors('The staff has already been assigned to this assignment.');
         }
 
     }
