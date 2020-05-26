@@ -33,7 +33,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="date">Date</label>
-                <input type="text" name="date" class="form-control" placeholder="YY-mm-dd">
+                <input type="date" name="date" class="form-control" placeholder="YY-mm-dd">
             </div>
             <div class="form-group col-md-6">
                 <label for="start_time">Start Time</label>
