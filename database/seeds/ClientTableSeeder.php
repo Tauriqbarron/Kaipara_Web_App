@@ -65,8 +65,8 @@ class ClientTableSeeder extends Seeder
             'suburb' => 'Ohariu',
             'city' => 'Wellington',
             'postcode' => 6037,
-
         ]);
         $client->save();
     }
 }
+

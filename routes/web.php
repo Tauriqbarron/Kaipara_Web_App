@@ -32,12 +32,25 @@ Route::get('/provider', function () {
 });
 
 
+/* Client Routes  */
+
+Route::get('/client/index', function () {
+    return view('Client.index');
+}) ->name('client.home');
+
+Route::get('/client/security', [
+    'uses' => 'ClientController@getSecurity',
+    'as' => 'client.security'
+]);
+
+
 
 
 /*Function Routes */
 Route::post('register','RegistrationController@createServiceProvider');
 Route::post('/provider','ServiceProviderController@login')->name('service.login.submit');
 Route::post('registerAddrS','RegistrationController@storeServiceProvider' );
+Route::post('/client','ClientController@login')->name('client.login.submit');
 
 Route::get('/', function () {
     return view('index');
@@ -85,6 +98,11 @@ Route::get('/acceptJob/{id}',[
     'as' => 'service.acceptJob'
 ]);
 
+Route::get('/quote/{id}',[
+    'uses' => 'ServiceProviderController@quote',
+    'as' => 'service.quote'
+]);
+
 Route::get('/service/jobs', [
     'uses' => 'ServiceProviderController@getJobs', 'as' => 'service.jobs'
 ]) ->name('service.jobs');
@@ -94,6 +112,10 @@ Route::get('/service/applications', [
     'uses' => 'ApplicationsController@getApps', 'as' => 'service.applications'
 ]) ->name('service.Bookings');
 
+Route::get('service/logout', [
+    'uses' => 'ServiceProviderController@serviceLogout',
+    'as' => 'service.logout'
+]);
 
 
 /*Registration*/
@@ -183,6 +205,35 @@ Route::post('/admin/sec-assignment/assign{id}', [
     'as' => 'security_assignment.assign'
 ]);
 
+Route::get('/admin/sec-assignment/edit/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@getEdit',
+    'as' => 'security_assignment.edit'
+]);
+
+Route::post('/admin/sec-assignment/edit/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@postEdit',
+    'as' => 'security_assignment.edit'
+]);
+
+Route::get('/admin/sec-assignment/edit/change-staff/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@getChangeStaff',
+    'as' => 'security_assignment.change_staff'
+]);
+
+Route::post('/admin/sec-assignment/edit/change-staff/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@postChangeStaff',
+    'as' => 'security_assignment.change_staff'
+]);
+
+Route::get('/admin/sec-assignment/delete/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@getDelete',
+    'as' => 'security_assignment.delete'
+]);
+
+Route::post('/admin/sec-assignment/delete/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@postDelete',
+    'as' => 'security_assignment.delete'
+]);
 
 
 /*Service Assignment Part*/

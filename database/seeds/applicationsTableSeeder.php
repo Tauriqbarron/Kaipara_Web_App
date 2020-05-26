@@ -49,5 +49,17 @@ class applicationsTableSeeder extends Seeder
             'postcode' => 6037
         ]);
         $application->save();
+        $application = new \App\applications([
+            'status'=> '1',
+            'imagePath' => 'https://www.gardenmagiclandscaping.com/uploads/7/6/8/0/76808997/edited/westmount-pathway_7.jpg',
+            'title' => '5 Meter Paving',
+            'description' => 'small path to be paved from door to street',
+            'price' =>null,
+            'street' => '67  Caroni Way',
+            'suburb' => 'Ohariu',
+            'city' => 'Wellington',
+            'postcode' => 6037
+        ]);
+        $application->save();
     }
 }

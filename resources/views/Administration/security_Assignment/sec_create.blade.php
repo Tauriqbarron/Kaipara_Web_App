@@ -26,27 +26,24 @@
                 </select>
             </div>
         </div>
-            <div class="form-group">
-                <label for="descripyion">Description</label>
-                <textarea type="text" class="form-control" name="description" rows="3"></textarea>
-            </div>
-        <!--<div class="form-row">
-            <div class="form-group">
-                <label for="inputAddress">Security Officer</label>
-                <select class="form-control" name="security_officer">
-                    <option value=" "> </option>
-                   {{--@foreach($staffs as $staff)
-                        <option value="{{$staff->id}}">{{$staff->first_name}} {{$staff->last_name}}</option>
-                    @endforeach--}}
-                </select>
-            </div>
+        <div class="form-group">
+            <label for="descripyion">Description</label>
+            <textarea type="text" class="form-control" name="description" rows="3"></textarea>
         </div>
-        -->
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="date">Date</label>
-                <input type="text" name="date" class="form-control" placeholder="dd-mm-YY">
+                <input type="date" name="date" class="form-control" placeholder="YY-mm-dd">
             </div>
+            <div class="form-group col-md-6">
+                <label for="start_time">Start Time</label>
+                <input type="text" name="start_time" class="form-control" placeholder="default: 8.30">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="finish_time">End Time</label>
+                <input type="text" name="finish_time" class="form-control" placeholder="default: 16.30">
+            </div>
+
             <div class="form-group col-md-6">
                 <label for="numOfStaff">Number of Officer</label>
                 <select class="form-control" name="numOfStaff">

@@ -12,14 +12,13 @@
     <a class="nav-link active btn-lg mx-5 pt-2" href="#">Profile</a>
 @endsection
 @section('mainContent')
-
     <div class="bookCon">
         <div class="jobList">
             <div class="jobListCon">
                 @foreach($jobs as $job)
-                    <div class="card w-auto">
+                    <div class="card w-auto cards">
                         <div class="card-body">
-                            <img src="{{$job->imagePath}}" class="card-cmdimg-top" alt="...">
+                            <img src="{{$job->imagePath}}" class="card-cmdimg-top jobimg" alt="...">
                             <h5 class="card-title">{{$job->title}}</h5>
                             <h5 class="card-title">{{$job->price}}</h5>
                             <p class="card-text">{{$job->description}}</p>

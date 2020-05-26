@@ -16,29 +16,30 @@ use Illuminate\Support\Facades\Validator;
 class AdminSecurityAssignmentController extends Controller
 {
 
-    /*public function getIndex() {
-        $assignments = Staff_Assignment::all();
-        return view('Administration.security_Assignment.index', ['assignments' => $assignments]);
-    }*/
-
+    /*Get index function*/
     public function getIndex() {
         $assignments = Booking::all();
         return view('Administration.security_Assignment.index', ['assignments' => $assignments]);
     }
 
+    /*Search assignment function*/
     public function Search(Request $request) {
         $search = $request->input('search');
-        $assignments = Booking::where('booking_id', 'like', '%'.$search.'%')
+        $assignments = Booking::where('id', 'like', '%'.$search.'%')
             ->paginate(5);
         $assignments->appends(['search' => $search]);
         return view('Administration.security_Assignment.index', ['assignments' => $assignments]);
     }
 
+
+    /*View an assignment*/
     public function view($id) {
         $assignment = Booking::find($id);
         return view('Administration.security_Assignment.sec_view', ['assignment' => $assignment]);
     }
 
+
+    /*Create an new assignment*/
     public function getCreate(){
         $types = Booking_Types::all();
         $staffs = Staff::all();
@@ -55,6 +56,7 @@ class AdminSecurityAssignmentController extends Controller
             'suburb' => 'required',
             'city' => 'required',
             'postcode' => 'required',
+            'numOfStaff' => 'required'
         ]);
 
         if($validator->fails()) {
@@ -80,8 +82,8 @@ class AdminSecurityAssignmentController extends Controller
             'status' => 'available',
             'staff_needed' => $request->input('numOfStaff'),
             'available_slots' => $request->input('numOfStaff'),
-            'start_time' => null,
-            'finish_time' => null,
+            'start_time' => '8.30',
+            'finish_time' => '16.30',
         ]);
 
         $booking->save();
@@ -123,6 +125,132 @@ class AdminSecurityAssignmentController extends Controller
         else{
             return redirect()->back()->withErrors('The staff has already been assign to this assignment.');
         }
+    }
+
+    /*Edit an assignment*/
+    public function getEdit($id) {
+        $assignment = Booking::find($id);
+        $types = Booking_Types::all();
+        return view('Administration.security_Assignment.sec_edit', ['assignment' => $assignment, 'types' => $types]);
+    }
+
+    public function postEdit(Request $request, $id) {
+        $validator = Validator::make($request->all(), [
+            'booking_type' => 'required',
+            'description' => 'required',
+            'date' => 'required|date|date_format:Y-m-d',
+            'start_time' => 'required',
+            'finish_time' => 'required',
+            'numOfStaff' => 'required',
+            'street' => 'required',
+            'suburb' => 'required',
+            'city' => 'required',
+            'postcode' => 'required',
+            'status' => 'required'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput($request->all());
+        }
+
+        $assignment = Booking::find($id);
+        $assignment->booking_type_id = $request->input('booking_type');
+        $assignment->description = $request->input('description');
+        $assignment->date = $request->input('date');
+        $assignment->start_time = $request->input('start_time');
+        $assignment->finish_time = $request->input('finish_time');
+        $assignment->street = $request->input('street');
+        $assignment->suburb = $request->input('suburb');
+        $assignment->city = $request->input('city');
+        $assignment->postcode = $request->input('postcode');
+        $assignment->status = $request->input('status');
+
+        /*Check if the number of security officer is changed or not.*/
+        if($request->input('numOfStaff') - $assignment->staff_needed > 0) {
+            /*if require more security officers*/
+            $assignment->staff_needed = $request->input('numOfStaff');
+            $assignment->available_slots = $assignment->available_slots + ($request->input('numOfStaff') - $assignment->staff_needed);
+            $assignment->status = 'available';
+            $assignment->save();
+        }elseif ($request->input('numOfStaff') - $assignment->staff_needed < 0) {
+            /*if required less security officers.*/
+            $assignment->staff_needed = $request->input('numOfStaff');
+            $assignment->available_slots = $request->input('numOfStaff');
+            $assignment->status = 'available';
+            $staff_assignments = Staff_Assignment::where('booking_id', '=', $id)->get();
+            if($staff_assignments != null) {
+                foreach ($staff_assignments as $record) {
+                    $record->delete();
+                }
+            }
+            $assignment->save();
+        }else {
+            /*if the number of security officer is not changed.*/
+            $assignment->save();
+        }
+
+        return redirect()->route('security_assignment.index');
+    }
+
+
+
+    /*change the assigned staff for an assignment*/
+    public function getChangeStaff($id) {
+        $staff_assignment = Staff_Assignment::find($id);
+        $staffs = Staff::all();
+        return view('Administration.security_Assignment.change_staff', ['staff_assignment' => $staff_assignment, 'staffs' => $staffs]);
+    }
+
+    public function postChangeStaff(Request $request, $id) {
+        $validator = Validator::make($request->all(), [
+            'staff' => 'required'
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput($request->all());
+        }
+
+        $staff_assignment = Staff_Assignment::find($id);
+        $record = Staff_Assignment::where('staff_id', '=', $request->input('staff'))
+            ->where('booking_id', '=', $staff_assignment->booking_id)
+            ->first();
+        if($record == null) {
+            $staff_assignment->staff_id = $request->input('staff');
+            $staff_assignment->save();
+            return redirect()->route('security_assignment.edit', ['id' => $staff_assignment->booking_id]);
+        }
+        else {
+            return redirect()->back()->withErrors('The staff has already been assigned to this assignment.');
+        }
+
+    }
+
+
+    /*Delete an security assignment record*/
+    public function getDelete($id) {
+        $assignment = Booking::find($id);
+        return view('Administration.security_Assignment.sec_delete', ['assignment' => $assignment]);
+    }
+
+    public function postDelete($id) {
+        $assignment = Booking::find($id);
+        $staff_assignments = Staff_Assignment::where('booking_id', '=', $id)->get();
+        if($staff_assignments == null) {
+            $assignment->delete();
+            return redirect()->route('security_assignment.index');
+        }
+        else{
+            foreach ($staff_assignments as $record){
+                $record->delete();
+            }
+            $assignment->delete();
+            return redirect()->route('security_assignment.index');
+        }
+
     }
 
 

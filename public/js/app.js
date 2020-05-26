@@ -173,6 +173,11 @@ function pageToggle(button, target){
 
 }
 
+function updateTextInput(val) {
+    document.getElementById('textInput').value=val;
+}
+
+
 function clearSession(){
     window.sessionStorage.clear();
 }
