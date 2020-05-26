@@ -1,7 +1,7 @@
 <div class="shadow">
     <div class="container-fluid">
         <nav class="navbar navbar-light navbar-expand-lg justify-content-left"  style="padding: 5px">
-            <a href="/" class="navbar-brand d-flex w-50 mr-auto">
+            <a href="/" class="navbar-brand d-flex w-50 mr-auto" onclick="clearSession()" >
                 <img id="kaiparaLogo" src="{{url('images/KaiparaLogo.png')}}" class="mr-auto float-left">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">

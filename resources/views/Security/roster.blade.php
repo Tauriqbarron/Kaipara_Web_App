@@ -13,7 +13,6 @@
                 <div class="main-box clearfix">
                     <div class="table">
                         <table class="table border" style="table-layout: fixed; width: 100%">
-                            <!--TODO: Add ability to filter by week-->
                             <thead>
                             <tr class="w-100" style="width: 100%">
                                 <th >

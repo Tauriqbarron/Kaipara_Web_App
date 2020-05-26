@@ -4,7 +4,6 @@ var addresses = [];
 var n = new Date();
 var _scAddresses = [];
 
-//TODO: change map location when record is clicked on table.
 
 function loaded(){
     if(window.sessionStorage.getItem('button')){
@@ -172,4 +171,8 @@ function pageToggle(button, target){
     window.sessionStorage.setItem('button', button);
     window.sessionStorage.setItem('target', target);
 
+}
+
+function clearSession(){
+    window.sessionStorage.clear();
 }
