@@ -23,8 +23,30 @@
             function updateTextInput(val) {
                 document.getElementById('textInput').value=val;
             }
+            function overviewTextInput(val) {
+                document.getElementById('number1').value=val;
+            }
             function overviewType(val){
                 document.getElementById('type').value=val;
+            }
+
+            function overviewStreet(val){
+                document.getElementById('street').value =val;
+            }
+            function overviewSuburb(val){
+                document.getElementById('suburb').value =val;
+            }
+            function overviewCity(val){
+                document.getElementById('city1').value =val;
+            }
+            function overviewPostcode(val){
+                document.getElementById('postcode1').value =val;
+            }
+            function overviewDate(val){
+                document.getElementById('date1').value =val;
+            }
+            function overviewStart(val){
+                document.getElementById('startTime').value =val;
             }
         </script>
     </body>

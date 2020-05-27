@@ -43,6 +43,11 @@ Route::get('/client/security', [
     'as' => 'client.security'
 ]);
 
+Route::get('/client/property', [
+    'uses' => 'ClientController@getProperty',
+    'as' => 'client.property'
+]);
+
 
 
 
