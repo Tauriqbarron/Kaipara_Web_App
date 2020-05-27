@@ -64,7 +64,7 @@
                                     </td>
 
                                             <td>
-                                                <h6>{{$booking->street}}</h6>
+                                                <h6><!--{{$booking->street}}--> today = {{\Carbon\Carbon::parse(today('NZ'))->format('d/m/Y') }}, booking date = {{\Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}, {{$booking->finish_time}} > {{(now('NZ')->hour)+(now('NZ')->minute*.01)}}</h6>
                                             </td>
                                             <td class="text-center">
                                                 <h6 class="label label-default">{{$booking->suburb}}</h6>
@@ -80,7 +80,6 @@
                                                         <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}n"></i>
                                                     </span>
                                         </a>
-                                        </a>
 
                                     </td>
                                 </tr>
@@ -92,6 +91,21 @@
                                     </td>
                                     <td style="padding: 0px" class="bg-white">
                                         <div class="collapse btn-group-lg"  id="n{{$booking->id}}" style="padding: 10px">
+                                            @if(\Carbon\Carbon::parse($booking->date)->format('d/m/Y') == \Carbon\Carbon::parse(today('NZ'))->format('d/m/Y') && $booking->finish_time > (now()->hour-12)+(now()->minute*.01))
+                                                @if(Session::has('inProgress'))
+
+                                                    <form role="form" method="POST" action="{{route('staff.stopJob')}}">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-danger w-100" name="bookingId" value="Stop">Stop</button>
+                                                    </form>
+                                                @else
+
+                                                            <form role="form" method="POST" action="{{route('staff.startJob')}}">
+                                                                @csrf
+                                                                <button type="submit" name="bookingId" value="{{$booking->id}}" class="btn btn-primary w-100">Start</button>
+                                                            </form>
+                                                @endif
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>
