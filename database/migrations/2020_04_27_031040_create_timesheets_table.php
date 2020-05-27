@@ -16,8 +16,9 @@ class CreateTimesheetsTable extends Migration
         Schema::create('timesheets', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('start_time');
-            $table->string('stop_time');
+            $table->date('date');
+            $table->float('start_time');
+            $table->float('stop_time')->nullable();
             $table->foreignId('staff_assignment_id')->references('id')->on('staff__assignments');
         });
     }

@@ -86,6 +86,11 @@ Route::get('/security/week{i}', [
 ]);
 
 
+Route::post('/security/start','TimesheetController@start')->name('staff.startJob');
+Route::post('/security/stop','TimesheetController@stop')->name('staff.stopJob');
+
+
+
 // SERVICE
 /*Service Provider Profile*/
 

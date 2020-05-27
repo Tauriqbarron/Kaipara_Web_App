@@ -18,12 +18,13 @@ class StaffController extends Controller
 
     public function getHome() {
         $user = Session::has('user') ? Session::get('user'): null;
-        if($user != null) {
+        if(Session::get('date1')) {
             $currentStaff = Staff::query()->find($user->id);
             $bookings = app('App\Http\Controllers\BookingsController')->getStaffBookings($currentStaff);
             $timetable = app('App\Http\Controllers\BookingsController')->getTimetable($currentStaff);
             $availableBookings = Booking::query()->select('*')->whereNotIn('id',
                 Staff_Assignment::query()->select('booking_id')->where('staff_id', '=', $currentStaff->id)->get())
+                ->whereDate('date', '>=', today())
                 ->orderBy('date','asc')
                 ->orderBy('start_time', 'asc')
                 ->get();
@@ -36,6 +37,9 @@ class StaffController extends Controller
     }
 
     public function dateChange($i){
+        if(!Session::has('date1')){
+            return redirect()->route('staff.login')->with('error', 'Session has timed out');
+        }
         Session::put('page', 'profile');
         $currentDate = Session::get('date1');
         $currentDate->addDays($i);
@@ -47,6 +51,9 @@ class StaffController extends Controller
     }
 
     public function setWeek($i){
+        if(!Session::has('weekStart')){
+            return redirect()->route('staff.login')->with('error', 'Session has timed out');
+        }
         $j = $i*7;
         $weekStart = Session::get('weekStart');
         $weekEnd = Session::get('weekEnd');
@@ -61,7 +68,7 @@ class StaffController extends Controller
     }
 
     public function acceptBooking($booking_id) {
-        //TODO: Allow multiple staff to book the same job but remove from available assignments list for current staff member
+        if(!Session::has('user')) return redirect()->route('staff.login')->with('error', 'Session has timed out');
         $user = Session::has('user') ? Session::get('user') : null;
         $staff_id = $user->id;
         $staff = Staff::query()->find($staff_id);

@@ -20,7 +20,7 @@
 
 
     </head>
-    <body id="bod" onload="loaded()">
+    <body id="bod">
     <?php
     $addresses = array();
     foreach($bookings as $booking){

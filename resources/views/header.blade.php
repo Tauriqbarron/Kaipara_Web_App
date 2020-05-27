@@ -15,9 +15,9 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse w-100 align-items-end" id="collapsingNavbar3">
-                <ul class="navbar-nav w-100 h-100 justify-content-center text-nowrap align-items-end">
-                    <li class="nav-item active">
+            <div class="navbar-collapse collapse w-100 align-items-end" id="collapsingNavbar3" >
+                <ul class="navbar-nav w-100 h-100 justify-content-center text-nowrap align-items-end" >
+                    <li class="nav-item active" >
                         <a class="nav-link" href="#">Security Services</a>
                     </li>
                     <li class="nav-item">
@@ -29,7 +29,7 @@
                 </ul>
                 @if(Session::get('type'))
                     <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end  dropdown">
-                        <li class="nav-item border-0 ">
+                        <li class="nav-item border-0 "  >
                             <a class="btn-light border-0 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{Session::get('user')->first_name}} {{Session::get('user')->last_name}}
                             </a>
@@ -54,7 +54,7 @@
                             </div>
                         </li>
                         <li class="nav-item" id="headerProfileImage">
-                            <img class="float-right rounded-circle shadow dropdown-toggle" style="display: block; width: 54px; height: 54px" src="{{url('images/Profile_Placeholder_large.jpg')}}" alt="profileImage">
+                            <img class="float-right rounded-circle shadow dropdown-toggle text-nowrap" style="display: block; width: 54px; height: 54px" src="{{url('images/Profile_Placeholder_large.jpg')}}" alt="profileImage">
                         </li>
                     </ul>
 

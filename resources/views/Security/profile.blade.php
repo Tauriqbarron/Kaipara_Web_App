@@ -3,11 +3,11 @@
         <div id="cardHeader" class="card-header bg-light border-0 rounded">
             <img class="w-100 align-top" src="{{url('images/Card_Header.png')}}" alt="Card top">
         </div>
-        <img class="card-img-top rounded-circle border-light shadow border-3 w-75 mr-auto ml-auto mb-auto" src="{{url($staff->imgPath)}}" alt="Card image cap">
+        <img id="card-img-top" class="card-img-top rounded-circle border-light shadow border-3 mr-auto ml-auto mb-auto" src="{{url($staff->imgPath)}}" alt="Card image cap">
         <div class="mt-4 card-body text-light">
             <h5 class="card-title text-center">{{$staff->first_name}} {{$staff->last_name}}</h5>
-            <h5 class="card-title text-center">{{$staff->phone_number}}</h5>
-            <h5 class="card-title text-center">{{$staff->id}}</h5>
+            <h5 class="card-title text-center">Ph: {{$staff->phone_number}}</h5>
+            <h5 class="card-title text-center">ID#: {{$staff->id}}</h5>
 
         </div>
 
@@ -22,6 +22,12 @@
 <div style="width:74%; float: left; padding-left: 20px">
     @if ($message = Session::get('error'))
         <div class="alert alert-danger alert-block">
+            <button type="button" class="close" data-dismiss="alert">X</button>
+            <strong>{{$message}}</strong>
+        </div>
+    @endif
+    @if ($message = Session::get('message'))
+        <div class="alert alert-success alert-block">
             <button type="button" class="close" data-dismiss="alert">X</button>
             <strong>{{$message}}</strong>
         </div>
@@ -58,7 +64,7 @@
                                     </td>
 
                                             <td>
-                                                <h6>{{$booking->street}}</h6>
+                                                <h6><!--{{$booking->street}}--> today = {{\Carbon\Carbon::parse(today('NZ'))->format('d/m/Y') }}, booking date = {{\Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}, {{$booking->finish_time}} > {{(now('NZ')->hour)+(now('NZ')->minute*.01)}}</h6>
                                             </td>
                                             <td class="text-center">
                                                 <h6 class="label label-default">{{$booking->suburb}}</h6>
@@ -74,7 +80,6 @@
                                                         <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}n"></i>
                                                     </span>
                                         </a>
-                                        </a>
 
                                     </td>
                                 </tr>
@@ -86,6 +91,21 @@
                                     </td>
                                     <td style="padding: 0px" class="bg-white">
                                         <div class="collapse btn-group-lg"  id="n{{$booking->id}}" style="padding: 10px">
+                                            @if(\Carbon\Carbon::parse($booking->date)->format('d/m/Y') == \Carbon\Carbon::parse(today('NZ'))->format('d/m/Y') && $booking->finish_time > (now()->hour-12)+(now()->minute*.01))
+                                                @if(Session::has('inProgress'))
+
+                                                    <form role="form" method="POST" action="{{route('staff.stopJob')}}">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-danger w-100" name="bookingId" value="Stop">Stop</button>
+                                                    </form>
+                                                @else
+
+                                                            <form role="form" method="POST" action="{{route('staff.startJob')}}">
+                                                                @csrf
+                                                                <button type="submit" name="bookingId" value="{{$booking->id}}" class="btn btn-primary w-100">Start</button>
+                                                            </form>
+                                                @endif
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>
