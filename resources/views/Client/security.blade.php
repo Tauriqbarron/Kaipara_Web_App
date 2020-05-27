@@ -1,7 +1,7 @@
 @extends('Client.layout')
 @section('nav')
     <a class="nav-link active btn-lg mx-5 pt-2 bg-secondary text-white" href="#">Security</a>
-    <a class="nav-link active btn-lg mx-5 pt-2" href="#">Property Management</a>
+    <a class="nav-link active btn-lg mx-5 pt-2" href="{{route('client.property')}}">Property Management</a>
     <a class="nav-link active btn-lg mx-5 pt-2" href="#">Service Jobs</a>
     <a class="nav-link active btn-lg mx-5 pt-2" href="#">Security Bookings</a>
     <a class="nav-link active btn-lg mx-5 pt-2" href="#">Quotes</a>
@@ -9,8 +9,8 @@
 @section('mainContent')
     <form class="mx-auto w-75 my-5">
         <div class="form-row">
-            <div class="col">
-                <div class="form-row w-25">
+            <div class="col mr-5">
+                <div class="form-row">
                     <div class="col">
                         <label for="officerType">Officer Type</label>
                         <select class="form-control" id="officeType" onchange="overviewType(this.value);">
@@ -23,12 +23,21 @@
                     </div>
                     <div class="col">
                         <label for="number">Number of Officers Required</label>
-                        <input type="range" class="custom-range" min="0" max="5" id="number" onchange="updateTextInput(this.value);">
-                        <input type="text" id="textInput" value="">
+                        <input type="range" class="custom-range" min="0" max="5" id="number" onchange="updateTextInput(this.value);overviewTextInput(this.value);">
+                        <input type="text" id="textInput" value="3">
                     </div>
+                </div>
+                <div class="form-row my-5">
+                    <h4>Description</h4>
+                </div>
+                <div class="form-row my-5">
+                    <textarea name="message" rows="6" cols="30" class="">The cat was playing in the garden.</textarea>
                 </div>
                 <div class="form-group my-3">
                     <div class="form-check">
+{{--
+                        TODO create function to display address of user in summary tab is checked
+--}}
                         <input class="form-check-input" type="checkbox" id="gridCheck">
                         <label class="form-check-label" for="gridCheck">
                             Use Cureent Address
@@ -37,25 +46,25 @@
                     <div class="form-group row w-50 my-4">
                         <label for="street" class="col-sm-2 col-form-label">Street</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="street" name="street">
+                            <input type="text" class="form-control" id="streetInput" name="street" onchange="overviewStreet(this.value);">
                         </div>
                     </div>
                     <div class="form-group row w-50">
                         <label for="suburb" class="col-sm-2 col-form-label">Suburb</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control w-75" id="suburb" name="suburb">
+                            <input type="text" class="form-control w-75" id="suburbInput" name="suburb" onchange="overviewSuburb(this.value);">
                         </div>
                     </div>
                     <div class="form-group row w-50">
                         <label for="city" class="col-sm-2 col-form-label">City</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control w-50" id="city" name="city">
+                            <input type="text" class="form-control w-50" id="city" name="city" onchange="overviewCity(this.value);">
                         </div>
                     </div>
                     <div class="form-group row w-75">
                         <label for="postcode" class="col-sm-2 col-form-label">Postcode</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control w-25" id="postcode" name="postcode">
+                            <input type="text" class="form-control w-25" id="postcode" name="postcode" onchange="overviewPostcode(this.value);">
                         </div>
                     </div>
                     <button class="btn btn-primary my-1" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -66,12 +75,12 @@
                             <div class="form-row">
                                 <div class="col">
                                     <label for="birthday">Select Date</label>
-                                    <input type="date" id="birthday" name="birthday">
+                                    <input type="date" id="birthday" name="birthday" onchange="overviewDate(this.value)">
                                 </div>
                                 <div class="col">
                                     <div class="form-row">
                                         <label for="appt">Select Start time:</label>
-                                        <input type="time" id="appt" name="appt">
+                                        <input type="time" id="appt" name="appt" onchange="overviewStart(this.value)">
                                     </div>
                                     <div class="form-row my-2">
                                         <label for="appt">Select End time:</label>
@@ -91,10 +100,11 @@
                                     <div class="card-header" id="headingOne">
                                         <h5 class="mb-0">
                                             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                Collapsible Group Item #1
+                                                Select Days
                                             </button>
                                         </h5>
                                     </div>
+                                   {{-- TODO create overview for custom schedule build & add start/end time to day picker --}}
                                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                                         <div class="card-body">
                                             <div class="form-check">
@@ -146,19 +156,19 @@
                                     <div class="card-header" id="headingTwo">
                                         <h5 class="mb-0">
                                             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                Select Start Date
+                                                Select Start Date And Time
                                             </button>
                                         </h5>
                                     </div>
                                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                                         <div class="card-body">
-                                            <div class="form-row">
+                                            <div class="form-row my-2">
                                                 <div class="col">
                                                     <label for="birthday">Select Date</label>
                                                     <input type="date" id="birthday" name="birthday">
                                                 </div>
                                                 <div class="col">
-                                                    <div class="form-row">
+                                                    <div class="form-row my-2">
                                                         <label for="appt">Select Start time:</label>
                                                         <input type="time" id="appt" name="appt">
                                                     </div>
@@ -211,14 +221,40 @@
                     </div>
                     <div class="card-body">
                         <div class="form-row">
-                            <label for="type" class="col col-form-label">Assignment Type</label>
-                            <input type="text" class="border-0" id="type" name="type" value="">
+                            <label for="type" class="col col-form-label text-primary">Assignment Type</label>
+                            <input type="text" class="border-0" id="type" name="type" value="Bouncer" readonly>
                         </div>
                         <div class="form-row">
-                            <label for="textinput" class="col col-form-label">Number of Guard</label>
-                            <input type="text" class="border-0" id="textinput" name="textinput" value="">
+                            <label for="number1" class="col col-form-label text-primary">Number of Guard</label>
+                            <input type="text" class="border-0" id="number1" name="number1" value="" readonly>
                         </div>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <div class="form-row">
+                            <label for="street" class="col col-form-label text-primary">Address</label>
+                            <input type="text" class="border-0" id="street" name="street" value="" readonly>
+                            <input type="text" class="border-0" id="suburb" name="suburb" value="" readonly>
+                            <input type="text" class="border-0" id="city1" name="city1" value="" readonly>
+                            <input type="text" class="border-0" id="postcode1" name="postcode1" value="" readonly>
+                        </div>
+                        <div class="form-row">
+                            <label for="date1" class="col col-form-label text-primary">Date</label>
+                            <input type="text" class="border-0" id="date1" name="date1" value="" readonly>
+                        </div>
+                        <div class="form-row">
+                            <label for="startTime" class="col col-form-label text-primary">Start time</label>
+                            <input type="text" class="border-0" id="startTime" name="date" value="" readonly>
+                        </div>
+                        <div class="form-row">
+                            <label for="endTime" class="col col-form-label text-primary">End Time </label>
+                            <input type="text" class="border-0" id="endTime" name="date" value="" readonly>
+                        </div>
+                        <div class="form-row">
+                            <label for="price" class="col col-form-label text-primary">Price: </label>
+                            <input type="text" class="border-0" id="price" name="price" value="" readonly>
+                        </div>
+{{--
+                        TODO Change btn to submit
+--}}
+                        <a href="#" class="btn btn-primary">Confirm Booking</a>
                     </div>
                 </div>
             </div>

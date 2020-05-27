@@ -45,5 +45,10 @@ class ClientController extends Controller
         return view('Client.security',['user'=>$user]);
     }
 
+    public function getProperty(){
+        $user = Session::has('user') ? Session::get('user'): null;
+        return view('Client.property',['user'=>$user]);
+    }
+
 
 }
