@@ -85,7 +85,7 @@ class ServiceProviderController extends Controller
         $jobs = applications::query()
             ->join('service__provider__jobs','applications.id','=','service__provider__jobs.job_id')
             ->select('applications.*')->where('service__provider__jobs.service_provider_id',$userID)->get();
-        return view('Service.Jobs',['jobs'=>$jobs],['user'=>$user]);
+        return view('Service.jobs',['jobs'=>$jobs],['user'=>$user]);
     }
 
     public function getJobs(){
