@@ -57,8 +57,8 @@ Route::post('/provider','ServiceProviderController@login')->name('service.login.
 Route::post('registerAddrS','RegistrationController@storeServiceProvider' );
 Route::post('/client','ClientController@login')->name('client.login.submit');
 
-Route::get('/aaa', function () {
-    return view('index');
+Route::get('/', function () {
+    return view('Index');
 });
 
 Route::get('/test', function () {
