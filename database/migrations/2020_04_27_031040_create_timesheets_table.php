@@ -18,7 +18,7 @@ class CreateTimesheetsTable extends Migration
             $table->timestamps();
             $table->date('date');
             $table->float('start_time');
-            $table->float('stop_time');
+            $table->float('stop_time')->nullable();
             $table->foreignId('staff_assignment_id')->references('id')->on('staff__assignments');
         });
     }
