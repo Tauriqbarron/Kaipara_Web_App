@@ -91,7 +91,7 @@
                                     </td>
                                     <td style="padding: 0px" class="bg-white">
                                         <div class="collapse btn-group-lg"  id="n{{$booking->id}}" style="padding: 10px">
-                                            @if(\Carbon\Carbon::parse($booking->date)->format('d/m/Y') == \Carbon\Carbon::parse(today('NZ'))->format('d/m/Y') && $booking->finish_time > (now()->hour-12)+(now()->minute*.01))
+                                            @if(\Carbon\Carbon::parse($booking->date)->format('d/m/Y') == \Carbon\Carbon::parse(today('NZ'))->format('d/m/Y') && $booking->finish_time > (now("NZ")->hour)+(now("NZ")->minute*.01))
                                                 @if(Session::has('inProgress'))
 
                                                     <form role="form" method="POST" action="{{route('staff.stopJob')}}">
