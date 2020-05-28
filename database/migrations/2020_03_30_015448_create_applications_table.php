@@ -15,6 +15,7 @@ class CreateApplicationsTable extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('client_id')->references('id')->on('clients');
             $table->timestamps();
             $table->integer('status');
             $table->string('imagePath');
