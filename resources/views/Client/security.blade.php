@@ -107,47 +107,59 @@
                                    {{-- TODO create overview for custom schedule build & add start/end time to day picker --}}
                                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                                         <div class="card-body">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                <label class="form-check-label" for="defaultCheck1">
-                                                    Monday
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                <label class="form-check-label" for="defaultCheck1">
-                                                    Tuesday
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                <label class="form-check-label" for="defaultCheck1">
-                                                    Wednesday
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                <label class="form-check-label" for="defaultCheck1">
-                                                    Thursday
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                <label class="form-check-label" for="defaultCheck1">
-                                                    Friday
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                <label class="form-check-label" for="defaultCheck1">
-                                                    Saturday
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                <label class="form-check-label" for="defaultCheck1">
-                                                    Sunday
-                                                </label>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1">
+                                                            Monday
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1">
+                                                            Tuesday
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1">
+                                                            Wednesday
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1">
+                                                            Thursday
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1">
+                                                            Friday
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1">
+                                                            Saturday
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1">
+                                                            Sunday
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1">
+                                                            Ongoing
+                                                        </label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -156,7 +168,7 @@
                                     <div class="card-header" id="headingTwo">
                                         <h5 class="mb-0">
                                             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                Select Start Date And Time
+                                                Or Select Start and End date
                                             </button>
                                         </h5>
                                     </div>
@@ -168,14 +180,8 @@
                                                     <input type="date" id="birthday" name="birthday">
                                                 </div>
                                                 <div class="col">
-                                                    <div class="form-row my-2">
-                                                        <label for="appt">Select Start time:</label>
-                                                        <input type="time" id="appt" name="appt">
-                                                    </div>
-                                                    <div class="form-row my-2">
-                                                        <label for="appt">Select End time:</label>
-                                                        <input type="time" id="appt" name="appt">
-                                                    </div>
+                                                    <label for="birthday">Select Date</label>
+                                                    <input type="date" id="birthday" name="birthday">
                                                 </div>
                                             </div>
                                         </div>
@@ -186,24 +192,20 @@
                                 <div class="card-header" id="headingThree">
                                     <h5 class="mb-0">
                                         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                            Select End date or Ongoing
+                                            Finally Set Time
                                         </button>
                                     </h5>
                                 </div>
                                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                                     <div class="card-body">
                                         <div class="form-row">
-                                            <div class="col">
-                                                <label for="birthday">Select Date</label>
-                                                <input type="date" id="birthday" name="birthday">
+                                            <div class="form-row">
+                                                <label for="appt">Select Start time:</label>
+                                                <input type="time" id="appt" name="appt" onchange="overviewStart(this.value)">
                                             </div>
-                                            <div class="col">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1">
-                                                        Ongoing
-                                                    </label>
-                                                </div>
+                                            <div class="form-row my-2">
+                                                <label for="appt">Select End time:</label>
+                                                <input type="time" id="appt" name="appt">
                                             </div>
                                         </div>
                                     </div>
@@ -228,11 +230,19 @@
                             <label for="number1" class="col col-form-label text-primary">Number of Guard</label>
                             <input type="text" class="border-0" id="number1" name="number1" value="" readonly>
                         </div>
-                        <div class="form-row">
+                        <div class="form-row ">
                             <label for="street" class="col col-form-label text-primary">Address</label>
+                        </div>
+                        <div class="form-row ml-5 my-1">
                             <input type="text" class="border-0" id="street" name="street" value="" readonly>
+                        </div>
+                        <div class="form-row ml-5 my-1">
                             <input type="text" class="border-0" id="suburb" name="suburb" value="" readonly>
+                        </div>
+                        <div class="form-row ml-5 my-1">
                             <input type="text" class="border-0" id="city1" name="city1" value="" readonly>
+                        </div>
+                        <div class="form-row ml-5 my-1">
                             <input type="text" class="border-0" id="postcode1" name="postcode1" value="" readonly>
                         </div>
                         <div class="form-row">
