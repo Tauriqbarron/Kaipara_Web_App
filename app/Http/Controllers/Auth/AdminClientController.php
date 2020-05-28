@@ -11,6 +11,15 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminClientController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
+    public function adminIndex() {
+        return view('Administration.index');
+    }
+
     public function getIndex() {
         $clients = Clients::all();
         return view('Administration.Client.index', ['clients' => $clients]);
