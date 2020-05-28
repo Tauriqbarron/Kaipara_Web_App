@@ -153,7 +153,7 @@ class AdminStaffController extends Controller
         if(Auth::guard('staff')->attempt($credentials)){
             $currentStaff = Staff::query()->where('email', $request->input('email'))->firstOrFail();
             $request->session()->put('user', $currentStaff);
-            $date = today();
+            $date = today("NZ");
             $request->session()->put('date1', $date);
 
             $d = Carbon::parse(today())->dayOfWeek;
