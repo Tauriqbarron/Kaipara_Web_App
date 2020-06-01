@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Query\Builder;
 use App\Staff;
+use MaddHatter\LaravelFullcalendar\Calendar;
 
 class AdminStaffController extends Controller
 {
@@ -117,6 +118,28 @@ class AdminStaffController extends Controller
         $staff->delete();
         return redirect()->route('staff.index');
     }
+
+    /*Calendar*/
+    public function getCalendar() {
+        $events = Booking::all();
+        $event = [];
+        foreach ($events as $row) {
+            $enddate = $row->date."24:00:00";
+            $event[] = \Calendar::event(
+                $row->booking_type->description,
+                true,
+                new \DateTime($row->date),
+                new \DateTime($row->date),
+                $row->id,
+                [
+                    'color' => 'red'
+                ]
+            );
+        }
+        $calendar = \Calendar::addEvents($event);
+        return view('Administration.staff.calendar', compact('events', 'calendar'));
+    }
+
 
     /*login Part*/
     public function getLoginForm() {
