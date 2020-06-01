@@ -8,6 +8,11 @@ use Auth;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest:admin')->except('logout');
+    }
+
     public function getLoginForm() {
         return view('Administration.login');
     }
@@ -28,14 +33,10 @@ class AdminController extends Controller
         return redirect()->route('admin.index');
     }
     return redirect()->back()->withErrors("The email address or password is wrong.");
-}
+    }
 
     public function logout() {
         Auth::guard('admin')->logout();
         return redirect('/');
-    }
-
-    public function adminIndex() {
-        return view('Administration.index');
     }
 }

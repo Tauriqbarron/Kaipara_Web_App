@@ -60,6 +60,11 @@
 
                 @else
                     <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end">
+                        @if(Auth::guard('admin')->check())
+                            <li class="nav-item border-0">
+                                <a href="#" class="text-dark mx-1 align-self-start ">Admin Logged in</a>
+                            </li>
+                        @endif
                         <li class="nav-item border-0">
                             <a href="{{route('admin.index')}}" class="text-dark mx-1 align-self-start ">Admin</a>
                         </li>

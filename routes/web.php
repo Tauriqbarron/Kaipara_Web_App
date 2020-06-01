@@ -159,11 +159,6 @@ Route::get('/selectstaff', function () {
 });
 
 /*Admin login*/
-Route::get('/admin/home', [
-    'uses' => 'Auth\AdminController@adminIndex',
-    'as' => 'admin.index'
-]);
-
 Route::get('admin/login', [
     'uses' => 'Auth\AdminController@getLoginForm',
     'as' => 'admin.login'
@@ -172,6 +167,11 @@ Route::get('admin/login', [
 Route::post('admin/login', [
     'uses' => 'Auth\AdminController@postLogin',
     'as' => 'admin.login'
+]);
+
+Route::get('/admin', [
+    'uses' => 'Auth\AdminClientController@adminIndex',
+    'as' => 'admin.index'
 ]);
 
 Route::get('admin/logout', [
