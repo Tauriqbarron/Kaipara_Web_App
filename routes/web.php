@@ -179,75 +179,75 @@ Route::get('admin/logout', [
     'as' => 'admin.logout'
 ]);
 
-/*Security Assignment Part*/
+/*Security Assignment Part
 Route::group(['middleware' => ['auth:admin']], function (){
-    
-    Route::get('/admin/sec-assignment', [
-        'uses' => 'Auth\AdminSecurityAssignmentController@getIndex',
-        'as' => 'security_assignment.index'
-    ]);
 
-    Route::get('/admin/sec-assignment/result', [
-        'uses' => 'Auth\AdminSecurityAssignmentController@search',
-        'as' => 'security_assignment.search'
-    ]);
+});*/
 
-    Route::get('/admin/sec-assignment/create', [
-        'uses' => 'Auth\AdminSecurityAssignmentController@getCreate',
-        'as' => 'security_assignment.create'
-    ]);
+Route::get('/admin/sec-assignment', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@getIndex',
+    'as' => 'security_assignment.index'
+]);
 
-    Route::post('/admin/sec-assignment/create', [
-        'uses' => 'Auth\AdminSecurityAssignmentController@postCreate',
-        'as' => 'security_assignment.create'
-    ]);
+Route::get('/admin/sec-assignment/result', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@search',
+    'as' => 'security_assignment.search'
+]);
 
-    Route::get('/admin/sec-assignment/view/{id}', [
-        'uses' => 'Auth\AdminSecurityAssignmentController@view',
-        'as' => 'security_assignment.view'
-    ]);
+Route::get('/admin/sec-assignment/create', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@getCreate',
+    'as' => 'security_assignment.create'
+]);
 
-    Route::get('/admin/sec-assignment/assign{id}', [
-        'uses' => 'Auth\AdminSecurityAssignmentController@getAssign',
-        'as' => 'security_assignment.assign'
-    ]);
+Route::post('/admin/sec-assignment/create', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@postCreate',
+    'as' => 'security_assignment.create'
+]);
 
-    Route::post('/admin/sec-assignment/assign{id}', [
-        'uses' => 'Auth\AdminSecurityAssignmentController@postAssign',
-        'as' => 'security_assignment.assign'
-    ]);
+Route::get('/admin/sec-assignment/view/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@view',
+    'as' => 'security_assignment.view'
+]);
 
-    Route::get('/admin/sec-assignment/edit/{id}', [
-        'uses' => 'Auth\AdminSecurityAssignmentController@getEdit',
-        'as' => 'security_assignment.edit'
-    ]);
+Route::get('/admin/sec-assignment/assign{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@getAssign',
+    'as' => 'security_assignment.assign'
+]);
 
-    Route::post('/admin/sec-assignment/edit/{id}', [
-        'uses' => 'Auth\AdminSecurityAssignmentController@postEdit',
-        'as' => 'security_assignment.edit'
-    ]);
+Route::post('/admin/sec-assignment/assign{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@postAssign',
+    'as' => 'security_assignment.assign'
+]);
 
-    Route::get('/admin/sec-assignment/edit/change-staff/{id}', [
-        'uses' => 'Auth\AdminSecurityAssignmentController@getChangeStaff',
-        'as' => 'security_assignment.change_staff'
-    ]);
+Route::get('/admin/sec-assignment/edit/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@getEdit',
+    'as' => 'security_assignment.edit'
+]);
 
-    Route::post('/admin/sec-assignment/edit/change-staff/{id}', [
-        'uses' => 'Auth\AdminSecurityAssignmentController@postChangeStaff',
-        'as' => 'security_assignment.change_staff'
-    ]);
+Route::post('/admin/sec-assignment/edit/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@postEdit',
+    'as' => 'security_assignment.edit'
+]);
 
-    Route::get('/admin/sec-assignment/delete/{id}', [
-        'uses' => 'Auth\AdminSecurityAssignmentController@getDelete',
-        'as' => 'security_assignment.delete'
-    ]);
+Route::get('/admin/sec-assignment/edit/change-staff/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@getChangeStaff',
+    'as' => 'security_assignment.change_staff'
+]);
 
-    Route::post('/admin/sec-assignment/delete/{id}', [
-        'uses' => 'Auth\AdminSecurityAssignmentController@postDelete',
-        'as' => 'security_assignment.delete'
-    ]);
+Route::post('/admin/sec-assignment/edit/change-staff/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@postChangeStaff',
+    'as' => 'security_assignment.change_staff'
+]);
 
-});
+Route::get('/admin/sec-assignment/delete/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@getDelete',
+    'as' => 'security_assignment.delete'
+]);
+
+Route::post('/admin/sec-assignment/delete/{id}', [
+    'uses' => 'Auth\AdminSecurityAssignmentController@postDelete',
+    'as' => 'security_assignment.delete'
+]);
 
 
 
