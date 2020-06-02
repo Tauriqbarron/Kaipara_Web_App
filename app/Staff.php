@@ -9,7 +9,9 @@ class Staff extends Model implements Auth
 {
     use Authenticatable;
     protected $guard = 'staff';
+    protected $primaryKey = 'id';
     protected  $fillable = ['first_name', 'last_name', 'email', 'phone_number', 'password', 'imgPath', 'street', 'suburb', 'city', 'postcode'];
+    protected $hidden = ['password'];
 
     public function staff_Assignment() {
         return $this->hasMany('App\Staff_Assignment');

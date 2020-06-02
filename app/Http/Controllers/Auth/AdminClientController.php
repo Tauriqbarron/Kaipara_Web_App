@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Clients;
 use App\Address;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
@@ -126,5 +128,14 @@ class AdminClientController extends Controller
         $client = Clients::find($id);
         $client->Delete();
         return redirect()->route('client.index');
+    }
+
+    public function logout() {
+        Auth::logout();
+        Session::flush();
+        if(!(Auth::check() || (Session::has('user')))){
+            return redirect('/');
+        }
+        return redirect()->back()->with('error', 'Logout failed');
     }
 }

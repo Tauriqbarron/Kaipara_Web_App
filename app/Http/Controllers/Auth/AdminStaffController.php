@@ -149,10 +149,10 @@ class AdminStaffController extends Controller
             $sa->delete();
         }
         */
-
+        //TODO add middleware to login route
         if(Auth::guard('staff')->attempt($credentials)){
-            $currentStaff = Staff::query()->where('email', $request->input('email'))->firstOrFail();
-            $request->session()->put('user', $currentStaff);
+            $user = $request->all();
+
             $date = today("NZ");
             $request->session()->put('date1', $date);
 

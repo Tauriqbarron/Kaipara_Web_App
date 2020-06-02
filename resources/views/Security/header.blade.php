@@ -19,11 +19,11 @@
                         <a class="nav-link" href="#">About Us</a>
                     </li>
                 </ul>
-                @if(Session::get('user'))
+                @if(auth()->guard('staff')->check())
                     <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end  dropdown">
                         <li class="nav-item border-0 ">
                                 <a class="btn-light border-0 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{Session::get('user')->first_name}} {{Session::get('user')->last_name}}
+                                    {{auth()->guard('staff')->user()->first_name}} {{auth()->guard('staff')->user()->last_name}}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right rounded-0" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{route('security.index')}}">My Profile</a>

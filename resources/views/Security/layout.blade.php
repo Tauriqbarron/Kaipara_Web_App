@@ -29,6 +29,11 @@
         array_push($addresses, $addressString);
     }
     ?>
+    <div class="feedback overlay" onclick="off()">
+        <div class="feedback-popup jumbotron shadow">
+
+        </div>
+    </div>
     <script>
         setAddresses({!! json_encode($addresses)!!});
     </script>

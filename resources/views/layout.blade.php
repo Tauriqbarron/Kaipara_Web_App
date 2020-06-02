@@ -18,6 +18,18 @@
         <script src="https://kit.fontawesome.com/c3929064ae.js" crossorigin="anonymous"></script>
         <title>@yield('title') - KSPMS</title>
         @yield('styles')
+        @php
+            $guard = 'none';
+            if(auth()->guard('staff')->check()){
+                $guard = 'staff';
+            }elseif(auth()->guard('clients')->check()){
+                $guard = 'clients';
+            }elseif(auth()->guard('admin')->check()){
+                $guard = 'admin';
+            }elseif(auth()->guard('service_provider')->check()){
+                $guard = 'service_provider';
+            }
+        @endphp
     </head>
 <body style="margin-top: 0px">
     <div class="MainCon ">

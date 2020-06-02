@@ -27,44 +27,40 @@
                         <a class="nav-link" href="#">About Us</a>
                     </li>
                 </ul>
-                @if(Session::get('type'))
+                @if($guard != 'none')
                     <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end  dropdown">
                         <li class="nav-item border-0 "  >
-                            <a class="btn-light border-0 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{Session::get('user')->first_name}} {{Session::get('user')->last_name}}
+                            <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                            @if(auth()->guard('admin')->check())
+                                    {{auth()->guard('admin')->user()->name}}
+                            @else
+                                    {{auth()->guard($guard)->user()->first_name}} {{auth()->guard($guard)->user()->last_name}}
+                            @endif
                             </a>
                             <div class="dropdown-menu dropdown-menu-right rounded-0" aria-labelledby="dropdownMenuButton">
-                                @if(Session::get('type') == 'staff')
-                                <a class="dropdown-item" href="{{route('security.index')}}">My Profile</a>
-                                <a class="dropdown-item" href="{{route('staff.logout')}}">Logout</a>
-                                    @elseif(Session::get('type') == 'service')
+                                @if(Auth::guard('staff')->check())
+                                    <a class="dropdown-item" href="{{route('security.index')}}">My Profile</a>
+                                    <a class="dropdown-item" href="{{route('staff.logout')}}">Logout</a>
+                                @elseif(Auth::guard('service_provider')->check())
                                     <a class="dropdown-item" href="{{route('service.home')}}">My Profile</a>
-                                    <a class="dropdown-item" href="{{route('staff.logout')}}">Logout</a>
-                                    @else
+                                    <a class="dropdown-item" href="{{route('service.logout')}}">Logout</a>
+                                @elseif(Auth::guard('admin')->check())
+                                    <a class="dropdown-item" href="{{route('admin.index')}}">Administration Center</a>
+                                    <a class="dropdown-item" href="{{route('admin.logout')}}">Logout</a>
+                                @else
                                     <a class="dropdown-item" href="{{route('client.index')}}">My Profile</a>
-                                    <a class="dropdown-item" href="{{route('staff.logout')}}">Logout</a>
+                                    <a class="dropdown-item" href="{{route('client.logout')}}">Logout</a>
                                 @endif
-
-
-
-
-{{--
-                                jahsdjhsahd
---}}
                             </div>
                         </li>
                         <li class="nav-item" id="headerProfileImage">
-                            <img class="float-right rounded-circle shadow dropdown-toggle text-nowrap" style="display: block; width: 54px; height: 54px" src="{{url('images/Profile_Placeholder_large.jpg')}}" alt="profileImage">
+                            <img class="float-right rounded-circle shadow dropdown-toggle text-nowrap" style="display: block; width: 54px; height: 54px" src="@if($guard == 'admin'){{url('images/Profile_Placeholder_large.jpg')}}@else{{auth()->guard($guard)->user()->imgPath}}@endif" alt="profileImage">
                         </li>
                     </ul>
 
                 @else
                     <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end">
-                        @if(Auth::guard('admin')->check())
-                            <li class="nav-item border-0">
-                                <a href="#" class="text-dark mx-1 align-self-start ">Admin Logged in</a>
-                            </li>
-                        @endif
+
                         <li class="nav-item border-0">
                             <a href="{{route('admin.index')}}" class="text-dark mx-1 align-self-start ">Admin</a>
                         </li>

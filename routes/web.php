@@ -295,6 +295,11 @@ Route::post('/admin/client/delete/{id}' , [
     'as' => 'client.delete'
 ]);
 
+Route::get('/client/logout', [
+    'uses' => 'Auth\AdminClientController@logout',
+    'as' => 'client.logout'
+]);
+
 
 /*staff*/
 Route::get('/security/login', [

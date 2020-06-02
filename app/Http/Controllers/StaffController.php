@@ -7,6 +7,7 @@ use App\Staff;
 use App\Staff_Assignment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -17,9 +18,10 @@ class StaffController extends Controller
 {
 
     public function getHome() {
-        $user = Session::has('user') ? Session::get('user'): null;
-        if(Session::get('date1')) {
-            $currentStaff = Staff::query()->find($user->id);
+
+        if(Auth::guard('staff')->check()) {
+
+            $currentStaff = Staff::query()->find(Auth::guard('staff')->user()->id);
             $bookings = app('App\Http\Controllers\BookingsController')->getStaffBookings($currentStaff);
             $timetable = app('App\Http\Controllers\BookingsController')->getTimetable($currentStaff);
             $availableBookings = Booking::query()->select('*')->whereNotIn('id',
