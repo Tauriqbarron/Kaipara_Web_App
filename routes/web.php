@@ -362,14 +362,9 @@ Route::post('/admin/staff/delete/{id}',[
     'as' => "staff.delete"
 ]);
 
-Route::get('admin/calendar', [
+Route::get('admin/staff/roster{id}', [
     'uses' => 'Auth\AdminStaffController@getCalendar',
-    'as' => 'staff.router'
-]);
-
-Route::get('admin/calendar', [
-    'uses' => 'Auth\AdminStaffController@getCalendar',
-    'as' => 'staff.event'
+    'as' => 'staff.roster'
 ]);
 
 /*Service Provider*/

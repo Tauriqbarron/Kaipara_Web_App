@@ -2,6 +2,7 @@
 
 @section('mainContent')
     <h1 class="ml-5">Security assignment id: {{$assignment->id}}</h1>
+
     @if(count($errors) > 0)
         <div class="alert alert-danger">
             @foreach($errors->all() as $error)
@@ -45,12 +46,24 @@
                 <label for="inputZip">Zip</label>
                 <p class="form-control">{{$assignment->postcode}}</p>
             </div>
-            <div class="form-group">
-                <label for="inputAddress2">Status</label>
-                <p class="form-control">{{$assignment->status}}</p>
+            <div class="form-group col-md-6">
+                <label for="date">Date</label>
+                <p name="date" class="form-control">{{$assignment->date}}</p>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="start_time">Start Time</label>
+                <p name="start_time" class="form-control">{{$assignment->start_time}}</p>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="finish_time">End Time</label>
+                <div name="finish_time" class="form-control">{{$assignment->finish_time}}</div>
             </div>
         </div>
 
+    <div class="form-group col-md-2">
+        <label for="inputAddress2">Status</label>
+        <p class="form-control">{{$assignment->status}}</p>
+    </div>
         <div class="form-group col-md-2">
             <label for="available_slots">Available Slots</label>
             <p class="form-control">{{$assignment->available_slots}}</p>
@@ -74,5 +87,5 @@
             </form>
         @endfor
         <br/>
-        <a class="btn btn-danger" href="{{route('security_assignment.index')}}">back</a>
+        <a class="btn btn-danger ml-2" href="{{route('security_assignment.index')}}">back</a>
 @endsection
