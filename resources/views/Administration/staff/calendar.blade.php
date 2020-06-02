@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
 
 @section('mainContent')
+
     <div class="w-50">
         {!! $calendar->calendar() !!}
         {!! $calendar->script() !!}

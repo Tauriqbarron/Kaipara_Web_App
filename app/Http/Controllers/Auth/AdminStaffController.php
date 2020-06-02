@@ -123,6 +123,16 @@ class AdminStaffController extends Controller
     public function getCalendar() {
         $events = Booking::all();
         $event = [];
+        /*$event[] = \Calendar::event(
+            'title',
+            true,
+            '2020-06-02',
+            '2020-06-02',
+            1,
+            [
+                'color' => 'blue'
+                ]
+    );*/
         foreach ($events as $row) {
             $enddate = $row->date."24:00:00";
             $event[] = \Calendar::event(
