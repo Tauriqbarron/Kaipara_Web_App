@@ -46,7 +46,9 @@ class TimesheetController extends Controller
 
 
     }
-
+    /*TODO add a status to timesheet records so that in progress timesheet can be carried over between app and
+        won't be affected by session wipe
+    */
     function stop(){
         if(!Session::has('inProgress')){
             return redirect()->route('security.index')->with('error', 'Something went wrong, please try again');
@@ -55,6 +57,12 @@ class TimesheetController extends Controller
             $timesheet = Session::pull('inProgress');
 
             $timesheet->stop_time = now("NZ")->hour+(now("NZ")->minute*0.01);
+
+            $staff_assignment = Staff_Assignment::query()->find($timesheet->staff_assignment_id)->firstOrFail();
+            $booking = Booking::query()->find($staff_assignment->booking_id)->firstOrFail();
+
+            $booking->status = 'complete';
+
             $timesheet->save();
 
             return redirect()->route('security.index')->with('message', 'Job Stopped');

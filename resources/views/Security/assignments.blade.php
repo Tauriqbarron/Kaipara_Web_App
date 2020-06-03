@@ -28,7 +28,7 @@
                             <h6>{{$booking->city}}</h6>
                         </td>
                         <td style="width: 20%;">
-                            <a href="#" title="More Information" class="table-link fa-pull-right" data-toggle="collapse" data-target="#a{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}a','a{{$booking->id}}')" >
+                            <a href="#" title="More Information" class="table-link float-right" data-toggle="collapse" data-target="#a{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}a','a{{$booking->id}}')" >
                                 <span class="fa-stack">
                                     <i class="fa fa-square fa-stack-2x"></i>
                                     <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}a"></i>
@@ -54,26 +54,27 @@
         </div>
     </div>
     <h2 class="text-center">Completed Assignments</h2>
-    <div class="container jumbotron bg-light main-box clearfix" id="completed">
+    <div class="container jumbotron bg-light main-box clearfix" id="completed" style="padding: 10px; margin-bottom: 0px;">
         <div class="table-responsive">
             <table class="table user-list">
                 <tbody>
                 @foreach($completedBookings as $booking )
+
+
                     <tr>
                         <td class="text-center">
-                            <a href="#" onclick="setCenter('{{$booking->street}} {{$booking->suburb}} {{$booking->city}} New Zealand')"><i class="fa fa-map-marker fa-2x fa-light fa-pull-left"></i></a><h6>{{number_format($booking->start_time, 2, ":","")}}</h6>
                         </td>
                         <td>
                             <h6>{{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}</h6>
                         </td>
                         <td class="text-center">
-                            <h6 class="label label-default">{{$booking->description}}</h6>
+                            <h6 class="label label-default">{{number_format($booking->start_time, 2, ":","")}}</h6>
                         </td>
                         <td>
                             <h6>{{$booking->city}}</h6>
                         </td>
                         <td style="width: 20%;">
-                            <a href="#" title="More Information" class="table-link fa-pull-right" data-toggle="collapse" data-target="#a{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}a','a{{$booking->id}}')" >
+                            <a href="#" title="More Information" class="table-link float-right" data-toggle="collapse" data-target="#a{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}a','a{{$booking->id}}')" >
                                 <span class="fa-stack">
                                     <i class="fa fa-square fa-stack-2x"></i>
                                     <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}a"></i>
@@ -81,18 +82,29 @@
                             </a>
                         </td>
                     </tr>
-                    <tr >
-                        <td colspan="4" style="padding: 0px" class="bg-white">
-                            <div class="collapse"  id="a{{$booking->id}}" style="padding: 10px">
-                                {{$booking->description}} required at {{$booking->street}}, {{$booking->suburb}}, {{$booking->city}} at {{number_format($booking->start_time, 2, ":","")}} on {{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}
-                            </div>
-                        </td>
-                        <td style="padding: 0px" class="bg-white">
-                            <div class="collapse btn-group-lg"  id="a{{$booking->id}}" style="padding: 10px">
-                                <a type="button" class="btn-primary text-white w-100 rounded border-0 text-center text-decoration-none" href="{{route('security.acceptBooking', ['booking_id' => $booking->id])}}"><h6>Accept</h6></a>
-                            </div>
-                        </td>
-                    </tr>
+                    @if(count($booking->staff_assignment) > 0)
+                        @foreach($booking->staff_assignment as $sa)
+                        <tr >
+                            <td colspan="4" style="padding: 0px" class="bg-white">
+                                <div class="collapse"  id="a{{$booking->id}}" style="padding: 10px">
+                                    {{$booking->description}} required at {{$booking->street}}, {{$booking->suburb}}, {{$booking->city}} at {{number_format($booking->start_time, 2, ":","")}} on {{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}
+                                </div>
+                            </td>
+                            <td style="padding: 0px" class="bg-white">
+                                <div class="collapse"  id="a{{$booking->id}}" style="padding: 10px">
+                                    @if(count($sa->feedback) > 0)
+                                        <button type="button" class="btn btn-primary w-100" data-toggle="modal" data-target="#f{{$booking->id}}">
+                                            Feedback
+                                        </button>
+                                    @else
+                                        <button type="button" class="btn btn-secondary w-100" data-toggle="modal" data-target="#f{{$booking->id}}">
+                                            Feedback
+                                        </button>
+                                    @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    @endif
                 @endforeach
                 </tbody>
             </table>

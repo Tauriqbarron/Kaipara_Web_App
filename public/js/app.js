@@ -14,12 +14,12 @@ function loaded(){
     }
 }
 
-function on() {
-    document.getElementById("overlay").style.display = "block";
+function on(id) {
+    document.getElementById(id).style.display = "block";
 }
 
-function off() {
-    document.getElementById("overlay").style.display = "none";
+function off(id) {
+    document.getElementById(id).style.display = "none";
 }
 
 function setAddresses(scAddresses){

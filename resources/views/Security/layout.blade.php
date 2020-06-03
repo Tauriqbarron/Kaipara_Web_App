@@ -15,12 +15,55 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
         <script src="{{url('js/app.js')}}"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-        <script src="https://kit.fontawesome.com/c3929064ae.js" crossorigin="anonymous"></script>
+        <!--<script src="https://kit.fontawesome.com/c3929064ae.js" crossorigin="anonymous"></script>-->
 
 
     </head>
     <body id="bod">
+    @foreach($completedBookings as $booking)
+        <div class="modal" id="f{{$booking->id}}" tabindex="-1" role="dialog" aria-labelledby="modalTestLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <form  method="POST" action="{{route('staff.postFeedback')}}">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalTestLabel">{{$booking->description}}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <label for="rating">Rating:</label>
+                            </div>
+                            <div class="rating btn-group form-group" id="rating" role="group">
+                                <input type="radio" name="star" id="star5" value="5"><label for="star5"></label>
+                                <input type="radio" name="star" id="star4" value="4"><label for="star4"></label>
+                                <input type="radio" name="star" id="star3" value="3"><label for="star3"></label>
+                                <input type="radio" name="star" id="star2" value="2"><label for="star2"></label>
+                                <input type="radio" name="star" id="star1" value="1"><label for="star1"></label>
+                            </div>
+                            <div>
+                                <label for="messageBox">Message:</label>
+                            </div>
+                            <div>
+                                <textarea name="message" class="float-left w-100" id="messageBox" rows="5"></textarea>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Submit Feedback</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        @endforeach
     <?php
     $addresses = array();
     foreach($bookings as $booking){
@@ -29,11 +72,7 @@
         array_push($addresses, $addressString);
     }
     ?>
-    <div class="feedback overlay" onclick="off()">
-        <div class="feedback-popup jumbotron shadow">
 
-        </div>
-    </div>
     <script>
         setAddresses({!! json_encode($addresses)!!});
     </script>

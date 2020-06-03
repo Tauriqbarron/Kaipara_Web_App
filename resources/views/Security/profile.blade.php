@@ -49,7 +49,7 @@
                                     <h3 id="myAssignmentDate">{{Carbon\Carbon::parse(Session::get('date1'))->format('d/m/Y')}} </h3>
                                 </th>
                                 <th>
-                                    <a href="{{route('security.dateChange', ['i' => 1])}}"> <i class="fa fa-chevron-right fa-pull-right fa-2x date-arrow"></i></a>
+                                    <a href="{{route('security.dateChange', ['i' => 1])}}"> <i class="fa fa-chevron-right float-right fa-2x date-arrow"></i></a>
                                 </th>
                             </tr>
                             </thead>
@@ -74,7 +74,7 @@
                                                 <h6>{{$booking->city}}</h6>
                                             </td>
                                     <td style="width: 20%;">
-                                        <a href="#" class="table-link fa-pull-right" data-toggle="collapse" data-target="#n{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}n','n{{$booking->id}}')" >
+                                        <a href="#" class="table-link float-right" data-toggle="collapse" data-target="#n{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}n','n{{$booking->id}}')" >
 
                                             <span class="fa-stack">
                                                         <i class="fa fa-square fa-stack-2x"></i>

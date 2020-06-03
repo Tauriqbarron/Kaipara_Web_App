@@ -22,7 +22,7 @@
                                     <h3 id="myAssignmentDate">{{Carbon\Carbon::parse(Session::get('weekStart'))->format('d/m/Y')}} - {{Carbon\Carbon::parse(Session::get('weekEnd'))->format('d/m/Y')}}</h3>
                                 </th>
                                 <th>
-                                    <a href="{{route('security.setWeek', ['i' => 1])}}"> <i class="fa fa-chevron-right fa-pull-right fa-2x date-arrow float-right"></i></a>
+                                    <a href="{{route('security.setWeek', ['i' => 1])}}"> <i class="fa fa-chevron-right float-right fa-2x date-arrow float-right"></i></a>
                                 </th>
                             </tr>
                             <tr>

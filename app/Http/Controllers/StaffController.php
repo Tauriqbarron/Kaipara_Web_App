@@ -30,12 +30,23 @@ class StaffController extends Controller
                 ->orderBy('date','asc')
                 ->orderBy('start_time', 'asc')
                 ->get();
+            $completedBookings = Booking::query()->select('*')->whereNotIn('id',
+                Staff_Assignment::query()->select('booking_id')->where('staff_id', '=', $currentStaff->id)->get())
+                ->whereDate('date', '<=', today())
+               // ->where('status','=','complete')
+                ->orderBy('date','asc')
+                ->orderBy('start_time', 'asc')
+                ->get();
 
-            return view('Security.index', ['staff' => $currentStaff, 'bookings' => $bookings, 'availableBookings' => $availableBookings, 'timetable' => $timetable]);
+            return view('Security.index', ['staff' => $currentStaff, 'bookings' => $bookings,'completedBookings' => $completedBookings, 'availableBookings' => $availableBookings, 'timetable' => $timetable]);
         }
         else {
             return redirect()->route('staff.login')->with('error', 'You must log in to view your profile');
         }
+    }
+
+    public function postFeedback(){
+        return redirect()->route('security.index')->with('message', 'Feedback Sent');
     }
 
     public function dateChange($i){
