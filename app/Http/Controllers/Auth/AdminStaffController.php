@@ -128,6 +128,7 @@ class AdminStaffController extends Controller
     /*Calendar*/
     public function getCalendar($id) {
         $events = Staff_Assignment::where('staff_id', '=', $id)->get();
+        $staff = Staff::find($id);
         $event = [];
         foreach ($events as $row) {
             $enddate = $row->date."24:00:00";
@@ -144,7 +145,7 @@ class AdminStaffController extends Controller
             );
         }
         $calendar = \Calendar::addEvents($event);
-        return view('Administration.staff.roster', compact('events', 'calendar'));
+        return view('Administration.staff.roster', compact('events', 'calendar'), ['staff' => $staff]);
     }
 
 

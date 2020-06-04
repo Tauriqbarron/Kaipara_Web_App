@@ -52,6 +52,7 @@ return array(
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
+    'App\\Roster' => $baseDir . '/app/Roster.php',
     'App\\Service_Provider_Job' => $baseDir . '/app/Service_Provider_Job.php',
     'App\\Service_Provider_Service' => $baseDir . '/app/Service_Provider_Service.php',
     'App\\Staff' => $baseDir . '/app/Staff.php',

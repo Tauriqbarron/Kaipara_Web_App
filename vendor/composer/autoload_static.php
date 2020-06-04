@@ -535,6 +535,7 @@ class ComposerStaticInit62d9ea2a1f53928317c40ca3a96bceed
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Roster' => __DIR__ . '/../..' . '/app/Roster.php',
         'App\\Service_Provider_Job' => __DIR__ . '/../..' . '/app/Service_Provider_Job.php',
         'App\\Service_Provider_Service' => __DIR__ . '/../..' . '/app/Service_Provider_Service.php',
         'App\\Staff' => __DIR__ . '/../..' . '/app/Staff.php',
