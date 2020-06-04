@@ -92,7 +92,7 @@
                             </td>
                             <td style="padding: 0px" class="bg-white">
                                 <div class="collapse"  id="a{{$booking->id}}" style="padding: 10px">
-                                    @if(count($sa->feedback) > 0)
+                                    @if(!count($sa->feedback) > 0)
                                         <button type="button" class="btn btn-primary w-100" data-toggle="modal" data-target="#f{{$booking->id}}">
                                             Feedback
                                         </button>

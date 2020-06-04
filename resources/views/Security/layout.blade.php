@@ -30,6 +30,7 @@
                 <form  method="POST" action="{{route('staff.postFeedback')}}">
                     <div class="modal-content">
                         <div class="modal-header">
+                            <img src="{{url('images/Profile_Placeholder_Large.jpg')}}" class="rounded-circle modal-client-image" >
                             <h5 class="modal-title" id="modalTestLabel">{{$booking->description}}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -50,7 +51,7 @@
                                 <label for="messageBox">Message:</label>
                             </div>
                             <div>
-                                <textarea name="message" class="float-left w-100" id="messageBox" rows="5"></textarea>
+                                <textarea name="message" class="float-left w-100" id="messageBox" rows="5" maxlength="300"></textarea>
                             </div>
 
 

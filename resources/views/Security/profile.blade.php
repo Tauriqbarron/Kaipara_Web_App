@@ -33,7 +33,6 @@
         </div>
     @endif
     <h2 class="text-center">Your Assignments</h2>
-        <button onclick="on()">Overlay</button>
     <div class="container jumbotron bg-light" id="schedule">
         <div class="row">
             <div class="col-lg-12">

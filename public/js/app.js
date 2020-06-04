@@ -14,14 +14,6 @@ function loaded(){
     }
 }
 
-function on(id) {
-    document.getElementById(id).style.display = "block";
-}
-
-function off(id) {
-    document.getElementById(id).style.display = "none";
-}
-
 function setAddresses(scAddresses){
     _scAddresses = scAddresses;
 

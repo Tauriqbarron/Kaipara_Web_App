@@ -12,4 +12,6 @@ class Timesheet extends Model
     public function staff_assignment() {
         return $this->belongsTo('App\staff_assignment', 'staff_assignment_id', 'id');
     }
+
+
 }
