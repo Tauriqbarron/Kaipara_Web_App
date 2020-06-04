@@ -4,6 +4,7 @@ namespace Illuminate\Database\Eloquent\Concerns;
 
 use Carbon\CarbonInterface;
 use DateTimeInterface;
+use Illuminate\Contracts\Database\Eloquent\Castable;
 use Illuminate\Contracts\Database\Eloquent\CastsInboundAttributes;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\JsonEncodingException;
@@ -352,7 +353,8 @@ trait HasAttributes
         // If the attribute exists in the attribute array or has a "get" mutator we will
         // get the attribute's value. Otherwise, we will proceed as if the developers
         // are asking for a relationship's value. This covers both types of values.
-        if (array_key_exists($key, $this->getAttributes()) ||
+        if (array_key_exists($key, $this->attributes) ||
+            array_key_exists($key, $this->casts) ||
             $this->hasGetMutator($key) ||
             $this->isClassCastable($key)) {
             return $this->getAttributeValue($key);
@@ -475,7 +477,7 @@ trait HasAttributes
     protected function mutateAttributeForArray($key, $value)
     {
         $value = $this->isClassCastable($key)
-                    ? $this->getClassCastableAttributeValue($key)
+                    ? $this->getClassCastableAttributeValue($key, $value)
                     : $this->mutateAttribute($key, $value);
 
         return $value instanceof Arrayable ? $value->toArray() : $value;
@@ -539,7 +541,7 @@ trait HasAttributes
         }
 
         if ($this->isClassCastable($key)) {
-            return $this->getClassCastableAttributeValue($key);
+            return $this->getClassCastableAttributeValue($key, $value);
         }
 
         return $value;
@@ -549,18 +551,27 @@ trait HasAttributes
      * Cast the given attribute using a custom cast class.
      *
      * @param  string  $key
+     * @param  mixed  $value
      * @return mixed
      */
-    protected function getClassCastableAttributeValue($key)
+    protected function getClassCastableAttributeValue($key, $value)
     {
         if (isset($this->classCastCache[$key])) {
             return $this->classCastCache[$key];
         } else {
             $caster = $this->resolveCasterClass($key);
 
-            return $this->classCastCache[$key] = $caster instanceof CastsInboundAttributes
-                ? $this->attributes[$key]
-                : $caster->get($this, $key, $this->attributes[$key] ?? null, $this->attributes);
+            $value = $caster instanceof CastsInboundAttributes
+                        ? $value
+                        : $caster->get($this, $key, $value, $this->attributes);
+
+            if ($caster instanceof CastsInboundAttributes || ! is_object($value)) {
+                unset($this->classCastCache[$key]);
+            } else {
+                $this->classCastCache[$key] = $value;
+            }
+
+            return $value;
         }
     }
 
@@ -1061,13 +1072,26 @@ trait HasAttributes
      */
     protected function resolveCasterClass($key)
     {
-        if (strpos($castType = $this->getCasts()[$key], ':') === false) {
-            return new $castType;
+        $castType = $this->getCasts()[$key];
+
+        $arguments = [];
+
+        if (is_string($castType) && strpos($castType, ':') !== false) {
+            $segments = explode(':', $castType, 2);
+
+            $castType = $segments[0];
+            $arguments = explode(',', $segments[1]);
         }
 
-        $segments = explode(':', $castType, 2);
+        if (is_subclass_of($castType, Castable::class)) {
+            $castType = $castType::castUsing();
+        }
 
-        return new $segments[0](...explode(',', $segments[1]));
+        if (is_object($castType)) {
+            return $castType;
+        }
+
+        return new $castType(...$arguments);
     }
 
     /**
@@ -1393,7 +1417,7 @@ trait HasAttributes
         }
 
         // If the attribute exists within the cast array, we will convert it to
-        // an appropriate native PHP type dependant upon the associated value
+        // an appropriate native PHP type dependent upon the associated value
         // given with the key in the pair. Dayle made this comment line up.
         if ($this->hasCast($key)) {
             return $this->castAttribute($key, $value);

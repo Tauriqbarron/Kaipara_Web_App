@@ -181,7 +181,11 @@ Route::get('admin/logout', [
     'as' => 'admin.logout'
 ]);
 
-/*Security Assignment Part*/
+/*Security Assignment Part
+Route::group(['middleware' => ['auth:admin']], function (){
+
+});*/
+
 Route::get('/admin/sec-assignment', [
     'uses' => 'Auth\AdminSecurityAssignmentController@getIndex',
     'as' => 'security_assignment.index'
@@ -246,6 +250,8 @@ Route::post('/admin/sec-assignment/delete/{id}', [
     'uses' => 'Auth\AdminSecurityAssignmentController@postDelete',
     'as' => 'security_assignment.delete'
 ]);
+
+
 
 
 /*Service Assignment Part*/
@@ -361,6 +367,16 @@ Route::get('/admin/staff/delete/{id}',[
 Route::post('/admin/staff/delete/{id}',[
     'uses' => 'Auth\AdminStaffController@postDelete',
     'as' => "staff.delete"
+]);
+
+Route::get('admin/staff/roster{id}', [
+    'uses' => 'Auth\AdminStaffController@getCalendar',
+    'as' => 'staff.roster'
+]);
+
+Route::post('admin/staff/roster{id}', [
+    'uses' => 'Auth\AdminStaffController@saveRoster',
+    'as' => 'staff.roster'
 ]);
 
 /*Service Provider*/

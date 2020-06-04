@@ -2,6 +2,13 @@
 
 @section('mainContent')
     <h1 class="ml-5">Staff id: {{ $staff->id }}</h1>
+    @if(count($errors) > 0)
+        <div class="alert alert-danger">
+            @foreach($errors->all() as $error)
+                <p>{{$error}}</p>
+            @endforeach
+        </div>
+    @endif
     <hr/>
     <form class="ml-2" method="post" action="{{route('staff.delete', ['id' => $staff->id])}}">
         @csrf
@@ -30,7 +37,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputCity">Suburb</label>
-                <<p class="form-control">{{$staff->suburb}}</p>
+                <p class="form-control">{{$staff->suburb}}</p>
             </div>
             <div class="form-group col-md-4">
                 <label for="inputState">City</label>
