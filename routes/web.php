@@ -367,6 +367,11 @@ Route::get('admin/staff/roster{id}', [
     'as' => 'staff.roster'
 ]);
 
+Route::post('admin/staff/roster{id}', [
+    'uses' => 'Auth\AdminStaffController@saveRoster',
+    'as' => 'staff.roster'
+]);
+
 /*Service Provider*/
 Route::get('/admin/serviceProvider', [
     'uses' => 'Auth\AdminSpController@getIndex',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Booking;
 use App\Http\Controllers\Controller;
+use App\Roster;
 use App\Staff_Assignment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -128,6 +129,7 @@ class AdminStaffController extends Controller
     /*Calendar*/
     public function getCalendar($id) {
         $events = Staff_Assignment::where('staff_id', '=', $id)->get();
+        $rosters = Roster::where('staff_id', '=', $id)->get();
         $staff = Staff::find($id);
         $event = [];
         foreach ($events as $row) {
@@ -141,11 +143,41 @@ class AdminStaffController extends Controller
                 [
                     'color' => '#3E76E5',
                 ]
-
+            );
+        }
+        foreach ($rosters as $row){
+            $enddate = $row->date."24:00:00";
+            $event[] = \Calendar::event(
+                'Work day',
+                true,
+                new \DateTime($row->date),
+                new \DateTime($row->date),
+                $row->staff_id,
+                [
+                    'color' => 'green',
+                ]
             );
         }
         $calendar = \Calendar::addEvents($event);
         return view('Administration.staff.roster', compact('events', 'calendar'), ['staff' => $staff]);
+    }
+
+    public function saveRoster(Request $request, $id) {
+        $validator = Validator::make($request->all(), [
+            'date' => 'required|date|date_format:Y-m-d'
+        ]);
+        if($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput($request->all());
+        }
+
+        $roster = new Roster([
+            'staff_id' => $id,
+            'date' => $request->input('date')
+        ]);
+        $roster->save();
+        return redirect()->back();//->route('staff.roster', ['id' => $id]);
     }
 
 
