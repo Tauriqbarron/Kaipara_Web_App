@@ -18,7 +18,7 @@ class CreateFeedbackTable extends Migration
             $table->timestamps();
             $table->string('message',300);
             $table->bigInteger('rating');
-            $table->foreignId('service_provider_job_id')->references('id')->on('service__provider__jobs')->onDelete('cascade');
+            $table->foreignId('staff__assignment_id')->references('id')->on('staff__assignments')->onDelete('cascade');
         });
     }
 

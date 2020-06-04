@@ -18,5 +18,8 @@ class Staff_Assignment extends Model
     public function timesheet() {
         return $this->hasMany('App\Timesheet');
     }
+    public function feedback() {
+        return $this->hasMany('App\Feedback');
+    }
 
 }

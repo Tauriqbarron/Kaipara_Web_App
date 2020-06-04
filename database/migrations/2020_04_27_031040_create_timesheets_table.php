@@ -19,7 +19,7 @@ class CreateTimesheetsTable extends Migration
             $table->date('date');
             $table->float('start_time');
             $table->float('stop_time')->nullable();
-            $table->foreignId('staff_assignment_id')->references('id')->on('staff__assignments')->onDelete("Cascade");
+            $table->foreignId('staff__assignment_id')->references('id')->on('staff__assignments')->onDelete("cascade");
         });
     }
 

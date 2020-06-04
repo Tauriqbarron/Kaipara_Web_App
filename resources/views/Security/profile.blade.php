@@ -64,7 +64,7 @@
                                     </td>
 
                                             <td>
-                                                <h6><!--{{$booking->street}}--> today = {{\Carbon\Carbon::parse(today('NZ'))->format('d/m/Y') }}, booking date = {{\Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}, {{$booking->finish_time}} > {{(now('NZ')->hour)+(now('NZ')->minute*.01)}}</h6>
+                                                <h6>{{$booking->street}}</h6>
                                             </td>
                                             <td class="text-center">
                                                 <h6 class="label label-default">{{$booking->suburb}}</h6>

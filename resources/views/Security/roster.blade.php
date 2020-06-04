@@ -77,7 +77,8 @@
                                                                 $hours,
                                                                 'Booking ID: '.$t->id,
                                                                 $startLeadingZero.number_format($t->start_time, 2, ":","")." - ".$finishLeadingZero.number_format($t->finish_time, 2, ":",""),
-                                                                $t->description
+                                                                $t->description,
+                                                                $t->date
                                                             )
                                                         );
                                                         $j += $hours;
@@ -103,16 +104,17 @@
                                                 @elseif($col[0] == 'wat')
                                                     <td class="border-light bg-white" style="width: 13%"></td>
                                                     @else
-                                                        <td rowspan="{{$col[0]}}" class="text-center text-light rounded-lg border border-white" style="color: #262525; background-color: #dd504c; width: 13%" >
-                                                            <strong>
+                                                    <td rowspan="{{$col[0]}}" class="text-center text-light rounded-lg border border-white" style="color: #262525; background-color: #dd504c; width: 13%; cursor: pointer" onclick="window.location.href = '{{route('security.dateChange',['i'=>(\Carbon\Carbon::parse($col[4])->dayOfYear - \Carbon\Carbon::Parse(\Illuminate\Support\Facades\Session::get('date1'))->dayOfYear)])}}'">
+                                                        <strong>
                                                             @foreach($col as $record)
-                                                                @if($record === $col[0])
+                                                                @if($record === $col[0] || $record === $col[4])
                                                                     @continue
-                                                                    @endif
+                                                                @endif
                                                                 {{$record}}<br>
-                                                                @endforeach
-                                                            </strong>
-                                                        </td>
+                                                            @endforeach
+                                                        </strong>
+                                                    </td>
+
                                                 @endif
                                             @endforeach
                                     </tr>

@@ -16,7 +16,7 @@
                     </script>
                     <tr>
                         <td class="text-center">
-                            <a href="#" onclick="setCenter('{{$booking->street}} {{$booking->suburb}} {{$booking->city}} New Zealand')"><i class="fa fa-map-marker fa-2x fa-light fa-pull-left"></i></a><h6>{{number_format($booking->start_time, 2, ":","")}}</h6>
+                            <a href="#" onclick="setCenter('{{$booking->street}} {{$booking->suburb}} {{$booking->city}} New Zealand')"><i class="fa fa-map-marker fa-2x fa-light float-left"></i></a><h6>{{number_format($booking->start_time, 2, ":","")}}</h6>
                         </td>
                         <td>
                             <h6>{{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}</h6>
@@ -74,35 +74,43 @@
                             <h6>{{$booking->city}}</h6>
                         </td>
                         <td style="width: 20%;">
-                            <a href="#" title="More Information" class="table-link float-right" data-toggle="collapse" data-target="#a{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}a','a{{$booking->id}}')" >
+                            <a href="#" title="More Information" class="table-link float-right" data-toggle="collapse" data-target="#sa{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}sa','sa{{$booking->id}}')" >
                                 <span class="fa-stack">
                                     <i class="fa fa-square fa-stack-2x"></i>
-                                    <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}a"></i>
+                                    <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}sa"></i>
                                 </span>
                             </a>
                         </td>
                     </tr>
+                    <tr >
+                        <td colspan="4" style="padding: 0px" class="bg-white">
+                            <div class="collapse"  id="sa{{$booking->id}}" style="padding: 10px">
+                                {{$booking->description}} required at {{$booking->street}}, {{$booking->suburb}}, {{$booking->city}} at {{number_format($booking->start_time, 2, ":","")}} on {{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}
+                            </div>
+                        </td>
+                        <td style="padding: 0px" class="bg-white">
+                            <div class="collapse"  id="sa{{$booking->id}}" style="padding: 10px">
+                                <!--TODO feedback only for completed jobs, check if feedback has been sent already by the staff member and grey out button if it has
+                                        - figure out a way to distinguish between staff and client feedback -->
+                                @if(!count($booking->staff_assignment) > 0)
+                                    <button type="button" class="btn btn-primary w-100" data-toggle="modal" data-target="#f{{$booking->id}}">
+                                        Feedback
+                                    </button>
+                                @else
+                                    <button type="button" class="btn btn-secondary disabled w-100" data-toggle="modal">
+                                        Feedback Sent
+                                    </button>
+                            @endif
+                        </td>
+                    </tr>
+                    <!--TODO fix collapse issue, make sure staff only see their staff assignments and timesheets-->
                     @if(count($booking->staff_assignment) > 0)
                         @foreach($booking->staff_assignment as $sa)
-                        <tr >
-                            <td colspan="4" style="padding: 0px" class="bg-white">
-                                <div class="collapse"  id="a{{$booking->id}}" style="padding: 10px">
-                                    {{$booking->description}} required at {{$booking->street}}, {{$booking->suburb}}, {{$booking->city}} at {{number_format($booking->start_time, 2, ":","")}} on {{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}
-                                </div>
-                            </td>
-                            <td style="padding: 0px" class="bg-white">
-                                <div class="collapse"  id="a{{$booking->id}}" style="padding: 10px">
-                                    @if(!count($sa->feedback) > 0)
-                                        <button type="button" class="btn btn-primary w-100" data-toggle="modal" data-target="#f{{$booking->id}}">
-                                            Feedback
-                                        </button>
-                                    @else
-                                        <button type="button" class="btn btn-secondary w-100" data-toggle="modal" data-target="#f{{$booking->id}}">
-                                            Feedback
-                                        </button>
-                                    @endif
-                            </td>
-                        </tr>
+                            @if($sa->staff_id == auth()->guard('staff')->user()->id)
+                                @foreach($sa->timesheet as $timesheet)
+                                    <!--TODO Display timesheets here-->
+                                @endforeach
+                            @endif
                         @endforeach
                     @endif
                 @endforeach

@@ -30,8 +30,13 @@
                 <form  method="POST" action="{{route('staff.postFeedback')}}">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <img src="{{url('images/Profile_Placeholder_Large.jpg')}}" class="rounded-circle modal-client-image" >
-                            <h5 class="modal-title" id="modalTestLabel">{{$booking->description}}</h5>
+                            <div class="modal-client-image">
+                                <img src="{{url('images/Profile_Placeholder_Large.jpg')}}" class="rounded-circle w-100" alt="Client Image" >
+                            </div>
+                            <div style="width: 300px; float: right">
+                                <h5 class="modal-title" id="modalTestLabel">{{$booking->description}}</h5>
+                                <h5 class="modal-title" id="modalTestLabel">Client: {{$booking->client->first_name}} {{$booking->client->last_name}}</h5>
+                            </div>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
