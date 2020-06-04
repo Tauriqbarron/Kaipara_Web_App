@@ -20,20 +20,21 @@ class StaffController extends Controller
     public function getHome() {
 
         if(Auth::guard('staff')->check()) {
-
+            //TODO: Grab all records for user and sort them into separate arrays afterwards
+            //  to keep database access as minimal as possible
             $currentStaff = Staff::query()->find(Auth::guard('staff')->user()->id);
             $bookings = app('App\Http\Controllers\BookingsController')->getStaffBookings($currentStaff);
             $timetable = app('App\Http\Controllers\BookingsController')->getTimetable($currentStaff);
             $availableBookings = Booking::query()->select('*')->whereNotIn('id',
                 Staff_Assignment::query()->select('booking_id')->where('staff_id', '=', $currentStaff->id)->get())
                 ->whereDate('date', '>=', today())
+                ->where('available_slots','>','0')
                 ->orderBy('date','asc')
                 ->orderBy('start_time', 'asc')
                 ->get();
-            $completedBookings = Booking::query()->select('*')->whereNotIn('id',
+            $completedBookings = Booking::query()->select('*')->whereIn('id',
                 Staff_Assignment::query()->select('booking_id')->where('staff_id', '=', $currentStaff->id)->get())
                 ->whereDate('date', '<=', today())
-               // ->where('status','=','complete')
                 ->orderBy('date','asc')
                 ->orderBy('start_time', 'asc')
                 ->get();
