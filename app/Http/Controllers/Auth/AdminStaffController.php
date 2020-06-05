@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Query\Builder;
@@ -178,6 +179,21 @@ class AdminStaffController extends Controller
         ]);
         $roster->save();
         return redirect()->back();//->route('staff.roster', ['id' => $id]);
+    }
+
+    public function getUpdateRoster($id) {
+        //
+    }
+
+    public function updateRoster(Request $request, $id) {
+        //
+    }
+
+    public function uRoster(Request $request) {
+        $roster = Roster::find($request->id);
+        $roster->date = $request->input('date');
+        $roster->save();
+        return redirect()->back();
     }
 
 
