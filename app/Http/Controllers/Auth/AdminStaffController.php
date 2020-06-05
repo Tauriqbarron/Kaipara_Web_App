@@ -198,21 +198,6 @@ class AdminStaffController extends Controller
             'password' => $request->input('password')
         );
 
-        /*TODO: Delete this block
-        //Unassign bookings for testing
-        $bookings = Booking::all();
-        foreach ($bookings as $booking){
-            $booking->status = 'available';
-            $booking->staff_needed = $booking->available_slots;
-
-            $booking->save();
-        }
-        $staff_assignments = Staff_Assignment::all();
-        foreach($staff_assignments as $sa){
-            $sa->delete();
-        }
-        */
-        //TODO add middleware to login route
         if(Auth::guard('staff')->attempt($credentials)){
             $user = $request->all();
 

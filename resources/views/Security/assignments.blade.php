@@ -1,11 +1,18 @@
 <div style="width:26%; height: 100%; float: left">
     <div style="height: 48px"></div>
     <div class="rounded" style="background-color: #636b6f; width: 105%; height: 400px" id="map"></div>
-    <a href="#completed">Completed Assignments</a>
+    <div  class="jumbotron bg-light shadow-sm" style="margin-top:10px;width: 25%; padding: 10px; position: fixed">
+        <div style="">
+            <h6>Jump to:</h6>
+            <a href="#available" class="nav-link"><h6>Available Assignments</h6></a>
+            <a href="#completed" class="nav-link"><h6>Completed Assignments</h6></a>
+        </div>
+    </div>
+
 
 </div>
 <div style="width:74%; float: left; padding-left: 20px">
-    <h2 class="text-center">Available Assignments</h2>
+    <h2 class="text-center" id="available">Available Assignments</h2>
     <div class="container jumbotron bg-light main-box clearfix" id="schedule">
         <div class="table-responsive">
             <table class="table user-list">
@@ -55,8 +62,8 @@
             </table>
         </div>
     </div>
-    <h2 class="text-center">Completed Assignments</h2>
-    <div class="container jumbotron bg-light main-box clearfix" id="completed" style="padding: 10px; margin-bottom: 0px;">
+    <h2 class="text-center" id="completed">Completed Assignments</h2>
+    <div class="container jumbotron bg-light main-box clearfix" style="padding: 10px; margin-bottom: 0px;">
         <div class="table-responsive">
             <table class="table user-list">
                 <tbody>
@@ -186,7 +193,7 @@
                                         </tr>
                                     @endforeach
                                     <tr>
-                                        <td colspan="6" class="border-0 bg-white" style="padding: 0">
+                                        <td colspan="6" class="bg-white" style="padding: 0">
                                             <div class="collapse" id="sa{{$booking->id}}" style="padding:10px; text-align: right">
                                                 <strong>Total Hours: {{$totalHours}}</strong>
                                             </div>
