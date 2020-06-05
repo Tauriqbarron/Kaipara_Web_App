@@ -36,18 +36,20 @@
                             </a>
                         </td>
                     </tr>
-                    <tr >
-                        <td colspan="4" style="padding: 0px" class="bg-white">
-                            <div class="collapse"  id="a{{$booking->id}}" style="padding: 10px">
-                                {{$booking->description}} required at {{$booking->street}}, {{$booking->suburb}}, {{$booking->city}} at {{number_format($booking->start_time, 2, ":","")}} on {{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}
-                            </div>
-                        </td>
-                        <td style="padding: 0px" class="bg-white">
-                            <div class="collapse btn-group-lg"  id="a{{$booking->id}}" style="padding: 10px">
-                                <a type="button" class="btn-primary text-white w-100 rounded border-0 text-center text-decoration-none" href="{{route('security.acceptBooking', ['booking_id' => $booking->id])}}"><h6>Accept</h6></a>
-                            </div>
-                        </td>
-                    </tr>
+
+                        <tr >
+                            <td colspan="4" style="padding: 0px" class="bg-white">
+                                <span class="collapse" id="a{{$booking->id}}"></span>
+                                <div class="collapse"  id="a{{$booking->id}}" style="padding: 10px">
+                                    {{$booking->description}} required at {{$booking->street}}, {{$booking->suburb}}, {{$booking->city}} at {{number_format($booking->start_time, 2, ":","")}} on {{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}
+                                </div>
+                            </td>
+                            <td style="padding: 0px" class="bg-white">
+                                <div class="collapse btn-group-lg"  id="a{{$booking->id}}" style="padding: 10px">
+                                    <a type="button" class="btn-primary text-white w-100 rounded border-0 text-center text-decoration-none" href="{{route('security.acceptBooking', ['booking_id' => $booking->id])}}"><h6>Accept</h6></a>
+                                </div>
+                            </td>
+                        </tr>
                 @endforeach
                 </tbody>
             </table>
@@ -82,34 +84,117 @@
                             </a>
                         </td>
                     </tr>
-                    <tr >
-                        <td colspan="4" style="padding: 0px" class="bg-white">
-                            <div class="collapse"  id="sa{{$booking->id}}" style="padding: 10px">
-                                {{$booking->description}} required at {{$booking->street}}, {{$booking->suburb}}, {{$booking->city}} at {{number_format($booking->start_time, 2, ":","")}} on {{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}
-                            </div>
-                        </td>
-                        <td style="padding: 0px" class="bg-white">
-                            <div class="collapse"  id="sa{{$booking->id}}" style="padding: 10px">
-                                <!--TODO feedback only for completed jobs, check if feedback has been sent already by the staff member and grey out button if it has
-                                        - figure out a way to distinguish between staff and client feedback -->
-                                @if(!count($booking->staff_assignment) > 0)
-                                    <button type="button" class="btn btn-primary w-100" data-toggle="modal" data-target="#f{{$booking->id}}">
-                                        Feedback
-                                    </button>
-                                @else
-                                    <button type="button" class="btn btn-secondary disabled w-100" data-toggle="modal">
-                                        Feedback Sent
-                                    </button>
-                            @endif
-                        </td>
-                    </tr>
+
                     <!--TODO fix collapse issue, make sure staff only see their staff assignments and timesheets-->
                     @if(count($booking->staff_assignment) > 0)
                         @foreach($booking->staff_assignment as $sa)
+
                             @if($sa->staff_id == auth()->guard('staff')->user()->id)
-                                @foreach($sa->timesheet as $timesheet)
-                                    <!--TODO Display timesheets here-->
-                                @endforeach
+
+                                <tr class="bg-light" >
+                                    <td colspan="4" style="padding: 0px" class="bg-light">
+                                        <span class="collapse" id="sa{{$booking->id}}"></span>
+                                        <div style="padding: 10px"  class="collapse" id="sa{{$booking->id}}">
+                                            {{$booking->description}} required at {{$booking->street}}, {{$booking->suburb}}, {{$booking->city}} at {{number_format($booking->start_time, 2, ":","")}} on {{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}
+                                        </div>
+                                    </td>
+                                    <td style="padding: 0px" class="bg-light">
+                                        <div style="padding: 10px"  class="collapse" id="sa{{$booking->id}}">
+                                            <!--TODO feedback only for completed jobs, check if feedback has been sent already by the staff member and grey out button if it has
+                                                    - figure out a way to distinguish between staff and client feedback -->
+                                            @if(!(count($sa->feedback) > 0))
+                                                <button type="button" class="btn btn-primary w-100" data-toggle="modal" data-target="#f{{$booking->id}}">
+                                                    Feedback
+                                                </button>
+                                            @else
+                                                <button type="button" class="btn btn-secondary disabled w-100" data-toggle="modal">
+                                                    Feedback Sent
+                                                </button>
+                                            @endif
+                                        </div>
+                                    </td>
+                                </tr>
+                                @if(count($sa->timesheet) > 0)
+                                    <tr class="bg-light">
+                                        <td style="padding: 0" class="border-0 bg-light" >
+                                            <div class="collapse" id="sa{{$booking->id}}" style="padding:10px;">
+                                            </div>
+                                        </td>
+                                        <td style="padding: 0" class="border-0 bg-light" >
+                                            <div class="collapse" id="sa{{$booking->id}}" style="padding:10px;">
+                                                <strong>
+                                                    Date
+                                                </strong>
+                                            </div>
+                                        </td>
+                                        <td style="padding: 0"  class="border-0 bg-light" >
+                                            <div class="collapse" id="sa{{$booking->id}}" style="padding:10px;">
+                                                <strong>
+                                                    Start Time
+                                                </strong>
+
+                                            </div>
+                                        </td>
+                                        <td style="padding: 0" class="border-0 bg-light"  >
+                                            <div class="collapse" id="sa{{$booking->id}}" style="padding:10px;">
+                                                <strong>
+                                                    Stop Time
+                                                </strong>
+
+                                            </div>
+                                        </td>
+                                        <td style="padding: 0" colspan="2"  class="border-0 bg-light">
+                                            <div class="collapse" id="sa{{$booking->id}}" style="padding:10px; text-align: right">
+                                                <strong>
+                                                    Hours
+                                                </strong>
+
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    @php($totalHours = 0)
+                                    @foreach($sa->timesheet as $timesheet)
+                                        <!--TODO Display timesheets here-->
+                                        <tr class="bg-white">
+                                            <td style="padding: 0"  class="border-0 bg-white" >
+                                                <div class="collapse" id="sa{{$booking->id}}" style="padding:10px">
+                                                </div>
+                                            </td>
+                                            <td style="padding: 0"  class="border-0 bg-white" >
+                                                <div class="collapse" id="sa{{$booking->id}}" style="padding:10px">
+                                                    {{\Carbon\Carbon::parse($timesheet->date)->format('d/m/Y')}}
+                                                </div>
+                                            </td>
+                                            <td style="padding: 0" class="border-0 bg-white" >
+                                                <div class="collapse" id="sa{{$booking->id}}" style="padding:10px">
+                                                    {{number_format($timesheet->start_time, 2, ":", "")}}
+                                                </div>
+                                            </td>
+                                            <td style="padding: 0"  class="border-0 bg-white" >
+                                                <div class="collapse" id="sa{{$booking->id}}" style="padding:10px">
+                                                    {{number_format($timesheet->stop_time, 2, ":", "")}}
+                                                </div>
+                                            </td>
+                                            <td style="padding: 0" colspan="2"  class="border-0 bg-white">
+                                                <div class="collapse" id="sa{{$booking->id}}"  style="padding:10px; text-align: right">
+                                                    {{$timesheet->stop_time - $timesheet->start_time}}
+                                                    @php($totalHours += ($timesheet->stop_time - $timesheet->start_time))
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    @endforeach
+                                    <tr>
+                                        <td colspan="6" class="border-0 bg-white" style="padding: 0">
+                                            <div class="collapse" id="sa{{$booking->id}}" style="padding:10px; text-align: right">
+                                                <strong>Total Hours: {{$totalHours}}</strong>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                @endif
+                                @break
                             @endif
                         @endforeach
                     @endif

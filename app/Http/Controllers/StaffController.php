@@ -27,14 +27,14 @@ class StaffController extends Controller
             $timetable = app('App\Http\Controllers\BookingsController')->getTimetable($currentStaff);
             $availableBookings = Booking::query()->select('*')->whereNotIn('id',
                 Staff_Assignment::query()->select('booking_id')->where('staff_id', '=', $currentStaff->id)->get())
-                ->whereDate('date', '>=', today())
+                ->whereDate('date', '>=', today("NZ"))
                 ->where('available_slots','>','0')
                 ->orderBy('date','asc')
                 ->orderBy('start_time', 'asc')
                 ->get();
             $completedBookings = Booking::query()->select('*')->whereIn('id',
                 Staff_Assignment::query()->select('booking_id')->where('staff_id', '=', $currentStaff->id)->get())
-                ->whereDate('date', '<=', today())
+                ->whereDate('date', '<=', today("NZ"))
                 ->orderBy('date','asc')
                 ->orderBy('start_time', 'asc')
                 ->get();
