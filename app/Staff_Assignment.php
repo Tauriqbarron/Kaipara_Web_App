@@ -15,6 +15,7 @@ class Staff_Assignment extends Model
     public function booking() {
         return $this->belongsTo('App\Booking', 'booking_id', 'id');
     }
+
     public function timesheet() {
         return $this->hasMany('App\Timesheet');
     }

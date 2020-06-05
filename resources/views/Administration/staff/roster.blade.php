@@ -5,18 +5,25 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
 
 @section('mainContent')
-    <h1>staff id: {{$staff->id}}</h1>
-    <form class="form-row">
+
+    <!--The calendar-->
+    <div class="text-center">
+    <h1 class="">staff name: {{$staff->first_name}} {{$staff->last_name}}
+    </h1>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#example">Add Roster</button>
+    </div>
+    <hr/>
+    <div class="form-row justify-content-center">
+        <div class="form-group mr-2">
+
+        </div>
         <div class="form-group w-50">
             {!! $calendar->calendar() !!}
             {!! $calendar->script() !!}
         </div>
-        <div class="form-group col-md-2">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#example">test</button>
-        </div>
-    </form>
+    </div>
 
-
+    <!--Add new roster form in modal-->
     <div class="modal fade" id="example" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -38,7 +45,6 @@
                             <label for="date"><strong>Date: </strong></label>
                             <input type="date" class="form-control" name="date">
                         </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -48,4 +54,53 @@
             </div>
         </div>
     </div>
+
+    <!--Roster record-->
+    <div class="text-center">
+    <button type="button" class="btn btn-success" id="showRecord">Show roster record</button>
+    <hr/>
+    </div>
+
+    <table class="table" id="rosterRecord">
+        <thead>
+        <tr>
+            <th>
+                Staff Name: {{$staff->first_name}}
+                {{$staff->last_name}}
+            </th>
+            <th>Date</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($rosters as $record)
+            <tr>
+                <td></td>
+                <td>
+                    {{$record->date}}
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="#">Edit</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" href="#">Delete</a>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+
+    <!--Show and hide record table-->
+    <script>
+        $(document).ready(function () {
+            $('#rosterRecord').hide();
+        });
+
+            $('#showRecord').click(function () {
+                $('#rosterRecord').toggle(500, 'linear');
+
+            });
+    </script>
+
 @endsection

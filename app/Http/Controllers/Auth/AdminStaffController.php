@@ -141,7 +141,7 @@ class AdminStaffController extends Controller
                 new \DateTime($row->booking->date),
                 $row->staff_id,
                 [
-                    'color' => '#3E76E5',
+                    'url' => route('security_assignment.view', ['id' => $row->booking_id]),
                 ]
             );
         }
@@ -159,7 +159,7 @@ class AdminStaffController extends Controller
             );
         }
         $calendar = \Calendar::addEvents($event);
-        return view('Administration.staff.roster', compact('events', 'calendar'), ['staff' => $staff]);
+        return view('Administration.staff.roster', compact('events', 'calendar'), ['staff' => $staff, 'rosters' => $rosters]);
     }
 
     public function saveRoster(Request $request, $id) {
