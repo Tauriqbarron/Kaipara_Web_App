@@ -20,12 +20,46 @@ class StaffController extends Controller
     public function getHome() {
 
         if(Auth::guard('staff')->check()) {
-            //TODO: Grab all records for user and sort them into separate arrays afterwards
-            //  to keep database access as minimal as possible
+            //TODO: Only access database when something changes rather than reloading the same data
             $currentStaff = Staff::query()->find(Auth::guard('staff')->user()->id);
-            $bookings = app('App\Http\Controllers\BookingsController')->getStaffBookings($currentStaff);
-            $timetable = app('App\Http\Controllers\BookingsController')->getTimetable($currentStaff);
-            $availableBookings = Booking::query()->select('*')->whereNotIn('id',
+            $staff_assignments = $currentStaff->staff_assignment->pluck('booking_id');
+
+            $bookings = Booking::query()->select('*')->whereIn('id', $staff_assignments)
+                ->orWhere('available_slots', '>', '0')->get();
+
+
+            $staff_bookings = $bookings->whereIn('id', $staff_assignments)
+                ->where('date','=', Carbon::parse(Session::get('date1'))->format('Y-m-d'))
+                ->sortBy('date',1)
+                ->sortBy('start_time', 1);
+
+            foreach ($bookings as $booking)
+            {
+                error_log($booking->date . ' vs ' . Session::get('date1'));
+            }
+
+
+            /**
+             * Why is ony this one working properly?
+            */
+            $availableBookings = $bookings->whereNotIn('id', $staff_assignments)
+                ->where('date', '>=', today("NZ"))
+                ->where('available_slots','>','0')
+                ->sortBy('date',1)
+                ->sortBy('start_time', 1);
+
+            $completedBookings = $bookings->whereIn('id', $staff_assignments)
+                ->where('date', '<=', today("NZ"))
+                ->sortBy('date',1)
+                ->sortBy('start_time', 1);
+
+            //$bookings = app('App\Http\Controllers\BookingsController')->getStaffBookings($currentStaff);
+            $timetable = $bookings->whereIn('id', $staff_assignments)
+                ->whereBetween('date', array(Session::get('weekStart'), Session::get('weekEnd')))
+                ->sortBy('date',1)
+                ->sortBy('start_time', 1);
+
+           /*$availableBookings = Booking::query()->select('*')->whereNotIn('id',
                 Staff_Assignment::query()->select('booking_id')->where('staff_id', '=', $currentStaff->id)->get())
                 ->whereDate('date', '>=', today("NZ"))
                 ->where('available_slots','>','0')
@@ -37,9 +71,9 @@ class StaffController extends Controller
                 ->whereDate('date', '<=', today("NZ"))
                 ->orderBy('date','asc')
                 ->orderBy('start_time', 'asc')
-                ->get();
+                ->get();*/
 
-            return view('Security.index', ['staff' => $currentStaff, 'bookings' => $bookings,'completedBookings' => $completedBookings, 'availableBookings' => $availableBookings, 'timetable' => $timetable]);
+            return view('Security.index', ['staff' => $currentStaff, 'bookings' => $staff_bookings,'completedBookings' => $completedBookings, 'availableBookings' => $availableBookings, 'timetable' => $timetable]);
         }
         else {
             return redirect()->route('staff.login')->with('error', 'You must log in to view your profile');

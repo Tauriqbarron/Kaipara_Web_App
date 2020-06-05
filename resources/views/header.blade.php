@@ -30,7 +30,7 @@
                 @if($guard != 'none')
                     <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end  dropdown">
                         <li class="nav-item border-0 "  >
-                            <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                            <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button" style="cursor:pointer;">
                             @if(auth()->guard('admin')->check())
                                     {{auth()->guard('admin')->user()->name}}
                             @else
