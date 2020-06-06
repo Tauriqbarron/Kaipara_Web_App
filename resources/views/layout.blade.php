@@ -14,6 +14,7 @@
         <script src="{{url('js/app.js')}}"></script>
 
         <script src="https://kit.fontawesome.com/c3929064ae.js" crossorigin="anonymous"></script>
+
         <title>@yield('title') - KSPMS</title>
         @yield('styles')
         @php

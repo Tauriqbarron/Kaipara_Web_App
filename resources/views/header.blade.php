@@ -1,11 +1,4 @@
-<!--
-<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex shadow">
-    <img src="{{url('images/KaiparaLogo.png')}}" alt="" class=" mr-auto">
-    <a href="{{route('admin.index')}}" class="btn btn-primary  mx-1 align-self-start shadow">Admin</a>
-    <a href="{{ url('/selectuser') }}" class="btn btn-primary  mx-1 align-self-start shadow">Login</a>
-    <a href="{{ url('/registration/usertype') }}" class="btn btn-primary  mx-1 align-self-start shadow">Sign up</a>
-</nav>
--->
+
 <div class="shadow">
     <div class="container-fluid">
         <nav class="navbar navbar-light navbar-expand-lg justify-content-left"  style="padding: 5px">
@@ -54,7 +47,7 @@
                             </div>
                         </li>
                         <li class="nav-item" id="headerProfileImage">
-                            <img class="float-right rounded-circle shadow dropdown-toggle text-nowrap" style="display: block; width: 54px; height: 54px" src="@if($guard == 'admin'){{url('images/Profile_Placeholder_large.jpg')}}@else{{auth()->guard($guard)->user()->imgPath}}@endif" alt="profileImage">
+                            <img class="float-right rounded-circle shadow dropdown-toggle text-nowrap" style="display: block; width: 54px; height: 54px" src="@if($guard == 'admin'){{url('images/Profile_Placeholder.png')}}@else{{auth()->guard($guard)->user()->imgPath}}@endif" alt="profileImage">
                         </li>
                     </ul>
 

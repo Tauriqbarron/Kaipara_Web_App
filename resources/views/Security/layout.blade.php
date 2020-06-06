@@ -46,11 +46,11 @@
                                 <label for="rating">Rating:</label>
                             </div>
                             <div class="rating btn-group form-group" id="rating" role="group">
-                                <input type="radio" name="star" id="star5" value="5"><label for="star5"></label>
-                                <input type="radio" name="star" id="star4" value="4"><label for="star4"></label>
-                                <input type="radio" name="star" id="star3" value="3"><label for="star3"></label>
-                                <input type="radio" name="star" id="star2" value="2"><label for="star2"></label>
-                                <input type="radio" name="star" id="star1" value="1"><label for="star1"></label>
+                                <input type="radio" name="star" id="{{$booking->id}}star5" value="5"><label for="{{$booking->id}}star5"></label>
+                                <input type="radio" name="star" id="{{$booking->id}}star4" value="4"><label for="{{$booking->id}}star4"></label>
+                                <input type="radio" name="star" id="{{$booking->id}}star3" value="3"><label for="{{$booking->id}}star3"></label>
+                                <input type="radio" name="star" id="{{$booking->id}}star2" value="2"><label for="{{$booking->id}}star2"></label>
+                                <input type="radio" name="star" id="{{$booking->id}}star1" value="1"><label for="{{$booking->id}}star1"></label>
                             </div>
                             <div>
                                 <label for="messageBox">Message:</label>

@@ -1,7 +1,7 @@
 <div style="width:26%; height: 100%; float: left">
     <div style="height: 48px"></div>
     <div class="rounded" style="background-color: #636b6f; width: 105%; height: 400px" id="map"></div>
-    <div  class="jumbotron bg-light shadow-sm" style="margin-top:10px;width: 25%; padding: 10px; position: fixed">
+    <div  class="jumbotron bg-light shadow-sm rounded" style="margin-top:10px;width: 301px; padding: 10px; position: fixed">
         <div style="">
             <h6>Jump to:</h6>
             <a href="#available" class="nav-link"><h6>Available Assignments</h6></a>
@@ -92,7 +92,7 @@
                         </td>
                     </tr>
 
-                    <!--TODO fix collapse issue, make sure staff only see their staff assignments and timesheets-->
+                    <!--TODO create a class for cell backgrounds and padding, get rid of inline style defs-->
                     @if(count($booking->staff_assignment) > 0)
                         @foreach($booking->staff_assignment as $sa)
 
@@ -162,7 +162,7 @@
                                     </tr>
                                     @php($totalHours = 0)
                                     @foreach($sa->timesheet as $timesheet)
-                                        <!--TODO Display timesheets here-->
+                                        <!--Display timesheets here-->
                                         <tr class="bg-white">
                                             <td style="padding: 0"  class="border-0 bg-white" >
                                                 <div class="collapse" id="sa{{$booking->id}}" style="padding:10px">

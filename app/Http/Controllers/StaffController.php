@@ -33,15 +33,6 @@ class StaffController extends Controller
                 ->sortBy('date',1)
                 ->sortBy('start_time', 1);
 
-            foreach ($bookings as $booking)
-            {
-                error_log($booking->date . ' vs ' . Session::get('date1'));
-            }
-
-
-            /**
-             * Why is ony this one working properly?
-            */
             $availableBookings = $bookings->whereNotIn('id', $staff_assignments)
                 ->where('date', '>=', today("NZ"))
                 ->where('available_slots','>','0')
@@ -53,25 +44,10 @@ class StaffController extends Controller
                 ->sortBy('date',1)
                 ->sortBy('start_time', 1);
 
-            //$bookings = app('App\Http\Controllers\BookingsController')->getStaffBookings($currentStaff);
             $timetable = $bookings->whereIn('id', $staff_assignments)
                 ->whereBetween('date', array(Session::get('weekStart'), Session::get('weekEnd')))
                 ->sortBy('date',1)
                 ->sortBy('start_time', 1);
-
-           /*$availableBookings = Booking::query()->select('*')->whereNotIn('id',
-                Staff_Assignment::query()->select('booking_id')->where('staff_id', '=', $currentStaff->id)->get())
-                ->whereDate('date', '>=', today("NZ"))
-                ->where('available_slots','>','0')
-                ->orderBy('date','asc')
-                ->orderBy('start_time', 'asc')
-                ->get();
-            $completedBookings = Booking::query()->select('*')->whereIn('id',
-                Staff_Assignment::query()->select('booking_id')->where('staff_id', '=', $currentStaff->id)->get())
-                ->whereDate('date', '<=', today("NZ"))
-                ->orderBy('date','asc')
-                ->orderBy('start_time', 'asc')
-                ->get();*/
 
             return view('Security.index', ['staff' => $currentStaff, 'bookings' => $staff_bookings,'completedBookings' => $completedBookings, 'availableBookings' => $availableBookings, 'timetable' => $timetable]);
         }
