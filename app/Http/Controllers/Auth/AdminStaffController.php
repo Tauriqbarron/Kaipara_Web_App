@@ -19,11 +19,13 @@ use MaddHatter\LaravelFullcalendar\Calendar;
 
 class AdminStaffController extends Controller
 {
+    //Get the staff list.
     public function getIndex() {
         $staffs = Staff::all();
         return view('Administration.staff.index', ['staffs' => $staffs]);
     }
 
+    //Search staff function.
     public function getSearch(Request $request) {
         $search = $request->input('search');
         $staffs = Staff::where('first_name', 'like', '%'.$search.'%')
@@ -34,10 +36,12 @@ class AdminStaffController extends Controller
         return view('Administration.staff.index', ['staffs' => $staffs]);
     }
 
+    //Get the create staff page.
     public function getCreate() {
         return view('Administration.staff.staff_create');
     }
 
+    //Save the new staff detail to database.
     public function postCreate(Request $request) {
         $validator = Validator::make($request->all(), [
             'fName'=>'required|max:50',
@@ -69,16 +73,20 @@ class AdminStaffController extends Controller
         return redirect()->route('staff.index');
     }
 
+    //View a staff
     public function viewStaff($id) {
         $staff = Staff::find($id);
         return view('Administration.staff.staff_view', ['staff' => $staff]);
     }
 
+
+    //Get the edit staff page.
     public function  getEdit($id) {
         $staff = Staff::find($id);
         return view('Administration.staff.staff_edit', ['staff' => $staff]);
     }
 
+    //Update a staff details.
     public function postEdit(Request $request, $id) {
         $validator = Validator::make($request->all(), [
             'fName'=>'required|max:50',
@@ -110,11 +118,13 @@ class AdminStaffController extends Controller
         return redirect()->route('staff.index');
     }
 
+    //Get the delete staff page
     public function getDelete($id) {
         $staff = Staff::query()->find($id);
         return view('Administration.staff.staff_delete', ['staff' => $staff]);
     }
 
+    //Delete the staff record from the database.
     public function postDelete($id) {
         $staff = Staff::query()->find($id);
         $record = Staff_Assignment::where('staff_id', '=', $id)->get();
@@ -163,6 +173,7 @@ class AdminStaffController extends Controller
         return view('Administration.staff.roster', compact('events', 'calendar'), ['staff' => $staff, 'rosters' => $rosters]);
     }
 
+    //Create new roster.
     public function saveRoster(Request $request, $id) {
         $validator = Validator::make($request->all(), [
             'date' => 'required|date|date_format:Y-m-d'
@@ -171,6 +182,18 @@ class AdminStaffController extends Controller
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput($request->all());
+        }
+        $rosters = Roster::where('staff_id', '=', $id)->get();
+        $staff_assignments = Staff_Assignment::where('staff_id', '=', $id)->get();
+        foreach ($rosters as $record) {
+            if($record->date == $request->date){
+                return redirect()->back()->withErrors('This date is already in the roster.');
+            }
+        }
+        foreach ($staff_assignments as $record) {
+            if ($record->booking->date == $request->date) {
+                return redirect()->back()->withErrors('This date has already been assigned activity.');
+            }
         }
 
         $roster = new Roster([
@@ -181,18 +204,38 @@ class AdminStaffController extends Controller
         return redirect()->back();//->route('staff.roster', ['id' => $id]);
     }
 
-    public function getUpdateRoster($id) {
-        //
-    }
-
-    public function updateRoster(Request $request, $id) {
-        //
-    }
-
+    //Update the existing roster.
     public function uRoster(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'date' => 'required|date|date_format:Y-m-d'
+        ]);
+        if($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput($request->all());
+        }
         $roster = Roster::find($request->id);
+        $rosters = Roster::where('staff_id', '=', $roster->staff_id)->get();
+        $staff_assignments = Staff_Assignment::where('staff_id', '=', $roster->staff_id)->get();
+        foreach ($rosters as $record) {
+            if($record->date == $request->date){
+                return redirect()->back()->withErrors('This date is already in the roster.');
+            }
+        }
+        foreach ($staff_assignments as $record) {
+            if ($record->booking->date == $request->date) {
+                return redirect()->back()->withErrors('This date has already been assigned activity.');
+            }
+        }
         $roster->date = $request->input('date');
         $roster->save();
+        return redirect()->back();
+    }
+
+    //Delete a roster.
+    public function dRoster(Request $request) {
+        $roster = Roster::find($request->id);
+        $roster->delete();
         return redirect()->back();
     }
 

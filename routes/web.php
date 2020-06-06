@@ -369,30 +369,32 @@ Route::post('/admin/staff/delete/{id}',[
     'as' => "staff.delete"
 ]);
 
+//Roster calendar route.
+  //Open the roster page route.
 Route::get('admin/staff/roster{id}', [
     'uses' => 'Auth\AdminStaffController@getCalendar',
     'as' => 'staff.roster'
 ]);
 
+  //Save the new roster route.
 Route::post('admin/staff/roster{id}', [
     'uses' => 'Auth\AdminStaffController@saveRoster',
     'as' => 'staff.roster'
 ]);
 
-Route::get('admin/staff/roster/edit{id}', [
-    'uses' => 'Auth\AdminStaffController@getUpdateRoster',
-    'as' => 'staff.updateRoster'
-]);
-
-Route::post('admin/staff/roster/edit{id}', [
-    'uses' => 'Auth\AdminStaffController@updateRoster',
-    'as' => 'staff.updateRoster'
-]);
-
-Route::patch('admin/staff/roster/edit{id}', [
+  //Edit roster route.
+Route::post('admin/staff/roster/edit', [
     'uses' => 'Auth\AdminStaffController@uRoster',
     'as' => 'staff.uRoster'
 ]);
+
+  //Delete roster route.
+Route::post('admin/staff/roster/delete', [
+    'uses' => 'Auth\AdminStaffController@dRoster',
+    'as' => 'staff.dRoster'
+]);
+
+
 
 
 /*Service Provider*/
