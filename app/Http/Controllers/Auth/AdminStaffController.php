@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Query\Builder;
@@ -141,7 +142,7 @@ class AdminStaffController extends Controller
                 new \DateTime($row->booking->date),
                 $row->staff_id,
                 [
-                    'color' => '#3E76E5',
+                    'url' => route('security_assignment.view', ['id' => $row->booking_id]),
                 ]
             );
         }
@@ -159,7 +160,7 @@ class AdminStaffController extends Controller
             );
         }
         $calendar = \Calendar::addEvents($event);
-        return view('Administration.staff.roster', compact('events', 'calendar'), ['staff' => $staff]);
+        return view('Administration.staff.roster', compact('events', 'calendar'), ['staff' => $staff, 'rosters' => $rosters]);
     }
 
     public function saveRoster(Request $request, $id) {
@@ -178,6 +179,21 @@ class AdminStaffController extends Controller
         ]);
         $roster->save();
         return redirect()->back();//->route('staff.roster', ['id' => $id]);
+    }
+
+    public function getUpdateRoster($id) {
+        //
+    }
+
+    public function updateRoster(Request $request, $id) {
+        //
+    }
+
+    public function uRoster(Request $request) {
+        $roster = Roster::find($request->id);
+        $roster->date = $request->input('date');
+        $roster->save();
+        return redirect()->back();
     }
 
 

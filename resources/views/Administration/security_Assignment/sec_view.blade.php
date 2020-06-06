@@ -70,6 +70,6 @@
             <label for="inputAddress2">Status</label>
             <p class="form-control">{{$assignment->status}}</p>
         </div>
-        <a class="btn btn-danger" href="{{route('security_assignment.index')}}">back</a>
+        <a class="btn btn-danger" href="{{URL::previous()}}">back</a>
     </form>
 @endsection

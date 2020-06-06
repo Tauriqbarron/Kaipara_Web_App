@@ -379,6 +379,22 @@ Route::post('admin/staff/roster{id}', [
     'as' => 'staff.roster'
 ]);
 
+Route::get('admin/staff/roster/edit{id}', [
+    'uses' => 'Auth\AdminStaffController@getUpdateRoster',
+    'as' => 'staff.updateRoster'
+]);
+
+Route::post('admin/staff/roster/edit{id}', [
+    'uses' => 'Auth\AdminStaffController@updateRoster',
+    'as' => 'staff.updateRoster'
+]);
+
+Route::patch('admin/staff/roster/edit{id}', [
+    'uses' => 'Auth\AdminStaffController@uRoster',
+    'as' => 'staff.uRoster'
+]);
+
+
 /*Service Provider*/
 Route::get('/admin/serviceProvider', [
     'uses' => 'Auth\AdminSpController@getIndex',

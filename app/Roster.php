@@ -9,6 +9,6 @@ class Roster extends Model
     protected $fillable = ['staff_id', 'date'];
 
     public function staff() {
-        $this->belongsTo('App\Staff', 'staff_id', 'id');
+        return $this->belongsTo('App\Staff', 'staff_id', 'id');
     }
 }
