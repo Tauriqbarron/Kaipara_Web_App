@@ -103,6 +103,10 @@ body, html{
     min-width: 1300px;
 }
 
+.header-bar{
+    min-width: 1300px;
+}
+
 .service-img{
     width:200px;
     height: 200px;

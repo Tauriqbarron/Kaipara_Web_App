@@ -29,6 +29,7 @@ class ClientController extends Controller
 
             $user = Clients::query()->where('email',$email)->first();
             $request->session()->put('user',$user);
+            $request->session()->put('guardString', 'clients');
             //Session::put('user',$user);
             //if success redirect to profile
             return view('Client.index',['user'=>$user]) ;

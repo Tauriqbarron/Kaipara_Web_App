@@ -5,18 +5,6 @@
         <link rel="stylesheet" href="{{url('css/Profile.css')}}">
     </head>
     <body id="bod">
-        @php
-            $guard = 'none';
-            if(auth()->guard('staff')->check()){
-                $guard = 'staff';
-            }elseif(auth()->guard('clients')->check()){
-                $guard = 'clients';
-            }elseif(auth()->guard('admin')->check()){
-                $guard = 'admin';
-            }elseif(auth()->guard('service_provider')->check()){
-                $guard = 'service_provider';
-            }
-        @endphp
 
         @include('Profile.header')
         <div class="MainCon container-fluid">

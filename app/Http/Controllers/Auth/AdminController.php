@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -30,6 +31,7 @@ class AdminController extends Controller
 
     if(Auth::guard('admin')->attempt($credentials)){
 
+        $request->session()->put('guardString', 'admin');
         return redirect()->route('admin.index');
     }
     return redirect()->back()->withErrors("The email address or password is wrong.");
@@ -37,6 +39,7 @@ class AdminController extends Controller
 
     public function logout() {
         Auth::guard('admin')->logout();
+        Session::flush();
         return redirect('/');
     }
 }

@@ -45,6 +45,7 @@ class ServiceProviderController extends Controller
                 $user = service_provider::query()->where('email',$email)->first();
                 $request->session()->put('user',$user);
                 $request->session()->put('type', 'service');
+                $request->session()->put('guardString', 'service_provider');
                 //Session::put('user',$user);
                 //if success redirect to profile
                 return view('Service.index',['user'=>$user]) ;
@@ -98,6 +99,7 @@ class ServiceProviderController extends Controller
     }
     public function serviceLogout(){
         Auth::guard('service_provider')->logout();
+        Session::flush();
         return redirect('/');
     }
     public function quote($id,Request $request){

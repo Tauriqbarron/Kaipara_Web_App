@@ -10,18 +10,7 @@
     <title>@yield('title') - KSPMS</title>
 </head>
     <body>
-    @php
-        $guard = 'none';
-        if(auth()->guard('staff')->check()){
-            $guard = 'staff';
-        }elseif(auth()->guard('clients')->check()){
-            $guard = 'clients';
-        }elseif(auth()->guard('admin')->check()){
-            $guard = 'admin';
-        }elseif(auth()->guard('service_provider')->check()){
-            $guard = 'service_provider';
-        }
-    @endphp
+
 
         <div class="MainCon">
             @include('Profile.header')

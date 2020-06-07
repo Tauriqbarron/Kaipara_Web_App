@@ -3,7 +3,7 @@
     <i class="fas fa-cog align-self-start mt-3"></i>
     <a href="{{route('staff.logout')}}" class="btn btn-primary  mx-1 align-self-start">Log out</a>
 </nav>-->
-<div class="shadow">
+<div class="shadow header-bar">
     <div class="container-fluid">
         <nav class="navbar navbar-light navbar-expand-lg justify-content-left"  style="padding: 5px">
             <a href="/" class="navbar-brand d-flex w-50 mr-auto">
@@ -13,11 +13,11 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse w-100 align-items-end" id="collapsingNavbar3" >
-                @if($guard != 'none')
+                @if($guard = session()->get('guardString'))
                     <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end  dropdown">
                         <li class="nav-item border-0 "  >
                             <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button" style="cursor:pointer;">
-                                @if(auth()->guard('admin')->check())
+                                @if($guard === 'admin')
                                     {{auth()->guard('admin')->user()->name}}
                                 @elseif($guard === 'service_provider')
                                     {{auth()->guard($guard)->user()->firstname}} {{auth()->guard($guard)->user()->lastname}}
