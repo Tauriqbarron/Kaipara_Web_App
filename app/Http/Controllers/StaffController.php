@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Booking;
+use App\Feedback;
 use App\Staff;
 use App\Staff_Assignment;
+use App\Timesheet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +24,7 @@ class StaffController extends Controller
         if(Auth::guard('staff')->check()) {
             //TODO: Only access database when something changes rather than reloading the same data
             $currentStaff = Staff::query()->find(Auth::guard('staff')->user()->id);
-            $staff_assignments = $currentStaff->staff_assignment->pluck('booking_id');
+            $staff_assignments = $currentStaff->staff_assignments->pluck('booking_id');
 
             $bookings = Booking::query()->select('*')->whereIn('id', $staff_assignments)
                 ->orWhere('available_slots', '>', '0')->get();
@@ -56,8 +58,17 @@ class StaffController extends Controller
         }
     }
 
-    public function postFeedback(){
-        return redirect()->route('security.index')->with('message', 'Feedback Sent');
+    public function postFeedback(Request $request){
+
+        $feedback = new Feedback([
+
+            'rating' => $request->get('star'),
+            'message'=> $request->get('message'),
+            'staff__assignment_id'=> $request->get('staff_assignment_id'),
+        ]);
+        $feedback->save();
+
+        return redirect()->back()->with('message', 'Feedback Sent');
     }
 
     public function dateChange($i){
@@ -96,7 +107,7 @@ class StaffController extends Controller
         $user = Session::has('user') ? Session::get('user') : null;
         $staff_id = $user->id;
         $staff = Staff::query()->find($staff_id);
-        $staff_assignments = $staff->staff_Assignment;
+        $staff_assignments = $staff->staff_Assignments;
         //TODO: Tidy this up
         $booking = Booking::query()->find($booking_id);
 

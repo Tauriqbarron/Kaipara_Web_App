@@ -42,7 +42,7 @@
                                     <a class="dropdown-item" href="{{route('admin.logout')}}">Logout</a>
                                 @else
                                     <a class="dropdown-item" href="{{route('client.index')}}">My Profile</a>
-                                    <a class="dropdown-item" href="{{route('client.logout')}}">Logout</a>
+                                    <a class="dropdown-item" href="{{url('client/logout')}}">Logout</a>
                                 @endif
                             </div>
                         </li>

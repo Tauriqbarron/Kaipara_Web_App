@@ -2,14 +2,26 @@
     <head>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{url('css/Profile.css')}}">
     </head>
-    <body>
+    <body id="bod">
+        @php
+            $guard = 'none';
+            if(auth()->guard('staff')->check()){
+                $guard = 'staff';
+            }elseif(auth()->guard('clients')->check()){
+                $guard = 'clients';
+            }elseif(auth()->guard('admin')->check()){
+                $guard = 'admin';
+            }elseif(auth()->guard('service_provider')->check()){
+                $guard = 'service_provider';
+            }
+        @endphp
 
-
-        <div class="MainCon">
-            @include('Profile.header')
-            @include('Profile.ProfileBar')
-            @include('Profile.nav')
+        @include('Profile.header')
+        <div class="MainCon container-fluid">
+            {{--@include('Profile.ProfileBar')--}}
+            @include('Client.nav')
 
             <div class="content">
                 @yield('mainContent')
@@ -47,6 +59,9 @@
             }
             function overviewStart(val){
                 document.getElementById('startTime').value =val;
+            }
+            function overviewEnd(val){
+                document.getElementById('endTime').value =val;
             }
         </script>
     </body>

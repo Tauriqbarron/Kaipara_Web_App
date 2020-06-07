@@ -234,9 +234,9 @@ class AdminStaffController extends Controller
 
 
     public function logout() {
-        Auth::logout();
+        Auth::guard('staff')->logout();
         Session::flush();
-        if(!(Auth::check() || (Session::has('user')))){
+        if(!(Auth::guard('staff')->check() || (Session::has('user')))){
             return redirect('/');
         }
         return redirect()->back()->with('error', 'Logout failed');

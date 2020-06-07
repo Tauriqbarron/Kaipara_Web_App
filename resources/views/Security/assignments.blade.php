@@ -92,9 +92,9 @@
                         </td>
                     </tr>
 
-                    <!--TODO create a class for cell backgrounds and padding, get rid of inline style defs-->
-                    @if(count($booking->staff_assignment) > 0)
-                        @foreach($booking->staff_assignment as $sa)
+                    <!--TODO create a css class for cell backgrounds and padding, get rid of inline style defs-->
+                    @if(count($booking->staff_assignments) > 0)
+                        @foreach($booking->staff_assignments as $sa)
 
                             @if($sa->staff_id == auth()->guard('staff')->user()->id)
 
@@ -114,7 +114,7 @@
                                                     Feedback
                                                 </button>
                                             @else
-                                                <button type="button" class="btn btn-secondary disabled w-100" data-toggle="modal">
+                                                <button type="button" class="btn btn-secondary disabled w-100" style="cursor: not-allowed">
                                                     Feedback Sent
                                                 </button>
                                             @endif

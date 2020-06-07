@@ -15,7 +15,7 @@ class AdminClientController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:admin');
+        $this->middleware('auth:admin')->except('logout');
     }
 
     public function adminIndex() {
@@ -131,9 +131,9 @@ class AdminClientController extends Controller
     }
 
     public function logout() {
-        Auth::logout();
+        Auth::guard('clients')->logout();
         Session::flush();
-        if(!(Auth::check() || (Session::has('user')))){
+        if(!(Auth::guard('clients')->check())){
             return redirect('/');
         }
         return redirect()->back()->with('error', 'Logout failed');

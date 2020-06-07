@@ -100,6 +100,7 @@ body, html{
     margin-right: auto;
     margin-left: auto;
     max-width: 1300px;
+    min-width: 1300px;
 }
 
 .service-img{
@@ -163,9 +164,11 @@ body, html{
     opacity: 0;
 }
 
-body{margin-top:20px;}
+/*body{margin-top:20px;}*/
 
-
+ textarea{
+     resize: none;
+ }
 /* USER LIST TABLE */
 .user-list tbody td > img {
     position: relative;

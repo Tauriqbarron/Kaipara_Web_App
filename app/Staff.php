@@ -13,7 +13,7 @@ class Staff extends Model implements Auth
     protected  $fillable = ['first_name', 'last_name', 'email', 'phone_number', 'password', 'imgPath', 'street', 'suburb', 'city', 'postcode'];
     protected $hidden = ['password'];
 
-    public function staff_Assignment() {
+    public function staff_Assignments() {
         return $this->hasMany('App\Staff_Assignment');
     }
 

@@ -25,50 +25,54 @@
     </head>
     <body id="bod">
     @foreach($completedBookings as $booking)
-        <div class="modal" id="f{{$booking->id}}" tabindex="-1" role="dialog" aria-labelledby="modalTestLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <form  method="POST" action="{{route('staff.postFeedback')}}">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="modal-client-image">
-                                <img src="{{url('images/Profile_Placeholder_Large.jpg')}}" class="rounded-circle w-100" alt="Client Image" >
+        @if($staff_assignment = $booking->staff_assignments->where('staff_id', '=', $staff->id)->first())
+            <div class="modal" id="f{{$booking->id}}" tabindex="-1" role="dialog" aria-labelledby="modalTestLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <form  method="POST" action="{{route('staff.postFeedback')}}">
+                        @csrf
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="modal-client-image">
+                                    <img src="{{url('images/Profile_Placeholder_Large.jpg')}}" class="rounded-circle w-100" alt="Client Image" >
+                                </div>
+                                <div style="width: 300px; float: right">
+                                    <h5 class="modal-title" id="modalTestLabel">{{$booking->description}}</h5>
+                                    <h5 class="modal-title" id="modalTestLabel">Client: {{$booking->client->first_name}} {{$booking->client->last_name}}</h5>
+                                    <label for="staff_assignment_id">Staff Assignment ID: {{$staff_assignment->id}} </label><input id="staff_assignment_id" name="staff_assignment_id" value="{{$staff_assignment->id}}" type="hidden">
+                                </div>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <div style="width: 300px; float: right">
-                                <h5 class="modal-title" id="modalTestLabel">{{$booking->description}}</h5>
-                                <h5 class="modal-title" id="modalTestLabel">Client: {{$booking->client->first_name}} {{$booking->client->last_name}}</h5>
-                            </div>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div>
-                                <label for="rating">Rating:</label>
-                            </div>
-                            <div class="rating btn-group form-group" id="rating" role="group">
-                                <input type="radio" name="star" id="{{$booking->id}}star5" value="5"><label for="{{$booking->id}}star5"></label>
-                                <input type="radio" name="star" id="{{$booking->id}}star4" value="4"><label for="{{$booking->id}}star4"></label>
-                                <input type="radio" name="star" id="{{$booking->id}}star3" value="3"><label for="{{$booking->id}}star3"></label>
-                                <input type="radio" name="star" id="{{$booking->id}}star2" value="2"><label for="{{$booking->id}}star2"></label>
-                                <input type="radio" name="star" id="{{$booking->id}}star1" value="1"><label for="{{$booking->id}}star1"></label>
-                            </div>
-                            <div>
-                                <label for="messageBox">Message:</label>
-                            </div>
-                            <div>
-                                <textarea name="message" class="float-left w-100" id="messageBox" rows="5" maxlength="300"></textarea>
-                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <label for="rating">Rating:</label>
+                                </div>
+                                <div class="rating btn-group form-group" id="rating" role="group">
+                                    <input type="radio" name="star" id="{{$booking->id}}star5" value="5"><label for="{{$booking->id}}star5"></label>
+                                    <input type="radio" name="star" id="{{$booking->id}}star4" value="4"><label for="{{$booking->id}}star4"></label>
+                                    <input type="radio" name="star" id="{{$booking->id}}star3" value="3"><label for="{{$booking->id}}star3"></label>
+                                    <input type="radio" name="star" id="{{$booking->id}}star2" value="2"><label for="{{$booking->id}}star2"></label>
+                                    <input type="radio" name="star" id="{{$booking->id}}star1" value="1"><label for="{{$booking->id}}star1"></label>
+                                </div>
+                                <div>
+                                    <label for="messageBox">Message:</label>
+                                </div>
+                                <div>
+                                    <textarea name="message" class="float-left w-100" id="messageBox" rows="5" maxlength="300"></textarea>
+                                </div>
 
 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success">Submit Feedback</button>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success">Submit Feedback</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+        @endif
         @endforeach
     <?php
     $addresses = array();
