@@ -1,4 +1,4 @@
-@extends('Service.index')
+@extends('Profile.layout')
 @section('nav')
     <a class="nav-link active btn-lg mx-5 pt-2 bg-secondary text-white" href="{{ url('/service/applications')}}">Applications</a>
     <a class="nav-link active btn-lg mx-5 pt-2 " href="{{ url('/service/jobs')}}">Jobs</a>
@@ -10,6 +10,13 @@
     <div class="bookCon">
         <div class="jobList">
             <div class="jobListCon">
+                @if(count($errors) > 0)
+                    <div class="alert alert-danger">
+                        @foreach($errors->all() as $error)
+                            <p>{{$error}}</p>
+                        @endforeach
+                    </div>
+                @endif
                 @foreach($applications as $app)
                     <div class="card w-75 mx-auto my-4 bg-light border-0 shadow-sm">
                         <div class="card-body ">
@@ -18,6 +25,7 @@
                             <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#{{$app->id}}" aria-expanded="false" aria-controls="collapseExample">
                                 <h6>View Details</h6>
                             </button>
+
                             <div class="collapse my-2" id="{{$app->id}}">
                                 <div class="card card-body">
 {{--                                    TODO create if statement for Quotable to be displayed --}}
@@ -29,15 +37,32 @@
                                     <p class="card-text">{{$app->description}}</p>
                                 </div>
                             </div>
+                            <br/>
                             @if($app->price == NULL)
                                 <button class="btn btn-success float-right mx-1" type="button" data-toggle="collapse" data-target="#{{$app->title}}" aria-expanded="false" aria-controls="collapseExample">
                                     Create Quote
                                 </button>
                                 <div class="collapse my-2" id="{{$app->title}}">
+                                    @if(count($errors) > 0)
+                                        <div class="alert alert-danger">
+                                            @foreach($errors->all() as $error)
+                                                <p>{{$error}}</p>
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                    <!--Quote section-->
                                     <div class="card card-body">
-                                        <form method="GET" action="{{route('service.quote',['id' => $app->id])}}">
+                                        <h5 class="card-title">Quote</h5>
+                                        <div>
+                                        Select quote type:<br/>
+                                        Totally: <input type="radio" id="totally" name="quote_type" onclick="select_quote_type()">&nbsp;&nbsp;&nbsp;
+                                        Hourly: <input type="radio" id="hourly" name="quote_type" onclick="select_quote_type()">
+                                        </div>
+                                        <hr/>
+                                        <!--Normal quote-->
+                                        <form method="GET" action="{{route('service.quote',['id' => $app->id])}}" id="normal_quote" style="display: none">
                                             <div class="form-group row">
-                                                <label for="price" class="col-sm-2 col-form-label">Enter Price</label>
+                                                <label for="price">Enter a total price:</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" class="form-control" id="price" name="price">
                                                 </div>
@@ -46,7 +71,21 @@
                                                 <label for="message">Please include a short message with your quote</label>
                                                 <textarea class="form-control" id="message" name="message" rows="3"></textarea>
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Send Quote</button>
+                                            <button type="submit" class="btn btn-primary float-right">Send Quote</button>
+                                        </form>
+                                        <!--Hourly quote-->
+                                        <form id="hourly_quote" style="display: none">
+                                            <div class="form-group row">
+                                                <label for="price">Enter a hourly price:</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="price" name="price">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="message">Please include a short message with your quote</label>
+                                                <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary float-right">Send Quote</button>
                                         </form>
                                     </div>
                                 </div>
@@ -61,4 +100,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        //Show totally quote type form or show hourly form.
+        function select_quote_type() {
+            var total = document.getElementById('totally');
+            var hour = document.getElementById('hourly');
+            if(total.checked) {
+                document.getElementById('normal_quote').style.display = 'block';
+                document.getElementById('hourly_quote').style.display = 'none';
+            }else {
+                document.getElementById('normal_quote').style.display = 'none';
+                document.getElementById('hourly_quote').style.display = 'block';
+            }
+        }
+    </script>
 @endsection
