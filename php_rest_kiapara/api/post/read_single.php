@@ -21,4 +21,4 @@ $service_arr = array(
     'description'=> $service->description
 );
 
-print_r(json_encode($service_arr));
+echo json_encode($service_arr);
