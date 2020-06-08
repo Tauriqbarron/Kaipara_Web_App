@@ -21,4 +21,22 @@ class Services{
     
         return $stmt;
     }
+        public function read_single(){
+        $query = 'SELECT
+            p.id,
+            p.description
+        FROM
+        ' . $this->table . ' p
+        WHERE
+            p.id = ?
+        LIMIT 0,1';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1,$this->id);
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->description = $row['description'];
+        
+    }
 }
