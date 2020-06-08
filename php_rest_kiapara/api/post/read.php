@@ -12,7 +12,7 @@ $service = new Services($db);
 
 $result = $service->read();
 
-$num = $result-rowCount();
+$num = $result->rowCount();
 
 if ($num > 0){
     $service_arr = array();
