@@ -24,8 +24,8 @@ if($num > 0){
             'id'=>$id,
             'created_at'=> $created_at,
             'updated_at'=> $updated_at,
-            'first_name'=> $firstname,
-            'last_name'=> $lastname,
+            'first_name'=> $first_name,
+            'last_name'=> $last_name,
             'email'=> $email,
             'phone_number'=> $phone_number,
             'password'=> $password,
@@ -36,7 +36,7 @@ if($num > 0){
         );
         array_push($client_arr['data'],$client_item);
     }
-    echo json_encode($service_arr);
+    echo json_encode($client_arr);
 }else{
     echo json_encode(
         array('message'=>'No Cleints Found')
