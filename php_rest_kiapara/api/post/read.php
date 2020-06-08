@@ -10,7 +10,7 @@ $db = $database->connect();
 
 $service = new Services($db);
 
-$result = $post->read();
+$result = $service->read();
 
 $num = $result-rowCount();
 
