@@ -16,12 +16,12 @@
         <div class="jobList">
             <div class="jobListCon">
                 @foreach($jobs as $job)
-                    <div class="card w-auto cards">
+                    <div class="card w-50 cards">
+                        <img src="{{$job->application->imagePath}}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <img src="{{$job->imagePath}}" class="card-cmdimg-top jobimg" alt="...">
-                            <h5 class="card-title">{{$job->title}}</h5>
-                            <h5 class="card-title">{{$job->price}}</h5>
-                            <p class="card-text">{{$job->description}}</p>
+                            <h5 class="card-title">{{$job->application->title}}</h5>
+                            <h5 class="card-title">{{$job->application->price}}</h5>
+                            <p class="card-text">{{$job->application->description}}</p>
                             <a href="{{route('service.canceljob',['id' => $job->id])}}" class="btn btn-primary float-right mx-1">Cancel</a>
                         </div>
                     </div>

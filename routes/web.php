@@ -110,7 +110,7 @@ Route::get('/acceptJob/{id}',[
     'as' => 'service.acceptJob'
 ]);
 
-Route::get('/quote/{id}',[
+Route::post('/quote/{id}',[
     'uses' => 'ServiceProviderController@quote',
     'as' => 'service.quote'
 ]);

@@ -11,7 +11,6 @@ class Booking extends Model
         'status','street', 'suburb', 'city', 'postcode','staff_needed', 'available_slots'];
 
     public function client() {
-
         return $this->belongsTo('App\Clients', 'client_id', 'id');
     }
 

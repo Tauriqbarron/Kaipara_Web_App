@@ -16,4 +16,8 @@ class Clients extends Model implements Auth
         return $this->hasMany('App\Booking');
     }
 
+    public function applications() {
+        return $this->hasMany('App\application');
+    }
+
 }

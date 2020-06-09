@@ -19,6 +19,8 @@ class CreateQuotesTable extends Migration
             $table->foreignId('job_id')->references('id')->on('applications');
             $table->string('price');
             $table->string('message');
+            $table->string('quote_type');
+            $table->string('estimate_hours');
         });
     }
 
