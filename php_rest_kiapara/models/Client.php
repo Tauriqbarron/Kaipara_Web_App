@@ -173,4 +173,18 @@ class Client{
         return false;
 
     }
+        public function delete(){
+        $query = 'DELETE FROM ' . $this->table . ' WHERE id= :id';
+        $stmt = $this->conn->prepare($query);
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $stmt->bindParam(':id', $this->id);
+
+        if($stmt->execute()){
+            return  true;
+        }
+
+        printf("Error: %s. \n", $stmt->error);
+
+        return false;
+    }
 }
