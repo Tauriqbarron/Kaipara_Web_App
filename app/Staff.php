@@ -20,4 +20,7 @@ class Staff extends Model implements Auth
     public function rosters() {
         return $this->hasMany('App\Roster');
     }
+    public function leave_requests() {
+    return $this->hasMany('App\Leave_Request');
+    }
 }

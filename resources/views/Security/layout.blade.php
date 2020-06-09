@@ -24,6 +24,25 @@
 
     </head>
     <body id="bod">
+        <div class="modal" id="leaveRequest" tabindex="-1" role="dialog" aria-labelledby="modalTestLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <form  method="POST" action="{{--route('staff.postLeaveRequest')--}}">
+                    @csrf
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4>Leave Request</h4>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Submit Feedback</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     @foreach($completedBookings as $booking)
         @if($staff_assignment = $booking->staff_assignments->where('staff_id', '=', $staff->id)->first())
             <div class="modal" id="f{{$booking->id}}" tabindex="-1" role="dialog" aria-labelledby="modalTestLabel" aria-hidden="true">

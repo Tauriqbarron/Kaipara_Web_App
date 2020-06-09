@@ -489,7 +489,11 @@ class ComposerStaticInit62d9ea2a1f53928317c40ca3a96bceed
     );
 
     public static $classMap = array (
+        'AbsenceStatusSeeder' => __DIR__ . '/../..' . '/database/seeds/AbsenceStatusSeeder.php',
+        'AbsenceTypesSeeder' => __DIR__ . '/../..' . '/database/seeds/AbsenceTypesSeeder.php',
         'AdminTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AdminTableSeeder.php',
+        'App\\Absence_Status' => __DIR__ . '/../..' . '/app/Absence_Status.php',
+        'App\\Absence_Types' => __DIR__ . '/../..' . '/app/Absence_Types.php',
         'App\\Admin' => __DIR__ . '/../..' . '/app/Admin.php',
         'App\\Booking' => __DIR__ . '/../..' . '/app/Booking.php',
         'App\\Booking_Types' => __DIR__ . '/../..' . '/app/Booking_Types.php',
@@ -530,6 +534,7 @@ class ComposerStaticInit62d9ea2a1f53928317c40ca3a96bceed
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Job_Type' => __DIR__ . '/../..' . '/app/Job_Type.php',
+        'App\\Leave_Request' => __DIR__ . '/../..' . '/app/Leave_Request.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',

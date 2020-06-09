@@ -4,7 +4,7 @@ var addresses = [];
 var n = new Date();
 var _scAddresses = [];
 
-
+//TODO get nav buttons by custom class name and set active
 function loaded(){
     if(window.sessionStorage.getItem('button')){
         pageToggle(window.sessionStorage.getItem('button'),window.sessionStorage.getItem('target'));
@@ -127,8 +127,6 @@ function getRotation(element){
         st.getPropertyValue("transform") ||
         "FAIL";
 
-// With rotate(30deg)...
-// matrix(0.866025, 0.5, -0.5, 0.866025, 0px, 0px)
     var values = tr.split('(')[1].split(')')[0].split(',');
     var a = values[0];
     var b = values[1];

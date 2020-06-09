@@ -6,7 +6,11 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AbsenceStatusSeeder' => $baseDir . '/database/seeds/AbsenceStatusSeeder.php',
+    'AbsenceTypesSeeder' => $baseDir . '/database/seeds/AbsenceTypesSeeder.php',
     'AdminTableSeeder' => $baseDir . '/database/seeds/AdminTableSeeder.php',
+    'App\\Absence_Status' => $baseDir . '/app/Absence_Status.php',
+    'App\\Absence_Types' => $baseDir . '/app/Absence_Types.php',
     'App\\Admin' => $baseDir . '/app/Admin.php',
     'App\\Booking' => $baseDir . '/app/Booking.php',
     'App\\Booking_Types' => $baseDir . '/app/Booking_Types.php',
@@ -47,6 +51,7 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Job_Type' => $baseDir . '/app/Job_Type.php',
+    'App\\Leave_Request' => $baseDir . '/app/Leave_Request.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
