@@ -10,7 +10,13 @@ $db = $database->connect();
 
 $client = new Client($db);
 
-$client->id = isset($__GET['id']) ? $__GET['id'] : die();
+if(isset($__GET['id'])){
+    $client->id = $__GET['id'];
+}else{
+    echo json_encode(
+        array('message'=>'id not set')
+    );
+}
 
 $client->getSingleClient();
 
