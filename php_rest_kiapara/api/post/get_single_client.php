@@ -10,8 +10,8 @@ $db = $database->connect();
 
 $client = new Client($db);
 
-if(isset($__GET['id'])){
-    $client->id = $__GET['id'];
+if(isset($_GET['id'])){
+    $client->id = $_GET['id'];
 }else{
     echo json_encode(
         array('message'=>'id not set')
