@@ -118,20 +118,22 @@ class ServiceProviderController extends Controller
         $validator = Validator::make($request->all(), [
             'price' => 'required',
             'message' => 'required',
-
+            'hours' => 'required|numeric'
         ]);
 
         if($validator->fails()) {
             return redirect()->back()
-                ->withErrors('You must enter the price and message for a quote.')
+                ->withErrors('You must enter the price, estimate hours and message for a quote.')
                 ->withInput($request->all());
         }
 
         $quote = new quote([
             'service_provider_id' => auth()->guard('service_provider')->id(),
             'job_id' => $id,
-            'price'=> $request->input('price'),
-            'message'=>$request->input('message')
+            'price' => $request->input('price'),
+            'message' => $request->input('message'),
+            'quote_type' => $request->input('type'),
+            'estimate_hour' => $request->input('hours')
         ]);
         $quote->save();
 

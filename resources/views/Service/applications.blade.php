@@ -43,48 +43,49 @@
                                     Create Quote
                                 </button>
                                 <div class="collapse my-2" id="{{$app->title}}">
-                                    @if(count($errors) > 0)
-                                        <div class="alert alert-danger">
-                                            @foreach($errors->all() as $error)
-                                                <p>{{$error}}</p>
-                                            @endforeach
-                                        </div>
-                                    @endif
                                     <!--Quote section-->
                                     <div class="card card-body">
                                         <h5 class="card-title">Quote</h5>
                                         <div>
                                         Select quote type:<br/>
-                                        Totally: <input type="radio" id="totally" name="quote_type" onclick="select_quote_type()">&nbsp;&nbsp;&nbsp;
-                                        Hourly: <input type="radio" id="hourly" name="quote_type" onclick="select_quote_type()">
+                                        Totally: <input type="radio" id="totally" name="quote_type" value="totally" onclick="select_quote_type()">&nbsp;&nbsp;&nbsp;
+                                        Hourly: <input type="radio" id="hourly" name="quote_type" value="hourly" onclick="select_quote_type()">
                                         </div>
                                         <hr/>
                                         <!--Normal quote-->
-                                        <form method="GET" action="{{route('service.quote',['id' => $app->id])}}" id="normal_quote" style="display: none">
+                                        <form method="post" action="{{route('service.quote',['id' => $app->id])}}" id="normal_quote" style="display: none">
+                                            @csrf
                                             <div class="form-group row">
-                                                <label for="price">Enter a total price:</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="price" name="price">
-                                                </div>
+                                                <label for="price">Enter a total price: </label>
+                                                <input type="text" class="form-control w-25" id="price" name="price">
                                             </div>
                                             <div class="form-group row">
-                                                <label for="message">Please include a short message with your quote</label>
+                                                <label for="hours">Estimate hours:</label>
+                                                <input type="text" name="hours" class="form-control">
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="message">Please include a short message with your quote:</label>
                                                 <textarea class="form-control" id="message" name="message" rows="3"></textarea>
                                             </div>
+                                            <input type="text" name="type" value="totally">
                                             <button type="submit" class="btn btn-primary float-right">Send Quote</button>
                                         </form>
                                         <!--Hourly quote-->
-                                        <form id="hourly_quote" style="display: none">
+                                        <form id="hourly_quote" method="post" action="{{route('service.quote',['id' => $app->id])}}" style="display: none">
+                                            @csrf
                                             <div class="form-group row">
-                                                <label for="price">Enter a hourly price:</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="price" name="price">
-                                                </div>
+                                                <label for="price">Enter a hourly price: </label>
+                                                <input type="text" class="form-control w-25" id="price" name="price">
                                             </div>
                                             <div class="form-group row">
-                                                <label for="message">Please include a short message with your quote</label>
+                                                <label for="hours">Estimate hours:</label>
+                                                <input type="text" name="hours" class="form-control">
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="message">Please include a short message with your quote:</label>
                                                 <textarea class="form-control" id="message" name="message" rows="3"></textarea>
                                             </div>
+                                            <input type="text" name="type" value="hourly">
                                             <button type="submit" class="btn btn-primary float-right">Send Quote</button>
                                         </form>
                                     </div>
