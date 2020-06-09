@@ -125,7 +125,7 @@ class Client{
     }
     
     public function update(){
-        $query = 'INSERT INTO '. $this->table .'
+        $query = 'UPDATE '. $this->table .'
             SET
                 first_name = :first_name,
                 last_name = :last_name,
