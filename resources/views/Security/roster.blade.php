@@ -9,7 +9,7 @@
 <div style="width:100%;">
     <div class="container jumbotron bg-light" id="schedule">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-12">
                 <div class="main-box clearfix">
                     <div class="table">
                         <table class="table border" style="table-layout: fixed; width: 100%">
@@ -127,6 +127,100 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-3 h-100">
+                <div class="row">
+                    <h3>Annual Leave</h3>
+                </div>
+                <div class="row">
+                    <a href="#leaveApplication">Apply for leave</a>
+                </div>
+                <div class="row">
+                    <a href="#leaveRequests">View Leave Requests</a>
+                </div>
+            </div>
+            <div class="h-100 col-9 container jumbotron bg-light mr-0 pt-2 pb-2" id="leaveRequests">
+                <div class="row">
+                    <table class="table" style="table-layout: fixed; width: 100%">
+                        <thead>
+                        <tr>
+                            <th colspan="2" class="text-center border"><h3>Leave Requests</h3></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if(count($staff->leave_requests) > 0)
+                            @foreach($staff->leave_requests as $record)
+                                <tr>
+                                    <th colspan="2">{{$record->subject}}</th>
+                                </tr>
+                                <tr>
+                                    <td>Type: {{$record->absence_types->description}}</td>
+                                    <td> Status: <span class="font-italic status-{{$record->absence_status->description}}">{{$record->absence_status->description}}</span></td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr><th colspan="2" class="text-center">Nothing to show</th></tr>
+                        @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="h-100 col-6 container jumbotron bg-light pt-2 pb-2" id="leaveApplication">
+                <div class="row text-center">
+                    <h3 class="text-center mr-auto ml-auto">Apply for leave</h3>
+                </div>
+                <form method="POST" action="">
+                    <div class="row">
+                        <label>
+                            <input class="form-control" type="text" name="subject" id="subject" placeholder="Subject" >
+                        </label>
+                    </div>
+                    <div class="row">
+                        <label>
+                            <textarea type="text" cols="60" rows="8" style="resize: none" class="form-control w-75"  name="message" id="message" placeholder="Message"></textarea>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="w-100">
+                            <label for="type"><strong>Absence Type:</strong></label>
+                        </div>
+                        <div class="w-100">
+                            <select id="type" name="type">
+                                @foreach(\App\Absence_Types::all() as $type)
+                                    <option value="{{$type->id}}">{{$type->description}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col pl-0">
+                            <div>
+                                <label for="startDate"><strong>Start Date: </strong></label>
+                            </div>
+                            <div>
+                                <input type="date" id="startDate" name="startDate">
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <div>
+                                <label for="endDate"><strong>End Date: </strong></label>
+                            </div>
+                            <div>
+                                <input type="date" id="endDate" name="EndDate">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row mt-3 pt-3 pb-2 ml-auto border-top w-100">
+                        <input type="submit" value="Save" class="ml-auto btn btn-success ">
+                    </div>
+                </form>
             </div>
         </div>
     </div>

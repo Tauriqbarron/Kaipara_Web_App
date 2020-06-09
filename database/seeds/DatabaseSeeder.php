@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
         $this->call(StaffAssignmentSeeder::class);
         $this->call(BookingTypesTableSeeder::class);
         */
-        $this->call(add_completed_assignments_and_timesheets::class);
+        //$this->call(add_completed_assignments_and_timesheets::class);
+        $this->call(AbsenceTypesSeeder::class);
+        $this->call(AbsenceStatusSeeder::class);
 
 
 

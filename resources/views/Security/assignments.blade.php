@@ -1,7 +1,7 @@
-<div style="width:26%; height: 100%; float: left">
+<div class="profile-card-col">
     <div style="height: 48px"></div>
-    <div class="rounded" style="background-color: #636b6f; width: 105%; height: 400px" id="map"></div>
-    <div  class="jumbotron bg-light shadow-sm rounded" style="margin-top:10px;width: 301px; padding: 10px; position: fixed">
+    <div class="assignment-map rounded" id="map"></div>
+    <div  class="jumbotron bg-light shadow-sm rounded" style="margin-top:10px;width: 301px;padding: 10px;position: fixed">
         <div style="">
             <h6>Jump to:</h6>
             <a href="#available" class="nav-link"><h6>Available Assignments</h6></a>

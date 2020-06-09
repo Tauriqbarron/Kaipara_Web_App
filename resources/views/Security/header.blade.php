@@ -1,12 +1,9 @@
 <div class="shadow w-100 header-bar">
     <div class="container-fluid">
-        <nav class="navbar navbar-light navbar-expand-lg justify-content-left"  style="padding: 5px">
+        <nav class="navbar navbar-light navbar-expand-lg navbar-expand-md navbar-expand-sm justify-content-left"  style="padding: 5px">
             <a href="/" class="navbar-brand d-flex w-50 mr-auto" onclick="clearSession()" >
                 <img id="kaiparaLogo" src="{{url('images/KaiparaLogo.png')}}" class="mr-auto float-left">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
-                <span class="navbar-toggler-icon"></span>
-            </button>
                 @if(auth()->guard('staff')->check())
                     <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end  dropdown">
                         <li class="nav-item border-0 ">
