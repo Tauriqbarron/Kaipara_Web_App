@@ -13,7 +13,7 @@ $db = $database->connect();
 
 $client = new Client($db);
 
-$data = json_decode(file_get_contents("php://input"));
+$data = json_decode(file_get_contents('php://input'));
 
 $client->id = $data->id; 
 
