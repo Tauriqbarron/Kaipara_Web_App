@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Console\Scheduling\Event;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as Auth;
 use Illuminate\Auth\Authenticatable;
@@ -12,6 +13,9 @@ class Staff extends Model implements Auth
     protected $primaryKey = 'id';
     protected  $fillable = ['first_name', 'last_name', 'email', 'phone_number', 'password', 'imgPath', 'street', 'suburb', 'city', 'postcode'];
     protected $hidden = ['password'];
+    protected $dispatchesEvents = [
+        'created' => Events\CreateStaff::class
+    ];
 
     public function staff_Assignments() {
         return $this->hasMany('App\Staff_Assignment');
