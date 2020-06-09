@@ -17,5 +17,9 @@ class applications extends Model
         return $this->hasOne('App\Service_Provider_job');
     }
 
+    public function quotes() {
+        return $this->hasMany('App\quote');
+    }
+
 
 }
