@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Booking;
 use App\Feedback;
+use App\Leave_Request;
 use App\Staff;
 use App\Staff_Assignment;
 use App\Timesheet;
@@ -144,6 +145,22 @@ class StaffController extends Controller
             $booking->save();
         }
         return redirect()->route('security.index');
+    }
+
+    public function postLeave(Request $request){
+
+        $leaveRequest = new Leave_Request([
+           'subject' => $request->get('subject'),
+           'message' => $request->get('message'),
+           'absence_types_id' => $request->get('type'),
+           'absence_status_id' => 1,
+           'start_date' => $request->get('startDate'),
+           'end_date' => $request->get('EndDate'),
+           'staff_id' => auth()->guard('staff')->user()->id
+        ]);
+        $leaveRequest->save();
+        return redirect()->route('security.index')->with('message', 'Leave Request Sent');
+
     }
 
 }

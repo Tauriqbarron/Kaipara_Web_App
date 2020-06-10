@@ -8,6 +8,7 @@ class applications extends Model
 {
     protected $fillable = ['client_id','title','imagePath','description','price','street', 'suburb', 'city', 'postcode'];
 
+    public $timestamps = false;
     public function client() {
 
         return $this->belongsTo('App\Clients', 'client_id', 'id');

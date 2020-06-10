@@ -12,10 +12,10 @@ class Leave_Request extends Model
 
     public function absence_status()
     {
-        return $this->hasOne('App\Absence_Status', 'absence_status_id', 'id');
+        return $this->hasOne('App\Absence_Status', 'id', 'absence_status_id');
     }
     public function absence_types()
     {
-        return $this->hasOne('App\Absence_Types', 'absence_types_id', 'id');
+        return $this->hasOne('App\Absence_Types', 'id', 'absence_types_id');
     }
 }

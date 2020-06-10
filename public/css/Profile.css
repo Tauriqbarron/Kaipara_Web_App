@@ -75,6 +75,15 @@ body, html{
     opacity: 1;
 }
 
+.al-hidden{
+    display: none;
+}
+
+a.disabled{
+    color: lightgray;
+    pointer-events: none;
+}
+
 .modal-client-image{
     width: 100px;
     height: 100px;
@@ -117,7 +126,7 @@ body, html{
     margin-right: auto;
     margin-left: auto;
     max-width: 1300px;
-    min-width: 1300px;
+    min-width: 1000px;
 }
 
 .header-bar{

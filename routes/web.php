@@ -89,6 +89,7 @@ Route::get('/security/week{i}', [
 Route::post('/security/start','TimesheetController@start')->name('staff.startJob');
 Route::post('/security/stop','TimesheetController@stop')->name('staff.stopJob');
 Route::post('/security/rating','staffController@postFeedback')->name('staff.postFeedback');
+Route::post('/security/leaveApplication','staffController@postLeave')->name('staff.postLeave');
 
 
 

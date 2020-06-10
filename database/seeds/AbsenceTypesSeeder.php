@@ -16,11 +16,11 @@ class AbsenceTypesSeeder extends Seeder
         ]);
         $type->save();
         $type = new \App\Absence_Types([
-            'description' => 'Sick Leave'
+            'description' => 'Lieu Day'
         ]);
         $type->save();
         $type = new \App\Absence_Types([
-            'description' => 'Maternity Leave'
+            'description' => 'Study Leave'
         ]);
         $type->save();
     }

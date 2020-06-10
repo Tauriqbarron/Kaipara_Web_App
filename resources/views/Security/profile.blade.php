@@ -20,7 +20,7 @@
             <h6>Jump to:</h6>
             <a href="#available" onclick="pageToggle('assignmentBtn','assignmentContainer')" class="nav-link"><h6>Available Assignments</h6></a>
             <a href="#completed" onclick="pageToggle('assignmentBtn','assignmentContainer')" class="nav-link"><h6>Completed Assignments</h6></a>
-            <a href="#" onclick="pageToggle('rosterBtn','rosterContainer')"  class="nav-link"><h6>Request Leave</h6></a>
+            <a href="#leaveRequests" onclick="pageToggle('rosterBtn','rosterContainer')"  class="nav-link"><h6>Request Leave</h6></a>
         </div>
     </div>
 
@@ -132,6 +132,6 @@
             </div>
         </div>
     </div>
-        @include('Security.roster')
+        @include('Security.timetable')
 </div>
 

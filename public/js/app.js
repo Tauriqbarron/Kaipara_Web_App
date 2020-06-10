@@ -5,6 +5,43 @@ var n = new Date();
 var _scAddresses = [];
 
 //TODO get nav buttons by custom class name and set active
+window.addEventListener('load', function() {
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+}, false);
+
+
+function dateValidation(sender) {
+    console.log(sender.value);
+    console.log(document.getElementById("alEndDate").min);
+    document.getElementById("alEndDate").min = sender.value;
+    console.log('after: '+document.getElementById("alEndDate").min);
+}
+
+function alToggle() {
+    //do something
+    pages = document.getElementsByClassName('annual-leave-page');
+
+    for(i = 0; i < pages.length; i++){
+        pages[i].classList.toggle('al-hidden');
+    }
+    btns = document.getElementsByClassName('alBtn');
+
+    for(i = 0; i < btns.length; i++){
+        btns[i].classList.toggle('disabled');
+    }
+}
 function loaded(){
     if(window.sessionStorage.getItem('button')){
         pageToggle(window.sessionStorage.getItem('button'),window.sessionStorage.getItem('target'));
