@@ -12,7 +12,7 @@ $client = new Client($db);
 
 
 if(isset($_GET['email'])){
-    $client->id = $_GET['email'];
+    $client->email = $_GET['email'];
 }else{
     echo json_encode(
         array('message'=>'email not set')
