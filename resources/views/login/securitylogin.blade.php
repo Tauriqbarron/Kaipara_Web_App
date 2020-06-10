@@ -10,7 +10,7 @@
 <body>
 <div class="container-fluid">
     <form class="w-75 mx-auto" role="form" method="POST" action="{{route('staff.login')}}">
-        <a class="btn btn-danger" href="{{url('/')}}">Back</a>
+        <a class="btn btn-secondary" href="{{url('/')}}">Back</a>
         <h1 class="form-group ">Security Officer Login</h1>
         {{csrf_field()}}
 
