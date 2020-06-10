@@ -92,7 +92,7 @@ class AdminStaffController extends Controller
             'fName'=>'required|max:50',
             'lName'=>'required|max:50',
             'email'=>'required|email',
-            'pNumber'=>'required|max:10',
+            'pNumber'=>'required|max:11',
             'street'=>'required',
             'suburb'=>'required',
             'city'=>'required',

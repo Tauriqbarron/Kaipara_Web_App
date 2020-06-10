@@ -148,6 +148,18 @@ class StaffController extends Controller
     }
 
     public function postLeave(Request $request){
+        $validator = Validator::make($request->all(), [
+            'subject'=>'required|max:50',
+            'message'=>'required|max:300',
+            'type'=>'required',
+            'startDate'=>'required',
+            'EndDate'=>'required'
+        ]);
+        if($validator->fails()) {
+            return redirect()->route('security.index')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         $leaveRequest = new Leave_Request([
            'subject' => $request->get('subject'),
@@ -161,6 +173,30 @@ class StaffController extends Controller
         $leaveRequest->save();
         return redirect()->route('security.index')->with('message', 'Leave Request Sent');
 
+    }
+
+    //Update a staff details.
+    public function postEdit(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'pNumber'=>'required|max:11',
+            'street'=>'required',
+            'suburb'=>'required',
+            'city'=>'required',
+            'postcode'=>'required'
+        ]);
+        if($validator->fails()) {
+            return redirect()->route('security.index')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $staff = Staff::query()->find(Auth::guard('staff')->user()->id);
+        $staff->phone_number = $request->input('pNumber');
+        $staff->street = $request->input('street');
+        $staff->suburb = $request->input('suburb');
+        $staff->city = $request->input('city');
+        $staff->postcode = $request->input('postcode');
+        $staff->save();
+        return redirect()->route('security.index')->with('message', 'Details updated');
     }
 
 }

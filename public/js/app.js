@@ -7,6 +7,29 @@ var _scAddresses = [];
 //TODO get nav buttons by custom class name and set active
 window.addEventListener('load', function() {
 
+    if(window.sessionStorage.getItem('button')){
+        pageToggle(window.sessionStorage.getItem('button'),window.sessionStorage.getItem('target'));
+    }
+    else{
+        pageToggle('profileBtn', 'profileContainer')
+    }
+
+    var editBtns = document.getElementsByClassName('edit-toggle');
+
+    for(var i = 0; i < editBtns.length; i++){
+        editBtns[i].addEventListener('click', function (event) {
+            var btn = event.target;
+            var id = btn.getAttribute('data-target');
+            var input = document.getElementById(id);
+            input.classList.remove('form-control-plaintext');
+            input.removeAttribute('readonly');
+            document.getElementById('btnEditStaff').classList.remove('disabled');
+            document.getElementById('btnEditStaff').style.pointerEvents = 'all';
+            btn.classList.remove('text-secondary');
+            btn.style.pointerEvents = 'none';
+        })
+    }
+
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.getElementsByClassName('needs-validation');
     // Loop over them and prevent submission
@@ -43,12 +66,7 @@ function alToggle() {
     }
 }
 function loaded(){
-    if(window.sessionStorage.getItem('button')){
-        pageToggle(window.sessionStorage.getItem('button'),window.sessionStorage.getItem('target'));
-    }
-    else{
-        pageToggle('profileBtn', 'profileContainer')
-    }
+
 }
 
 function setAddresses(scAddresses){
@@ -178,26 +196,16 @@ function getRotation(element){
 }
 
 function pageToggle(button, target){
-    profilePage = document.getElementById('profileContainer').style;
-    assignmentPage = document.getElementById('assignmentContainer').style;
-    schedulePage = document.getElementById('scheduleContainer').style;
-    rosterPage = document.getElementById('rosterContainer').style;
+    pages = document.getElementsByClassName('page-toggle-page');
 
-    profileBtn = document.getElementById('profileBtn').classList;
-    scheduleBtn = document.getElementById('scheduleBtn').classList;
-    assignmentBtn = document.getElementById('assignmentBtn').classList;
-    rosterBtn = document.getElementById('rosterBtn').classList;
-
-    pages = [profilePage,assignmentPage,schedulePage,rosterPage];
-
-    btns = [profileBtn, scheduleBtn, assignmentBtn, rosterBtn];
+    btns = document.getElementsByClassName('page-toggle-btn');
 
     for(i = 0; i < pages.length; i+=1){
-        pages[i].display = 'none';
+        pages[i].style.display = 'none';
     }
 
     for(i = 0; i < btns.length; i+=1){
-        btns[i].remove('active');
+        btns[i].classList.remove('active');
     }
 
     document.getElementById(button).classList.add('active');

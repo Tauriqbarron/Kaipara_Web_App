@@ -8,18 +8,18 @@
     <div class="navbar-collapse collapse w-100 " id="collapsingNavbar3">
         <ul class="navbar-nav w-100 h-100 justify-content-center text-nowrap align-items-end">
             <li class="nav-item" >
-                <a class="nav-link" href="#Schedule" id="scheduleBtn" onclick="pageToggle('scheduleBtn', 'scheduleContainer')">Schedule</a>
+                <a class="nav-link page-toggle-btn" href="#Schedule" id="scheduleBtn" onclick="pageToggle('scheduleBtn', 'scheduleContainer')">Schedule</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#Assignments" id="assignmentBtn" onclick="pageToggle('assignmentBtn', 'assignmentContainer')">Assignments</a>
+                <a class="nav-link page-toggle-btn" href="#Assignments" id="assignmentBtn" onclick="pageToggle('assignmentBtn', 'assignmentContainer')">Assignments</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#Roster" id="rosterBtn"  onclick="pageToggle('rosterBtn', 'rosterContainer')">Roster</a>
+                <a class="nav-link page-toggle-btn" href="#Roster" id="rosterBtn"  onclick="pageToggle('rosterBtn', 'rosterContainer')">Roster</a>
             </li>
         </ul>
         <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end">
             <li class="nav-item">
-                <a class="nav-link" id="txtUsername" href="#">Settings</a>
+                <a class="nav-link page-toggle-btn" id="settingsBtn" href="#settings" onclick="pageToggle('settingsBtn', 'settingsContainer')">Settings</a>
             </li>
         </ul>
     </div>
