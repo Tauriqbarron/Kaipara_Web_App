@@ -198,7 +198,7 @@ class Client{
         $stmt->bindParam(1,$this->email);
         $stmt->execute();
         $stmt->bind_result($password);
-        $stmt->fetch()
+        $stmt->fetch();
         $this->password = $password;
     }
 }
