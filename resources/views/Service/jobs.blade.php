@@ -16,15 +16,20 @@
         <div class="jobList">
             <div class="jobListCon">
                 @foreach($jobs as $job)
-                    <div class="card w-50 cards">
-                        <img src="{{$job->application->imagePath}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{$job->application->title}}</h5>
-                            <h5 class="card-title">{{$job->application->price}}</h5>
-                            <p class="card-text">{{$job->application->description}}</p>
-                            <a href="{{route('service.canceljob',['id' => $job->id])}}" class="btn btn-primary float-right mx-1">Cancel</a>
+                    <form method="post" action="{{route('service.canceljob', ['id' => $job->id])}}">
+                        @csrf
+
+                        <div class="card w-75 cards">
+                            <img src="{{$job->application->imagePath}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{$job->application->title}}</h5>
+                                <h5 class="card-title">{{$job->application->price}}</h5>
+                                <p class="card-text">{{$job->application->description}}</p>
+                                <button type="submit" class="btn btn-primary float-right mx-1">Cancel</button>
+                            </div>
                         </div>
-                    </div>
+
+                    </form>
                 @endforeach
             </div>
         </div>

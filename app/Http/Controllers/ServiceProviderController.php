@@ -65,10 +65,16 @@ class ServiceProviderController extends Controller
         return redirect('/');
     }
 
+    //View current accepted jobs.
+    public function getJobs(){
+        $id = auth()->guard('service_provider')->id();
+        $jobs = Service_Provider_Job::where ('service_provider_id', '=', $id)->get();
+        return view('Service.jobs', ['jobs' => $jobs]);
+    }
+
     //Accept a job.
     public function acceptJob($id){
         $sp_id = auth()->guard('service_provider')->id();
-        //$user = Session::has('user') ? Session::get('user'): null;
         $job = new Service_Provider_Job([
                 'service_provider_id' => $sp_id,
                 'job_id' => $id
@@ -80,41 +86,28 @@ class ServiceProviderController extends Controller
         $jobUpdate->status= '2';
         $jobUpdate->save();
 
-        $applications = applications::query()->select('*')->where('status','=','1')->get();
-        return view('Service.applications',['applications' => $applications]);
-    }
-
-    //View current accepted jobs.
-    public function getJobs(){
-        //$user = Session::has('user') ? Session::get('user'): null;
-        //$userID = $user->id;
-        //$jobs = applications::query()
-        //->join('service__provider__jobs','applications.id','=','service__provider__jobs.job_id')
-        //->select('applications.*')->where('service__provider__jobs.service_provider_id',$userID)->get();
-        $id = auth()->guard('service_provider')->id();
-        $jobs = Service_Provider_Job::where ('service_provider_id', '=', $id)->get();
-        return view('Service.jobs',['jobs'=>$jobs]);
+        $applications = applications::where('status','=','1')->whereNotIn('id', function ($query) {
+            $sp_id = auth()->guard('service_provider')->id();
+            $query->select('job_id')->where('service_provider_id', '=', $sp_id)->from('quotes');
+        })->get();
+        return redirect()->route('service.applications', ['applications' => $applications]);
     }
 
     //Cancel a accepted job.
     public function canceljob($id){
-        $user = Session::has('user') ? Session::get('user'): null;
-        $userID = $user->id;
-        $jobupdate = applications::query()->select('*')->where('id',$id)->first();
-        $jobupdate->status='1';
-        $jobupdate->save();
-        Service_Provider_Job::query()->where('job_id',$id)->delete();
-        $jobs = applications::query()
-            ->join('service__provider__jobs','applications.id','=','service__provider__jobs.job_id')
-            ->select('applications.*')->where('service__provider__jobs.service_provider_id',$userID)->get();
-        return view('Service.jobs',['jobs'=>$jobs],['user'=>$user]);
+        $job = Service_Provider_Job::find($id);
+        $application = applications::find($job->job_id);
+        $application->status = '1';
+        $application->save();
+        $job->delete();
+        $sp_id = auth()->guard('service_provider')->id();
+        $jobs = Service_Provider_Job::where('service_provider_id', '=', $sp_id)->get();
+        return redirect()->route('service.jobs', ['jobs' => $jobs]);
     }
 
 
     //Send a quote for a un-priced job.
-    public function quote($id,Request $request){
-        //$user = Session::has('user') ? Session::get('user'): null;
-
+    public function quote($id, Request $request){
         $validator = Validator::make($request->all(), [
             'price' => 'required',
             'message' => 'required',
@@ -133,15 +126,22 @@ class ServiceProviderController extends Controller
             'price' => $request->input('price'),
             'message' => $request->input('message'),
             'quote_type' => $request->input('type'),
-            'estimate_hour' => $request->input('hours')
+            'estimate_hours' => $request->input('hours')
         ]);
         $quote->save();
 
-        $jobUpdate = applications::query()->where('id',$id)->first();
-        $jobUpdate->status= '2';
-        $jobUpdate->save();
+        $applications = applications::where('status','=','1')->whereNotIn('id', function ($query) {
+            $sp_id = auth()->guard('service_provider')->id();
+            $query->select('job_id')->where('service_provider_id', '=', $sp_id)->from('quotes');
+        })->get();
+        return redirect()->route('service.applications', ['applications' => $applications]);
+    }
 
-        $applications = applications::query()->select('*')->where('status','=','1')->get();
-        return view('Service.applications',['applications' => $applications]);
+    //View the current quoted application.
+    public function viewQuote() {
+        $id = auth()->guard('service_provider')->id();
+        $quotes = quote::where('service_provider_id', '=', $id)->get();
+
+        return view('Service.quote_view', ['quotes' => $quotes]);
     }
 }

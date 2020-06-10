@@ -67,7 +67,7 @@
                                                 <label for="message">Please include a short message with your quote:</label>
                                                 <textarea class="form-control" id="message" name="message" rows="3"></textarea>
                                             </div>
-                                            <input type="text" name="type" value="totally">
+                                            <input type="hidden" name="type" value="totally">
                                             <button type="submit" class="btn btn-primary float-right">Send Quote</button>
                                         </form>
                                         <!--Hourly quote-->
@@ -85,7 +85,7 @@
                                                 <label for="message">Please include a short message with your quote:</label>
                                                 <textarea class="form-control" id="message" name="message" rows="3"></textarea>
                                             </div>
-                                            <input type="text" name="type" value="hourly">
+                                            <input type="hidden" name="type" value="hourly">
                                             <button type="submit" class="btn btn-primary float-right">Send Quote</button>
                                         </form>
                                     </div>

@@ -11,7 +11,7 @@
                 <a class="nav-link" href="{{ url('/service/jobs')}}">Jobs</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Quotes</a>
+                <a class="nav-link" href="{{route('service.view_quote')}}">Quotes</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Availability Schedule</a>

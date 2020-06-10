@@ -8,4 +8,8 @@ class quote extends Model
 {
     protected $fillable = ['service_provider_id','job_id','price','message', 'quote_type', 'estimate_hours'];
     public $timestamps = false;
+
+    public function application() {
+        return $this->belongsTo('App\applications', 'job_id', 'id');
+    }
 }

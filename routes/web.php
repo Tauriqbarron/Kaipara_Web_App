@@ -97,12 +97,11 @@ Route::post('/security/editInfo','staffController@postEdit')->name('security.pos
 
 // SERVICE
 /*Service Provider Profile*/
-
 Route::get('/service', function () {
     return view('Service.index');
 }) ->name('service.home');
 
-Route::get('/canceljob/{id}',[
+Route::post('/canceljob/{id}',[
     'uses' =>'ServiceProviderController@canceljob',
     'as' => 'service.canceljob'
 ]);
@@ -117,14 +116,21 @@ Route::post('/quote/{id}',[
     'as' => 'service.quote'
 ]);
 
+Route::get('/quote',[
+    'uses' => 'ServiceProviderController@viewQuote',
+    'as' => 'service.view_quote'
+]);
+
 Route::get('/service/jobs', [
-    'uses' => 'ServiceProviderController@getJobs', 'as' => 'service.jobs'
-]) ->name('service.jobs');
+    'uses' => 'ServiceProviderController@getJobs',
+    'as' => 'service.jobs'
+]);
 
 /*Service Provider Booking Application Page*/
 Route::get('/service/applications', [
-    'uses' => 'ApplicationsController@getApps', 'as' => 'service.applications'
-]) ->name('service.Bookings');
+    'uses' => 'ApplicationsController@getApps',
+    'as' => 'service.applications'
+]);
 
 Route::get('service/logout', [
     'uses' => 'ServiceProviderController@serviceLogout',
