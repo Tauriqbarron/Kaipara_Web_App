@@ -199,6 +199,6 @@ class Client{
         $stmt->execute();
         $stmt->bind_result($password);
         $stmt->fetch()
-        this->password = $password;
+        $this->password = $password;
     }
 }
