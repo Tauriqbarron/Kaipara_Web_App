@@ -197,7 +197,7 @@ class Client{
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1,$this->email);
         $stmt->execute();
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $this->password = $stmt;
+        $stmt->->bind_result($password);
+        this->password = $password;
     }
 }
