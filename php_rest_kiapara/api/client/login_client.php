@@ -36,6 +36,6 @@ $client->getSingleClient();
 if ($client->password == $passCheck){
     print("true");
 }else{
-    print("Does not match );
+    print("Does not match" );
 }
 
