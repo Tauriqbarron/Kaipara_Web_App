@@ -43,10 +43,11 @@
             </div>
             <div class="form-group">
                 <button type="submit" name="login" class="btn btn-primary shadow" value="login">Login</button>
+                <a class="btn btn-link" href="#">
+                    {{ __('Forgot Your Password?') }}
+                </a>
             </div>
-            <a class="btn btn-link" href="#">
-                {{ __('Forgot Your Password?') }}
-            </a>
+
         </form>
 
 
