@@ -2,7 +2,7 @@
 <div class="shadow bg-light header-bar" style="min-width: 1300px">
     <div class="container-fluid">
         <nav class="navbar navbar-light navbar-expand-lg justify-content-left"  style="padding: 5px">
-            <a href="/" class="navbar-brand d-flex w-50 mr-auto">
+            <a href="{{url('/')}}" class="navbar-brand d-flex w-50 mr-auto">
                 <img id="kaiparaLogo" src="{{url('images/KaiparaLogo.png')}}" class="mr-auto float-left" alt="">
             </a>
 

@@ -53,13 +53,8 @@ Route::get('/client/property', [
 
 /*Function Routes */
 
-Route::post('/register','RegistrationController@createServiceProvider');
+
 Route::post('/service_provider','ServiceProviderController@login')->name('service.login.submit');
-
-Route::get('/register/address', function (){
-    return view('Registration.ServiceReg.serviceRegFormAddr');
-});
-
 
 Route::post('/client','ClientController@login')->name('client.login.submit');
 
@@ -168,9 +163,15 @@ Route::prefix('service_provider')->group(function (){
 
 
 /*Registration*/
+Route::post('/registration/address',[
+    'uses' => 'RegistrationController@createServiceProvider',
+    'as' => 'reg.service'
+]);
 
-Route::post('register','RegistrationController@createServiceProvider');
-
+Route::post('/registration/address/save',[
+    'uses' => 'RegistrationController@storeServiceProvider',
+    'as' => 'reg.service.save'
+]);
 
 Route::get('/registration/usertype',[
     'uses' => 'RegistrationController@getUserType',
@@ -182,10 +183,9 @@ Route::get('/registration/servicepage1',[
     'as'=>'reg.service.1'
 ]);
 
-
 Route::get('/registration/servicepage2',[
     'uses'=> 'RegistrationController@getServicePage2',
-    'as'=>'reg.service.1'
+    'as'=>'reg.service.2'
 ]);
 
 

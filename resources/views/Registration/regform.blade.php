@@ -1,4 +1,4 @@
-<form method="POST" action="/register">
+<form method="POST" action="{{url('/registration/address')}}">
     <div class="form-group row">
         <label for="firstname" class="col-sm-2 col-form-label">First Name</label>
         <div class="col-sm-10">

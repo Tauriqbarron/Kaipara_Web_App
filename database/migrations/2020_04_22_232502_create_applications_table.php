@@ -22,10 +22,11 @@ class CreateApplicationsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->integer('price')->nullable();
+            $table->date('date');
             $table->string('street');
             $table->string('suburb');
             $table->string('city');
-            $table->bigInteger('postCode');
+            $table->string('postCode');
         });
     }
 

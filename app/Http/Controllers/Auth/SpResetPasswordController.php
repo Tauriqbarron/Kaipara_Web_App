@@ -29,7 +29,7 @@ class SpResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/service_provider';//RouteServiceProvider::HOME;
+    protected $redirectTo = '/'; //RouteServiceProvider::HOME;
 
     public function __construct()
     {

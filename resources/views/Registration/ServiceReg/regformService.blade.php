@@ -1,4 +1,13 @@
-<form method="POST" action="/register">
+<form method="POST" action="{{url('/registration/address')}}">
+    @csrf
+    @if(count($errors) > 0)
+        <div class="alert alert-danger">
+            @foreach($errors->all() as $error)
+                <p>{{$error}}</p>
+            @endforeach
+        </div>
+    @endif
+
      <div class="form-group row">
         <label for="firstname" class="col-sm-2 col-form-label">First Name</label>
         <div class="col-sm-10">
@@ -8,7 +17,7 @@
     <div class="form-group row">
         <label for="lastnname" class="col-sm-2 col-form-label">Last Name</label>
         <div class="col-sm-10">
-            <input type="password" class="form-control" id="lastname" name="lastname">
+            <input type="text" class="form-control" id="lastname" name="lastname">
         </div>
     </div>
     <div class="form-group row">
@@ -32,7 +41,7 @@
     <div class="form-group row">
         <label for="phone" class="col-sm-2 col-form-label">Phone Number</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="phone">
+            <input type="text" class="form-control" id="phone" name="pNumber">
         </div>
     </div>
     <div class="form-group row">
