@@ -46,7 +46,6 @@ class RegistrationController extends Controller
 
     public function storeServiceProvider(Request $request){
         $userinfo = Session::has('userinfo') ? Session::get('userinfo'): null;
-
         $validator = Validator::make($request->all(),[
             'street'=>'required',
             'suburb' => 'required',

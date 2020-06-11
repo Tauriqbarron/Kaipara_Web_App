@@ -19,7 +19,7 @@ if(isset($_GET['email'])){
     );
 }
 if(isset($_GET['password'])){
-    $passCheck = password_hash($_GET['password'],PASSWORD_DEFAULT);
+    $passCheck = $_GET['password'];
      
 }else{
     echo json_encode(
@@ -32,10 +32,11 @@ if(isset($_GET['password'])){
 $client->getSingleClient();
 
 
-
-if ($client->password == $passCheck){
-    print("true");
+if (password_verify($passCheck,$client->password)){
+     print("true");
 }else{
-    print("false");
+    print("false");  
 }
+
+
 

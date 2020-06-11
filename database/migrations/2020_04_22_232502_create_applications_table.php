@@ -23,6 +23,8 @@ class CreateApplicationsTable extends Migration
             $table->text('description');
             $table->integer('price')->nullable();
             $table->date('date');
+            $table->time('start_time');
+            $table->time('finish_time');
             $table->string('street');
             $table->string('suburb');
             $table->string('city');
