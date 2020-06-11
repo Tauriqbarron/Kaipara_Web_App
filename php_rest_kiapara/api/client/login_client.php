@@ -19,7 +19,7 @@ if(isset($_GET['email'])){
     );
 }
 if(isset($_GET['password'])){
-    $passCheck = password_hash($_GET['password'],PASSWORD_BCRYPT);
+    $passCheck = $_GET['password'];
      
 }else{
     echo json_encode(
@@ -32,7 +32,11 @@ if(isset($_GET['password'])){
 $client->getSingleClient();
 
 
-print("Password from database: " . $client->password . "\r\n Password from app: " . $passCheck );
+if (password_verify($passCheck,$client->password){
+    echo 'Pass';
+}else{
+    echo 'Fail';   
+}
 
 
 
