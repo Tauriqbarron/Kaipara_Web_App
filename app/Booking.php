@@ -8,7 +8,7 @@ class Booking extends Model
 {
     //TODO add booking end date and days and such
     protected $fillable = ['client_id', 'booking_type_id', 'description', 'date', 'start_time', 'finish_time',
-        'status','street', 'suburb', 'city', 'postcode','staff_needed', 'available_slots'];
+        'status','street', 'suburb', 'city', 'postcode','staff_needed', 'available_slots', 'price'];
 
     public function client() {
         return $this->belongsTo('App\Clients', 'client_id', 'id');

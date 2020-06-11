@@ -29,15 +29,13 @@ class RegistrationController extends Controller
         else{
             error_log('data stored');
             $user = array(
-                [
                     'firstname' => $request->input('firstname'),
                     'lastname' => $request->input('lastname'),
                     'username' => $request->input('username'),
                     'email' => $request->input('email'),
                     'password' => $request->input('password'),
-                    'phone_number' => $request->input('phone'),
+                    'phone_number' => $request->input('pNumber'),
                     'service' => $request->input('service')
-                ]
             );
 
             error_log('data to session');
@@ -47,7 +45,7 @@ class RegistrationController extends Controller
     }
 
     public function storeServiceProvider(Request $request){
-        $userinfo[] = Session::has('userinfo') ? Session::get('userinfo'): null;
+        $userinfo = Session::has('userinfo') ? Session::get('userinfo'): null;
         $validator = Validator::make($request->all(),[
             'street'=>'required',
             'suburb' => 'required',
@@ -67,7 +65,7 @@ class RegistrationController extends Controller
                 'phone_number'=> $userinfo['phone_number'],
                 'street'=> $request->input('street'),
                 'suburb'=> $request->input('suburb'),
-                'city'=> $request->input('city '),
+                'city'=> $request->input('city'),
                 'postcode'=> $request->input('postcode')
             ]);
             $service_provider->save();

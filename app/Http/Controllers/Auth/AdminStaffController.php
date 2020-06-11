@@ -145,6 +145,7 @@ class AdminStaffController extends Controller
         $event = [];
         foreach ($events as $row) {
             $enddate = $row->date."24:00:00";
+
             $event[] = \Calendar::event(
                 $row->booking->booking_type->description,
                 true,
@@ -169,6 +170,7 @@ class AdminStaffController extends Controller
                 ]
             );
         }
+
         $calendar = \Calendar::addEvents($event);
         return view('Administration.staff.roster', compact('events', 'calendar'), ['staff' => $staff, 'rosters' => $rosters]);
     }

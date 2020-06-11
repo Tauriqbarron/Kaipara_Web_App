@@ -24,6 +24,7 @@ class CreateBookingsTable extends Migration
             $table->string('city');
             $table->bigInteger('postcode');
             $table->string('description');
+            $table->double('price');
             $table->date('date');
             $table->float('start_time');
             $table->float('finish_time');
