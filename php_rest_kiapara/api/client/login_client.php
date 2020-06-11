@@ -32,7 +32,7 @@ if(isset($_GET['password'])){
 $client->getSingleClient();
 
 
-print($client->password);
-print($passCheck);
+print("Password from database: " . $client->password . "\r\n Password from app: " . $passCheck );
+
 
 
