@@ -1,5 +1,5 @@
 <div style="width:100%;">
-    @include('Security.timetable')
+    @include('Security.calendar')
     <div class="container">
         <div class="row">
             <div class="col-3 h-100">
@@ -61,8 +61,8 @@
                         </div>
                         <div class="w-100">
                             <select class="form-control" id="type" name="type" required>
-                                @foreach(\App\Absence_Types::all() as $type)
-                                    <option value="{{$type->id}}">{{$type->description}}</option>
+                                @foreach(\App\Absence_Types::all() as $absence_type)
+                                    <option value="{{$absence_type->id}}">{{$absence_type->description}}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -6,6 +6,8 @@ var _scAddresses = [];
 
 //TODO get nav buttons by custom class name and set active
 window.addEventListener('load', function() {
+    var monthbtn = document.getElementsByClassName('fc-month-button')[0];
+    monthbtn.click();
 
     if(window.sessionStorage.getItem('button')){
         pageToggle(window.sessionStorage.getItem('button'),window.sessionStorage.getItem('target'));
@@ -46,6 +48,8 @@ window.addEventListener('load', function() {
 
             btn.classList.add('active');
             target.style.display = 'block';
+            window.sessionStorage.setItem('button', btn.getAttribute('id'));
+            window.sessionStorage.setItem('target', targetID);
 
         }, false);
     });

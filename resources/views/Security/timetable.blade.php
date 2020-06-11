@@ -1,6 +1,6 @@
 <div style="width: 100%" id="timetable">
     <div class="container jumbotron bg-light" id="schedule">
-        <div class="row">
+       <div class="row">
             <div class="col-12">
                 <div class="main-box clearfix">
                     <div class="table">
@@ -235,3 +235,4 @@
         </div>
     </div>
 </div>
+

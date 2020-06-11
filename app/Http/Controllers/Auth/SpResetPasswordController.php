@@ -47,6 +47,9 @@ class SpResetPasswordController extends Controller
 
     public function showResetForm(Request $request, $token = null)
     {
+        auth()->guard('staff')->logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
         return view('passwords.reset-sp')->with(
             ['token' => $token, 'email' => $request->email]
         );

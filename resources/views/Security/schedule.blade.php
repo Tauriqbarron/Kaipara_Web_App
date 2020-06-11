@@ -34,7 +34,7 @@
 
                                     <tr>
                                         <td class="text-center">
-                                            <a style="color: #636b6f;" href="#" onclick="setScheduleCenter('{{$booking->street}}, {{$booking->suburb}}, {{$booking->city}}, New Zealand')"><i class="fa fa-map-marker fa-2x fa-light float-left"></i></a><h6>{{number_format($booking->start_time, 2, ":","")}}</h6>
+                                            <h6>{{number_format($booking->start_time, 2, ":","")}}</h6>
                                         </td>
 
                                         <td>
@@ -47,27 +47,41 @@
                                             <h6>{{$booking->city}}</h6>
                                         </td>
                                         <td style="width: 20%;">
-                                            <a href="#" class="table-link float-right" data-toggle="collapse" data-target="#n{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}n','n{{$booking->id}}')" >
+                                            <a href="#" class="table-link float-right" data-toggle="collapse" data-target="#p{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}p','p{{$booking->id}}')" >
 
-                                            <span class="fa-stack">
-                                                        <i class="fa fa-square fa-stack-2x"></i>
-                                                        <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}n"></i>
-                                                    </span>
-                                            </a>
+                                                <span class="fa-stack">
+                                                            <i class="fa fa-square fa-stack-2x"></i>
+                                                            <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}p"></i>
+                                                        </span>
                                             </a>
 
                                         </td>
                                     </tr>
+
                                     <tr >
                                         <td colspan="4" style="padding: 0px" class="bg-white">
-                                            <div class="collapse"  id="n{{$booking->id}}" style="padding: 10px">
+                                            <span class="collapse" id="p{{$booking->id}}"></span>
+                                            <div class="collapse"  id="p{{$booking->id}}" style="padding: 10px">
                                                 {{$booking->description}} on {{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}
                                             </div>
                                         </td>
                                         <td style="padding: 0px" class="bg-white">
-                                            <div class="collapse btn-group-lg"  id="n{{$booking->id}}" style="padding: 10px">
-                                                <!--<button class="btn-primary text-white w-100 rounded border-0" type="submit"><h6>Accept</h6></button>-->
-                                                <!--<button class="btn-danger text-white w-100 rounded border-0"><h6>Decline</h6></button>-->
+                                            <div class="collapse btn-group-lg"  id="p{{$booking->id}}" style="padding: 10px">
+                                                @if(\Carbon\Carbon::parse($booking->date)->format('d/m/Y') == \Carbon\Carbon::parse(today('NZ'))->format('d/m/Y') && $booking->finish_time > (now("NZ")->hour)+(now("NZ")->minute*.01))
+                                                    @if(Session::has('inProgress'))
+
+                                                        <form role="form" method="POST" action="{{route('staff.stopJob')}}">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-danger w-100" name="bookingId" value="Stop">Stop</button>
+                                                        </form>
+                                                    @else
+
+                                                        <form role="form" method="POST" action="{{route('staff.startJob')}}">
+                                                            @csrf
+                                                            <button type="submit" name="bookingId" value="{{$booking->id}}" class="btn btn-primary w-100">Start</button>
+                                                        </form>
+                                                    @endif
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>

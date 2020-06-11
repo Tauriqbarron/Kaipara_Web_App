@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Booking;
 use App\Feedback;
 use App\Leave_Request;
+use App\Roster;
 use App\Staff;
 use App\Staff_Assignment;
 use App\Timesheet;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use MaddHatter\LaravelFullcalendar\Calendar;
 
 
 
@@ -52,7 +54,7 @@ class StaffController extends Controller
                 ->sortBy('date',1)
                 ->sortBy('start_time', 1);
 
-            return view('Security.index', ['staff' => $currentStaff, 'bookings' => $staff_bookings,'completedBookings' => $completedBookings, 'availableBookings' => $availableBookings, 'timetable' => $timetable]);
+            return view('Security.index', $this->getCalendar(),['staff' => $currentStaff, 'bookings' => $staff_bookings,'completedBookings' => $completedBookings, 'availableBookings' => $availableBookings, 'timetable' => $timetable]);
         }
         else {
             return redirect()->route('staff.login')->with('error', 'You must log in to view your profile');
@@ -197,6 +199,62 @@ class StaffController extends Controller
         $staff->postcode = $request->input('postcode');
         $staff->save();
         return redirect()->route('security.index')->with('message', 'Details updated');
+    }
+
+    public function getCalendar() {
+        $id = auth()->guard('staff')->user()->id;
+        $events = Staff_Assignment::where('staff_id', '=', $id)->get();
+        $rosters = Roster::where('staff_id', '=', $id)->get();
+        $staff = Staff::find($id);
+        $leave = $staff->leave_requests->where('absence_status_id', '=', 2);
+        $event = [];
+        foreach ($events as $row) {
+            $enddate = $row->date."24:00:00";
+            $start_time = sprintf('%02d:%02d:00', (int) $row->booking->start_time, round(fmod($row->booking->start_time, 1) * 100));
+            $finish_time = sprintf('%02d:%02d:00', (int) $row->booking->finish_time, round(fmod($row->booking->finish_time, 1) * 100));
+            $event[] = \Calendar::event(
+                $row->booking->booking_type->description,
+                false,
+                new \DateTime($row->booking->date . ' ' . $start_time),
+                new \DateTime($row->booking->date . ' ' . $finish_time),
+                $row->staff_id,
+                [
+                    'url' => route('security.dateChange',['i'=>count(\Carbon\Carbon::parse('1970-01-01')->daysUntil($row->booking->date)->toArray()) - count(\Carbon\Carbon::Parse('1970-01-01')->daysUntil(\Illuminate\Support\Facades\Session::get('date1'))->toArray())]),
+                    'color' => '#dd504c',
+                    'textColor'=>'white'
+                ]
+            );
+        }
+        foreach ($rosters as $row){
+            $enddate = $row->date."24:00:00";
+            $event[] = \Calendar::event(
+                'Work day',
+                true,
+                new \DateTime($row->date),
+                new \DateTime($row->date),
+                $row->staff_id,
+                [
+                    'color' => '#67c76c',
+                    'textColor'=>'white'
+                ]
+            );
+        }
+        foreach ($leave as $row){
+            $enddate = $row->date."24:00:00";
+            $event[] = \Calendar::event(
+                'Annual Leave',
+                true,
+                new \DateTime($row->start_date),
+                new \DateTime($row->end_date),
+                $row->staff_id,
+                [
+                    'color' => '#5f94e8',
+                    'textColor'=>'white'
+                ]
+            );
+        }
+        $calendar = \Calendar::addEvents($event);
+        return compact('events', 'calendar');
     }
 
 }
