@@ -8,7 +8,7 @@
     @yield('styles')
 </head>
     <body>
-        <form class="w-75 mx-auto" role="form" method="POST" action="{{route('client.login.submit')}}">
+        <form class="w-75 mx-auto mt-3" role="form" method="POST" action="{{route('client.login.submit')}}">
             <a class="btn btn-secondary" href="{{URL::previous()}}">Back</a>
             <h1 class="form-group ">Custom Login</h1>
             {{csrf_field()}}
@@ -16,6 +16,11 @@
                 <div class="alert alert-danger alert-block">
                     <button type="button" class="close" data-dismiss="alert">X</button>
                     <strong>{{$message}}</strong>
+                </div>
+            @endif
+            @if(session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session()->get('message') }}
                 </div>
             @endif
             @if (count($errors) > 0)
@@ -37,8 +42,11 @@
                 <input id="password" name="password" type="password" class="form-control" >
             </div>
             <div class="form-group">
-                <button type="submit" name="login" class="btn btn-primary shadow" value="login">Submit</button>
+                <button type="submit" name="login" class="btn btn-primary shadow" value="login">Login</button>
             </div>
+            <a class="btn btn-link" href="#">
+                {{ __('Forgot Your Password?') }}
+            </a>
         </form>
 
 

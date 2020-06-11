@@ -8,8 +8,9 @@
     @yield('styles')
 </head>
 <body>
-<form class="w-75 mx-auto" role="form" method="POST" action="{{route('admin.login')}}">
-    <a class="btn btn-secondary" href="{{URL::previous()}}">Back</a>
+
+<form class="w-75 mx-auto mt-3" role="form" method="POST" action="{{route('admin.login')}}">
+    <a class="btn btn-secondary" href="{{url('/selectstaff')}}">Back</a>
     <h1 class="form-group ">Admin Login</h1>
     {{csrf_field()}}
 
@@ -41,7 +42,7 @@
     </div>
 
     <div class="form-group">
-        <button type="submit" name="login" class="btn btn-primary shadow" value="login">Submit</button>
+        <button type="submit" name="login" class="btn btn-primary shadow" value="login">Login</button>
     </div>
 </form>
 
