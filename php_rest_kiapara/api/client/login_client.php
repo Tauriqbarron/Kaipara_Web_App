@@ -19,7 +19,8 @@ if(isset($_GET['email'])){
     );
 }
 if(isset($_GET['password'])){
-    $passCheck = $_GET['password'];
+    $passCheck = password_hash($_GET['password']);
+     
 }else{
     echo json_encode(
         array('message'=>'password not set')
