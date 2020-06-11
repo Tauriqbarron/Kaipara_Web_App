@@ -12,16 +12,30 @@ $client = new Client($db);
 
 
 if(isset($_GET['email'])){
-    $client->id = $_GET['email'];
+    $client->email = $_GET['email'];
 }else{
     echo json_encode(
-        array('message'=>'id not set')
+        array('message'=>'email not set')
+    );
+}
+if(isset($_GET['password'])){
+    $passCheck = password_hash($_GET['password'],PASSWORD_DEFAULT);
+     
+}else{
+    echo json_encode(
+        array('message'=>'password not set')
     );
 }
 
 
-$client->login();
 
-$client_pass = $client->password;
+$client->getSingleClient();
 
-print(json_encode($client_pass));
+
+
+if ($client->password == $passCheck){
+    print("true");
+}else{
+    print("false");
+}
+

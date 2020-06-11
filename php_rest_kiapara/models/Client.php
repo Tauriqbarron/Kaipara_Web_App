@@ -188,16 +188,36 @@ class Client{
         return false;
     }
         public function login(){
-        $query = 'SELECT 
-            password
-        FROM
-            '. $this->table .'
-        WHERE
-        email= ?';
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1,$this->email);
-        $stmt->execute();
-        $password = $stmt->fetchColumn();
-        $this->password = $password;
+    $query = 'SELECT 
+        id,
+        first_name,
+        last_name,
+        email,
+        phone_number,
+        password,
+        street,
+        suburb,
+        city,
+        postcode
+    FROM
+    ' . $this->table .'
+    WHERE
+        email = ?';
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(1,$this->email);
+    $stmt->execute();
+
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $this->first_name = $row['first_name'];
+    $this->last_name = $row['last_name'];
+    $this->email = $row['email'];
+    $this->phone_number = $row['phone_number'];
+    $this->password = $row['password'];
+    $this->street = $row['street'];
+    $this->suburb = $row['suburb'];
+    $this->city = $row['city'];
+    $this->postcode = $row['postcode'];
     }
 }
