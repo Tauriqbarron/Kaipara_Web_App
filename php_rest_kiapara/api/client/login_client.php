@@ -32,10 +32,7 @@ if(isset($_GET['password'])){
 $client->getSingleClient();
 
 
+print($client->password);
+print($passCheck);
 
-if ($client->password == $passCheck){
-    print("true");
-}else{
-    print("Does not match" );
-}
 
