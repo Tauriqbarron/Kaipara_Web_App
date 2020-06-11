@@ -27,8 +27,28 @@ window.addEventListener('load', function() {
             document.getElementById('btnEditStaff').style.pointerEvents = 'all';
             btn.classList.remove('text-secondary');
             btn.style.pointerEvents = 'none';
-        })
+        });
     }
+
+    var pageToggleBtns = document.getElementsByClassName('page-toggle-btn');
+
+    Array.prototype.filter.call(pageToggleBtns, function (btn) {
+        btn.addEventListener('click', function () {
+            var targetID = btn.getAttribute('data-target');
+            var target = document.getElementById(targetID);
+            var pages = document.getElementsByClassName('page-toggle-page');
+            Array.prototype.filter.call(pageToggleBtns, function (b) {
+                b.classList.remove('active');
+            });
+            Array.prototype.filter.call(pages, function (page) {
+                page.style.display = 'none';
+            });
+
+            btn.classList.add('active');
+            target.style.display = 'block';
+
+        }, false);
+    });
 
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.getElementsByClassName('needs-validation');
@@ -221,6 +241,6 @@ function updateTextInput(val) {
 }
 
 
-function clearSession(){
+function clearSession() {
     window.sessionStorage.clear();
 }

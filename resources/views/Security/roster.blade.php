@@ -1,11 +1,3 @@
-<!--<div style="width:26%; height: 100%; float: left">
-    <div  class="card bg-light text-center shadow p-3 mb-5 border-0 card-image rounded-lg shadow col-sm-0" style="width: 18rem; background-size: cover">
-        <h4>Roster</h4>
-    </div>
-
-
-
-</div>-->
 <div style="width:100%;">
     @include('Security.timetable')
     <div class="container">
@@ -20,6 +12,7 @@
                 <div class="row ml-2">
                     <a href="#leaveApplication" class="alBtn" onclick="alToggle()">Apply for leave</a>
                 </div>
+                @include('Security.sideNav')
 
             </div>
             <div class="annual-leave-page h-100 col-9 container jumbotron bg-light mr-0 pt-2 pb-2" id="leaveRequests">
@@ -54,7 +47,7 @@
                     @csrf
                     <div class="form-row">
                         <label class="w-100">
-                            <input class="form-control" type="text" name="subject" id="alSubject" placeholder="Subject" maxlength="50" autocomplete="false" required>
+                            <input class="form-control" type="text" name="subject" id="alSubject" placeholder="Subject" maxlength="50" autocomplete="off" required>
                         </label>
                     </div>
                     <div class="form-row">
@@ -81,7 +74,7 @@
                                 <label for="alStartDate"><strong>Start Date: </strong></label>
                             </div>
                             <div>
-                                <input class="form-control" type="date" min="{{Carbon\Carbon::parse(today("NZ")->addDay())->format('Y-m-d')}}" id="alStartDate" name="startDate" oninput="dateValidation(this)" required>
+                                <input class="form-control" type="date" min="{{Carbon\Carbon::parse(today("NZ")->addDay())->format('Y-m-d')}}" max="{{Carbon\Carbon::parse(today("NZ")->addYear())->format('Y-m-d')}}" id="alStartDate" name="startDate" oninput="dateValidation(this)" required>
                             </div>
 
                         </div>
@@ -92,7 +85,7 @@
                                 </label>
                             </div>
                             <div>
-                                <input class="form-control" type="date" min="{{Carbon\Carbon::parse(today("NZ")->addDay())->format('Y-m-d')}}" id="alEndDate" name="EndDate" required>
+                                <input class="form-control" type="date" min="{{Carbon\Carbon::parse(today("NZ")->addDay())->format('Y-m-d')}}" max="{{Carbon\Carbon::parse(today("NZ")->addYear())->format('Y-m-d')}}"  id="alEndDate" name="EndDate" required>
                             </div>
 
                         </div>
