@@ -7,24 +7,27 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class RegistrationController extends Controller
 {
     public function createServiceProvider(Request $request)
     {
+        error_log('validate start');
         //create function to store results validated so far
         $validator = Validator::make($request->all(), [
-            'fName' => 'required|max:50',
-            'lName' => 'required|max:50',
-            'email' => 'required|email|max:50|unique:serviceproviders',
-            'uName' => 'required|max:50',
+            'firstname' => 'required|max:50',
+            'lastname' => 'required|max:50',
+            'email' => 'required|email|max:50|unique:service_providers',
+            'username' => 'required|max:50',
             'pNumber' => 'required|max:20',
-            'password' => 'required|confirmed|max:20'
+            'password' => 'required|max:20'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
         else{
+            error_log('data stored');
             $user = array(
                 [
                     'firstname' => $request->input('firstname'),
@@ -37,18 +40,19 @@ class RegistrationController extends Controller
                 ]
             );
 
+            error_log('data to session');
             $request->session()->put('userinfo',$user);
-           return redirect($this->getServicePage2());
+           return redirect()->route('reg.service.2');
         }
     }
 
     public function storeServiceProvider(Request $request){
-        $userinfo = Session::has('userinfo') ? Session::get('userinfo'): null;
+        $userinfo[] = Session::has('userinfo') ? Session::get('userinfo'): null;
         $validator = Validator::make($request->all(),[
             'street'=>'required',
             'suburb' => 'required',
             'city'=>'required',
-            'postcode'=>'postcode'
+            'postcode'=>'required'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all());

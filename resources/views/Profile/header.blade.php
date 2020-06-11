@@ -3,6 +3,7 @@
     <i class="fas fa-cog align-self-start mt-3"></i>
     <a href="{{route('staff.logout')}}" class="btn btn-primary  mx-1 align-self-start">Log out</a>
 </nav>-->
+
 <div class="shadow header-bar">
     <div class="container-fluid">
         <nav class="navbar navbar-light navbar-expand-lg justify-content-left"  style="padding: 5px">
@@ -45,7 +46,6 @@
                             <img class="float-right rounded-circle shadow dropdown-toggle text-nowrap" style="display: block; width: 54px; height: 54px" src="@if($guard == 'admin' || $guard == 'clients' || $guard === 'service_provider'){{url('images/Profile_Placeholder.png')}}@else{{auth()->guard($guard)->user()->imgPath}}@endif" alt="clientProfileImage">
                         </li>
                     </ul>
-
                 @else
                     @php(session()->put('error', 'You must be logged in to view this page'))
                     <script type="text/javascript">
