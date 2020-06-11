@@ -33,9 +33,13 @@ $client->getSingleClient();
 
 
 if (password_verify($passCheck,$client->password)){
-     print(json_encode(true));
+         echo json_encode(
+        array('message'=>'Pass')
+    );
 }else{
-    print(json_encode(false));  
+        echo json_encode(
+        array('message'=>'=Fail')
+    );
 }
 
 
