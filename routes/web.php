@@ -27,7 +27,7 @@ Route::get('/selectuser', function () {
 Route::get('/client', function () {
     return view('login.userlogin');
 });
-Route::get('/provider', function () {
+Route::get('/service_provider/login', function () {
     return view('login.servicelogin');
 });
 
@@ -52,9 +52,15 @@ Route::get('/client/property', [
 
 
 /*Function Routes */
-Route::post('register','RegistrationController@createServiceProvider');
-Route::post('/provider','ServiceProviderController@login')->name('service.login.submit');
-Route::post('registerAddrS','RegistrationController@storeServiceProvider' );
+
+Route::post('/register','RegistrationController@createServiceProvider');
+Route::post('/service_provider','ServiceProviderController@login')->name('service.login.submit');
+
+Route::get('/register/address', function (){
+    return view('Registration.ServiceReg.serviceRegFormAddr');
+});
+
+
 Route::post('/client','ClientController@login')->name('client.login.submit');
 
 Route::get('/', function () {
@@ -97,45 +103,68 @@ Route::post('/security/editInfo','staffController@postEdit')->name('security.pos
 
 // SERVICE
 /*Service Provider Profile*/
-Route::get('/service', function () {
+Route::get('/service_provider', function () {
     return view('Service.index');
 }) ->name('service.home');
 
-Route::post('/canceljob/{id}',[
+Route::post('service_provider/canceljob/{id}',[
     'uses' =>'ServiceProviderController@canceljob',
     'as' => 'service.canceljob'
 ]);
 
-Route::get('/acceptJob/{id}',[
+Route::get('service_provider/acceptJob/{id}',[
     'uses' =>'ServiceProviderController@acceptJob',
     'as' => 'service.acceptJob'
 ]);
 
-Route::post('/quote/{id}',[
+Route::post('service_provider/quote/{id}',[
     'uses' => 'ServiceProviderController@quote',
     'as' => 'service.quote'
 ]);
 
-Route::get('/quote',[
+Route::get('service_provider/quote',[
     'uses' => 'ServiceProviderController@viewQuote',
     'as' => 'service.view_quote'
 ]);
 
-Route::get('/service/jobs', [
+Route::get('/service_provider/jobs', [
     'uses' => 'ServiceProviderController@getJobs',
     'as' => 'service.jobs'
 ]);
 
 /*Service Provider Booking Application Page*/
-Route::get('/service/applications', [
+Route::get('/service_provider/applications', [
     'uses' => 'ApplicationsController@getApps',
     'as' => 'service.applications'
 ]);
 
-Route::get('service/logout', [
+Route::get('service_provider/logout', [
     'uses' => 'ServiceProviderController@serviceLogout',
     'as' => 'service.logout'
 ]);
+
+/*Service provider reset password part*/
+Route::prefix('service_provider')->group(function (){
+    Route::post('/password/email', [
+       'uses' => 'Auth\SpForgotPasswordController@sendResetLinkEmail',
+       'as' => 'sp.password.email'
+    ]);
+
+    Route::get('/password/reset', [
+        'uses' => 'Auth\SpForgotPasswordController@showLinkRequestForm',
+        'as' => 'sp.password.request'
+    ]);
+
+    Route::post('/password/reset', [
+        'uses' => 'Auth\SpResetPasswordController@reset',
+        'as' => 'sp.password.update'
+    ]);
+
+    Route::get('/password/reset/{token}', [
+        'uses' => 'Auth\SpResetPasswordController@showResetForm',
+        'as' => 'sp.password.reset'
+    ]);
+});
 
 
 /*Registration*/

@@ -38,7 +38,7 @@ class RegistrationController extends Controller
             );
 
             $request->session()->put('userinfo',$user);
-            redirect($this->getServicePage2());
+           return redirect($this->getServicePage2());
         }
     }
 

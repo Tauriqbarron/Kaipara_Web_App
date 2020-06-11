@@ -48,7 +48,7 @@ return [
 
         'service_provider' =>[
             'driver' => 'session',
-            'provider'=>'service_provider',
+            'provider'=>'service_providers',
         ],
 
         'admin' => [
@@ -58,7 +58,7 @@ return [
 
         'staff' => [
             'driver' => 'session',
-            'provider' => 'staff'
+            'provider' => 'staffs'
         ],
 
         'api' => [
@@ -96,7 +96,7 @@ return [
             'model' => App\Clients::class,
         ],
 
-        'service_provider' =>[
+        'service_providers' =>[
             'driver' => 'eloquent',
             'model' => App\service_provider::class,
         ],
@@ -106,7 +106,7 @@ return [
             'model' => App\Admin::class,
         ],
 
-        'staff' => [
+        'staffs' => [
             'driver' => 'eloquent',
             'model' => App\Staff::class,
         ]
@@ -138,6 +138,25 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'clients' => [
+            'provider' => 'Clients',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'service_providers' => [
+            'provider' => 'service_providers',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'staffs' => [
+            'provider' => 'staffs',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
     ],
 
     /*

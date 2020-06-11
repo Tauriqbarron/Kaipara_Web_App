@@ -11,11 +11,11 @@ $db = $database->connect();
 $client = new Client($db);
 
 
-if(isset($_GET['id'])){
-    $client->id = $_GET['id'];
+if(isset($_GET['email'])){
+    $client->email = $_GET['email'];
 }else{
     echo json_encode(
-        array('message'=>'id not set')
+        array('message'=>'email not set')
     );
 }
 

@@ -6,9 +6,11 @@ use Illuminate\Console\Scheduling\Event;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as Auth;
 use Illuminate\Auth\Authenticatable;
+use Illuminate\Notifications\Notifiable;
 class Staff extends Model implements Auth
 {
     use Authenticatable;
+    use Notifiable;
     protected $guard = 'staff';
     protected $primaryKey = 'id';
     protected  $fillable = ['first_name', 'last_name', 'email', 'phone_number', 'password', 'imgPath', 'street', 'suburb', 'city', 'postcode'];

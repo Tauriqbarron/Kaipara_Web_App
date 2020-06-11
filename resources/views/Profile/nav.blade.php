@@ -5,10 +5,10 @@
     <div class="navbar-collapse collapse w-100 ">
         <ul class="navbar-nav w-100 h-100 justify-content-center text-nowrap align-items-end">
             <li class="nav-item" >
-                <a class="nav-link" href="{{ url('/service/applications')}}" >Applications</a>
+                <a class="nav-link" href="{{ route('service.applications')}}" >Applications</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('/service/jobs')}}">Jobs</a>
+                <a class="nav-link" href="{{ route('service.jobs')}}">Jobs</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('service.view_quote')}}">Quotes</a>

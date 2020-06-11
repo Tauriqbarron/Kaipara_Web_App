@@ -9,7 +9,7 @@
 </head>
 <body>
 <form class="w-75 mx-auto" role="form" method="POST" action="{{route('admin.login')}}">
-    <a class="btn btn-danger" href="{{url('/')}}">Back</a>
+    <a class="btn btn-secondary" href="{{URL::previous()}}">Back</a>
     <h1 class="form-group ">Admin Login</h1>
     {{csrf_field()}}
 
