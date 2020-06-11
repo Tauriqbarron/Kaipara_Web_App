@@ -19,7 +19,7 @@ if(isset($_GET['email'])){
     );
 }
 if(isset($_GET['password'])){
-    $passCheck = password_hash($_GET['password'],PASSWORD_DEFAULT);
+    $passCheck = password_hash($_GET['password'],PASSWORD_BCRYPT);
      
 }else{
     echo json_encode(
