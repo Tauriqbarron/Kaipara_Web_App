@@ -9,7 +9,7 @@
 </head>
     <body>
         <form class="w-75 mx-auto mt-3" role="form" method="POST" action="{{route('client.login.submit')}}">
-            <a class="btn btn-secondary" href="{{URL::previous()}}">Back</a>
+            <a class="btn btn-secondary" href="{{url('/selectuser')}}">Back</a>
             <h1 class="form-group ">Custom Login</h1>
             {{csrf_field()}}
             @if ($message = Session::get('error'))
@@ -43,7 +43,7 @@
             </div>
             <div class="form-group">
                 <button type="submit" name="login" class="btn btn-primary shadow" value="login">Login</button>
-                <a class="btn btn-link" href="#">
+                <a class="btn btn-link" href="{{route('client.password.request')}}">
                     {{ __('Forgot Your Password?') }}
                 </a>
             </div>

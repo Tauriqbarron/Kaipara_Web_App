@@ -41,9 +41,9 @@ return [
             'provider' => 'users',
         ],
 
-        'clients' =>[
+        'client' =>[
             'driver' => 'session',
-            'provider'=>'Clients',
+            'provider'=>'clients',
         ],
 
         'service_provider' =>[
@@ -91,7 +91,7 @@ return [
             'model' => App\User::class,
         ],
 
-        'Clients' =>[
+        'clients' =>[
             'driver' => 'eloquent',
             'model' => App\Clients::class,
         ],
@@ -139,7 +139,7 @@ return [
             'throttle' => 60,
         ],
         'clients' => [
-            'provider' => 'Clients',
+            'provider' => 'clients',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

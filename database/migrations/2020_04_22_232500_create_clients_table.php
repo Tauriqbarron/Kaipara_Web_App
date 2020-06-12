@@ -25,6 +25,7 @@ class CreateClientsTable extends Migration
             $table->string('suburb');
             $table->string('city');
             $table->bigInteger('postcode');
+            $table->rememberToken();
         });
     }
 

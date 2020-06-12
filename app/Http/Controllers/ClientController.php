@@ -24,12 +24,12 @@ class ClientController extends Controller
         );
         $email = $request->get('email');
         // attempt login
-        if(Auth::guard('clients')->attempt($user_data))
+        if(Auth::guard('client')->attempt($user_data))
         {
 
             $user = Clients::query()->where('email',$email)->first();
             $request->session()->put('user',$user);
-            $request->session()->put('guardString', 'clients');
+            $request->session()->put('guardString', 'client');
             //Session::put('user',$user);
             //if success redirect to profile
             return view('Client.index',['user'=>$user]) ;
