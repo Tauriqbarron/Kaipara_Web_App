@@ -139,9 +139,9 @@ class AdminClientController extends Controller
 
     //client logout function.
     public function logout() {
-        Auth::guard('clients')->logout();
+        Auth::guard('client')->logout();
         Session::flush();
-        if(!(Auth::guard('clients')->check())){
+        if(!(Auth::guard('client')->check())){
             return redirect('/');
         }
         return redirect()->back()->with('error', 'Logout failed');

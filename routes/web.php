@@ -48,8 +48,9 @@ Route::get('/client/property', [
     'as' => 'client.property'
 ]);
 
-/*Client Registration*/
+
 Route::prefix('client')->group(function (){
+    /*Client Registration*/
     Route::get('/registration/getClientRegPage1',[
         'uses'=> 'RegistrationController@getClientRegPage1',
         'as'=>'reg.client.1'
@@ -69,9 +70,31 @@ Route::prefix('client')->group(function (){
         'uses' => 'RegistrationController@storeClient',
         'as' => 'reg.client.save'
     ]);
+    /*Client Registration End*/
+
+    /*Service provider reset password part*/
+    Route::post('/password/email', [
+        'uses' => 'Auth\ClientForgotPasswordController@sendResetLinkEmail',
+        'as' => 'client.password.email'
+    ]);
+
+    Route::get('/password/reset', [
+        'uses' => 'Auth\ClientForgotPasswordController@showLinkRequestForm',
+        'as' => 'client.password.request'
+    ]);
+
+    Route::post('/password/reset', [
+        'uses' => 'Auth\ClientResetPasswordController@reset',
+        'as' => 'client.password.update'
+    ]);
+
+    Route::get('/password/reset/{token}', [
+        'uses' => 'Auth\ClientResetPasswordController@showResetForm',
+        'as' => 'client.password.reset'
+    ]);
 
 });
-/*Client Registration End*/
+
 
 
 
