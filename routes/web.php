@@ -13,10 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-//Client Route
-
-
+/*Registration*/
+Route::get('/registration/usertype',[
+    'uses' => 'RegistrationController@getUserType',
+    'as' => "reg.type"
+]);
 
 /*Login Routes */
 
@@ -24,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/selectuser', function () {
     return view('login/userselect.usertype');
 });
-Route::get('/client', function () {
+Route::get('/client/login', function () {
     return view('login.userlogin');
 });
 Route::get('/service_provider/login', function () {
@@ -33,7 +34,6 @@ Route::get('/service_provider/login', function () {
 
 
 /* Client Routes  */
-
 Route::get('/client/index', function () {
     return view('Client.index');
 }) ->name('client.home');
@@ -47,6 +47,31 @@ Route::get('/client/property', [
     'uses' => 'ClientController@getProperty',
     'as' => 'client.property'
 ]);
+
+/*Client Registration*/
+Route::prefix('client')->group(function (){
+    Route::get('/registration/getClientRegPage1',[
+        'uses'=> 'RegistrationController@getClientRegPage1',
+        'as'=>'reg.client.1'
+    ]);
+
+    Route::post('/registration/create',[
+        'uses' => 'RegistrationController@createClient',
+        'as' => 'reg.client.putToSession'
+    ]);
+
+    Route::get('/registration/servicepage2',[
+        'uses'=> 'RegistrationController@getClientRegPage2',
+        'as'=>'reg.client.2'
+    ]);
+
+    Route::post('/registration/address/save',[
+        'uses' => 'RegistrationController@storeClient',
+        'as' => 'reg.client.save'
+    ]);
+
+});
+/*Client Registration End*/
 
 
 
@@ -138,8 +163,31 @@ Route::get('service_provider/logout', [
     'as' => 'service.logout'
 ]);
 
-/*Service provider reset password part*/
+/*Service provider prefix group*/
 Route::prefix('service_provider')->group(function (){
+    /*Service Provider Registration*/
+    Route::get('/registration/servicepage1',[
+        'uses'=> 'RegistrationController@getServicePage1',
+        'as'=>'reg.service.1'
+    ]);
+
+    Route::post('/registration/create',[
+        'uses' => 'RegistrationController@createServiceProvider',
+        'as' => 'reg.service.putToSession'
+    ]);
+
+    Route::get('/registration/servicepage2',[
+        'uses'=> 'RegistrationController@getServicePage2',
+        'as'=>'reg.service.2'
+    ]);
+
+    Route::post('/registration/address/save',[
+        'uses' => 'RegistrationController@storeServiceProvider',
+        'as' => 'reg.service.save'
+    ]);
+    /*Service Provider Registration End*/
+
+    /*Service provider reset password part*/
     Route::post('/password/email', [
        'uses' => 'Auth\SpForgotPasswordController@sendResetLinkEmail',
        'as' => 'sp.password.email'
@@ -162,31 +210,7 @@ Route::prefix('service_provider')->group(function (){
 });
 
 
-/*Registration*/
-Route::post('/registration/address',[
-    'uses' => 'RegistrationController@createServiceProvider',
-    'as' => 'reg.service'
-]);
 
-Route::post('/registration/address/save',[
-    'uses' => 'RegistrationController@storeServiceProvider',
-    'as' => 'reg.service.save'
-]);
-
-Route::get('/registration/usertype',[
-    'uses' => 'RegistrationController@getUserType',
-    'as' => "reg.type"
-]);
-
-Route::get('/registration/servicepage1',[
-    'uses'=> 'RegistrationController@getServicePage1',
-    'as'=>'reg.service.1'
-]);
-
-Route::get('/registration/servicepage2',[
-    'uses'=> 'RegistrationController@getServicePage2',
-    'as'=>'reg.service.2'
-]);
 
 
 

@@ -2,10 +2,10 @@
 
 @section('registration')
         <a class="btn btn-secondary" href="{{url('/selectuser')}}">Back</a>
-        <h5 class="mt-2 text-center">Service Provider registration</h5>
+        <h5 class="mt-2 text-center">Client registration</h5>
         <hr/>
 
-        <form method="POST" action="{{route('reg.service.putToSession')}}">
+        <form method="POST" action="{{route('reg.client.putToSession')}}">
             @csrf
             @if(count($errors) > 0)
                 <div class="alert alert-danger">
@@ -15,21 +15,9 @@
                 </div>
             @endif
             <div class="form-group row">
-                <label for="firstname" class="col-sm-2 col-form-label">First Name:</label>
+                <label for="email" class="col-sm-2 col-form-label">Email:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="firstname" name="firstname">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="lastnname" class="col-sm-2 col-form-label">Last Name:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="lastname" name="lastname">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="username" class="col-sm-2 col-form-label">User Name:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="username" name="username">
+                    <input type="email" class="form-control" id="email" name="email">
                 </div>
             </div>
             <div class="form-group row">
@@ -45,9 +33,15 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="email" class="col-sm-2 col-form-label">Email:</label>
+                <label for="firstname" class="col-sm-2 col-form-label">First Name:</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="email" name="email">
+                    <input type="text" class="form-control" id="firstname" name="firstname">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="lastnname" class="col-sm-2 col-form-label">Last Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="lastname" name="lastname">
                 </div>
             </div>
             <div class="form-group row">

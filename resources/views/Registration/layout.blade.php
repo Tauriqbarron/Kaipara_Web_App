@@ -11,10 +11,12 @@
         @include('header')
         <div class="my-5">
             <div class="regformcontainer mx-auto">
-                @include('Registration.regform')
+                @yield('registration')
             </div>
         </div>
-        @include('footer')
+        <div style="margin-top: 300px">
+            @include('footer')
+        </div>
     </body>
 </html>
 

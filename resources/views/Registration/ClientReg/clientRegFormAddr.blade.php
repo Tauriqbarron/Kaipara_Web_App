@@ -1,10 +1,10 @@
 @extends('Registration.layout')
 
 @section('registration')
-    <h5 class="mt-2 text-center">Service Provider registration</h5>
+    <h5 class="mt-2 text-center">Address Form</h5>
     <hr/>
 
-    <form method="POST" action="{{route('reg.service.save')}}">
+    <form method="POST" action="{{route('reg.client.save')}}">
         @csrf
         <div class="form-group row">
             <label for="street" class="col-sm-2 col-form-label">Street</label>
@@ -32,4 +32,7 @@
         </div>
         <button type="submit" class="btn btn-primary float-right">Submit</button>
     </form>
+
+
+
 @endsection

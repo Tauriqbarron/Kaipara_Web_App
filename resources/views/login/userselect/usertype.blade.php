@@ -33,7 +33,7 @@
                 </div>
                 <a class="btn btn-secondary mt-1" href="{{url('/')}}">Back</a>
             <div class="row mx-md-n5 ">
-                <div class="col px-md-5 "><a href="{{ url('/client') }}"  class="btn btn-primary btn-lg col p-3 mb-5 mt-5 h-100 d-flex justify-content-center"><div class='align-self-center'>Client</div></a></div>
+                <div class="col px-md-5 "><a href="{{ url('/client/login') }}"  class="btn btn-primary btn-lg col p-3 mb-5 mt-5 h-100 d-flex justify-content-center"><div class='align-self-center'>Client</div></a></div>
                 <div class="col px-md-5 "><a href="{{ url('/service_provider/login') }}"  class="btn btn-primary btn-lg col p-3 mb-5 mt-5 h-100 d-flex justify-content-center"><div class='align-self-center'>Service Provider</div></a></div>
             </div>
             <div class="fixed-bottom">@include('footer')</div>
