@@ -54,7 +54,7 @@ class StaffController extends Controller
                 ->sortBy('date',1)
                 ->sortBy('start_time', 1);
 
-            return view('Security.index', $this->getCalendar(),['staff' => $currentStaff, 'bookings' => $staff_bookings,'completedBookings' => $completedBookings, 'availableBookings' => $availableBookings, 'timetable' => $timetable]);
+            return view('Security.index', $this->getCalendar(),['staff_assignments' => $staff_assignments, 'staff' => $currentStaff, 'bookings' => $staff_bookings,'completedBookings' => $completedBookings, 'availableBookings' => $availableBookings, 'timetable' => $timetable, 'allBookings' => $bookings]);
         }
         else {
             return redirect()->route('staff.login')->with('error', 'You must log in to view your profile');

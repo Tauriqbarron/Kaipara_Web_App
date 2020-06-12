@@ -105,7 +105,9 @@
     ?>
 
     <script>
+        setBookings({!! json_encode($allBookings) !!}, {!! json_encode($staff_assignments) !!}, {!! json_encode($staff->leave_requests) !!});
         setAddresses({!! json_encode($addresses)!!});
+        setWeek("{!! \Carbon\Carbon::parse(session()->get('weekStart'))->format('Y-m-d') !!}", "{!! \Carbon\Carbon::parse(session()->get('weekEnd'))->format('Y-m-d') !!}");
     </script>
         @include('Security.header')
         <div class="container-fluid" style="min-width: 1200px">

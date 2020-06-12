@@ -28,6 +28,16 @@ body, html{
 
 }
 
+.date-arrow,
+.date-arrow:active:hover{
+    color: dimgray;
+}
+.date-arrow:hover,
+.date-arrow:active{
+    cursor: pointer;
+    color: black;
+}
+
 .rating{
     transform: rotateY(180deg);
 }

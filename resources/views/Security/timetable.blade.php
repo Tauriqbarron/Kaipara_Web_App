@@ -1,4 +1,4 @@
-<div style="width: 100%" id="timetable">
+{{--<div style="width: 100%" id="timetable">
     <div class="container jumbotron bg-light" id="schedule">
        <div class="row">
             <div class="col-12">
@@ -127,7 +127,7 @@
                                                 <td class="border-light bg-white" style="width: 13%"></td>
                                             @else
 
-                                                <td rowspan="{{$col[0]}}" class="text-center text-light rounded-lg border border-white" style="@if($col[1]==='[Leave Day]')background-color: #262525;@else background-color: #dd504c;@endif width: 13%; cursor: pointer" onclick="window.location.href = '{{route('security.dateChange',['i'=>(\Carbon\Carbon::parse($col[4])->dayOfYear - \Carbon\Carbon::Parse(\Illuminate\Support\Facades\Session::get('date1'))->dayOfYear)])}}'">
+                                                <td rowspan="{{$col[0]}}" class="text-center text-light rounded-lg border border-white" style="@if($col[1]==='[Leave Day]')background-color: #3d8fd1;@else background-color: #dd504c;@endif width: 13%; cursor: pointer" onclick="window.location.href = '{{route('security.dateChange',['i'=>(\Carbon\Carbon::parse($col[4])->dayOfYear - \Carbon\Carbon::Parse(\Illuminate\Support\Facades\Session::get('date1'))->dayOfYear)])}}'">
                                                     <strong>
                                                         @foreach($col as $record)
                                                             @if($record === $col[0] || $record === $col[4])
@@ -234,5 +234,17 @@
             </div>
         </div>
     </div>
-</div>
+</div>--}}
+<div style="width: 100%" id="timetable">
+    <div class="container jumbotron bg-light" id="schedule">
+        <div class="row">
+            <div class="col-12">
+                <div class="main-box clearfix">
+                    <div id="timetableContainer">
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
