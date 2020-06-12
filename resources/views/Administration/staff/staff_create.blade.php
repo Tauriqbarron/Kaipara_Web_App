@@ -1,6 +1,7 @@
 @extends('Administration.layout')
 @section('mainContent')
-    <h1 class="ml-5">Create staff</h1>
+    <div class="w-75 mx-auto bg-light p-2 mt-2 rounded">
+    <h1 class="">Create staff</h1>
     @if(count($errors) > 0)
         <div class="alert alert-danger">
             @foreach($errors->all() as $error)
@@ -9,7 +10,7 @@
         </div>
     @endif
     <hr/>
-    <form class="ml-2" method="post" action="{{route('staff.create')}}" >
+    <form class="justify-content-center" method="post" action="{{route('staff.create')}}" >
         @csrf
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -60,4 +61,5 @@
         <a type="button" class="btn btn-danger" href="{{route('staff.index')}}">Back</a>
         <button type="submit" class="btn btn-primary float-right">Submit</button>
     </form>
+    </div>
 @endsection

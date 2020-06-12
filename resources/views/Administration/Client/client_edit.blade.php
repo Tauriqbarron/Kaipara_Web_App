@@ -1,7 +1,9 @@
 @extends('Administration.layout')
 
 @section('mainContent')
-    <h1 class="ml-5">Client id: {{ $client->id }}</h1>
+    <div class="w-75 mx-auto bg-light p-2 mt-2 rounded">
+        <h1>Update client</h1>
+    <h2 class="ml-5">Client id: {{ $client->id }}</h2>
     @if(count($errors) > 0)
         <div class="alert alert-danger">
             @foreach($errors->all() as $error)
@@ -51,4 +53,5 @@
         <a type="button" class="btn btn-danger" href="{{route('client.index')}}">Back</a>
         <button type="submit" class="btn btn-primary float-right">Submit</button>
     </form>
+    </div>
 @endsection

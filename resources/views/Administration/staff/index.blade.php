@@ -13,8 +13,8 @@
     <div>
     <a href="{{route('staff.create')}}" class="btn btn-primary ml-2">Create</a>
 
-    <table class="table">
-        <thead>
+    <table class="table mt-1">
+        <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
             <th scope="col">First name</th>
@@ -24,11 +24,12 @@
             <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
         @foreach($staffs as $staff)
-            <tr>
+            <tr class="table-secondary">
                 <td>{{$staff->id}}</td>
                 <td>{{$staff->first_name}}</td>
                 <td>{{$staff->last_name}}</td>

@@ -9,7 +9,7 @@
     <title>@yield('title') - KSPMS</title>
 
 </head>
-<body>
+<body class="" style="background-color: #c4ebbc">
 <div class="MainCon">
     @include('Administration.header')
     <div>
@@ -18,7 +18,7 @@
     <div class="content">
         @yield('mainContent')
     </div>
-    <div style="margin-top: 300px">
+    <div style="margin-top: 250px">
     @include('footer')
     </div>
 </div>

@@ -1,7 +1,9 @@
 @extends('Administration.layout')
 
 @section('mainContent')
-    <h1 class="ml-5">Client id: {{$client->id}}</h1>
+    <div class="w-75 mx-auto bg-light p-2 mt-2 rounded">
+        <h1>Client detail</h1>
+    <h2 class="ml-5">Client id: {{$client->id}}</h2>
     <hr/>
     <form class="ml-2">
         <div class="form-row">
@@ -42,7 +44,5 @@
         </div>
         <a class="btn btn-danger" href="{{route('client.index')}}">back</a>
     </form>
-
-
-
+    </div>
 @endsection

@@ -1,7 +1,9 @@
 @extends('Administration.layout')
 
 @section('mainContent')
-    <h1 class="ml-5">Staff id: {{ $staff->id }}</h1>
+    <div class="w-75 mx-auto bg-light p-2 mt-2 rounded">
+        <h1>Delete staff</h1>
+    <h2 class="ml-5">Staff id: {{ $staff->id }}</h2>
     @if(count($errors) > 0)
         <div class="alert alert-danger">
             @foreach($errors->all() as $error)
@@ -10,7 +12,7 @@
         </div>
     @endif
     <hr/>
-    <form class="ml-2" method="post" action="{{route('staff.delete', ['id' => $staff->id])}}">
+    <form class="justify-content-center" method="post" action="{{route('staff.delete', ['id' => $staff->id])}}">
         @csrf
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -54,4 +56,5 @@
         <a class="btn btn-primary" href="{{route('staff.index')}}">back</a>
         <button type="submit" class="btn btn-danger float-right">Delete</button>
     </form>
+    </div>
 @endsection

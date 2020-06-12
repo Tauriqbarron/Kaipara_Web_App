@@ -1,7 +1,9 @@
 @extends('Administration.layout')
 
 @section('mainContent')
-    <h1 class="ml-5">Security assignment id: {{$assignment->id}}</h1>
+    <div class="w-75 mx-auto bg-light p-2 mt-2 rounded">
+        <h1>Delete assignment</h1>
+    <h2 class="ml-5">Security assignment id: {{$assignment->id}}</h2>
     <hr/>
     <form class="ml-2" method="post" action="{{route('security_assignment.delete', ['id' => $assignment->id])}}">
         @csrf
@@ -73,4 +75,5 @@
         <a class="btn btn-success" href="{{route('security_assignment.index')}}">back</a>
         <button type="submit" class="btn btn-danger float-right">Delete</button>
     </form>
+    </div>
 @endsection

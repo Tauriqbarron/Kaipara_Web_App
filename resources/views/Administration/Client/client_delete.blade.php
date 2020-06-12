@@ -1,7 +1,9 @@
 @extends('Administration.layout')
 
 @section('mainContent')
-    <h1 class="ml-5">Client id: {{$client->id}}</h1>
+    <div class="w-75 mx-auto bg-light p-2 mt-2 rounded">
+        <h1>Delete Client</h1>
+    <h2 class="ml-5">Client id: {{$client->id}}</h2>
     <hr/>
     <form class="ml-2" method="post" action="{{route('client.delete', ['id' => $client->id])}}">
         @csrf
@@ -47,4 +49,5 @@
         <a class="btn btn-primary" href="{{route('client.index')}}">back</a>
         <button type="submit" class="btn btn-danger float-right">Delete</button>
     </form>
+    </div>
 @endsection
