@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
 @section('mainContent')
     <h1>Staff Management</h1>
-    <a href="{{route('staff.getLeaveRequests')}}">View Leave Requests</a>
+    <a class="btn btn-primary float-right mr-2" href="{{route('staff.getLeaveRequests')}}">View Leave Requests</a>
     <form style="padding-top: 25px;" class="form-inline my-2 my-lg-3 ml-2" method="get" action="{{route('staff.search')}}">
         <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
