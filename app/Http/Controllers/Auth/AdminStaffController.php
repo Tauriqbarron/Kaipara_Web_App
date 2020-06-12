@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Booking;
 use App\Http\Controllers\Controller;
+use App\Leave_Request;
 use App\Roster;
 use App\Staff_Assignment;
 use Carbon\Carbon;
@@ -277,6 +278,46 @@ class AdminStaffController extends Controller
         return redirect()->back()->with('error','Email Address or Password not recognised');
     }
 
+    public function getLeaveRequests()
+    {
+        return view('Administration.staff.leave_request');
+    }
+
+    public function acceptLeave($id){
+        $leave = Leave_Request::query()->find($id);
+        $leave->absence_status_id = 2;
+        $leave->updated_on = today('NZ');
+        $leave->save();
+
+        return redirect()->back();
+    }
+
+
+    public function declineLeave($id){
+        $leave = Leave_Request::query()->find($id);
+        $leave->absence_status_id = 3;
+        $leave->updated_on = today('NZ');
+        $leave->save();
+
+        return redirect()->back();
+    }
+
+    public function getLeaveDelete($id){
+        $leave = Leave_Request::query()->find($id);
+        return view('Administration.staff.leave_request_delete', ['leave' => $leave]);
+    }
+
+    public function postLeaveDelete(Request $request){
+        $leave = Leave_Request::query()->find($request->id);
+        try {
+            $leave->delete();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+        return redirect()->route('staff.getLeaveRequests')->with('message', 'Success');
+
+    }
+
 
     public function logout() {
         Auth::guard('staff')->logout();
@@ -285,6 +326,7 @@ class AdminStaffController extends Controller
             return redirect('/');
         }
         return redirect()->back()->with('error', 'Logout failed');
+
     }
 
 
