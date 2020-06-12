@@ -5,7 +5,7 @@
     <div class="page-toggle-page" id="profileContainer" style="display: none">
         @include('Security.profile')
     </div>
-    <div class="page-toggle-page" id="rosterContainer" style="display: none">
+    <div class="page-toggle-page" id="rosterContainer" style="display: block">
         @include('Security.roster')
     </div>
     <div class="page-toggle-page" id="scheduleContainer" style="display: none">

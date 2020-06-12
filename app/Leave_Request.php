@@ -18,4 +18,8 @@ class Leave_Request extends Model
     {
         return $this->hasOne('App\Absence_Types', 'id', 'absence_types_id');
     }
+    public function staff()
+    {
+        return $this->belongsTo('App\Staff', 'staff_id', 'id');
+    }
 }

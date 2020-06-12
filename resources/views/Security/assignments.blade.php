@@ -1,14 +1,7 @@
 <div class="profile-card-col">
     <div style="height: 48px"></div>
     <div class="assignment-map rounded" id="map"></div>
-    <div  class="jumbotron bg-light shadow-sm rounded" style="margin-top:10px;width: 301px;padding: 10px;position: fixed">
-        <div style="">
-            <h6>Jump to:</h6>
-            <a href="#available" class="nav-link"><h6>Available Assignments</h6></a>
-            <a href="#completed" class="nav-link"><h6>Completed Assignments</h6></a>
-            <a href="#leaveRequests" onclick="pageToggle('rosterBtn','rosterContainer')"  class="nav-link"><h6>Annual Leave</h6></a>
-        </div>
-    </div>
+    @include('Security.sideNav')
 
 
 </div>

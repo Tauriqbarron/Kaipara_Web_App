@@ -20,7 +20,7 @@
 
 </nav>--}}
 <nav class="navbar navbar-dark bg-dark navbar-expand-sm justify-content-center">
-    <a href="#" id="profileBtn"><img src="https://vectr.com/samjcribb/a25QhH2un.svg?width=107.46333333333331&height=23.999999999999943&select=de8GXLBTc&source=selection" class="navbar-brand d-flex mr-auto text-light">
+    <a href="#" id="profileBtn"><img  src="{{url('images/Dashboard_active.png')}}" class="navbar-brand d-flex mr-auto text-light">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
         <span class="navbar-toggler-icon"></span>

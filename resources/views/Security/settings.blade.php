@@ -1,5 +1,5 @@
 <div class="profile-card-col" style="min-height: 670px">
-    <div  class="profile-id-card card bg-light shadow p-3 mb-5 border-0 card-image rounded-lg shadow col-sm-0" style="background-image: url({{url('images/Card_BG.jpg')}}); ">
+    <div  class="profile-id-card card bg-light shadow p-3 mb-2 border-0 card-image float-none rounded-lg shadow col-sm-0" style="background-image: url({{url('images/Card_BG.jpg')}}); ">
         <div id="cardHeader" class="card-header bg-light border-0 rounded">
             <img class="w-100 align-top" src="{{url('images/Card_Header.png')}}" alt="Card top">
         </div>
@@ -15,13 +15,8 @@
             <img class="w-100 align-top" src="{{url('images/KaiparaLogo.png')}}" alt="Card top">
         </div>
     </div>
-    <div  class="jumbotron bg-light shadow-sm rounded" style="margin-top:490px;width: 301px;padding: 10px;position: fixed">
-            <h6>Jump to:</h6>
-            <a href="#dashboard" onclick="pageToggle('profileBtn','profileContainer')" class="nav-link"><h6>Dashboard</h6></a>
-            <a href="#available" onclick="pageToggle('assignmentBtn','assignmentContainer')" class="nav-link"><h6>Available Assignments</h6></a>
-            <a href="#completed" onclick="pageToggle('assignmentBtn','assignmentContainer')" class="nav-link"><h6>Completed Assignments</h6></a>
-            <a href="#leaveRequests" onclick="pageToggle('rosterBtn','rosterContainer')"  class="nav-link"><h6>Annual Leave</h6></a>
-    </div>
+
+    @include('Security.sideNav')
 </div>
 <div style="width:74%; float: left; padding-left: 20px">
     @if (count($errors) > 0)
@@ -39,10 +34,10 @@
         <form method="POST" action="{{route('security.postEdit')}}" class="needs-validation">
             @csrf
             <div class="row  border-bottom">
-                <div class="col-2">
-                    ID#:
+                <div class="py-2 col-3">
+                    <strong>ID#:</strong>
                 </div>
-                <div class="col-9">
+                <div class="col-8">
                     <label>
                         <input type="text" class="form-control-plaintext" value="{{$staff->id}}" readonly>
                     </label>
@@ -51,10 +46,10 @@
                 </div>
             </div>
             <div class="row  border-bottom">
-                <div class="col-2">
-                    First Name:
+                <div class="py-2 col-3">
+                    <strong>First Name:</strong>
                 </div>
-                <div class="col-9">
+                <div class="col-8">
                     <label>
                         <input type="text" class="form-control-plaintext" value="{{$staff->first_name}}" readonly>
                     </label>
@@ -64,10 +59,10 @@
                 </div>
             </div>
             <div class="row  border-bottom">
-                <div class="col-2">
-                    Last Name:
+                <div class="py-2 col-3">
+                    <strong>Last Name:</strong>
                 </div>
-                <div class="col-9">
+                <div class="col-8">
                     <label>
                         <input type="text" class="form-control-plaintext" value="{{$staff->last_name}}" readonly>
                     </label>
@@ -77,10 +72,10 @@
                 </div>
             </div>
             <div class="row  border-bottom">
-                <div class="col-2">
-                    Email:
+                <div class="py-2 col-3">
+                    <strong>Email:</strong>
                 </div>
-                <div class="col-9">
+                <div class="col-8">
                     <label>
                         <input type="text" class="form-control-plaintext" value="{{$staff->email}}" readonly>
                     </label>
@@ -90,10 +85,10 @@
                 </div>
             </div>
             <div class="row  border-bottom">
-                <div class="col-2">
-                    Phone Number:
+                <div class="py-2 col-3">
+                    <strong>Phone Number:</strong>
                 </div>
-                <div class="col-9">
+                <div class="col-8">
                     <label>
                         <input type="text" id="editPhoneNumber" name="pNumber" class="form-control form-control-plaintext can-edit" value="{{$staff->phone_number}}" readonly required>
                     </label>
@@ -103,10 +98,10 @@
                 </div>
             </div>
             <div class="row  border-bottom">
-                <div class="col-2">
-                    Street:
+                <div class="py-2 col-3">
+                    <strong>Street:</strong>
                 </div>
-                <div class="col-9">
+                <div class="col-8">
                     <label>
                         <input type="text" id="editStreet" name="street" class="form-control form-control-plaintext can-edit" value="{{$staff->street}}" readonly required>
                     </label>
@@ -116,10 +111,10 @@
                 </div>
             </div>
             <div class=" row  border-bottom">
-                <div class="col-2">
-                    Suburb:
+                <div class="py-2 col-3">
+                    <strong>Suburb:</strong>
                 </div>
-                <div class="col-9">
+                <div class="col-8">
                     <label>
                         <input type="text" id="editSuburb" name="suburb" class="form-control form-control-plaintext can-edit" value="{{$staff->suburb}}" readonly required>
                     </label>
@@ -129,10 +124,10 @@
                 </div>
             </div>
             <div class=" row  border-bottom">
-                <div class="col-2">
-                    City:
+                <div class="py-2 col-3">
+                    <strong>City:</strong>
                 </div>
-                <div class="col-9">
+                <div class="col-8">
                     <label>
                         <input type="text" id="editCity" name="city" class="form-control form-control-plaintext can-edit" value="{{$staff->city}}" readonly required>
                     </label>
@@ -143,12 +138,12 @@
                 </div>
             </div>
             <div class=" row  border-bottom">
-                <div class="col-2">
-                    Postcode:
+                <div class="py-2 col-3">
+                    <strong>Postcode:</strong>
                 </div>
-                <div class="col-9">
+                <div class="col-8">
                     <label>
-                        <input type="text" pattern="\d*" id="editPostCode" name="postcode" class="form-control form-control-plaintext can-edit" maxlength="4" value="{{$staff->postcode}}" readonly required>
+                        <input type="text" pattern="\d*" id="editPostCode" name="postcode" class="form-control form-control-plaintext can-edit" minlength="4" maxlength="4" value="{{$staff->postcode}}" readonly required>
                     </label>
                 </div>
                 <div class="col-1">
@@ -156,7 +151,10 @@
                 </div>
             </div>
             <div class="mt-2 row w-100">
-                <div class="col-12">
+                <div class="col-3">
+                    <a href="">Change your password</a>
+                </div>
+                <div class="col-9">
                     <input type="submit" id="btnEditStaff" class="btn btn-success disabled float-right" value="Save Changes" style="pointer-events: none">
                 </div>
             </div>

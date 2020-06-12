@@ -1,5 +1,5 @@
 <div class="profile-card-col" style="min-height: 625px">
-    <div  class="profile-id-card card bg-light shadow p-3 mb-5 border-0 card-image rounded-lg shadow col-sm-0" style="background-image: url({{url('images/Card_BG.jpg')}}); ">
+    <div  class="profile-id-card card bg-light shadow p-3 mb-5 border-0 card-image rounded-lg shadow col-sm-0 float-none" style="background-image: url({{url('images/Card_BG.jpg')}}); ">
         <div id="cardHeader" class="card-header bg-light border-0 rounded">
             <img class="w-100 align-top" src="{{url('images/Card_Header.png')}}" alt="Card top">
         </div>
@@ -15,13 +15,8 @@
             <img class="w-100 align-top" src="{{url('images/KaiparaLogo.png')}}" alt="Card top">
         </div>
     </div>
-    <div  class="jumbotron bg-light shadow-sm rounded" style="margin-top:490px;width: 301px;padding: 10px;position: fixed">
-        <div class="float-left">
-            <h6>Jump to:</h6>
-            <a href="#available" onclick="pageToggle('assignmentBtn','assignmentContainer')" class="nav-link"><h6>Available Assignments</h6></a>
-            <a href="#completed" onclick="pageToggle('assignmentBtn','assignmentContainer')" class="nav-link"><h6>Completed Assignments</h6></a>
-            <a href="#leaveRequests" onclick="pageToggle('rosterBtn','rosterContainer')"  class="nav-link"><h6>Annual Leave</h6></a>
-        </div>
+    <div>
+        @include('Security.sideNav')
     </div>
 
 
@@ -51,13 +46,13 @@
                             <thead>
                             <tr>
                                 <th >
-                                    <a href="{{route('security.dateChange', ['i' => -1])}}"><i class="fa fa-chevron-left fa-2x date-arrow" id="dateLeft" ></i></a>
+                                    <a href="{{route('security.dateChange', ['i' => -1])}}"><i class="fa fa-chevron-left date-arrow" id="dateLeft" ></i></a>
                                 </th>
                                 <th colspan="3" class="text-center text-secondary" style="vertical-align: bottom">
-                                    <h3 id="myAssignmentDate">{{Carbon\Carbon::parse(Session::get('date1'))->format('d/m/Y')}} </h3>
+                                    <h5 class="mb-0" id="myAssignmentDate">{{Carbon\Carbon::parse(Session::get('date1'))->format('d/m/Y')}} </h5>
                                 </th>
                                 <th>
-                                    <a href="{{route('security.dateChange', ['i' => 1])}}"> <i class="fa fa-chevron-right float-right fa-2x date-arrow"></i></a>
+                                    <a href="{{route('security.dateChange', ['i' => 1])}}"> <i class="fa fa-chevron-right float-right date-arrow"></i></a>
                                 </th>
                             </tr>
                             </thead>
@@ -133,6 +128,6 @@
             </div>
         </div>
     </div>
-        @include('Security.timetable')
+       @include('Security.timetable')
 </div>
 

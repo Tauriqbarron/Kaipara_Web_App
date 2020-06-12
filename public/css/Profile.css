@@ -28,6 +28,16 @@ body, html{
 
 }
 
+.date-arrow,
+.date-arrow:active:hover{
+    color: dimgray;
+}
+.date-arrow:hover,
+.date-arrow:active{
+    cursor: pointer;
+    color: black;
+}
+
 .rating{
     transform: rotateY(180deg);
 }
@@ -139,11 +149,6 @@ a.disabled{
     height: 400px
 }
 
-.profile-card-col{
-    width:26%;
-    height: 100%;
-    float: left
-}
 .profile-card-col{
     width:26%;
     height: 100%;

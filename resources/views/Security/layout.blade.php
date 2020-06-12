@@ -19,12 +19,32 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+        <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
+        <style>
+            #profileBtn,
+            #profileBtn:active:hover {
+                content: url("{{url('images/Dashboard_inactive.png')}}");
+            }
+            #profileBtn:hover,
+            #profileBtn.active{
+                cursor: pointer;
+                content: url("{{url('images/Dashboard_active.png')}}");
+            }
+            .page-toggle-btn.active{
+                pointer-events: none;
+            }
+
+
+        </style>
+
         <!--<script src="https://kit.fontawesome.com/c3929064ae.js" crossorigin="anonymous"></script>-->
 
 
     </head>
     <body id="bod">
-{{--TODO create one modal and chage it based on which button is pressed rather than creating one for each booking--}}
+{{--TODO create one modal and change it based on which button is pressed rather than creating one for each booking--}}
     @foreach($completedBookings as $booking)
         @if($staff_assignment = $booking->staff_assignments->where('staff_id', '=', $staff->id)->first())
             <div class="modal" id="f{{$booking->id}}" tabindex="-1" role="dialog" aria-labelledby="modalTestLabel" aria-hidden="true">
@@ -74,7 +94,7 @@
                 </div>
             </div>
         @endif
-        @endforeach
+    @endforeach
     <?php
     $addresses = array();
     foreach($bookings as $booking){
@@ -85,7 +105,9 @@
     ?>
 
     <script>
+        setBookings({!! json_encode($allBookings) !!}, {!! json_encode($staff_assignments) !!}, {!! json_encode($staff->leave_requests) !!});
         setAddresses({!! json_encode($addresses)!!});
+        setWeek("{!! \Carbon\Carbon::parse(session()->get('weekStart'))->format('Y-m-d') !!}", "{!! \Carbon\Carbon::parse(session()->get('weekEnd'))->format('Y-m-d') !!}");
     </script>
         @include('Security.header')
         <div class="container-fluid" style="min-width: 1200px">
@@ -100,6 +122,8 @@
 
 
         </div>
+
+        {!! $calendar->script() !!}
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoA571QZSNmBnGSO2B0AO6hA1XSlcgicI&callback=initMap" async defer></script>
 
