@@ -1,6 +1,8 @@
 @extends('Administration.layout')
 @section('mainContent')
-    <h1 class="ml-5">Security assignment id: {{$staff_assignment->booking_id}}</h1>
+    <div class="w-75 mx-auto bg-light p-2 mt-2 rounded">
+        <h1>Change staff</h1>
+    <h2 class="ml-5">Security assignment id: {{$staff_assignment->booking_id}}</h2>
     @if(count($errors) > 0)
         <div class="alert alert-danger">
             @foreach($errors->all() as $error)
@@ -34,6 +36,7 @@
         </div>
         <button type="submit" class="form-control col-md-2 btn btn-success">change</button>
     </form>
+    </div>
 
 
 

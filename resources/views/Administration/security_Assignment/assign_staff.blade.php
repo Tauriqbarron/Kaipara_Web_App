@@ -1,8 +1,9 @@
 @extends('Administration.layout')
 
 @section('mainContent')
-    <h1 class="ml-5">Security assignment id: {{$assignment->id}}</h1>
-
+    <div class="w-75 mx-auto bg-light p-2 mt-2 rounded">
+        <h1>Assign staff</h1>
+    <h2 class="ml-5">Security assignment id: {{$assignment->id}}</h2>
     @if(count($errors) > 0)
         <div class="alert alert-danger">
             @foreach($errors->all() as $error)
@@ -88,4 +89,5 @@
         @endfor
         <br/>
         <a class="btn btn-danger ml-2" href="{{route('security_assignment.index')}}">back</a>
+    </div>
 @endsection

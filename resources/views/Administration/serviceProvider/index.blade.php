@@ -9,8 +9,8 @@
     <div>
         <a href="{{route('sp.create')}}" class="btn btn-primary ml-2">Create</a>
 
-        <table class="table">
-            <thead>
+        <table class="table mt-1">
+            <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">First name</th>
@@ -24,7 +24,7 @@
             </thead>
             <tbody>
             @foreach($sps as $sp)
-                <tr>
+                <tr class="table-secondary">
                     <td>{{$sp->id}}</td>
                     <td>{{$sp->firstname}}</td>
                     <td>{{$sp->lastname}}</td>

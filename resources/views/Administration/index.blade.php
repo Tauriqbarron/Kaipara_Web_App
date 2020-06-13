@@ -1,7 +1,7 @@
 @extends('Administration.layout')
 
 @section('mainContent')
-    <div class="ml-2 mt-5">
+    <div class="ml-2 mt-2">
     <h1>Welcome to administration center</h1>
     <hr/>
     <div class="row mx-md-n5">

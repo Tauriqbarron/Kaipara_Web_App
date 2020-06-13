@@ -1,7 +1,9 @@
 @extends('Administration.layout')
 
 @section('mainContent')
-    <h1 class="ml-5">Staff id: {{ $sp->id }}</h1>
+    <div class="w-75 mx-auto bg-light p-2 mt-2 rounded">
+        <h1>Delete service provider</h1>
+    <h2 class="ml-5">Staff id: {{ $sp->id }}</h2>
     @if(count($errors) > 0)
         <div class="alert alert-danger">
             @foreach($errors->all() as $error)
@@ -58,4 +60,5 @@
         <a class="btn btn-primary" href="{{route('sp.index')}}">back</a>
         <button type="submit" class="btn btn-danger float-right">Delete</button>
     </form>
+    </div>
 @endsection

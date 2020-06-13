@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
 @section('mainContent')
     <h1>Staff Management</h1>
-    <a href="{{route('staff.getLeaveRequests')}}">View Leave Requests</a>
+    <a class="btn btn-primary float-right mr-2" href="{{route('staff.getLeaveRequests')}}">View Leave Requests</a>
     <form style="padding-top: 25px;" class="form-inline my-2 my-lg-3 ml-2" method="get" action="{{route('staff.search')}}">
         <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -14,8 +14,8 @@
     <div>
     <a href="{{route('staff.create')}}" class="btn btn-primary ml-2">Create</a>
 
-    <table class="table">
-        <thead>
+    <table class="table mt-1">
+        <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
             <th scope="col">First name</th>
@@ -25,11 +25,12 @@
             <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
         @foreach($staffs as $staff)
-            <tr>
+            <tr class="table-secondary">
                 <td>{{$staff->id}}</td>
                 <td>{{$staff->first_name}}</td>
                 <td>{{$staff->last_name}}</td>

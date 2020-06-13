@@ -1,9 +1,11 @@
 @extends('Administration.layout')
 
 @section('mainContent')
-    <h1 class="ml-5">Staff id: {{$staff->id}}</h1>
+    <div class="w-75 mx-auto bg-light p-2 mt-2 rounded">
+        <h1>Staff detail</h1>
+    <h2 class="ml-5">Staff id: {{$staff->id}}</h2>
     <hr/>
-    <form class="ml-2">
+    <form class="justify-content-center">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputEmail4">First Name</label>
@@ -42,6 +44,7 @@
         </div>
         <a class="btn btn-danger" href="{{route('staff.index')}}">back</a>
     </form>
+    </div>
 
 
 @endsection

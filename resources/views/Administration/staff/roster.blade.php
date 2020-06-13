@@ -24,7 +24,7 @@
         <div class="form-group mr-2">
 
         </div>
-        <div class="form-group w-50">
+        <div class="form-group w-50 bg-light p-1 rounded">
             {!! $calendar->calendar() !!}
             {!! $calendar->script() !!}
         </div>

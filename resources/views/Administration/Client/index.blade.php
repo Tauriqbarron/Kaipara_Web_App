@@ -10,8 +10,8 @@
         <div>
             <a href="{{route('client.create')}}" class="btn btn-primary ml-2">Create</a>
 
-            <table class="table">
-                <thead>
+            <table class="table mt-1">
+                <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">First name</th>
@@ -25,7 +25,7 @@
                 </thead>
                 <tbody>
                 @foreach($clients as $client)
-                    <tr>
+                    <tr class="table-secondary">
                         <td>{{$client->id}}</td>
                         <td>{{$client->first_name}}</td>
                         <td>{{$client->last_name}}</td>
