@@ -448,8 +448,6 @@ Route::get('/admin/staff/delete/{id}',[
     'as' => "staff.delete"
 ]);
 
-
-
 Route::post('/admin/staff/delete/{id}',[
     'uses' => 'Auth\AdminStaffController@postDelete',
     'as' => "staff.delete"
@@ -485,23 +483,23 @@ Route::get('/admin/staff/viewleave',[
     'uses' => 'Auth\AdminStaffController@getLeaveRequests',
     'as' => "staff.getLeaveRequests"
 ]);
-
+//Accept Leave request
 Route::get('admin/staff/leave/accept{id}', [
     'uses' => 'Auth\AdminStaffController@acceptLeave',
     'as' => 'staff.acceptLeave'
 ]);
-
+//Decline Leave request
 Route::get('admin/staff/leave/decline{id}', [
     'uses' => 'Auth\AdminStaffController@declineLeave',
     'as' => 'staff.declineLeave'
 ]);
-
+//Open delete leave page
 Route::get('admin/staff/leave/getdelete{id}', [
     'uses' => 'Auth\AdminStaffController@getLeaveDelete',
     'as' => 'staff.getLeaveDelete'
 ]);
 
-
+//delete leave request
 Route::post('admin/staff/leave/delete', [
     'uses' => 'Auth\AdminStaffController@postLeaveDelete',
     'as' => 'staff.postLeaveDelete'

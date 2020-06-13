@@ -21,10 +21,13 @@ use MaddHatter\LaravelFullcalendar\Calendar;
 
 class StaffController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:staff');
+    }
 
     public function getHome() {
 
-        if(Auth::guard('staff')->check()) {
             //TODO: Only access database when something changes rather than reloading the same data
             $currentStaff = Staff::query()->find(Auth::guard('staff')->user()->id);
             $staff_assignments = $currentStaff->staff_assignments->pluck('booking_id');
@@ -55,10 +58,7 @@ class StaffController extends Controller
                 ->sortBy('start_time', 1);
 
             return view('Security.index', $this->getCalendar(),['staff_assignments' => $staff_assignments, 'staff' => $currentStaff, 'bookings' => $staff_bookings,'completedBookings' => $completedBookings, 'availableBookings' => $availableBookings, 'timetable' => $timetable, 'allBookings' => $bookings]);
-        }
-        else {
-            return redirect()->route('staff.login')->with('error', 'You must log in to view your profile');
-        }
+
     }
 
     public function postFeedback(Request $request){

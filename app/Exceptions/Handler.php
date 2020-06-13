@@ -95,6 +95,10 @@ class Handler extends ExceptionHandler
         if ($request->is('service_provider') || $request->is('service_provider/*')) {
             return redirect()->guest('/service_provider/login');
         }
+        if ($request->is('security') || $request->is('security/*')) {
+            error_log($exception->getMessage());
+            return redirect()->guest('/security/login');
+        }
         return redirect()->guest(route('login'));
     }
 }

@@ -97,6 +97,13 @@ function setWeek(start_date, end_date) {
     week  = [new Date(start_date), new Date(end_date)];
 }
 
+function leadingZero(num) {
+    if (num < 10){
+        return '0' + num;
+    }
+    else return '' + num;
+}
+
 
 function createTimetable() {
 
@@ -108,6 +115,22 @@ function createTimetable() {
 
     });
 
+    start = Math.floor(Math.min.apply(Math, filteredArray.map(function (record) {
+        return record['start_time'];
+    })))-1;
+
+    finish = Math.ceil(Math.max.apply(Math,filteredArray.map(function (record) {
+        return record['finish_time'];
+    })))+1;
+
+    hours = (finish - start)
+
+    if (!(hours > 0)){
+        hours = 12;
+        start = 8;
+        finish = 20;
+    }
+
     //Filter the leave records
     filteredLeaveArray = [];
     for (var leave of leaveArray){
@@ -116,6 +139,7 @@ function createTimetable() {
         weekStart = week[0];
         weekEnd = week[1];
 
+        //Calculate number of days between the start and end dates
         days = (leaveEnd-leaveStart)/1000/60/60/24;
         //Iterate through the date range and create array records to populate the table
         if (leave['absence_status_id'] === 2){
@@ -126,7 +150,7 @@ function createTimetable() {
 
                 if (bleh >= weekStart && bleh <= weekEnd && bleh <= leaveEnd){
                     filteredLeaveArray.push([
-                        10,
+                        (finish-start)-2,
                         '',
                         'Annual Leave',
                         bleh.getFullYear() + "-" + (bleh.getMonth()+1) + "-" + bleh.getDate(),
@@ -139,21 +163,6 @@ function createTimetable() {
 
 
 
-    }
-    start = Math.floor(Math.min.apply(Math, filteredArray.map(function (record) {
-        return record['start_time'];
-    })));
-
-    finish = Math.ceil(Math.max.apply(Math,filteredArray.map(function (record) {
-        return record['finish_time'];
-    })));
-
-    hours = finish - start;
-
-    if (!(hours > 0)){
-        hours = 12;
-        start = 8;
-        finish = 16;
     }
 
 
@@ -183,7 +192,7 @@ function createTimetable() {
     $.each(filteredLeaveArray, function (key, value) {
         hours = value[0];
         j = new Date(value[3]).getDay()+1;
-        i = Math.floor(9-start);
+        i = Math.floor(1);
 
         timetable[i][j] = [value[0], value[1], value[2], value[3], value[4]];
 
@@ -197,7 +206,7 @@ function createTimetable() {
     $.each(filteredArray, function (key, value) {
 
 
-        hours = Math.floor(value['finish_time'] - value['start_time']);
+        hours = Math.floor(value['finish_time'] - value['start_time'])+1;
         j = new Date(value['date']).getDay()+1;
         i = Math.floor(value['start_time']-start);
         leading = '0';
@@ -210,8 +219,9 @@ function createTimetable() {
             leading = '';
         }
         finishhhmm = (leading + value['finish_time'].toFixed(2)).replace('.', ':');
+        date = new Date(value['date']);
 
-        timetable[i][j] = [hours, starthhmm + " - " + finishhhmm, value['description'], value['date'], "#dd504c"];
+        timetable[i][j] = [hours, starthhmm + " - " + finishhhmm, value['description'], date, "#dd504c"];
 
 
         for(k = 1; k < hours; k++){
@@ -305,7 +315,11 @@ function createTimetable() {
                     cell.classList.add('text-center', 'text-light', 'rounded-lg', 'border', 'border-white');
                     cell.style.backgroundColor = col[4];
                     cell.style.width = '13%';
-                    cell.innerHTML = "<strong>" + col[2] + "<br>" + col[1] + "<br>" + col[3] + "</strong>";
+                    cell.innerHTML = "<strong>" + col[2] + "<br>"
+                        + col[1]
+                        + "<br>"
+                        + leadingZero(new Date(col[3]).getDate()) + "/" + leadingZero((new Date(col[3]).getMonth()+1)) + "/" +  new Date(col[3]).getFullYear()
+                        + "</strong>";
                 }
             }
 

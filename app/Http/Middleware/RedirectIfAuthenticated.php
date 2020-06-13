@@ -34,6 +34,10 @@ class RedirectIfAuthenticated
                 break;
         }*/
 
+        if ($guard == "staff" && Auth::guard($guard)->check()) {
+            return redirect('/security/profile');
+        }
+
         if ($guard == "admin" && Auth::guard($guard)->check()) {
             return redirect('/admin');
         }
