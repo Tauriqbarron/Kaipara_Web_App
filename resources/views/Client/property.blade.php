@@ -81,6 +81,11 @@
                     <div class="collapse w-100" id="custom">
                         <div class="card card-body ">
                             <div id="accordion">
+                                {{---------------------------------------}}
+                                {{---------------------------------------}}
+                                {{--------------Card 1-------------------}}
+                                {{---------------------------------------}}
+                                {{---------------------------------------}}
                                 <div class="row">
                                     <div class="card w-100">
                                         <div class="card-header" id="headingOne">
@@ -95,14 +100,16 @@
                                             <div class="card-body">
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        @foreach(array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') as $record)
+                                                        @php($days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'))
+                                                        @for( $i = 0; $i < 7; $i++)
+                                                            @php($record = $days[$i])
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="{{$record}}" id="defaultCheck{{$record}}">
+                                                                <input class="form-check-input day-check" type="checkbox" data-info="{{$record}}" id="defaultCheck{{$record}}">
                                                                 <label class="form-check-label" for="defaultCheck{{$record}}">
                                                                     {{$record}}
                                                                 </label>
                                                             </div>
-                                                        @endforeach
+                                                        @endfor
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-check">
@@ -117,6 +124,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{---------------------------------------}}
+                                {{---------------------------------------}}
+                                {{--------------Card 2-------------------}}
+                                {{---------------------------------------}}
+                                {{---------------------------------------}}
                                 <div class="row">
                                     <div class="card w-100">
                                         <div class="card-header" id="headingTwo">
@@ -131,7 +143,7 @@
                                                 <div class="form-row">
                                                     <div class="col">
                                                         <label for="birthday">Select Date</label>
-                                                        <input type="date" min="{{today('NZ')->addDay()}}" id="birthday" name="birthday">
+                                                        <input type="date" min="{{\Carbon\Carbon::parse(today('NZ')->addDay())->format('Y-m-d')}}" id="birthday" name="birthday">
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-row">
@@ -156,6 +168,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{---------------------------------------}}
+                                {{---------------------------------------}}
+                                {{--------------Card 3-------------------}}
+                                {{---------------------------------------}}
+                                {{---------------------------------------}}
                                 <div class="row">
                                     <div class="card w-100">
                                         <div class="card-header" id="headingThree">
@@ -183,6 +200,11 @@
                 </div>
 
             </div>
+            {{------------------------------------------}}
+            {{------------------------------------------}}
+            {{---------------Overview-------------------}}
+            {{------------------------------------------}}
+            {{------------------------------------------}}
             <div class="col">
                 <div class="card">
                     <div class="card-header">
@@ -215,6 +237,12 @@
                             <div class="col">
                                 <input type="text" class="border-0" id="postcode1" name="postcode1" value="" readonly>
                             </div>
+                        </div>
+                        <div class="form-row">
+                            Date
+                        </div>
+                        <div class="form-row" id="daysOverview">
+
                         </div>
                     </div>
                 </div>
