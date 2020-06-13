@@ -61,12 +61,12 @@
         </div>
     @endforeach
 
-    <div class="container-fluid jumbotron bg-white">
+    <div class="container-fluid rounded-bottom py-4">
         <h1>Pending Leave Requests</h1>
 
         <div>
             <table class="table">
-                <thead>
+                <thead class="thead-dark">
                 <tr>
                     <th scope="col">Title</th>
                     <th scope="col">Leave Type</th>
@@ -81,7 +81,7 @@
                 </thead>
                 <tbody>
                 @foreach(\App\Leave_Request::query()->where('absence_status_id', '=', 1)->get() as $leave)
-                    <tr>
+                    <tr class="table-secondary">
                         <td>{{$leave->subject}}</td>
                         <td>{{$leave->absence_types->description}}</td>
                         <td>{{$leave->start_date}}</td>
@@ -94,12 +94,13 @@
                     </tr>
 
                 @endforeach
+
                 </tbody>
             </table>
 
             <h1>Reviewed Leave Requests</h1>
             <table class="table">
-                <thead>
+                <thead class="thead-dark">
                 <tr>
                     <th scope="col">Title</th>
                     <th scope="col">Leave Type</th>
@@ -114,7 +115,7 @@
                 </thead>
                 <tbody>
                 @foreach(\App\Leave_Request::query()->where('absence_status_id', '!=', 1)->get() as $leave)
-                    <tr>
+                    <tr class="table-secondary">
                         <td>{{$leave->subject}}</td>
                         <td>{{$leave->absence_types->description}}</td>
                         <td>{{$leave->start_date}}</td>
@@ -125,6 +126,8 @@
                         <td><button class="btn btn-primary" data-toggle="modal" data-target="#l{{$leave->id}}">View</button></td>
                         @if($leave->absence_status->id === 3)
                             <td><a class="btn btn-danger" href="{{route('staff.getLeaveDelete', ['id' => $leave->id])}}">Delete</a></td>
+                        @else
+                            <td></td>
                         @endif
                     </tr>
 

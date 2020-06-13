@@ -15,7 +15,7 @@
 
     <!--The calendar-->
     <div class="text-center">
-    <h1 class="">staff name: {{$staff->first_name}} {{$staff->last_name}}
+    <h1 class="">Staff Name: {{$staff->first_name}} {{$staff->last_name}}
     </h1>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addRoster">Add Roster</button>
     </div>

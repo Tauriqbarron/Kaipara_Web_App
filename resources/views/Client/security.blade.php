@@ -7,7 +7,7 @@
     <a class="nav-link active btn-lg mx-5 pt-2" href="#">Quotes</a>
 @endsection
 @section('mainContent')
-    <div class="jumbotron rounded-bottom bg-white">
+
         <form class="mx-auto my-5">
             <div class="form-row">
                 <div class="col mr-5">
@@ -276,5 +276,4 @@
             </div>
 
         </form>
-    </div>
 @endsection

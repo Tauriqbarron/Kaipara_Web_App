@@ -10,9 +10,10 @@
         <div class="MainCon container-fluid">
             {{--@include('Profile.ProfileBar')--}}
             @include('Client.nav')
-
-            <div class="content">
-                @yield('mainContent')
+            <div class="p-5 rounded-bottom bg-white">
+                <div class="content">
+                    @yield('mainContent')
+                </div>
             </div>
             @include('footer')
         </div>
