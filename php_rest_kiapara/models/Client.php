@@ -65,7 +65,7 @@ class Client{
     $stmt->execute();
 
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
+    $this->id = $row['id'};
     $this->created_at = $row['created_at'];
     $this->updated_at = $row['updated_at'];
     $this->first_name = $row['first_name'];
