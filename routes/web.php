@@ -48,6 +48,16 @@ Route::get('/client/property', [
     'as' => 'client.property'
 ]);
 
+Route::get('/client/dashboard', [
+    'uses' => 'ClientController@getDashboard',
+    'as' => 'client.dashboard'
+]);
+
+Route::post('/client/createBooking', [
+    'uses' => 'ClientController@postCreateBooking',
+    'as' => 'client.postCreateBooking'
+]);
+
 
 Route::prefix('client')->group(function (){
     /*Client Registration*/
@@ -406,6 +416,8 @@ Route::get('/client/logout', [
     'uses' => 'Auth\AdminClientController@logout',
     'as' => 'client.logout'
 ]);
+
+
 
 
 /*staff*/

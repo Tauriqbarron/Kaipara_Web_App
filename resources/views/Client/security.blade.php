@@ -8,7 +8,8 @@
 @endsection
 @section('mainContent')
 
-        <form class="mx-auto my-5">
+        <form class="mx-auto my-5 needs-validation" novalidate method="POST" action="{{route('client.postCreateBooking')}}">
+            @csrf
             <div class="form-row">
                 <div class="col mr-5">
                     <div class="form-row">
@@ -32,7 +33,7 @@
                         <label for="message"><h4>Description</h4></label>
                     </div>
                     <div class="form-row my-1 mb-2">
-                        <textarea name="message" rows="6" class="form-control w-100">The cat was playing in the garden.</textarea>
+                        <textarea name="message" placeholder="The cat was playing in the garden." rows="6" class="form-control w-100" onchange="document.getElementById('description').innerHTML = this.value"></textarea>
                     </div>
                     <div class="form-group my-3">
                         <div class="form-check">
@@ -71,7 +72,7 @@
                         </div>
                         <div class="row">
                             <div class="btn-group btn-group-toggle w-100"  data-toggle="buttons">
-                                <button class="btn btn-primary active" aria-pressed="true" id="btnSetDate" style="border-bottom-left-radius: 0" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="document.getElementById('custom').classList.remove('show');document.getElementById('collapseTwo').classList.remove('show')">
+                                <button class="btn btn-primary active" aria-pressed="true" id="btnSetDate" style="border-bottom-left-radius: 0" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="document.getElementById('custom').classList.remove('show');">
                                     Set date and time
                                 </button>
                                 <button class="btn btn-primary" type="button" data-toggle="collapse" id="btnCreateCustom" data-target="#custom" style="border-bottom-right-radius: 0" aria-expanded="false" aria-controls="custom" onclick="if(document.getElementById('collapseExample').classList.contains('show')) document.getElementById('btnSetDate').click();">
@@ -255,51 +256,58 @@
                         <div class="card-body">
                             <div class="form-row">
                                 <label for="type"  class="col-5 col-form-label text-primary">Assignment Type</label>
-                                <input type="text" class="col-7 form-control-plaintext w-50" id="type" name="type" value="Bouncer" readonly>
+                                <input type="text" class="col-7 form-control-plaintext w-50" id="type" name="type" value="Bouncer" readonly required>
                             </div>
                             <div class="form-row">
-                                <label for="number1" class="col-5  col-form-label text-primary">Number of Guard</label>
-                                <input type="text" class="col-7 form-control-plaintext " id="number1" name="number1" value="1" readonly>
+                                <label for="number1" class="col-5  col-form-label text-primary">Number of Guards</label>
+                                <input type="text" class="col-7 form-control-plaintext " id="number1" name="number1" value="1" readonly required>
+                            </div>
+                            <div class="form-row">
+                                <label for="type" class="col-5 col-form-label text-primary">Description</label>
+                                <textarea type="text" class="col-7 form-control-plaintext" id="description" name="description" readonly required></textarea>
                             </div>
                             <div class="form-row ">
                                 <label for="street" class="col col-form-label text-primary">Address</label>
-                            </div>
-                            <div class="form-row ml-5 my-1">
-                                <input type="text" class="form-control-plaintext " id="street" name="street" value="" readonly>
-                            </div>
-                            <div class="form-row ml-5 my-1">
-                                <input type="text" class="form-control-plaintext " id="suburb" name="suburb" value="" readonly>
-                            </div>
-                            <div class="form-row ml-5 my-1">
-                                <input type="text" class="form-control-plaintext " id="city1" name="city1" value="" readonly>
-                            </div>
-                            <div class="form-row ml-5 my-1">
-                                <input type="text" class="form-control-plaintext " id="postcode1" name="postcode1" value="" readonly>
+
+                                <div class="col-7">
+                                    <div class="form-row">
+                                        <input type="text" class="form-control-plaintext " id="street" name="street" value="" readonly required>
+                                    </div>
+                                    <div class="form-row">
+                                        <input type="text" class="form-control-plaintext " id="suburb" name="suburb" value="" readonly required>
+                                    </div>
+                                    <div class="form-row">
+                                        <input type="text" class="form-control-plaintext " id="city1" name="city1" value="" readonly required>
+                                    </div>
+                                    <div class="form-row">
+                                        <input type="text" class="form-control-plaintext " id="postcode1" name="postcode1" value="" readonly required>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-row" id="rowDateOverview">
                                 <label for="date1" class="col-5  col-form-label text-primary">Date</label>
                                 <div id="ovDateCol" class="col-7">
                                     <div class="form-row">
-                                        <input type="text" class="col-7 form-control-plaintext " id="date1" name="date1" value="" readonly>
+                                        <input type="text" class="col-7 form-control-plaintext " id="date1" name="date1" value="" readonly required>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <label for="startTime" class="col-5  col-form-label text-primary">Start time</label>
-                                <input type="text" class="col-7 form-control-plaintext " id="startTime" name="date" value="" readonly>
+                                <input type="text" class="col-7 form-control-plaintext " id="txtStartTime" name="date" value="" readonly required>
                             </div>
                             <div class="form-row">
                                 <label for="endTime" class="col-5  col-form-label text-primary">End Time </label>
-                                <input type="text" class="col-7 form-control-plaintext " id="endTime" name="date" value="" readonly>
+                                <input type="text" class="col-7 form-control-plaintext " id="txtEndTime" name="date" value="" readonly required>
                             </div>
                             <div class="form-row">
                                 <label for="price" class="col-5 col-form-label text-primary">Price: </label>
-                                <input type="text" class="col-7 form-control-plaintext " id="price" name="price" value="" readonly>
+                                <input type="text" class="col-7 form-control-plaintext " id="price" name="price" value="" readonly required>
                             </div>
     {{--
                             TODO Change btn to submit
     --}}
-                            <a href="#" class="btn btn-primary">Confirm Booking</a>
+                            <input type="submit" class="btn btn-primary" value="Confirm Booking"/>
                         </div>
                     </div>
                 </div>

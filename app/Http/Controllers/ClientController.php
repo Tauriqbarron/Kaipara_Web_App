@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\applications;
+use App\Booking;
 use App\Clients;
 use App\service_provider;
 use Illuminate\Http\Request;
@@ -10,6 +12,16 @@ use Illuminate\Support\Facades\Session;
 
 class ClientController extends Controller
 {
+    public function getDashboard(){
+        $client = Clients::query()->find(\auth()->guard('client')->user()->id);
+        $bookings = Booking::query()->where('client_id', '=', $client->id);
+        $applications = applications::query()->where('client_id', '=', $client->id);
+        return view('Client.dashboard', ['client' => $client, 'bookings' => $bookings, 'applications' => $applications]);
+    }
+
+    public function postCreateBooking(Request $request){
+        return redirect()->back();
+    }
     public function login(Request $request){
         //validate form
 

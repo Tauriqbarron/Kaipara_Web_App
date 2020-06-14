@@ -8,7 +8,8 @@
 @endsection
 @section('mainContent')
     <h2 class="w-100 text-center mb-5">Book a Job </h2>
-    <form class="mx-auto">
+    <form class="mx-auto needs-validation">
+        @csrf
         <div class="form-row">
             <div class="col mr-5">
                 <div class="form-row">
@@ -29,7 +30,7 @@
                 </div>
                 <div class="form-row my-2">
                     <div class="col">
-                        <textarea id="message" name="message" rows="6" cols="30" class="form-control" maxlength="300">The cat was playing in the garden.</textarea>
+                        <textarea id="message" name="message" rows="6" cols="30" class="form-control" maxlength="300" onchange="document.getElementById('description').innerHTML = this.value">The cat was playing in the garden.</textarea>
                     </div>
                 </div>
                 <div class="form-group my-3">
@@ -38,7 +39,7 @@
                         {{--
                                                 TODO create function to display address of user in summary tab is checked
                         --}}
-                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                        <input class="form-check-input" type="checkbox" id="gridCheck" data-street="{{auth()->guard('client')->user()->street}}" data-suburb="{{auth()->guard('client')->user()->suburb}}" data-city="{{auth()->guard('client')->user()->city}}" data-postcode="{{auth()->guard('client')->user()->postcode}}" >
                         <label class="form-check-label" for="gridCheck">
                             Use Current Address
                         </label>
@@ -48,7 +49,7 @@
                             <label for="streetInput" class="col-sm-2 col-form-label">Street</label>
                         </div>
                         <div class="col-9">
-                            <input type="text" class="form-control" id="streetInput" name="street" onchange="overviewStreet(this.value);">
+                            <input type="text" class="form-control address-input" id="streetInput" name="street" onchange="overviewStreet(this.value);">
                         </div>
                     </div>
                     <div class="form-group row ">
@@ -56,7 +57,7 @@
                             <label for="suburbInput" class="col-sm-2 col-form-label">Suburb</label>
                         </div>
                         <div class="col-9">
-                            <input type="text" class="form-control w-75" id="suburbInput" name="suburb" onchange="overviewSuburb(this.value);">
+                            <input type="text" class="form-control address-input w-75" id="suburbInput" name="suburb" onchange="overviewSuburb(this.value);">
                         </div>
                     </div>
                     <div class="form-group row ">
@@ -64,7 +65,7 @@
                             <label for="cityInput" class="col-sm-2 col-form-label">City</label>
                         </div>
                         <div class="col-9">
-                            <input type="text" class="form-control w-50" id="cityInput" name="city" onchange="overviewCity(this.value);">
+                            <input type="text" class="form-control address-input w-50" id="cityInput" name="city" onchange="overviewCity(this.value);">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -72,7 +73,7 @@
                             <label for="postcode" class="col-sm-2 col-form-label">Postcode</label>
                         </div>
                         <div class="col-9">
-                            <input type="text" class="form-control w-25" id="postcode" name="postcode" minlength="4" maxlength="4" pattern="/4d" onchange="overviewPostcode(this.value);">
+                            <input type="text" class="form-control address-input w-25" id="postcode" name="postcode" minlength="4" maxlength="4" pattern="/4d" onchange="overviewPostcode(this.value);">
                         </div>
                     </div>
                     <button class="btn btn-primary w-100" type="button" data-toggle="collapse" data-target="#custom" aria-expanded="false" aria-controls="custom">
@@ -196,7 +197,7 @@
                                                 <div class="form-row">
                                                     <div class="col">
                                                         <label for="dueDateInput">Select Date</label>
-                                                        <input type="date" class="form-control" id="dueDateInput" min="{{\Carbon\Carbon::parse(today('NZ')->addDay())->format('Y-m-d')}}">
+                                                        <input type="date" class="form-control" id="dueDateInput" min="{{\Carbon\Carbon::parse(today('NZ')->addDay())->format('Y-m-d')}}"  onchange="overviewDate(this.value)">
                                                     </div>
                                                 </div>
                                             </div>
@@ -215,36 +216,35 @@
             {{------------------------------------------}}
             {{------------------------------------------}}
             <div class="col">
-                <div class="card">
+                <div class="card bg-light float-right w-75">
                     <div class="card-header">
                         Booking Details
                     </div>
-                    <div class="card-body bg-light">
+                    <div class="card-body">
                         <div class="form-row">
                             <label for="type" class="col-5 col-form-label text-primary">Job Type</label>
                             <input type="text" class="col-7 form-control-plaintext" id="type" name="type" value="Plumbing" readonly>
                         </div>
                         <div class="form-row">
                             <label for="type" class="col-5 col-form-label text-primary">Description</label>
-                            <input type="text" class="col-7 form-control-plaintext" id="description" name="description" value="" readonly>
+                            <textarea type="text" class="col-7 form-control-plaintext" id="description" name="description" readonly></textarea>
                         </div>
                         <div class="form-row ">
                             <label for="street" class="col-5 col-form-label text-primary">Address</label>
-                        </div>
-                        <div class="form-row ml-5">
-                            <div class="col">
-                                <input type="text" class="form-control-plaintext" id="street" name="street" value="" readonly>
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control-plaintext" id="suburb" name="suburb" value="" readonly>
-                            </div>
-                        </div>
-                        <div class="form-row ml-5">
-                            <div class="col">
-                                <input type="text" class="form-control-plaintext" id="city1" name="city1" value="" readonly>
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control-plaintext" id="postcode1" name="postcode1" value="" readonly>
+
+                            <div class="col-7">
+                                <div class="form-row">
+                                    <input type="text" class="form-control-plaintext " id="street" name="street" value="" readonly>
+                                </div>
+                                <div class="form-row">
+                                    <input type="text" class="form-control-plaintext " id="suburb" name="suburb" value="" readonly>
+                                </div>
+                                <div class="form-row">
+                                    <input type="text" class="form-control-plaintext " id="city1" name="city1" value="" readonly>
+                                </div>
+                                <div class="form-row">
+                                    <input type="text" class="form-control-plaintext " id="postcode1" name="postcode1" value="" readonly>
+                                </div>
                             </div>
                         </div>
                         <div class="form-row" id="rowDateOverview">
@@ -255,9 +255,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-row" id="daysOverview">
-
+                        <div class="form-row">
+                            <label for="price" class="col-5 col-form-label text-primary">Price: </label>
+                            <input type="text" class="col-7 form-control-plaintext " id="price" name="price" value="" readonly>
                         </div>
+                        {{--
+                                                TODO Change btn to submit
+                        --}}
+                        <a href="#" class="btn btn-primary">Confirm Booking</a>
                     </div>
                 </div>
             </div>

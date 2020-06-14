@@ -20,7 +20,7 @@ class Clients extends Authenticatable
     }
 
     public function applications() {
-        return $this->hasMany('App\application');
+        return $this->hasMany('App\applications');
     }
 
     public function sendPasswordResetNotification($token)

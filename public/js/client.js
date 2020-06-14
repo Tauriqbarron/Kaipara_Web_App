@@ -75,6 +75,7 @@ const _collapseTooCallback = function (mutationsList, observer) {
 
                 document.getElementById('selStartInput').value = '';
                 document.getElementById('selEndInput').value = '';
+                document.getElementById('collapseOne').classList.toggle('sam');
             }else{
                 rowDateOverview.innerHTML = '';
                 var col = document.createElement('div');
@@ -145,6 +146,7 @@ const daysCallback = function (mutationsLst, observer) {
               "                                    <input type=\"text\" class=\"col-7 form-control-plaintext \" id=\"date1\" name=\"date1\" value=\"\" readonly>\n" +
               "                                </div>\n" +
               "                            </div>";
+          document.getElementById('collapseTwo').classList.toggle('sam');
 
       }else{
           row.innerHTML = "<label for=\"date1\" id=\"lblDateHeading\" class=\"col-5  col-form-label text-primary\">Days</label>\n" +
@@ -171,9 +173,18 @@ function timeToFloat(hhmm){
 
 window.addEventListener('load', function () {
 
-    //TODO
-    // - add event listener to startTime inputs to prevent start time being larger than end time.
-    // - do something about select days
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+
 
     try{
         observer.observe(document.getElementById('collapseTwo'), config);
@@ -208,7 +219,7 @@ window.addEventListener('load', function () {
             //check if start > end
             if(timeToFloat(sender.value) > timeToFloat(endTime.value)){
                 endTime.value = sender.value;
-                document.getElementById('endTime').value = sender.value;
+                document.getElementById('txtEndTime').value = sender.value;
             }
         })
     }
@@ -224,7 +235,7 @@ window.addEventListener('load', function () {
             //check if end > end
             if(timeToFloat(sender.value) < timeToFloat(startTime.value)){
                 sender.value = startTime.value;
-                document.getElementById('endTime').value = sender.value;
+                document.getElementById('txtEndTime').value = sender.value;
             }
         })
     }
