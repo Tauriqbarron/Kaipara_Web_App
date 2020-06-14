@@ -75,11 +75,20 @@
                             <input type="text" class="form-control w-25" id="postcode" name="postcode" minlength="4" maxlength="4" pattern="/4d" onchange="overviewPostcode(this.value);">
                         </div>
                     </div>
-                    <button class="btn btn-primary my-4" type="button" data-toggle="collapse" data-target="#custom" aria-expanded="false" aria-controls="custom">
+                    <button class="btn btn-primary w-100" type="button" data-toggle="collapse" data-target="#custom" aria-expanded="false" aria-controls="custom">
                         Create Custom Schedule
                     </button>
+                    <div class="row">
+
+                    </div>
+                    <div class="row">
+
+                    </div>
+                    <div class="row">
+
+                    </div>
                     <div class="collapse w-100" id="custom">
-                        <div class="card card-body ">
+                        <div class="w-100 card card-body">
                             <div id="accordion">
                                 {{---------------------------------------}}
                                 {{---------------------------------------}}
@@ -90,7 +99,7 @@
                                     <div class="card w-100">
                                         <div class="card-header" id="headingOne">
                                             <h5 class="mb-0">
-                                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                <button class="btn btn-primary w-100" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                     Select Days
                                                 </button>
                                             </h5>
@@ -133,17 +142,17 @@
                                     <div class="card w-100">
                                         <div class="card-header" id="headingTwo">
                                             <h5 class="mb-0">
-                                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                <button class="btn btn-primary w-100" type="button" data-toggle="collapse" data-target="#collapseToo" aria-expanded="false" aria-controls="collapseToo">
                                                     Or Select A Date and Time
                                                 </button>
                                             </h5>
                                         </div>
-                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                            <div class="card-body">
+                                        <div id="collapseToo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                            <div class="w-100 card card-body rounded-0">
                                                 <div class="form-row">
                                                     <div class="col">
                                                         <label for="birthday">Select Date</label>
-                                                        <input type="date" min="{{\Carbon\Carbon::parse(today('NZ')->addDay())->format('Y-m-d')}}" id="birthday" name="birthday">
+                                                        <input class="form-control" type="date" id="birthday" min="{{\Carbon\Carbon::parse(today()->addDay())->format('Y-m-d')}}" name="birthday" onchange="overviewDate(this.value)">
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-row">
@@ -151,7 +160,7 @@
                                                                 <label for="appt">Select Start time:</label>
                                                             </div>
                                                             <div class="col">
-                                                                <input type="time" id="appt" name="appt">
+                                                                <input class="form-control start-time-input" data-sibling="selEndInput"  type="time" id="selStartInput" onchange="overviewStart(this.value)">
                                                             </div>
                                                         </div>
                                                         <div class="form-row my-2">
@@ -159,7 +168,7 @@
                                                                 <label for="appt">Select End time:</label>
                                                             </div>
                                                             <div class="col">
-                                                                <input type="time" id="appt" name="appt">
+                                                                <input class="form-control end-time-input" data-sibling="selStartInput" type="time" id="selEndInput" onchange="overviewEnd(this.value)">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -177,7 +186,7 @@
                                     <div class="card w-100">
                                         <div class="card-header" id="headingThree">
                                             <h5 class="mb-0">
-                                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                <button class="btn btn-primary w-100" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                                     Or Select a due date
                                                 </button>
                                             </h5>
@@ -186,8 +195,8 @@
                                             <div class="card-body">
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <label for="birthday">Select Date</label>
-                                                        <input type="date" id="birthday" name="birthday" min="{{(today('NZ')->addDay())}}">
+                                                        <label for="dueDateInput">Select Date</label>
+                                                        <input type="date" class="form-control" id="dueDateInput" min="{{\Carbon\Carbon::parse(today('NZ')->addDay())->format('Y-m-d')}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -210,36 +219,41 @@
                     <div class="card-header">
                         Booking Details
                     </div>
-                    <div class="card-body">
+                    <div class="card-body bg-light">
                         <div class="form-row">
-                            <label for="type" class="col col-form-label text-primary">Job Type</label>
-                            <input type="text" class="border-0" id="type" name="type" value="Plumbing" readonly>
+                            <label for="type" class="col-5 col-form-label text-primary">Job Type</label>
+                            <input type="text" class="col-7 form-control-plaintext" id="type" name="type" value="Plumbing" readonly>
                         </div>
                         <div class="form-row">
-                            <label for="type" class="col col-form-label text-primary">Description</label>
-                            <input type="text" class="border-0" id="description" name="description" value="" readonly>
+                            <label for="type" class="col-5 col-form-label text-primary">Description</label>
+                            <input type="text" class="col-7 form-control-plaintext" id="description" name="description" value="" readonly>
                         </div>
                         <div class="form-row ">
-                            <label for="street" class="col col-form-label text-primary">Address</label>
+                            <label for="street" class="col-5 col-form-label text-primary">Address</label>
                         </div>
                         <div class="form-row ml-5">
                             <div class="col">
-                                <input type="text" class="border-0" id="street" name="street" value="" readonly>
+                                <input type="text" class="form-control-plaintext" id="street" name="street" value="" readonly>
                             </div>
                             <div class="col">
-                                <input type="text" class="border-0" id="suburb" name="suburb" value="" readonly>
+                                <input type="text" class="form-control-plaintext" id="suburb" name="suburb" value="" readonly>
                             </div>
                         </div>
                         <div class="form-row ml-5">
                             <div class="col">
-                                <input type="text" class="border-0" id="city1" name="city1" value="" readonly>
+                                <input type="text" class="form-control-plaintext" id="city1" name="city1" value="" readonly>
                             </div>
                             <div class="col">
-                                <input type="text" class="border-0" id="postcode1" name="postcode1" value="" readonly>
+                                <input type="text" class="form-control-plaintext" id="postcode1" name="postcode1" value="" readonly>
                             </div>
                         </div>
-                        <div class="form-row">
-                            Date
+                        <div class="form-row" id="rowDateOverview">
+                            <label for="date1" id="lblDateHeading" class="col-5  col-form-label text-primary">Date</label>
+                            <div id="ovDateCol" class="col-7">
+                                <div class="form-row">
+                                    <input type="text" class="col-7 form-control-plaintext " id="date1" name="date1" value="" readonly>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-row" id="daysOverview">
 

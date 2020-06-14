@@ -23,7 +23,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script >
             function updateTextInput(val) {
-                document.getElementById('textInput').value=val;
+                document.getElementById('textInput').innerHTML=val;
             }
             function overviewTextInput(val) {
                 document.getElementById('number1').value=val;
@@ -48,10 +48,10 @@
                 document.getElementById('date1').value =val;
             }
             function overviewStart(val){
-                document.getElementById('startTime').value =val;
+                document.getElementById('txtStartTime').value =val;
             }
             function overviewEnd(val){
-                document.getElementById('endTime').value =val;
+                document.getElementById('txtEndTime').value =val;
             }
         </script>
     </body>

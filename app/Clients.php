@@ -12,7 +12,7 @@ use App\Notifications\ClientResetPasswordNotification;
 class Clients extends Authenticatable
 {
     use Notifiable;
-    protected $guard = 'clients';
+    protected $guard = 'client';
     protected $fillable = ['first_name', 'last_name', 'email', 'phone_number', 'password', 'street', 'suburb', 'city', 'postcode'];
 
     public function bookings() {
