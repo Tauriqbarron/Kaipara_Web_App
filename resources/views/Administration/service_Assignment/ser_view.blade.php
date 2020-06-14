@@ -23,10 +23,22 @@
             <label for="inputAddress">Description</label>
             <p class="form-control">{{$assignment->description}}</p>
         </div>
-        <div class="form-group w-25">
-            <label for="inputAddress2">Price</label>
-            <p class="form-control">{{$assignment->price}}</p>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="inputAddress2">Price</label>
+                <p class="form-control">{{$assignment->price}}</p>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputAddress2">Quote</label>
+                @if(App\quote::where('job_id', '=', $assignment->id)->exists())
+                <p class="form-control">quoted</p>
+                    @else
+                    <p class="form-control">unquoted</p>
+                    @endif
+            </div>
         </div>
+
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="date">Date</label>
@@ -41,6 +53,7 @@
                 <p name="finish_time" class="form-control">{{$assignment->finish_time}}</p>
             </div>
         </div>
+
         <div class="form-group">
             <label for="inputAddress2">Street</label>
             <p class="form-control">{{$assignment->street}}</p>
@@ -59,6 +72,7 @@
                 <p class="form-control">{{$assignment->postCode}}</p>
             </div>
         </div>
+
         <div class="form-group">
             <label for="inputAddress2">Service Provider</label>
             <p class="form-control">
