@@ -339,8 +339,21 @@ Route::post('/admin/sec-assignment/delete/{id}', [
 
 
 /*Service Assignment Part*/
-Route::get('/ser', function (){
-   return view('Administration.service_Assignment.ser_create');
+Route::prefix('admin')->group(function (){
+    Route::get('service', [
+        'uses' => 'Auth\AdminServiceAssignmentController@getIndex',
+        'as' => 'admin.service.index'
+    ]);
+
+    Route::get('result', [
+        'uses' => 'Auth\AdminServiceAssignmentController@search',
+        'as' => 'admin.service.search'
+    ]);
+
+    Route::get('view/{id}', [
+        'uses' => 'Auth\AdminServiceAssignmentController@view',
+        'as' => 'admin.service.view'
+    ]);
 });
 
 /*Client*/
