@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
-use Auth;
 use Illuminate\Http\Request;
 use Password;
+use Auth;
 
-class SpResetPasswordController extends Controller
+class StaffResetPasswordController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -29,25 +29,26 @@ class SpResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/'; //RouteServiceProvider::HOME;
+    protected $redirectTo = 'security/login';
 
     public function __construct()
     {
-        $this->middleware('guest:service_provider');
+        $this->middleware('guest:staff');
     }
 
     protected function guard()
     {
-        return Auth::guard('service_provider');
+        return Auth::guard('staff');
     }
 
-    protected function broker() {
-        return Password::broker('service_providers');
+    protected function broker()
+    {
+        return Password::broker('staffs');
     }
 
     public function showResetForm(Request $request, $token = null)
     {
-        return view('passwords.reset-sp')->with(
+        return view('passwords.reset-staff')->with(
             ['token' => $token, 'email' => $request->email]
         );
     }

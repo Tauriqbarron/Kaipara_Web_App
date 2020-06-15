@@ -43,6 +43,9 @@
 
         <div class="form-group">
             <button type="submit" name="login" class="btn btn-primary shadow" value="login">Login</button>
+            <a class="btn btn-link" href="{{route('staff.password.request')}}">
+                {{ __('Forgot Your Password?') }}
+            </a>
         </div>
     </form>
 

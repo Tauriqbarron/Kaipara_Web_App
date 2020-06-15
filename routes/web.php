@@ -141,6 +141,28 @@ Route::post('/security/rating','staffController@postFeedback')->name('staff.post
 Route::post('/security/leaveApplication','staffController@postLeave')->name('staff.postLeave');
 Route::post('/security/editInfo','staffController@postEdit')->name('security.postEdit');
 
+//Staff reset password//
+Route::prefix('security')->group(function (){
+    Route::post('/password/email', [
+        'uses' => 'Auth\StaffForgotPasswordController@sendResetLinkEmail',
+        'as' => 'staff.password.email'
+    ]);
+
+    Route::get('/password/reset', [
+        'uses' => 'Auth\StaffForgotPasswordController@showLinkRequestForm',
+        'as' => 'staff.password.request'
+    ]);
+
+    Route::post('/password/reset', [
+        'uses' => 'Auth\StaffResetPasswordController@reset',
+        'as' => 'staff.password.update'
+    ]);
+
+    Route::get('/password/reset/{token}', [
+        'uses' => 'Auth\StaffResetPasswordController@showResetForm',
+        'as' => 'staff.password.reset'
+    ]);
+});
 
 
 
@@ -238,7 +260,7 @@ Route::prefix('service_provider')->group(function (){
 
 
 
-/*Administrator part (Jay) */
+/*Administrator part */
 /*Select Staff Type*/
 Route::get('/selectstaff', function () {
     return view('login.userselect.stafftype');

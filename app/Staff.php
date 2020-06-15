@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Console\Scheduling\Event;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable as Auth;
-use Illuminate\Auth\Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-class Staff extends Model implements Auth
+use App\Notifications\StaffResetPasswordNotification;
+
+class Staff extends Authenticatable
 {
-    use Authenticatable;
     use Notifiable;
     protected $guard = 'staff';
     protected $primaryKey = 'id';
@@ -26,7 +26,15 @@ class Staff extends Model implements Auth
     public function rosters() {
         return $this->hasMany('App\Roster');
     }
+
     public function leave_requests() {
         return $this->hasMany('App\Leave_Request');
     }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new StaffResetPasswordNotification($token));
+    }
+
+
 }
