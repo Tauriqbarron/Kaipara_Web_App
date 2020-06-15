@@ -4,6 +4,13 @@
     <div class="w-75 mx-auto bg-light p-2 mt-2 rounded">
         <h1>Delete assignment</h1>
     <h2 class="ml-5">Security assignment id: {{$assignment->id}}</h2>
+        @if(count($errors) > 0)
+            <div class="alert alert-danger">
+                @foreach($errors->all() as $error)
+                    <p>{{$error}}</p>
+                @endforeach
+            </div>
+        @endif
     <hr/>
     <form class="ml-2" method="post" action="{{route('security_assignment.delete', ['id' => $assignment->id])}}">
         @csrf

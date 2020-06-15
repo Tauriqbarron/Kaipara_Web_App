@@ -8,7 +8,7 @@
     </form>
 
     <div>
-        <a href="{{route('security_assignment.create')}}" class="btn btn-primary ml-2">Create</a>
+        <a href="{{route('admin.service.create')}}" class="btn btn-primary ml-2">Create</a>
         <table class="table mt-1">
             <thead class="thead-dark">
             <tr class="text-center">
@@ -41,7 +41,7 @@
                     @endif
                     <td><a class="btn btn-success" href="{{route('admin.service.view', ['id' => $assignment->id])}}">view</a></td>
                     <td><a class="btn btn-primary" href="#">Edit</a></td>
-                    <td><a class="btn btn-danger" href="#">Delete</a></td>
+                    <td><a class="btn btn-danger" href="{{route('admin.service.delete', ['id' => $assignment->id])}}">Delete</a></td>
                 </tr>
             @endforeach
             </tbody>

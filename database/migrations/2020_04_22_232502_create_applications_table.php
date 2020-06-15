@@ -18,7 +18,7 @@ class CreateApplicationsTable extends Migration
             $table->foreignId('client_id')->references('id')->on('clients');
             $table->timestamps();
             $table->integer('status');
-            $table->string('imagePath');
+            $table->string('imagePath')->nullable(true);
             $table->string('title');
             $table->text('description');
             $table->integer('price')->nullable();
