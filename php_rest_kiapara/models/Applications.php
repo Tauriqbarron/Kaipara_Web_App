@@ -44,4 +44,29 @@ class Applications{
         $stmt->execute();
         return $stmt;
     }
+    public function getClientApplications(){
+        $query = 'SELECT 
+            id,
+            client_id,
+            status,
+            imagePath,
+            title,
+            description,
+            price,
+            date,
+            start_time,
+            finish_time,
+            street,
+            suburb,
+            city,
+            postcode
+        FROM
+        ' . $this->table .'
+        WHERE 
+            client_id = ?';    
+        $stmt = $this->conn->perpare($query);
+        $stmt->bindParam(1,$this->client_id);
+        $stmt->execute();
+        return $stmt;    
+    }
 }
