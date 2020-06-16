@@ -3,20 +3,20 @@
 class Applications{
     private $conn;
     private $table = 'applications';
-    private $id;
-    private $client_id;
-    private $title;
-    private $description;
-    private $status;
-    private $imagepath;
-    private $price;
-    private $date;
-    private $start_time;
-    private $finish_time;
-    private $street;
-    private $suburb;
-    private $city;
-    private $postcode;
+    public $id;
+    public $client_id;
+    public $title;
+    public $description;
+    public $status;
+    public $imagepath;
+    public $price;
+    public $date;
+    public $start_time;
+    public $finish_time;
+    public $street;
+    public $suburb;
+    public $city;
+    public $postcode;
 
     public function __construct($db){
         $this->conn = $db;
