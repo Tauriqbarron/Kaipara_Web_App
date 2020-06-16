@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddStartAndEndDateToBooking extends Migration
+class AddEndDateToBooking extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddStartAndEndDateToBooking extends Migration
     public function up()
     {
         Schema::table('bookings', function (Blueprint $table) {
-            $table->date('end_date');
+            $table->date('end_date')->nullable();
 
         });
     }
