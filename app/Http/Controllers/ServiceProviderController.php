@@ -72,6 +72,23 @@ class ServiceProviderController extends Controller
         return view('Service.jobs', ['jobs' => $jobs]);
     }
 
+    //Start job//
+    public function startJob($id) {
+        $assignment = applications::find($id);
+        $assignment->status = 3;
+        $assignment->save();
+        return redirect()->back();
+    }
+
+    public function completeJob(Request $request, $id) {
+        $assignment = applications::find($id);
+        $assignment->end_date = date('Y-m-d');
+        $assignment->status = 4;
+        $assignment->save();
+        return redirect()->back();
+
+    }
+
     //Accept a job.
     public function acceptJob($id){
         $sp_id = auth()->guard('service_provider')->id();
@@ -105,18 +122,24 @@ class ServiceProviderController extends Controller
         return redirect()->route('service.jobs', ['jobs' => $jobs]);
     }
 
+    //View completed jobs//
+    public function getCompletedJobs(){
+        $id = auth()->guard('service_provider')->id();
+        $jobs = Service_Provider_Job::where ('service_provider_id', '=', $id)->get();
+        return view('Service.completed_jobs', ['jobs' => $jobs]);
+    }
+
 
     //Send a quote for a un-priced job.
     public function quote($id, Request $request){
         $validator = Validator::make($request->all(), [
-            'price' => 'required',
+            'price' => 'required|numeric',
             'message' => 'required',
-            'hours' => 'required|numeric'
         ]);
 
         if($validator->fails()) {
             return redirect()->back()
-                ->withErrors('You must enter the price, estimate hours and message for a quote.')
+                ->withErrors('You must enter the price and message for a quote.')
                 ->withInput($request->all());
         }
 
@@ -125,8 +148,6 @@ class ServiceProviderController extends Controller
             'job_id' => $id,
             'price' => $request->input('price'),
             'message' => $request->input('message'),
-            'quote_type' => $request->input('type'),
-            'estimate_hours' => $request->input('hours')
         ]);
         $quote->save();
 
@@ -143,5 +164,11 @@ class ServiceProviderController extends Controller
         $quotes = quote::where('service_provider_id', '=', $id)->get();
 
         return view('Service.quote_view', ['quotes' => $quotes]);
+    }
+
+    public function cancelQuote($id) {
+        $quote = quote::find($id);
+        $quote->delete();
+        return redirect()->back();
     }
 }

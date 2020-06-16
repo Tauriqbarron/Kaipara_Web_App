@@ -192,9 +192,29 @@ Route::get('service_provider/quote',[
     'as' => 'service.view_quote'
 ]);
 
+Route::post('service_provider/cancel_quote/{id}', [
+    'uses' => 'ServiceProviderController@cancelQuote',
+    'as' => 'service.cancel_quote'
+]);
+
 Route::get('/service_provider/jobs', [
     'uses' => 'ServiceProviderController@getJobs',
     'as' => 'service.jobs'
+]);
+
+Route::get('/service_provider/jobs/start_job/{id}', [
+    'uses' => 'ServiceProviderController@startJob',
+    'as' => 'service.job.start'
+]);
+
+Route::get('/service_provider/jobs/complete_job/{id}', [
+    'uses' => 'ServiceProviderController@completeJob',
+    'as' => 'service.job.complete'
+]);
+
+Route::get('/service_provider/jobs/completed_jobs', [
+    'uses' => 'ServiceProviderController@getCompletedJobs',
+    'as' => 'service.completed_jobs'
 ]);
 
 /*Service Provider Booking Application Page*/
