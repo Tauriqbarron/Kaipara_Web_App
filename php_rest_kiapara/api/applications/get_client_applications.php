@@ -21,7 +21,6 @@ $num = $result->rowCount();
 
 if($num > 0 ){
     $applications_arr = array();
-    $applications_arr['data'] = array();
 
     while($row = $result->fetch(PDO::FETCH_ASSOC)){
         extract($row);
@@ -41,7 +40,7 @@ if($num > 0 ){
             'city'=>$city,
             'postcode'=>$postcode
         );
-        array_push($applications_arr['data'],$applications_item);
+        array_push($applications_arr,$applications_item);
     }
     echo json_encode($applications_arr);
 }else{
