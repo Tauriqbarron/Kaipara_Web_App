@@ -99,6 +99,10 @@ class Handler extends ExceptionHandler
             error_log($exception->getMessage());
             return redirect()->guest('/security/login');
         }
+        if ($request->is('client') || $request->is('client/*')) {
+            error_log($exception->getMessage());
+            return redirect()->guest('/client/login');
+        }
         return redirect()->guest(route('login'));
     }
 }

@@ -1,15 +1,39 @@
 //Client Specific functions
+
+const __collapseCallback = function (mutationList) {
+    for (let mutation of mutationList){
+        if(mutation.attributeName === 'class'){
+            var inputs = mutation.target.getElementsByTagName('input');
+            if(mutation.target.classList.contains('show')){
+                for (let input of inputs){
+                    if(input.type !== 'checkbox'){
+                        let attr = document.createAttribute('required');
+                        input.setAttributeNode(attr);
+                    }
+
+                }
+            }else{
+                for (let input of inputs){
+                    input.removeAttribute('required');
+                }
+            }
+        }
+    }
+
+};
+
 const _collapseTwoCallback = function (mutationsList, observer) {
     for(let mutation of mutationsList){
 
         var target = mutation.target;
         var row = document.getElementById('rowDateOverview');
-        if(mutation.attributeName === 'class'){
+        if(mutation.attributeName === 'class' /*&& !document.getElementById('collapseOne').classList.contains('show')*/){
             if(!mutation.target.classList.contains('show')){
-                row.innerHTML = "<label for=\"date1\" id=\"lblDateHeading\" class=\"col-5  col-form-label text-primary\">Date</label>\n" +
+                row.innerHTML = "" +
+                    "<label for=\"txtStartDate\" id=\"lblDateHeading\" class=\"col-5  col-form-label text-primary\">Date</label>\n" +
                     "                            <div id=\"ovDateCol\" class=\"col-7\">\n" +
                     "                                <div class=\"form-row\">\n" +
-                    "                                    <input type=\"text\" class=\"col-7 form-control-plaintext \" id=\"date1\" name=\"date1\" value=\"\" readonly>\n" +
+                    "                                    <input type=\"text\" class=\"col-7 form-control-plaintext \" id=\"txtStartDate\" name=\"startDate\" value=\"\" readonly>\n" +
                     "                                </div>\n" +
                     "                            </div>";
 
@@ -34,6 +58,7 @@ const _collapseTwoCallback = function (mutationsList, observer) {
                 txtStartDate.type = 'text';
                 txtStartDate.classList.add('col-7', 'form-control-plaintext');
                 txtStartDate.id = 'txtStartDate';
+                txtStartDate.name = 'startDate';
                 var readonly = document.createAttribute('readonly');
                 txtStartDate.setAttributeNode(readonly);
                 startRow.appendChild(txtStartDate);
@@ -47,6 +72,7 @@ const _collapseTwoCallback = function (mutationsList, observer) {
                 txtEndDate.type = 'text';
                 txtEndDate.classList.add('col-7', 'form-control-plaintext');
                 txtEndDate.id = 'txtEndDate';
+                txtEndDate.name = 'endDate';
                 var rreadonly = document.createAttribute('readonly');
                 txtEndDate.setAttributeNode(rreadonly);
                 endRow.appendChild(txtEndDate);
@@ -58,7 +84,7 @@ const _collapseTwoCallback = function (mutationsList, observer) {
         }
     }
 };
-
+/*
 const _collapseTooCallback = function (mutationsList, observer) {
     for(let mutation of mutationsList){
 
@@ -66,10 +92,10 @@ const _collapseTooCallback = function (mutationsList, observer) {
         var row = document.getElementById('rowDateOverview');
         if(mutation.attributeName === 'class'){
             if(!mutation.target.classList.contains('show')){
-                row.innerHTML = "<label for=\"date1\" id=\"lblDateHeading\" class=\"col-5  col-form-label text-primary\">Date</label>\n" +
+                row.innerHTML = "<label for=\"startDate\" id=\"lblDateHeading\" class=\"col-5  col-form-label text-primary\">Date</label>\n" +
                     "                            <div id=\"ovDateCol\" class=\"col-7\">\n" +
                     "                                <div class=\"form-row\">\n" +
-                    "                                    <input type=\"text\" class=\"col-7 form-control-plaintext \" id=\"date1\" name=\"date1\" value=\"\" readonly>\n" +
+                    "                                    <input type=\"text\" class=\"col-7 form-control-plaintext \" id=\"startDate\" name=\"startDate\" value=\"\" readonly>\n" +
                     "                                </div>\n" +
                     "                            </div>";
 
@@ -91,11 +117,12 @@ const _collapseTooCallback = function (mutationsList, observer) {
                 lblDate.setAttribute('for', 'lblDate');
                 lblDate.classList.add('col-5', 'col-form-label', 'text-primary');
                 lblDate.innerHTML = 'Date';
+                lblDate.name = 'startDate';
                 dateRow.appendChild(lblDate);
                 var txtDate = document.createElement('input');
                 txtDate.type = 'text';
                 txtDate.classList.add('col-7', 'form-control-plaintext');
-                txtDate.id = 'date1';
+                txtDate.id = 'startDate';
                 var rrreadonly = document.createAttribute('readonly');
                 txtDate.setAttributeNode(rrreadonly);
                 dateRow.appendChild(txtDate);
@@ -136,33 +163,105 @@ const _collapseTooCallback = function (mutationsList, observer) {
 };
 
 const daysCallback = function (mutationsLst, observer) {
-  for(let mutation of mutationsLst){
-      var sender = mutation.target;
-      var row = document.getElementById('rowDateOverview')
-      if(!sender.classList.contains('show')){
-          row.innerHTML = "<label for=\"date1\" id=\"lblDateHeading\" class=\"col-5  col-form-label text-primary\">Date</label>\n" +
-              "                            <div id=\"ovDateCol\" class=\"col-7\">\n" +
-              "                                <div class=\"form-row\">\n" +
-              "                                    <input type=\"text\" class=\"col-7 form-control-plaintext \" id=\"date1\" name=\"date1\" value=\"\" readonly>\n" +
-              "                                </div>\n" +
-              "                            </div>";
-          document.getElementById('collapseTwo').classList.toggle('sam');
+    for (let mutation of mutationsLst) {
+        if (mutation.attributeName === 'class') {
+            var sender = mutation.target;
+            var row = document.getElementById('rowDateOverview');
+            var inputs = document.getElementsByTagName('input');
+            if (!sender.classList.contains('show')) {
+                row.innerHTML = "<label for=\"startDate\" id=\"lblDateHeading\" class=\"col-5  col-form-label text-primary\">Date</label>\n" +
+                    "                            <div id=\"ovDateCol\" class=\"col-7\">\n" +
+                    "                                <div class=\"form-row\">\n" +
+                    "                                    <input type=\"text\" class=\"col-7 form-control-plaintext \" id=\"startDate\" name=\"startDate\" value=\"\" readonly>\n" +
+                    "                                </div>\n" +
+                    "                            </div>";
 
-      }else{
-          row.innerHTML = "<label for=\"date1\" id=\"lblDateHeading\" class=\"col-5  col-form-label text-primary\">Days</label>\n" +
-              "                            <div id=\"ovDateCol\" class=\"col-7\">\n" +
-              "                            </div>";
+                for (let input of inputs) {
+                    input.checked = false;
+                }
 
-      }
-  }
+            } else if (sender.classList.contains('no-time-inputs')) {
+                row.innerHTML = "<div class='col'>\n " +
+                    "                <div class='form-row'>" +
+                    "                    <label for=\"startDate\" id=\"lblDateHeading\" class=\"col-5  col-form-label text-primary\">Days</label>\n" +
+                    "                    <div id=\"ovDateCol\" class=\"col-7\">\n" +
+                    "                        <input type='hidden' value='" + new Date() +"' >\n" +
+                    "                    </div>\n" +
+                    "                </div>\n" +
+                    "            </div>";
+            } else {
+                row.innerHTML = "<div class='col'>\n " +
+                    "                <div class='form-row'>" +
+                    "                    <label for=\"startDate\" id=\"lblDateHeading\" class=\"col-5  col-form-label text-primary\">Days</label>\n" +
+                    "                    <div id=\"ovDateCol\" class=\"col-7\">\n" +
+                    "                        <input type='hidden' value='" + new Date() +"' >\n" +
+                    "                    </div>\n" +
+                    "                </div>\n" +
+                    "                <div class='form-row'>\n" +
+                    "                    <label for=\"lblStartTime\" class=\"col-5 col-form-label text-primary\">Start Time</label>\n" +
+                    "                    <input type=\"text\" class=\"col-7 form-control-plaintext\" id=\"txtStartTime\" readonly=\"\">\n" +
+                    "                </div>\n " +
+                    "                <div class=\"form-row\">\n" +
+                    "                    <label for=\"lblEndTime\" class=\"col-5 col-form-label text-primary\">End Time</label>\n" +
+                    "                    <input type=\"text\" class=\"col-7 form-control-plaintext\" id=\"txtEndTime\" readonly=\"\">\n" +
+                    "                </div>\n" +
+                    "            </div>\n " +
+                    "                            ";
+            }
+        }
+    }
+};
+*/
+const setCallback = function (mutationList) {
+    var row = document.getElementById('rowDateOverview');
+    var heading = document.getElementById('lblDateHeading');
+    var col = document.getElementById('ovDateCol');
+    for (let mutation of mutationList){
+        if(mutation.target.classList.contains('show')){
+            var custom = document.getElementById('custom');
+            var divs = custom.getElementsByClassName('collapse');
+            for(let div of divs){
+                if(div.classList.contains('show'))div.classList.remove("show");
+            }
+
+            try{
+                heading.innerHTML = 'Date';
+            }catch(typeError){
+
+            }
+
+            col.innerHTML = "<div class=\"form-row\">\n" +
+            "                                    <input type=\"text\" class=\"col-7 form-control-plaintext \" id=\"txtStartDate\" name=\"startDate\" value=\"\" readonly>\n" +
+            "                                </div>"
+
+        }else{
+            document.getElementById('txtStartTime').value = '';
+            document.getElementById('txtEndTime').value = '';
+            try{
+                document.getElementById('txtStartDate').value = '';
+            }catch (typeError){
+
+            }
+
+        }
+    }
 };
 
 const observer = new MutationObserver(_collapseTwoCallback);
-const observerToo = new MutationObserver(_collapseTooCallback);
-const daysObserver = new MutationObserver(daysCallback);
+//const observerToo = new MutationObserver(_collapseTooCallback);
+//const daysObserver = new MutationObserver(daysCallback);
+const collapseObserver = new MutationObserver(__collapseCallback);
+const setObserver = new MutationObserver(setCallback);
 
 const config = {attributes:true};
 
+
+/**
+ * function timeToFloat
+ * convert a time string (HH:mm) to float value (HH.mm)
+ * @param hhmm
+ * @returns {number}
+ */
 function timeToFloat(hhmm){
     var time = hhmm.split(':');
     var hour = parseFloat(time[0]);
@@ -171,31 +270,79 @@ function timeToFloat(hhmm){
 
 }
 
+/**
+ * function getDateDifference
+ * returns the difference between 2 dates in days;
+ * @param date1
+ * @param date2
+ * @returns {number}
+ */
+function getDateDifference(date1, date2){
+    return (date2-date1)/1000/60/60/24;
+}
+function updateTextInput(val) {
+    document.getElementById('textInput').innerHTML=val;
+}
+function overviewTextInput(val) {
+    document.getElementById('number1').value=val;
+}
+function overviewType(sender){
+    var rate = sender.options[sender.selectedIndex].getAttribute('data-rate');
+    document.getElementById('type').value=sender.value;
+    document.getElementById('type').setAttribute('data-rate', rate);
+}
+
+function overviewStreet(val){
+    document.getElementById('street').value =val;
+}
+function overviewSuburb(val){
+    document.getElementById('suburb').value =val;
+}
+function overviewCity(val){
+    document.getElementById('city1').value =val;
+}
+function overviewPostcode(val){
+    document.getElementById('postcode1').value =val;
+}
+function overviewDate(val){
+    document.getElementById('txtStartDate').value =val;
+}
+function overviewStart(val){
+    document.getElementById('txtStartTime').value =val;
+}
+function overviewEnd(val){
+    document.getElementById('txtEndTime').value =val;
+}
+function overviewPrice(val){
+    document.getElementById('price').value =val;
+}
+function overviewQuote(checked){
+    var priceInput = document.getElementById('priceInput');
+    var txtPrice = document.getElementById('price');
+    if(checked){
+        priceInput.value = '';
+        priceInput.setAttributeNode(document.createAttribute('readonly'));
+        txtPrice.value = 'Quote';
+    }else{
+        priceInput.value = '';
+        priceInput.removeAttribute('readonly');
+        txtPrice.value = ''
+    }
+}
+
+function calcPrice(rate, guards,date1,date2,startTime,endTime){
+
+        return rate*(guards*(getDateDifference(date1,date2)*(endTime-startTime)));
+
+}
+
 window.addEventListener('load', function () {
-
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-        form.addEventListener('submit', function(event) {
-            if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-        }, false);
-    });
-
 
     try{
         observer.observe(document.getElementById('collapseTwo'), config);
     }catch (typeError) {
 
-    }
-
-    try{
-        observerToo.observe(document.getElementById('collapseToo'), config);
-    }catch (typeError) {
-
+        //observerToo.observe(document.getElementById('collapseToo'), config);
     }
 
     try{
@@ -204,7 +351,68 @@ window.addEventListener('load', function () {
 
     }
 
+    var collapses = document.getElementsByClassName('collapse-observe');
 
+    for (let c of collapses){
+
+        try{
+            collapseObserver.observe(c, config);
+        }catch(typeError){
+
+        }
+    }
+
+    try{
+        setObserver.observe(document.getElementById('collapseExample'), config);
+    }catch(typeError){
+
+    }
+    /*
+    document.getElementById('ongoingCheck').addEventListener('click', function (event) {
+        var target = event.target;
+        if(target.checked){
+            document.getElementById('lblDateHeading').innerHTML = 'Days (Ongoing)';
+        }else{
+            document.getElementById('lblDateHeading').innerHTML = 'Days';
+        }
+    });
+    */
+
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+                for (let el of form.getElementsByTagName('input')){
+                    console.log(el.validationMessage + ', ' + el.id);
+                }
+
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+
+    var overviewInputs = document.getElementById('overview').getElementsByTagName('input');
+
+    for(var oInput of overviewInputs){
+        oInput.addEventListener('change', function () {
+           try{
+               var rate = document.getElementById('officeType').options[sender.selectedIndex].getAttribute('data-rate');
+               var guards = document.getElementById('number').value;
+               var date1 = document.getElementById('txtStartDate').value;
+               var date2 = document.getElementById('txtEndDate').value;
+               var startTime = document.getElementById('txtStartTime').value;
+               var endTime = document.getElementById('txtEndTime').value;
+
+               document.getElementById('price').value = calcPrice(rate,guards, date1, date2, startTime,endTime);
+
+           }catch (e){
+               console.log(e.message);
+           }
+        });
+    }
 
     //Get Start time inputs using custom class name
     var startTimeInputs = document.getElementsByClassName('start-time-input');
@@ -240,7 +448,7 @@ window.addEventListener('load', function () {
         })
     }
 
-    /**
+    /*
      * Update the overview when the days are checked
      */
     var dayChecks = document.getElementsByClassName('day-check');
@@ -268,7 +476,7 @@ window.addEventListener('load', function () {
         });
     }
 
-    /**
+    /*
      * Update address overview with client address info and disable manual address input when checkbox is checked
      */
     document.getElementById('gridCheck').addEventListener('click', function (event) {
@@ -290,9 +498,8 @@ window.addEventListener('load', function () {
             ovPostcode.value = postcode;
 
             for (input of addressInputs){
-                attr = document.createAttribute('readonly');
-                input.value = '';
-                input.setAttributeNode(attr);
+                input.classList.add('f-readonly');
+                input.value = sender.getAttribute("data-" + input.getAttribute('data-input'));
             }
         }else{
             ovStreet.value = '';
@@ -301,37 +508,41 @@ window.addEventListener('load', function () {
             ovPostcode.value = '';
             for (input of addressInputs){
                 input.value = '';
-                input.removeAttribute('readonly');
+                input.classList.remove('f-readonly');
             }
         }
 
     });
+    try{
 
-    //Check start date, update start date overview and ensure end date is valid
-    document.getElementById('startDateInput').addEventListener('input', function (event) {
-        var sender = event.target;
-        var endDateInput = document.getElementById('endDateInput');
-        var txtStartDate = document.getElementById('txtStartDate');
-        var txtEndDate = document.getElementById('txtEndDate');
+        //Check start date, update start date overview and ensure end date is valid
+        document.getElementById('startDateInput').addEventListener('input', function (event) {
+            var sender = event.target;
+            var endDateInput = document.getElementById('endDateInput');
+            var txtStartDate = document.getElementById('txtStartDate');
+            var txtEndDate = document.getElementById('txtEndDate');
 
-        endDateInput.removeAttribute('readonly');
-        endDateInput.setAttribute('min', sender.value);
-        if(new Date(endDateInput.value) < new Date(sender.value)){
-            endDateInput.value = sender.value;
+            endDateInput.removeAttribute('readonly');
+            endDateInput.setAttribute('min', sender.value);
+            if(new Date(endDateInput.value) < new Date(sender.value)){
+                endDateInput.value = sender.value;
+                txtEndDate.value = sender.value;
+            }
+            txtStartDate.value = sender.value;
+
+        });
+        //Update end date overview when end date input is changed
+        document.getElementById('endDateInput').addEventListener('input', function (event) {
+            var sender = event.target;
+            var txtEndDate = document.getElementById('txtEndDate');
+
             txtEndDate.value = sender.value;
-        }
-        txtStartDate.value = sender.value;
 
-    });
-    //Update end date overview when end date input is changed
-    document.getElementById('endDateInput').addEventListener('input', function (event) {
-        var sender = event.target;
-        var txtEndDate = document.getElementById('txtEndDate');
-
-        txtEndDate.value = sender.value;
-
-    });
+        });
 
 
+    }catch (typeError) {
+
+    }
 
 });

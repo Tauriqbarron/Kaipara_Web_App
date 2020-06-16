@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Booking_Types extends Model
 {
-     protected $fillable = ['description'];
+     protected $fillable = ['description', 'rate'];
 
      public function bookings() {
 

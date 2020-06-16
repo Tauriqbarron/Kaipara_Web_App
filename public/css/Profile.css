@@ -28,6 +28,13 @@ body, html{
 
 }
 
+.f-readonly{
+    background-color: #e0e0e0;
+    font-style: italic;
+    color: dimgrey;
+    pointer-events: none;
+}
+
 .date-arrow,
 .date-arrow:active:hover{
     color: dimgray;

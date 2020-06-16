@@ -13,6 +13,22 @@
             @include('Client.nav')
             <div class="p-5 rounded-bottom bg-white">
                 <div class="content">
+                    @if ($message = Session::pull('error'))
+                        <div class="alert alert-danger alert-block">
+                            <button type="button" class="close" data-dismiss="alert">X</button>
+                            <strong>{{$message}}</strong>
+                        </div>
+                    @endif
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     @yield('mainContent')
                 </div>
             </div>
@@ -21,39 +37,7 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script >
-            function updateTextInput(val) {
-                document.getElementById('textInput').innerHTML=val;
-            }
-            function overviewTextInput(val) {
-                document.getElementById('number1').value=val;
-            }
-            function overviewType(val){
-                document.getElementById('type').value=val;
-            }
 
-            function overviewStreet(val){
-                document.getElementById('street').value =val;
-            }
-            function overviewSuburb(val){
-                document.getElementById('suburb').value =val;
-            }
-            function overviewCity(val){
-                document.getElementById('city1').value =val;
-            }
-            function overviewPostcode(val){
-                document.getElementById('postcode1').value =val;
-            }
-            function overviewDate(val){
-                document.getElementById('date1').value =val;
-            }
-            function overviewStart(val){
-                document.getElementById('txtStartTime').value =val;
-            }
-            function overviewEnd(val){
-                document.getElementById('txtEndTime').value =val;
-            }
-        </script>
     </body>
 
 
