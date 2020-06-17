@@ -23,5 +23,9 @@ class applications extends Model
         return $this->hasMany('App\quote');
     }
 
+    public function job_type() {
+        return $this->belongsTo('App\Job_Type', 'job__type_id', 'id');
+    }
+
 
 }

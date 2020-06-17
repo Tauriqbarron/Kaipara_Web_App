@@ -12,11 +12,11 @@
                     <div class="card w-75 cards">
                         <img src="{{$quote->application->imagePath}}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <label><strong>Title: </strong></label>
-                            <h5 class="card-title">{{$quote->application->title}}</h5>
-                            <label><strong>Price: </strong></label>
-                            <h5 class="card-title">{{$quote->application->price}}$</h5>
-                            <strong>Description: </strong>
+                            <label><strong>Title: </strong></label> {{$quote->application->title}}<br/>
+                            <label><strong>Price: </strong></label> &nbsp;null&nbsp;&nbsp;
+                            <strong>Job type: </strong>{{$quote->application->job_type->description}}<br/>
+
+                            <label><strong>Description: </strong></label>
                             <p class="card-text">{{$quote->application->description}}</p>
                             <strong>Client: </strong>{{$quote->application->client->first_name}} {{$quote->application->client->last_name}}&nbsp;&nbsp;
                             <strong>Phone Number: </strong>{{$quote->application->client->phone_number}}<br/>
