@@ -8,9 +8,10 @@
     @yield('styles')
 </head>
     <body>
-        <form class="w-75 mx-auto mt-3" role="form" method="POST" action="{{route('client.login.submit')}}">
+    <div class="container">
+        <form class="w-50 mx-auto mt-3" role="form" method="POST" action="{{route('client.login.submit')}}">
             <a class="btn btn-secondary" href="{{url('/selectuser')}}">Back</a>
-            <h1 class="form-group ">Custom Login</h1>
+            <h1 class="form-group ">Customer Login</h1>
             {{csrf_field()}}
             @if ($message = Session::get('error'))
                 <div class="alert alert-danger alert-block">
@@ -50,8 +51,10 @@
 
         </form>
 
+        <div class="fixed-bottom container">@include('footer')</div>
+    </div>
 
-        <div class="fixed-bottom">@include('footer')</div>
+
     </body>
 </html>
 

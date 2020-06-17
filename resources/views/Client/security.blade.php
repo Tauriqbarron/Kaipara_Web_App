@@ -17,7 +17,7 @@
                         <div class="col">
                             <label for="officerType">Officer Type</label>
                             <select class="form-control" id="officeType" onchange="overviewType(this);" required>
-                                @foreach(\App\Booking_Types::all() as $type)
+                                @foreach($booking_types as $type)
                                     <option data-rate="{{$type->rate}}">{{$type->description}}</option>
                                 @endforeach
                             </select>
@@ -216,7 +216,7 @@
                                         <div class="card-header" id="headingThree">
                                             <h5 class="mb-0">
                                                 <button class="btn btn-primary w-100" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                    {{--Finally--}} Set Time
+                                                    Set Time
                                                 </button>
                                             </h5>
                                         </div>

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class applications extends Model
 {
-    protected $fillable = ['client_id','title','imagePath','description','price','street', 'suburb', 'city', 'postcode', 'date', 'end_date'];
+    protected $fillable = ['client_id','title','imagePath','description','price','street', 'suburb', 'city', 'postcode', 'date', 'end_date','job__type_id'];
 
     public $timestamps = false;
 

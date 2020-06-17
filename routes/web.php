@@ -58,6 +58,11 @@ Route::post('/client/createBooking', [
     'as' => 'client.postCreateBooking'
 ]);
 
+Route::post('/client/createApplication', [
+    'uses' => 'ClientController@postCreateApplication',
+    'as' => 'client.postCreateApplication'
+]);
+
 
 Route::prefix('client')->group(function (){
     /*Client Registration*/

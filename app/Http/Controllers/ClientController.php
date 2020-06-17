@@ -6,11 +6,13 @@ use App\applications;
 use App\Booking;
 use App\Booking_Types;
 use App\Clients;
+use App\Job_Type;
 use App\service_provider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use SebastianBergmann\Comparator\Book;
 
 class ClientController extends Controller
 {
@@ -29,7 +31,7 @@ class ClientController extends Controller
     public function postCreateBooking(Request $request){
 
         $validator = Validator::make($request->all(), [
-            'type' => 'required',
+            'type' => 'required|exists:App\Booking_Types,description',
             'number1' => 'required|numeric',
             'message' => 'required|max:300',
             'street' => 'required',
@@ -40,7 +42,7 @@ class ClientController extends Controller
             'endDate' => 'sometimes|date|after_or_equal:startDate',
             'startTime' => 'required|date_format:H:i',
             'endTime' => 'required|date_format:H:i|after:startTime',
-            'price' => 'required'
+            'price' => 'required|numeric'
         ]);
         if($validator->fails()){
             return redirect()->back()
@@ -56,7 +58,7 @@ class ClientController extends Controller
                 'postcode' => $request->input('postcode1'),
                 'description' => $request->input('message'),
                 'price' => $request->input('price'),
-                'start_date' => $request->input('startDate'),
+                'date' => $request->input('startDate'),
                 'end_date' => $endDate,
                 'start_time' => $request->input('startTime'),
                 'end_time' => $request->input('endTime'),
@@ -64,7 +66,39 @@ class ClientController extends Controller
                 'available' => $request->input('number1'),
             ]);
         }
-        return redirect('jhkjgkjhlkjhkl')->back();
+        return redirect()->route('client.dashboard');
+    }
+    public function postCreateApplication(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'type' => 'required|exists:App\Job_Type,description',
+            'title' => 'required|max:50',
+            'description' => 'required|max:300',
+            'street' => 'required',
+            'suburb' => 'required',
+            'city1' => 'required|',
+            'postcode1' => 'required|numeric',
+            'startDate' => 'sometimes|date',
+            'price' => 'required|numeric'
+        ]);
+        if($validator->fails()){
+            return redirect()->back()
+                ->withErrors($validator);
+        }else{
+            $booking = new applications([
+                'client_id' => auth()->guard('client')->user()->id,
+                'job__type_id' => Job_Type::query()->select('id')->where('description', '=', $request->input('type'))->firstOrFail(),
+                'street' => $request->input('street'),
+                'suburb' => $request->input('suburb'),
+                'city' => $request->input('city1'),
+                'postcode' => $request->input('postcode1'),
+                'description' => $request->input('description'),
+                'price' => $request->input('price'),
+                'date' => $request->input('startDate'),
+
+            ]);
+        }
+        return redirect()->route('client.dashboard');
     }
     public function login(Request $request){
         //validate form
@@ -99,12 +133,14 @@ class ClientController extends Controller
     }
     public function getSecurity(){
         $user = Session::has('user') ? Session::get('user'): null;
-        return view('Client.security',['user'=>$user]);
+        $booking_types = Booking_Types::all();
+        return view('Client.security',['user'=>$user, 'booking_types'=>$booking_types]);
     }
 
     public function getProperty(){
         $user = Session::has('user') ? Session::get('user'): null;
-        return view('Client.property',['user'=>$user]);
+        $job_types = Job_Type::all();
+        return view('Client.property',['user'=>$user, 'job_types'=>$job_types]);
     }
 
 

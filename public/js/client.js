@@ -1,6 +1,5 @@
 //Client Specific functions
 const priceCallback = function () {
-    console.log("FIRE");
     try{
         let rate = document.getElementById('officeType').options[document.getElementById('officeType').selectedIndex].getAttribute('data-rate');
         let guards = document.getElementById('number1').value;
@@ -22,8 +21,6 @@ const priceCallback = function () {
         }
         let startTime = document.getElementById('txtStartTime').value;
         let endTime = document.getElementById('txtEndTime').value;
-
-        console.log(rate + ', ' + guards + ', ' + date1 + ', ' + date2 + ', ' + timeToFloat(startTime) + ', ' + timeToFloat(endTime));
         let price = calcPrice(rate,guards, new Date(date1), new Date(date2), timeToRealFloat(startTime),timeToRealFloat(endTime));
         let exp = document.getElementById('priceExplanation');
         let total = document.getElementById('total');
@@ -33,7 +30,7 @@ const priceCallback = function () {
         if(price > 0){
             exp.innerHTML = "<strong>" + guards + " </strong>&nbsp;" + document.getElementById('officeType').value + ss +" \n" +
                 " for&nbsp;<strong> " + days + " </strong>&nbsp;" + "day"+ s +
-                " @&nbsp;<strong> " + (timeToRealFloat(endTime)-timeToRealFloat(startTime)).toFixed(0) + "  </strong>&nbsp;hours a day<br>";
+                " @&nbsp;<strong> " + (timeToRealFloat(endTime)-timeToRealFloat(startTime)).toFixed(1) + "  </strong>&nbsp;hours a day<br>";
             document.getElementById('perHour').innerHTML = "<em class='text-secondary'>$" + (rate-0).toFixed(2) + "/Guard/Hr</em>";
 
             subTotal.innerHTML = "$" + price.toFixed(2);
@@ -47,7 +44,7 @@ const priceCallback = function () {
 
 
     }catch (e){
-        console.log(e.message);
+
     }
 };
 const __collapseCallback = function (mutationList) {
@@ -377,20 +374,28 @@ function overviewStart(val){
 function overviewEnd(val){
     document.getElementById('txtEndTime').value =val;
 }
+function overviewTitle(val){
+    document.getElementById('txtTitle').value =val;
+    document.getElementById('txtTitleDisplay').innerHTML =val;
+}
 function overviewPrice(val){
+    document.getElementById('txtPrice').value ="$" + (val-0).toFixed(2);
     document.getElementById('price').value =val;
 }
 function overviewQuote(checked){
     var priceInput = document.getElementById('priceInput');
-    var txtPrice = document.getElementById('price');
+    var txtPrice = document.getElementById('txtPrice');
+    var price = document.getElementById('price');
     if(checked){
         priceInput.value = '';
         priceInput.setAttributeNode(document.createAttribute('readonly'));
-        txtPrice.value = 'Quote';
+        txtPrice.value = 'Request a Quote';
+        price.value = '0';
     }else{
         priceInput.value = '';
         priceInput.removeAttribute('readonly');
         txtPrice.value = ''
+
     }
 }
 
@@ -570,13 +575,17 @@ window.addEventListener('load', function () {
             var endDateInput = document.getElementById('endDateInput');
             var txtStartDate = document.getElementById('txtStartDate');
             var txtEndDate = document.getElementById('txtEndDate');
+            try{
+                endDateInput.removeAttribute('readonly');
+                endDateInput.setAttribute('min', sender.value);
+                if(new Date(endDateInput.value) < new Date(sender.value)){
+                    endDateInput.value = sender.value;
+                    txtEndDate.value = sender.value;
+                }
+            }catch(e){
 
-            endDateInput.removeAttribute('readonly');
-            endDateInput.setAttribute('min', sender.value);
-            if(new Date(endDateInput.value) < new Date(sender.value)){
-                endDateInput.value = sender.value;
-                txtEndDate.value = sender.value;
             }
+
             txtStartDate.value = sender.value;
 
         });
