@@ -1,5 +1,55 @@
 //Client Specific functions
+const priceCallback = function () {
+    console.log("FIRE");
+    try{
+        let rate = document.getElementById('officeType').options[document.getElementById('officeType').selectedIndex].getAttribute('data-rate');
+        let guards = document.getElementById('number1').value;
+        let date1 = document.getElementById('txtStartDate').value;
+        let date2;
+        try{
+            date2 = document.getElementById('txtEndDate').value;
+        }catch (e){
+            date2 = document.getElementById('txtStartDate').value;
+        }
+        let days = (getDateDifference(new Date(date1), new Date(date2))+1);
+        let s = '';
+        let ss = '';
+        let ea = '';
+        if(days > 1)s='s';
+        if(guards > 1){
+            ss='s';
+            ea = '(each)';
+        }
+        let startTime = document.getElementById('txtStartTime').value;
+        let endTime = document.getElementById('txtEndTime').value;
 
+        console.log(rate + ', ' + guards + ', ' + date1 + ', ' + date2 + ', ' + timeToFloat(startTime) + ', ' + timeToFloat(endTime));
+        let price = calcPrice(rate,guards, new Date(date1), new Date(date2), timeToRealFloat(startTime),timeToRealFloat(endTime));
+        let exp = document.getElementById('priceExplanation');
+        let total = document.getElementById('total');
+        let txtPrice = document.getElementById('price');
+        let subTotal = document.getElementById('subtotal');
+
+        if(price > 0){
+            exp.innerHTML = "<strong>" + guards + " </strong>&nbsp;" + document.getElementById('officeType').value + ss +" \n" +
+                " for&nbsp;<strong> " + days + " </strong>&nbsp;" + "day"+ s +
+                " @&nbsp;<strong> " + (timeToRealFloat(endTime)-timeToRealFloat(startTime)).toFixed(0) + "  </strong>&nbsp;hours a day<br>";
+            document.getElementById('perHour').innerHTML = "<em class='text-secondary'>$" + (rate-0).toFixed(2) + "/Guard/Hr</em>";
+
+            subTotal.innerHTML = "$" + price.toFixed(2);
+            total.innerHTML = "$" + (price*1.15).toFixed(2);
+            txtPrice.value = (price*1.15);
+        }else{
+            exp.innerHTML = '';
+            total.innerHTML = '';
+            document.getElementById('price').value = '';
+        }
+
+
+    }catch (e){
+        console.log(e.message);
+    }
+};
 const __collapseCallback = function (mutationList) {
     for (let mutation of mutationList){
         if(mutation.attributeName === 'class'){
@@ -271,6 +321,20 @@ function timeToFloat(hhmm){
 }
 
 /**
+ * function timeToRealFloat
+ * convert a time string (HH:mm) to real float value i.e. 6:30 = 6.5, not 6.3
+ * @param hhmm
+ * @returns {number}
+ */
+function timeToRealFloat(hhmm){
+    var time = hhmm.split(':');
+    var hour = parseFloat(time[0]);
+    var min = parseFloat(time[1])/60;
+    return hour+min;
+
+}
+
+/**
  * function getDateDifference
  * returns the difference between 2 dates in days;
  * @param date1
@@ -331,8 +395,7 @@ function overviewQuote(checked){
 }
 
 function calcPrice(rate, guards,date1,date2,startTime,endTime){
-
-        return rate*(guards*(getDateDifference(date1,date2)*(endTime-startTime)));
+    return rate*(guards*((getDateDifference(date1,date2)+1)*(endTime-startTime)));
 
 }
 
@@ -383,10 +446,6 @@ window.addEventListener('load', function () {
     var validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener('submit', function(event) {
             if (form.checkValidity() === false) {
-                for (let el of form.getElementsByTagName('input')){
-                    console.log(el.validationMessage + ', ' + el.id);
-                }
-
                 event.preventDefault();
                 event.stopPropagation();
             }
@@ -394,24 +453,14 @@ window.addEventListener('load', function () {
         }, false);
     });
 
-    var overviewInputs = document.getElementById('overview').getElementsByTagName('input');
+    var overviewInputs = document.getElementsByTagName('input');
 
     for(var oInput of overviewInputs){
-        oInput.addEventListener('change', function () {
-           try{
-               var rate = document.getElementById('officeType').options[sender.selectedIndex].getAttribute('data-rate');
-               var guards = document.getElementById('number').value;
-               var date1 = document.getElementById('txtStartDate').value;
-               var date2 = document.getElementById('txtEndDate').value;
-               var startTime = document.getElementById('txtStartTime').value;
-               var endTime = document.getElementById('txtEndTime').value;
+        oInput.addEventListener('change', priceCallback);
+    }
 
-               document.getElementById('price').value = calcPrice(rate,guards, date1, date2, startTime,endTime);
-
-           }catch (e){
-               console.log(e.message);
-           }
-        });
+    for (var sel of document.getElementsByTagName('select')){
+        sel.addEventListener("change", priceCallback);
     }
 
     //Get Start time inputs using custom class name
@@ -440,7 +489,7 @@ window.addEventListener('load', function () {
             var sender = event.target;
             var startTime = document.getElementById(sender.getAttribute('data-sibling'));
 
-            //check if end > end
+            //check if end > start
             if(timeToFloat(sender.value) < timeToFloat(startTime.value)){
                 sender.value = startTime.value;
                 document.getElementById('txtEndTime').value = sender.value;

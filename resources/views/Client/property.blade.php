@@ -7,11 +7,12 @@
     <a class="nav-link active btn-lg mx-5 pt-2" href="#">Quotes</a>
 @endsection
 @section('mainContent')
-    <h2 class="w-100 text-center mb-5">Book a Job </h2>
+
     <form class="mx-auto needs-validation" novalidate method="POST" action="{{route('client.postCreateBooking')}}">
         @csrf
-        <div class="form-row">
-            <div class="col mr-5">
+        <div class="form-row mr-0">
+            <div class="col-7 pr-5">
+                <h2 class="w-100 text-center mb-5">Book a Job </h2>
                 <div class="form-row">
                     <div class="col">
                         <label for="serviceType"><h4>Service Type</h4></label>
@@ -100,10 +101,10 @@
             {{---------------Overview-------------------}}
             {{------------------------------------------}}
             {{------------------------------------------}}
-            <div class="col">
-                <div class="card bg-light float-right w-75">
-                    <div class="card-header">
-                        Booking Details
+            <div class="col-5 px-5 bg-light rounded-bottom rounded-left-0 py-5" style="margin-top: -47px; margin-bottom: -64px;">
+                <div class="card border-0 shadow bg-white w-100 rounded-lg" id="overview">
+                    <div class="card-header border-0 bg-white text-center">
+                        <h3 class="mb-0">Booking Details</h3>
                     </div>
                     <div class="card-body">
                         <div class="form-row">

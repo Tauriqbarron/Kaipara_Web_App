@@ -7,11 +7,12 @@
     <a class="nav-link active btn-lg mx-5 pt-2" href="#">Quotes</a>
 @endsection
 @section('mainContent')
-    <h2 class="w-100 text-center mb-5">Book a Security Job </h2>
-        <form class="mx-auto my-5 needs-validation" novalidate method="POST" action="{{route('client.postCreateBooking')}}">
+
+        <form class="mx-auto mb-5 needs-validation" novalidate method="POST" action="{{route('client.postCreateBooking')}}">
             @csrf
-            <div class="form-row">
-                <div class="col mr-5">
+            <div class="form-row mr-0">
+                <div class="col-7 pr-5">
+                    <h2 class="w-100 text-center mb-5">Book a Security Job </h2>
                     <div class="form-row">
                         <div class="col">
                             <label for="officerType">Officer Type</label>
@@ -245,10 +246,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col" style="width: 50%">
-                    <div class="card  bg-light float-right w-75" id="overview">
-                        <div class="card-header">
-                            Booking Details
+                <div class="col-5 px-5 bg-light rounded-bottom rounded-left-0 py-5" style="margin-top: -47px; margin-bottom: -96px;">
+                    <div class="card border-0 shadow bg-white w-100" id="overview">
+                        <div class="card-header border-0 bg-white text-center">
+                            <h3 class="mb-0">Booking Details</h3>
                         </div>
                         <div class="card-body">
                             <div class="form-row">
@@ -298,13 +299,37 @@
                                 <input type="text" class="col-7 form-control-plaintext " id="txtEndTime" name="endTime" value="" readonly required>
                             </div>
                             <div class="form-row">
-                                <label for="price" class="col-5 col-form-label text-primary">Price: </label>
-                                <input type="text" class="col-7 form-control-plaintext " id="price" name="price" value="" readonly required>
+                                <div class="col">
+                                    <div class="form-row my-3" id="priceExplanation"></div>
+                                    <div class="form-row my-3" id="perHour"></div>
+                                    <input type="hidden" class="form-control-plaintext " id="price" name="price" value="" readonly required>
+                                </div>
+
                             </div>
-    {{--
-                            TODO Change btn to submit
-    --}}
-                            <input type="submit" class="btn btn-primary" value="Confirm Booking"/>
+                            <div class="form-row border-secondary border-bottom">
+                                <label for="total" class="col-5 col-form-label text-primary">Subtotal</label>
+                                <div class="col-7 ">
+                                    <div class="form-row"><strong class="w-100 text-right py-2" id="subtotal"></strong></div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row border-secondary border-bottom ">
+                                <label for="total" class="col-5 col-form-label text-primary">GST</label>
+                                <div class="col-7">
+                                    <div class="form-row"><strong class="w-100 text-right py-2" id="gst">15%</strong></div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row border-secondary border-bottom">
+                                <label for="total" class="col-5 col-form-label text-primary">Total</label>
+                                <div class="col-7 ">
+                                    <div class="form-row" ><strong class="w-100 text-right py-2" id="total"></strong></div>
+                                </div>
+
+                            </div>
+                            <input type="submit" class="btn btn-primary w-100 mt-3" value="Confirm Booking"/>
                         </div>
                     </div>
                 </div>

@@ -11,7 +11,7 @@
         <div class="MainCon container-fluid">
             {{--@include('Profile.ProfileBar')--}}
             @include('Client.nav')
-            <div class="p-5 rounded-bottom bg-white">
+            <div class="py-5 pl-5 pr-0 rounded-bottom bg-white">
                 <div class="content">
                     @if ($message = Session::pull('error'))
                         <div class="alert alert-danger alert-block">

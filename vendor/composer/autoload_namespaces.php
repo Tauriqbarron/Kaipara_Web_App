@@ -10,4 +10,5 @@ return array(
     'MaddHatter\\LaravelFullcalendar' => array($vendorDir . '/progcode/laravel-fullcalendar/src'),
     'Highlight\\' => array($vendorDir . '/scrivo/highlight.php'),
     'HighlightUtilities\\' => array($vendorDir . '/scrivo/highlight.php'),
+    'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/lib'),
 );
