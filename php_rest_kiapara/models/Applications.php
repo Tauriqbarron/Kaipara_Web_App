@@ -11,8 +11,7 @@ class Applications{
     public $imagepath;
     public $price;
     public $date;
-    public $start_time;
-    public $finish_time;
+    public $end_date;
     public $street;
     public $suburb;
     public $city;
@@ -32,8 +31,7 @@ class Applications{
             description,
             price,
             date,
-            start_time,
-            finish_time,
+            end_date,
             street,
             suburb,
             city,
@@ -54,8 +52,7 @@ class Applications{
             description,
             price,
             date,
-            start_time,
-            finish_time,
+            end_date,
             street,
             suburb,
             city,
