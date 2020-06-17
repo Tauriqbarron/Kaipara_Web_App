@@ -183,9 +183,10 @@ Route::prefix('security')->group(function (){
 
 // SERVICE
 /*Service Provider Profile*/
-Route::get('/service_provider', function () {
-    return view('Service.index');
-}) ->name('service.home');
+Route::get('/service_provider', [
+    'uses' =>'ServiceProviderController@getIndex',
+    'as' => 'service.home'
+]);
 
 Route::post('service_provider/canceljob/{id}',[
     'uses' =>'ServiceProviderController@canceljob',
@@ -230,6 +231,16 @@ Route::get('/service_provider/jobs/complete_job/{id}', [
 Route::get('/service_provider/jobs/completed_jobs', [
     'uses' => 'ServiceProviderController@getCompletedJobs',
     'as' => 'service.completed_jobs'
+]);
+
+Route::get('/service_provider/setting', [
+    'uses' => 'ServiceProviderController@getEdit',
+    'as' => 'service.postEdit'
+]);
+
+Route::post('/service_provider/setting', [
+    'uses' => 'ServiceProviderController@postEdit',
+    'as' => 'service.postEdit'
 ]);
 
 /*Service Provider Booking Application Page*/

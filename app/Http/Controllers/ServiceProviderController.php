@@ -24,6 +24,22 @@ class ServiceProviderController extends Controller
      //   $this->middleware('guest:service_provider');
     //}
 
+    public function getIndex() {
+        $jobs = Service_Provider_Job::where('service_provider_id', '=', auth()->guard('service_provider')->id())->get();
+        $onGoing = 0;
+        $completed = 0;
+        $quotes = quote::where('service_provider_id', '=', auth()->guard('service_provider')->id())->count();
+        foreach ($jobs as $job){
+            if($job->application->status == 2 or $job->application->status == 3) {
+                $onGoing += 1;
+            }elseif ($job->application->status == 4) {
+                $completed += 1;
+            }
+        }
+        return view('Service.index', ['onGoing' => $onGoing, 'completed' => $completed, 'quotes' => $quotes]);
+
+    }
+
     //Login function.
     public function login(Request $request){
         //validate form
@@ -170,5 +186,34 @@ class ServiceProviderController extends Controller
         $quote = quote::find($id);
         $quote->delete();
         return redirect()->back();
+    }
+
+
+    //Update personal detail
+    public function getEdit() {
+        return view('Service.setting');
+    }
+
+    public function postEdit(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'phone_number'=>'required|max:11',
+            'street'=>'required',
+            'suburb'=>'required',
+            'city'=>'required',
+            'postcode'=>'required'
+        ]);
+        if($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $service_provider = service_provider::query()->find(Auth::guard('service_provider')->user()->id);
+        $service_provider->phone_number = $request->input('phone_number');
+        $service_provider->street = $request->input('street');
+        $service_provider->suburb = $request->input('suburb');
+        $service_provider->city = $request->input('city');
+        $service_provider->postcode = $request->input('postcode');
+        $service_provider->save();
+        return redirect()->back()->with('message', 'Details updated');
     }
 }
