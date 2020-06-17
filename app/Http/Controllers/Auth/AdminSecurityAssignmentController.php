@@ -244,11 +244,7 @@ class AdminSecurityAssignmentController extends Controller
             return redirect()->route('security_assignment.index');
         }
         else{
-            foreach ($staff_assignments as $record){
-                $record->delete();
-            }
-            $assignment->delete();
-            return redirect()->route('security_assignment.index');
+            return redirect()->back()->withErrors('You can not delete a processing assignment.');
         }
 
     }

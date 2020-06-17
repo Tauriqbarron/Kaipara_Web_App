@@ -1,37 +1,62 @@
-@extends('Service.index')
+@extends('Profile.layout')
 @section('styles')
     <link rel="stylesheet" href="{{url('css/calendar.css')}}" type="text/css"/>
 
 
 @endsection
-@section('nav')
-    <a class="nav-link active btn-lg mx-5 pt-2" href="{{ url('/service/applications')}}">Applications</a>
-    <a class="nav-link active btn-lg mx-5 pt-2 bg-secondary text-white " href="{{ url('/service/jobs')}}">Jobs</a>
-    <a class="nav-link active btn-lg mx-5 pt-2" href="#">Quotes</a>
-    <a class="nav-link active btn-lg mx-5 pt-2" href="#">Availability Schedule</a>
-    <a class="nav-link active btn-lg mx-5 pt-2" href="#">Profile</a>
-@endsection
+
 @section('mainContent')
+    <h1 id="No_jobs"></h1>
     <div class="bookCon">
         <div class="jobList">
-            <div class="jobListCon">
-                @foreach($jobs as $job)
-                    <form method="post" action="{{route('service.canceljob', ['id' => $job->id])}}">
-                        @csrf
-
-                        <div class="card w-75 cards">
-                            <img src="{{$job->application->imagePath}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{$job->application->title}}</h5>
-                                <h5 class="card-title">{{$job->application->price}}</h5>
-                                <p class="card-text">{{$job->application->description}}</p>
-                                <button type="submit" class="btn btn-primary float-right mx-1">Cancel</button>
-                            </div>
-                        </div>
-
-                    </form>
-                @endforeach
+            <div class="jobListCon" id="jobs">
+                    @foreach($jobs as $job)
+                            @if($job->application->status != 4)
+                            <form method="post" action="{{route('service.canceljob', ['id' => $job->id])}}">
+                                @csrf
+                                <div class="card w-75 cards">
+                                    <img src="{{$job->application->imagePath}}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <label><strong>Title: </strong></label>
+                                        <h5 class="card-title">{{$job->application->title}}</h5>
+                                        <label><strong>Price: </strong></label>
+                                        <h5 class="card-title">{{$job->application->price}}$</h5>
+                                        <strong>Description: </strong>
+                                        <p class="card-text">{{$job->application->description}}</p>
+                                        <strong>Client: </strong>{{$job->application->client->first_name}} {{$job->application->client->last_name}}&nbsp;&nbsp;
+                                        <strong>Phone Number: </strong>{{$job->application->client->phone_number}}<br/>
+                                        <strong>Address: </strong>{{$job->application->street}}, {{$job->application->suburb}}, {{$job->application->city}}
+                                        <br/><label><strong>Status: </strong></label>
+                                        @if($job->application->status == 2)
+                                            Accepted
+                                        @elseif($job->application->status == 3)
+                                            Started
+                                        @elseif($job->application->status == 4)
+                                            Completed
+                                        @endif
+                                        <br/><input type="hidden" name="end_date" value="{{date('Y-m-d')}}">
+                                        @if($job->application->status == 2)
+                                            <a href="{{route('service.job.start', ['id' => $job->application->id])}}" class="btn btn-success float-right mx-auto">Start Job</a>
+                                            <button type="submit" class="btn btn-primary float-right mx-1">Cancel</button>
+                                        @elseif($job->application->status == 3)
+                                            <a href="{{route('service.job.complete', ['id' => $job->application->id])}}" class="btn btn-success float-right">Complete</a>
+                                            <button type="submit" class="btn btn-primary float-right mx-1">Cancel</button>
+                                            @elseif($job->application->status == 4)
+                                            <a href="#" class="btn btn-secondary disabled float-right">Completed</a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </form>
+                            @endif
+                    @endforeach
             </div>
         </div>
     </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script>
+        if($('#jobs').contents().length == 1) {
+            $('#No_jobs').text('No Jobs Currently')
+        }
+    </script>
 @endsection

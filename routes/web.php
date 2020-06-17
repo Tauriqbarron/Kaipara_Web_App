@@ -156,6 +156,28 @@ Route::post('/security/rating','staffController@postFeedback')->name('staff.post
 Route::post('/security/leaveApplication','staffController@postLeave')->name('staff.postLeave');
 Route::post('/security/editInfo','staffController@postEdit')->name('security.postEdit');
 
+//Staff reset password//
+Route::prefix('security')->group(function (){
+    Route::post('/password/email', [
+        'uses' => 'Auth\StaffForgotPasswordController@sendResetLinkEmail',
+        'as' => 'staff.password.email'
+    ]);
+
+    Route::get('/password/reset', [
+        'uses' => 'Auth\StaffForgotPasswordController@showLinkRequestForm',
+        'as' => 'staff.password.request'
+    ]);
+
+    Route::post('/password/reset', [
+        'uses' => 'Auth\StaffResetPasswordController@reset',
+        'as' => 'staff.password.update'
+    ]);
+
+    Route::get('/password/reset/{token}', [
+        'uses' => 'Auth\StaffResetPasswordController@showResetForm',
+        'as' => 'staff.password.reset'
+    ]);
+});
 
 
 
@@ -185,9 +207,29 @@ Route::get('service_provider/quote',[
     'as' => 'service.view_quote'
 ]);
 
+Route::post('service_provider/cancel_quote/{id}', [
+    'uses' => 'ServiceProviderController@cancelQuote',
+    'as' => 'service.cancel_quote'
+]);
+
 Route::get('/service_provider/jobs', [
     'uses' => 'ServiceProviderController@getJobs',
     'as' => 'service.jobs'
+]);
+
+Route::get('/service_provider/jobs/start_job/{id}', [
+    'uses' => 'ServiceProviderController@startJob',
+    'as' => 'service.job.start'
+]);
+
+Route::get('/service_provider/jobs/complete_job/{id}', [
+    'uses' => 'ServiceProviderController@completeJob',
+    'as' => 'service.job.complete'
+]);
+
+Route::get('/service_provider/jobs/completed_jobs', [
+    'uses' => 'ServiceProviderController@getCompletedJobs',
+    'as' => 'service.completed_jobs'
 ]);
 
 /*Service Provider Booking Application Page*/
@@ -253,7 +295,7 @@ Route::prefix('service_provider')->group(function (){
 
 
 
-/*Administrator part (Jay) */
+/*Administrator part */
 /*Select Staff Type*/
 Route::get('/selectstaff', function () {
     return view('login.userselect.stafftype');
@@ -355,19 +397,39 @@ Route::post('/admin/sec-assignment/delete/{id}', [
 
 /*Service Assignment Part*/
 Route::prefix('admin')->group(function (){
-    Route::get('service', [
+    Route::get('ser-assignment', [
         'uses' => 'Auth\AdminServiceAssignmentController@getIndex',
         'as' => 'admin.service.index'
     ]);
 
-    Route::get('result', [
+    Route::get('ser-assignment/result', [
         'uses' => 'Auth\AdminServiceAssignmentController@search',
         'as' => 'admin.service.search'
     ]);
 
-    Route::get('view/{id}', [
+    Route::get('ser-assignment/view/{id}', [
         'uses' => 'Auth\AdminServiceAssignmentController@view',
         'as' => 'admin.service.view'
+    ]);
+
+    Route::get('ser-assignment/create', [
+        'uses' => 'Auth\AdminServiceAssignmentController@getCreate',
+        'as' => 'admin.service.create'
+    ]);
+
+    Route::post('ser-assignment/create', [
+        'uses' => 'Auth\AdminServiceAssignmentController@postCreate',
+        'as' => 'admin.service.create'
+    ]);
+
+    Route::get('ser-assignment/delete/{id}', [
+        'uses' => 'Auth\AdminServiceAssignmentController@getDelete',
+        'as' => 'admin.service.delete'
+    ]);
+
+    Route::post('ser-assignment/delete/{id}', [
+        'uses' => 'Auth\AdminServiceAssignmentController@postDelete',
+        'as' => 'admin.service.delete'
     ]);
 });
 

@@ -8,7 +8,10 @@
                 <a class="nav-link" href="{{ route('service.applications')}}" >Applications</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('service.jobs')}}">Jobs</a>
+                <a class="nav-link" href="{{ route('service.jobs')}}">Ongoing Jobs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('service.completed_jobs')}}">Completed Jobs</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('service.view_quote')}}">Quotes</a>

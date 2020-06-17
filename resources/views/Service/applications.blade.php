@@ -32,9 +32,17 @@
                                     @if($app->price == NULL)
                                         <h5 class="card-title text-primary">Quotable</h5>
                                     @else
+                                        <label><strong>Price: </strong></label>
                                         <h5 class="card-title text-primary">${{$app->price}}</h5>
                                     @endif
+                                    <strong>Client:</strong>
+                                    <p class="card-text">{{$app->client->first_name}} {{$app->client->last_name}}</p>
+                                    <strong>Phone Number:</strong>
+                                    <p class="card-text">{{$app->client->phone_number}}</p>
+                                    <strong>Description: </strong>
                                     <p class="card-text">{{$app->description}}</p>
+                                    <strong>Address: </strong>
+                                    <p class="card-text">{{$app->street}}, {{$app->suburb}}, {{$app->city}}</p>
                                 </div>
                             </div>
                             <br/>
@@ -46,46 +54,18 @@
                                     <!--Quote section-->
                                     <div class="card card-body">
                                         <h5 class="card-title">Quote</h5>
-                                        <div>
-                                        Select quote type:<br/>
-                                        Totally: <input type="radio" id="totally" name="quote_type" value="totally" onclick="select_quote_type()">&nbsp;&nbsp;&nbsp;
-                                        Hourly: <input type="radio" id="hourly" name="quote_type" value="hourly" onclick="select_quote_type()">
-                                        </div>
                                         <hr/>
                                         <!--Normal quote-->
-                                        <form method="post" action="{{route('service.quote',['id' => $app->id])}}" id="normal_quote" style="display: none">
+                                        <form method="post" action="{{route('service.quote',['id' => $app->id])}}" id="normal_quote">
                                             @csrf
                                             <div class="form-group row">
                                                 <label for="price">Enter a total price: </label>
                                                 <input type="text" class="form-control w-25" id="price" name="price">
                                             </div>
                                             <div class="form-group row">
-                                                <label for="hours">Estimate hours:</label>
-                                                <input type="text" name="hours" class="form-control">
-                                            </div>
-                                            <div class="form-group row">
                                                 <label for="message">Please include a short message with your quote:</label>
                                                 <textarea class="form-control" id="message" name="message" rows="3"></textarea>
                                             </div>
-                                            <input type="hidden" name="type" value="totally">
-                                            <button type="submit" class="btn btn-primary float-right">Send Quote</button>
-                                        </form>
-                                        <!--Hourly quote-->
-                                        <form id="hourly_quote" method="post" action="{{route('service.quote',['id' => $app->id])}}" style="display: none">
-                                            @csrf
-                                            <div class="form-group row">
-                                                <label for="price">Enter a hourly price: </label>
-                                                <input type="text" class="form-control w-25" id="price" name="price">
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="hours">Estimate hours:</label>
-                                                <input type="text" name="hours" class="form-control">
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="message">Please include a short message with your quote:</label>
-                                                <textarea class="form-control" id="message" name="message" rows="3"></textarea>
-                                            </div>
-                                            <input type="hidden" name="type" value="hourly">
                                             <button type="submit" class="btn btn-primary float-right">Send Quote</button>
                                         </form>
                                     </div>
