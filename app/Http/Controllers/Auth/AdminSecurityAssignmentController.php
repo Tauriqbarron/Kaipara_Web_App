@@ -50,8 +50,10 @@ class AdminSecurityAssignmentController extends Controller
         $validator = Validator::make($request->all(), [
             'client_id' => 'required',
             'booking_type' => 'required',
+            'price' => 'required|numeric',
             'description' => 'required',
             'date' => 'required|date|date_format:Y-m-d|after:today',
+            'end_date' => 'required|date|date_format:Y-m-d|after:today',
             'street' => 'required',
             'suburb' => 'required',
             'city' => 'required',
@@ -73,8 +75,10 @@ class AdminSecurityAssignmentController extends Controller
         $booking = new Booking([
             'client_id' => $request->input('client_id'),
             'booking_type_id' => $request->input('booking_type'),
+            'price' => $request->input('price'),
             'description' => $request->input('description'),
             'date' => $request->input('date'),
+            'end_date' => $request->input('end_date'),
             'street' => $request->input('street'),
             'suburb' => $request->input('suburb'),
             'city' => $request->input('city'),
@@ -82,7 +86,7 @@ class AdminSecurityAssignmentController extends Controller
             'status' => 'available',
             'staff_needed' => $request->input('numOfStaff'),
             'available_slots' => $request->input('numOfStaff'),
-            'start_time' => '8.30',
+            'start_time' => '9.30',
             'finish_time' => '16.30',
         ]);
 
@@ -138,7 +142,9 @@ class AdminSecurityAssignmentController extends Controller
         $validator = Validator::make($request->all(), [
             'booking_type' => 'required',
             'description' => 'required',
+            'price' => 'required|numeric',
             'date' => 'required|date|date_format:Y-m-d',
+            'end_date' => 'required|date|date_format:Y-m-d|after:today',
             'start_time' => 'required',
             'finish_time' => 'required',
             'numOfStaff' => 'required',
@@ -158,7 +164,9 @@ class AdminSecurityAssignmentController extends Controller
         $assignment = Booking::find($id);
         $assignment->booking_type_id = $request->input('booking_type');
         $assignment->description = $request->input('description');
+        $assignment->price = $request->input('price');
         $assignment->date = $request->input('date');
+        $assignment->end_date = $request->input('end_date');
         $assignment->start_time = $request->input('start_time');
         $assignment->finish_time = $request->input('finish_time');
         $assignment->street = $request->input('street');

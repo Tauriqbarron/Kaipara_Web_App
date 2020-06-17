@@ -422,6 +422,16 @@ Route::prefix('admin')->group(function (){
         'as' => 'admin.service.create'
     ]);
 
+    Route::get('ser-assignment/edit/{id}', [
+        'uses' => 'Auth\AdminServiceAssignmentController@getEdit',
+        'as' => 'admin.service.edit'
+    ]);
+
+    Route::post('ser-assignment/edit/{id}', [
+        'uses' => 'Auth\AdminServiceAssignmentController@postEdit',
+        'as' => 'admin.service.edit'
+    ]);
+
     Route::get('ser-assignment/delete/{id}', [
         'uses' => 'Auth\AdminServiceAssignmentController@getDelete',
         'as' => 'admin.service.delete'
