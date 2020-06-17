@@ -1,10 +1,31 @@
 @extends('Client.layout')
 @section('nav')
-    <a class="nav-link active btn-lg mx-5 pt-2" href="{{route('client.security')}}">Security</a>
-    <a class="nav-link active btn-lg mx-5 pt-2 bg-secondary text-white" href="#">Property Management</a>
-    <a class="nav-link active btn-lg mx-5 pt-2" href="#">Service Jobs</a>
-    <a class="nav-link active btn-lg mx-5 pt-2" href="#">Security Bookings</a>
-    <a class="nav-link active btn-lg mx-5 pt-2" href="#">Quotes</a>
+    <img class="page-toggle-btn navbar-brand d-flex mr-auto text-light active" data-target="profileContainer" id="profileBtn" alt="Dashboard" />
+    <h4 class="navbar-brand w-25"></h4>
+    <div class="navbar-collapse collapse w-100 " id="collapsingNavbar3">
+        <ul class="navbar-nav w-100 h-100 justify-content-center text-nowrap align-items-end">
+            <li class="nav-item" >
+                <a class="nav-link" href="{{route('client.security')}}" >Security</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('client.property')}}">Property Management</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Service Jobs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Security Bookings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Quotes</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Settings</a>
+            </li>
+        </ul>
+    </div>
 @endsection
 @section('mainContent')
 <div class="row">
@@ -24,13 +45,13 @@
             </div>
         </div>
     </div>
-    <div class="col-8">
+    <div class="col-7">
         <div class="container jumbotron p-3">
             <div class="row text-center">
                 <h5 class="w-100 text-center">Your Security Bookings</h5>
             </div>
             @foreach($bookings as $booking)
-                <div class="row bg-white shadow">
+                <div class="row bg-white shadow m-2 p-2">
                     <div class="col">
                         <div class="row">
                             <div class="col">
@@ -55,7 +76,7 @@
                                 Start Time:
                             </div>
                             <div class="col">
-                                {{$booking->start_time}}
+                                {{substr('00:00', 0, (-(strlen(number_format($booking->start_time ,2 , ':','')))) ) . number_format($booking->start_time ,2 , ':','')}}
                             </div>
                         </div>
                         <div class="row">
@@ -63,7 +84,7 @@
                                 Finish Time:
                             </div>
                             <div class="col">
-                                {{$booking->finish_time}}
+                                {{substr('00:00', 0, (-(strlen(number_format($booking->finish_time ,2 , ':','')))) ) . number_format($booking->finish_time ,2 , ':','')}}
                             </div>
                         </div>
                     </div>
@@ -75,7 +96,7 @@
                 <h5 class="w-100 text-center">Your Service Applications</h5>
             </div>
             @foreach($applications as $booking)
-                <div class="row bg-white shadow">
+                <div class="row bg-white shadow m-2 p-2">
                     <div class="col">
                         <div class="row">
                             <div class="col">

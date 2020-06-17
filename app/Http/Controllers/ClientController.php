@@ -8,6 +8,7 @@ use App\Booking_Types;
 use App\Clients;
 use App\Job_Type;
 use App\service_provider;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -22,9 +23,9 @@ class ClientController extends Controller
     }
 
     public function getDashboard(){
-        $client = Clients::query()->find(\auth()->guard('client')->user()->id);
-        $bookings = Booking::query()->where('client_id', '=', $client->id);
-        $applications = applications::query()->where('client_id', '=', $client->id);
+        $client = Clients::query()->find(auth()->guard('client')->user()->id);
+        $bookings = Booking::query()->where('client_id', '=', $client->id)->get();
+        $applications = applications::query()->where('client_id', '=', $client->id)->get();
         return view('Client.dashboard', ['client' => $client, 'bookings' => $bookings, 'applications' => $applications]);
     }
 
@@ -51,7 +52,7 @@ class ClientController extends Controller
             $endDate = $request->has('endDate') ? $request->input('endDate') : $request->input('startDate');
             $booking = new Booking([
                 'client_id' => auth()->guard('client')->user()->id,
-                'booking_type_id' => Booking_Types::query()->select('id')->where('description', '=', $request->input('type'))->firstOrFail(),
+                'booking_type_id' => Booking_Types::query()->select('id')->where('description', '=', $request->input('type'))->firstOrFail()->id,
                 'street' => $request->input('street'),
                 'suburb' => $request->input('suburb'),
                 'city' => $request->input('city1'),
@@ -60,11 +61,12 @@ class ClientController extends Controller
                 'price' => $request->input('price'),
                 'date' => $request->input('startDate'),
                 'end_date' => $endDate,
-                'start_time' => $request->input('startTime'),
-                'end_time' => $request->input('endTime'),
+                'start_time' => floatval(Carbon::parse($request->input('startTime'))->format("H.i")),
+                'finish_time' => floatval(Carbon::parse($request->input('endTime'))->format("H.i")),
                 'staff_needed' => $request->input('number1'),
-                'available' => $request->input('number1'),
+                'available_slots' => $request->input('number1'),
             ]);
+            $booking->save();
         }
         return redirect()->route('client.dashboard');
     }
@@ -77,17 +79,15 @@ class ClientController extends Controller
             'street' => 'required',
             'suburb' => 'required',
             'city1' => 'required|',
-            'postcode1' => 'required|numeric',
-            'startDate' => 'sometimes|date',
-            'price' => 'required|numeric'
+            'postcode1' => 'required|numeric'
         ]);
         if($validator->fails()){
             return redirect()->back()
                 ->withErrors($validator);
         }else{
-            $booking = new applications([
+            $application = new applications([
                 'client_id' => auth()->guard('client')->user()->id,
-                'job__type_id' => Job_Type::query()->select('id')->where('description', '=', $request->input('type'))->firstOrFail(),
+                'job__type_id' => Job_Type::query()->select('id')->where('description', '=', $request->input('type'))->firstOrFail()->id,
                 'street' => $request->input('street'),
                 'suburb' => $request->input('suburb'),
                 'city' => $request->input('city1'),
@@ -95,8 +95,11 @@ class ClientController extends Controller
                 'description' => $request->input('description'),
                 'price' => $request->input('price'),
                 'date' => $request->input('startDate'),
+                'title' => $request->input('title'),
+                'status' => 1,
 
             ]);
+            $application->save();
         }
         return redirect()->route('client.dashboard');
     }
@@ -116,13 +119,10 @@ class ClientController extends Controller
         // attempt login
         if(Auth::guard('client')->attempt($user_data))
         {
-
-            $user = Clients::query()->where('email',$email)->first();
-            $request->session()->put('user',$user);
             $request->session()->put('guardString', 'client');
             //Session::put('user',$user);
             //if success redirect to profile
-            return view('Client.index',['user'=>$user]) ;
+            return redirect()->route('client.dashboard');
 
         }
 

@@ -75,9 +75,6 @@ class StaffController extends Controller
     }
 
     public function dateChange($i){
-        if(!Session::has('date1')){
-            return redirect()->route('staff.login')->with('error', 'Session has timed out');
-        }
         Session::put('page', 'profile');
         $currentDate = Session::get('date1');
         $currentDate->addDays($i);
@@ -89,9 +86,6 @@ class StaffController extends Controller
     }
 
     public function setWeek($i){
-        if(!Session::has('weekStart')){
-            return redirect()->route('staff.login')->with('error', 'Session has timed out');
-        }
         $j = $i*7;
         $weekStart = Session::get('weekStart');
         $weekEnd = Session::get('weekEnd');
@@ -106,8 +100,7 @@ class StaffController extends Controller
     }
 
     public function acceptBooking($booking_id) {
-        if(!Session::has('user')) return redirect()->route('staff.login')->with('error', 'Session has timed out');
-        $user = Session::has('user') ? Session::get('user') : null;
+        $user = auth()->guard('staff')->user();
         $staff_id = $user->id;
         $staff = Staff::query()->find($staff_id);
         $staff_assignments = $staff->staff_Assignments;

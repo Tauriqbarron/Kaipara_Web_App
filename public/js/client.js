@@ -390,7 +390,7 @@ function overviewQuote(checked){
         priceInput.value = '';
         priceInput.setAttributeNode(document.createAttribute('readonly'));
         txtPrice.value = 'Request a Quote';
-        price.value = '0';
+        price.value = '';
     }else{
         priceInput.value = '';
         priceInput.removeAttribute('readonly');

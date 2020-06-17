@@ -1,10 +1,35 @@
 @extends('Client.layout')
 @section('nav')
-    <a class="nav-link active btn-lg mx-5 pt-2 bg-secondary text-white" href="#">Security</a>
-    <a class="nav-link active btn-lg mx-5 pt-2" href="{{route('client.property')}}">Property Management</a>
-    <a class="nav-link active btn-lg mx-5 pt-2" href="#">Service Jobs</a>
-    <a class="nav-link active btn-lg mx-5 pt-2" href="#">Security Bookings</a>
-    <a class="nav-link active btn-lg mx-5 pt-2" href="#">Quotes</a>
+    <a href="{{route('client.dashboard')}}" id="profileBtn"><img  src="{{url('images/Dashboard_active.png')}}" class="navbar-brand d-flex mr-auto text-light">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <h4 class="navbar-brand w-25"></h4>
+    <div class="navbar-collapse collapse w-100 " id="collapsingNavbar3">
+        <ul class="navbar-nav w-100 h-100 justify-content-center text-nowrap align-items-end">
+            <li class="nav-item" >
+                <a class="nav-link active" href="{{route('client.security')}}" >Security</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('client.property')}}">Property Management</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Service Jobs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Security Bookings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Quotes</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end">
+            <li class="nav-item">
+                <a class="nav-link"  href="#">Settings</a>
+            </li>
+        </ul>
+    </div>
 @endsection
 @section('mainContent')
 
@@ -90,7 +115,7 @@
                                                     <label for="appt">Select Start time:</label>
                                                 </div>
                                                 <div class="col">
-                                                    <input class="form-control start-time-input" data-sibling="selEndInput"  type="time" id="selStartInput" onchange="overviewStart(this.value)"required>
+                                                    <input class="form-control start-time-input" data-sibling="selEndInput"  type="time" id="selStartInput"  onchange="overviewStart(this.value)"required>
                                                 </div>
                                             </div>
                                             <div class="form-row my-2">
@@ -98,7 +123,7 @@
                                                     <label for="appt">Select End time:</label>
                                                 </div>
                                                 <div class="col">
-                                                    <input class="form-control end-time-input" data-sibling="selStartInput" type="time" id="selEndInput" onchange="overviewEnd(this.value)" required>
+                                                    <input class="form-control end-time-input" data-sibling="selStartInput" type="time"  id="selEndInput" onchange="overviewEnd(this.value)" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -227,7 +252,7 @@
                                                         <label for="appt">Select Start time:</label>
                                                     </div>
                                                     <div class="form-row">
-                                                        <input class="form-control start-time-input" type="time" id="createStartInput" data-sibling="createEndInput" onchange="overviewStart(this.value)">
+                                                        <input class="form-control start-time-input" type="time" id="createStartInput" data-sibling="createEndInput"  onchange="overviewStart(this.value)">
                                                     </div>
                                                 </div>
                                                 <div class="col px-2">
@@ -235,7 +260,7 @@
                                                         <label for="appt">Select End time:</label>
                                                     </div>
                                                     <div class="form-row">
-                                                        <input class="form-control end-time-input" data-sibling="createStartInput" type="time" id="createEndInput" onchange="overviewEnd(this.value)">
+                                                        <input class="form-control end-time-input" data-sibling="createStartInput" type="time" id="createEndInput"  onchange="overviewEnd(this.value)">
                                                     </div>
                                                 </div>
                                             </div>

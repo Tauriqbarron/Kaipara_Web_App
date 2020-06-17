@@ -1,10 +1,35 @@
 @extends('Client.layout')
 @section('nav')
-    <a class="nav-link active btn-lg mx-5 pt-2" href="{{route('client.security')}}">Security</a>
-    <a class="nav-link active btn-lg mx-5 pt-2 bg-secondary text-white" href="#">Property Management</a>
-    <a class="nav-link active btn-lg mx-5 pt-2" href="#">Service Jobs</a>
-    <a class="nav-link active btn-lg mx-5 pt-2" href="#">Security Bookings</a>
-    <a class="nav-link active btn-lg mx-5 pt-2" href="#">Quotes</a>
+    <a href="{{route('client.dashboard')}}" id="profileBtn"><img  src="{{url('images/Dashboard_active.png')}}" class="navbar-brand d-flex mr-auto text-light">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <h4 class="navbar-brand w-25"></h4>
+    <div class="navbar-collapse collapse w-100 " id="collapsingNavbar3">
+        <ul class="navbar-nav w-100 h-100 justify-content-center text-nowrap align-items-end">
+            <li class="nav-item" >
+                <a class="nav-link" href="{{route('client.security')}}" >Security</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{{route('client.property')}}">Property Management</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Service Jobs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Security Bookings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Quotes</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Settings</a>
+            </li>
+        </ul>
+    </div>
 @endsection
 @section('mainContent')
 
@@ -16,7 +41,7 @@
                 <div class="form-row">
                     <div class="col">
                         <label for="titleInput"><h4>Title</h4></label>
-                        <input class="form-control" type="text" id="titleInput" maxlength="50" placeholder="Eg. 200m Fence, 5 Meter Paving etc" onchange="overviewTitle(this.value)">
+                        <input class="form-control" type="text" autocomplete="off" id="titleInput" maxlength="50" placeholder="Eg. 200m Fence, 5 Meter Paving etc" onchange="overviewTitle(this.value)" required>
                     </div>
                     <div class="col">
                         <label for="serviceType"><h4>Service Type</h4></label>
@@ -151,7 +176,7 @@
                             <input type="text" class="col-7 form-control-plaintext " id="txtPrice" value="" readonly>
                             <input type="hidden" class="col-7 form-control-plaintext " id="price" name="price" value="" readonly>
                         </div>
-                        <input type="submit" class="btn btn-primary" value="Confirm Booking"/>
+                        <input type="submit" class="btn btn-primary w-100" value="Confirm Booking"/>
                     </div>
                 </div>
             </div>

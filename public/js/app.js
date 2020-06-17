@@ -124,7 +124,7 @@ function createTimetable() {
         return record['finish_time'];
     })))+1;
 
-    hours = (finish - start)
+    hours = (finish - start);
 
     if (!(hours > 0)){
         hours = 12;
