@@ -3,18 +3,18 @@
 class Bookings{
     private $conn;
     private $table = 'bookings';
-    private $id;
-    private $client_id;
-    private $description;
-    private $status;
-    private $price;
-    private $date;
-    private $end_date;
-    private $start_time;
-    private $finish_time;
-    private $street;
-    private $suburb;
-    private $city;
+    public $id;
+    public $client_id;
+    public $description;
+    public $status;
+    public $price;
+    public $date;
+    public $end_date;
+    public $start_time;
+    public $finish_time;
+    public $street;
+    public $suburb;
+    public $city;
 
     public function __construct($db){
         $this->conn = $db;
