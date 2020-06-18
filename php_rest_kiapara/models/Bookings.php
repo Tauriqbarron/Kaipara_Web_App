@@ -33,7 +33,7 @@ class Bookings{
             finish_time,
             street,
             suburb,
-            city,
+            city
         FROM
         ' . $this->table .'
         WHERE
