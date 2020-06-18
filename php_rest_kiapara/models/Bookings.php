@@ -38,7 +38,7 @@ class Bookings{
         ' . $this->table .'
         WHERE
             client_id = ?';
-        $stmt = $this->conn->perpare($query);
+        $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1,$this->client_id);
         $stmt->execute();
         return $stmt;
