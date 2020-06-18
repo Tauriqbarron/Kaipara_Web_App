@@ -298,6 +298,17 @@ Route::prefix('service_provider')->group(function (){
         'uses' => 'Auth\SpResetPasswordController@showResetForm',
         'as' => 'sp.password.reset'
     ]);
+
+    //Service provider change password
+    Route::get('/password/change', [
+        'uses' => 'ServiceProviderController@changePasswordForm',
+        'as' => 'service.password.change'
+    ]);
+
+    Route::post('/password/change', [
+        'uses' => 'ServiceProviderController@changePassword',
+        'as' => 'service.password.change'
+    ]);
 });
 
 

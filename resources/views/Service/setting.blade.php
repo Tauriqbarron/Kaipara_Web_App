@@ -154,7 +154,7 @@
                 </div>
                 <div class="mt-2 row w-100">
                     <div class="col-3">
-                        <a href="">Change your password</a>
+                        <a href="{{route('service.password.change')}}">Change your password</a>
                     </div>
                     <div class="col-9">
                         <input type="submit" id="btnEditStaff" class="btn btn-success disabled float-right" value="Save Changes" style="pointer-events: none">

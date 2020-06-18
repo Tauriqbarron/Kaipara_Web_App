@@ -46,7 +46,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="start_time">Start Time:</label>
-                <input type="text" name="start_time" class="form-control" placeholder="default: 8.30">
+                <input type="text" name="start_time" class="form-control" placeholder="default: 9.30">
             </div>
             <div class="form-group col-md-6">
                 <label for="finish_time">End Time:</label>

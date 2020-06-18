@@ -64,7 +64,7 @@ class ServiceProviderController extends Controller
                 $request->session()->put('guardString', 'service_provider');
                 //Session::put('user',$user);
                 //if success redirect to profile
-                return view('Service.index',['user'=>$user]) ;
+                return redirect()->route('service.home') ;
 
             }
 
@@ -215,5 +215,35 @@ class ServiceProviderController extends Controller
         $service_provider->postcode = $request->input('postcode');
         $service_provider->save();
         return redirect()->back()->with('message', 'Details updated');
+    }
+
+    //Change password
+    public function changePasswordForm() {
+        return view('Service.change_password');
+    }
+
+    public function changePassword(Request $request) {
+        if(!(Hash::check($request->input('current_password'), Auth::guard('service_provider')->user()->getAuthPassword()))) {
+            return back()->withErrors('The current password of your account does not match with what you provided.');
+        }
+
+        if(strcmp($request->input('current_password'), $request->input('new_password')) == 0) {
+            return back()->withErrors('The new password can not be the same as the current password.');
+        }
+
+        $validator = Validator::make($request->all(), [
+            'current_password' => 'required',
+            'new_password' => 'required|min:6|max:15|confirmed'
+        ]);
+        if($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $user = Auth::guard('service_provider')->user();
+        $user->password = Hash::make($request->input('new_password'));
+        $user->save();
+        return back()->with('message', 'Password change successfully');
     }
 }

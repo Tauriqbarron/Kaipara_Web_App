@@ -44,7 +44,9 @@
             @endforeach
         </tbody>
     </table>
-
+    </div>
+    <div class="text-right">
+        {!! $staffs->links() !!}
     </div>
 
 

@@ -13,7 +13,7 @@ use App\service_provider;
 class AdminSpController extends Controller
 {
     public function getIndex() {
-        $sps = service_provider::all();
+        $sps = service_provider::paginate(10);
         return view('Administration.serviceProvider.index', ['sps' => $sps]);
     }
 

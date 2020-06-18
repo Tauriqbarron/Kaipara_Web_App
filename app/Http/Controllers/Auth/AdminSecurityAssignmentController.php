@@ -18,7 +18,7 @@ class AdminSecurityAssignmentController extends Controller
 
     /*Get index function*/
     public function getIndex() {
-        $assignments = Booking::all();
+        $assignments = Booking::paginate(10);
         return view('Administration.security_Assignment.index', ['assignments' => $assignments]);
     }
 
