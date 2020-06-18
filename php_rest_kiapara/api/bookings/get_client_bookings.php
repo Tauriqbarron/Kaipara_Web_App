@@ -31,6 +31,7 @@ if($num > 0){
             'id'=>$id,
             'client_id'=>$client_id,
             'description'=>$description,
+            'price'=>$price,
             'status'=>$status,
             'date'=>$date,
             'start_time'=>$start_time,
