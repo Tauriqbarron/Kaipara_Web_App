@@ -16,11 +16,11 @@
                         <div class="card w-75 cards">
                             <img src="{{$job->application->imagePath}}" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <label><strong>Title: </strong></label>
-                                <h5 class="card-title">{{$job->application->title}}</h5>
+                                <label><strong>Title: </strong></label> {{$job->application->title}}<br/>
                                 <label><strong>Price: </strong></label>
-                                <h5 class="card-title">{{$job->application->price}}$</h5>
-                                <strong>Description: </strong>
+                                {{$job->application->price}}$ &nbsp;&nbsp;
+                                <strong>Job type: </strong>{{$job->application->job_type->description}}<br/>
+                                <label><strong>Description: </strong></label>
                                 <p class="card-text">{{$job->application->description}}</p>
                                 <strong>Client: </strong>{{$job->application->client->first_name}} {{$job->application->client->last_name}}&nbsp;&nbsp;
                                 <strong>Phone Number: </strong>{{$job->application->client->phone_number}}<br/>

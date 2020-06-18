@@ -35,6 +35,8 @@
                                         <label><strong>Price: </strong></label>
                                         <h5 class="card-title text-primary">${{$app->price}}</h5>
                                     @endif
+                                    <label><strong>Job type: </strong></label>
+                                    <p class="card-text">{{$app->job_type->description}}</p>
                                     <strong>Client:</strong>
                                     <p class="card-text">{{$app->client->first_name}} {{$app->client->last_name}}</p>
                                     <strong>Phone Number:</strong>

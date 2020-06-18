@@ -26,6 +26,10 @@
                 <label for="inputPassword4">Assignment Title</label>
                 <p class="form-control">{{$assignment->title}}</p>
             </div>
+            <div class="form-group col-md-6">
+                <label for="job_type">Job type:</label>
+                <p name="job_type" class="form-control">{{$assignment->job_type->description}}</p>
+            </div>
         </div>
         <div class="form-group">
             <label for="inputAddress">Description</label>
@@ -53,12 +57,8 @@
                 <p name="date" class="form-control">{{$assignment->date}}</p>
             </div>
             <div class="form-group col-md-6">
-                <label for="start_time">Start Time</label>
-                <p name="start_time" class="form-control">{{$assignment->start_time}}</p>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="finish_time">End Time</label>
-                <p name="finish_time" class="form-control">{{$assignment->finish_time}}</p>
+                <label for="date">End date:</label>
+                <p name="end_date" class="form-control">{{$assignment->end_date}}</p>
             </div>
         </div>
 
@@ -96,10 +96,14 @@
         <div class="form-group">
             <label for="inputAddress2">Status</label>
             @if($assignment->status == 1)
-            <p class="form-control">available</p>
-                @else
-            <p class="form-control">accepted</p>
-                @endif
+                <p class="form-control">available</p>
+            @elseif($assignment->status == 2)
+                <p class="form-control">accepted</p>
+            @elseif($assignment->status == 3)
+                <p class="form-control">started</p>
+            @elseif($assignment->status == 4)
+                <p class="form-control">completed</p>
+            @endif
         </div>
         <div class="float-right text-danger">Are you sure you want to delete this assignment record?</div>
         <br/>

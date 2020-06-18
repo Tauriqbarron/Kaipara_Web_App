@@ -249,9 +249,10 @@ Route::prefix('security')->group(function (){
 
 // SERVICE
 /*Service Provider Profile*/
-Route::get('/service_provider', function () {
-    return view('Service.index');
-}) ->name('service.home');
+Route::get('/service_provider', [
+    'uses' =>'ServiceProviderController@getIndex',
+    'as' => 'service.home'
+]);
 
 Route::post('service_provider/canceljob/{id}',[
     'uses' =>'ServiceProviderController@canceljob',
@@ -296,6 +297,16 @@ Route::get('/service_provider/jobs/complete_job/{id}', [
 Route::get('/service_provider/jobs/completed_jobs', [
     'uses' => 'ServiceProviderController@getCompletedJobs',
     'as' => 'service.completed_jobs'
+]);
+
+Route::get('/service_provider/setting', [
+    'uses' => 'ServiceProviderController@getEdit',
+    'as' => 'service.postEdit'
+]);
+
+Route::post('/service_provider/setting', [
+    'uses' => 'ServiceProviderController@postEdit',
+    'as' => 'service.postEdit'
 ]);
 
 /*Service Provider Booking Application Page*/
@@ -352,6 +363,17 @@ Route::prefix('service_provider')->group(function (){
     Route::get('/password/reset/{token}', [
         'uses' => 'Auth\SpResetPasswordController@showResetForm',
         'as' => 'sp.password.reset'
+    ]);
+
+    //Service provider change password
+    Route::get('/password/change', [
+        'uses' => 'ServiceProviderController@changePasswordForm',
+        'as' => 'service.password.change'
+    ]);
+
+    Route::post('/password/change', [
+        'uses' => 'ServiceProviderController@changePassword',
+        'as' => 'service.password.change'
     ]);
 });
 
@@ -486,6 +508,16 @@ Route::prefix('admin')->group(function (){
     Route::post('ser-assignment/create', [
         'uses' => 'Auth\AdminServiceAssignmentController@postCreate',
         'as' => 'admin.service.create'
+    ]);
+
+    Route::get('ser-assignment/edit/{id}', [
+        'uses' => 'Auth\AdminServiceAssignmentController@getEdit',
+        'as' => 'admin.service.edit'
+    ]);
+
+    Route::post('ser-assignment/edit/{id}', [
+        'uses' => 'Auth\AdminServiceAssignmentController@postEdit',
+        'as' => 'admin.service.edit'
     ]);
 
     Route::get('ser-assignment/delete/{id}', [

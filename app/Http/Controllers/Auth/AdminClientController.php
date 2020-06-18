@@ -25,7 +25,7 @@ class AdminClientController extends Controller
 
     //client management index page.
     public function getIndex() {
-        $clients = Clients::all();
+        $clients = Clients::paginate(10);
         return view('Administration.Client.index', ['clients' => $clients]);
     }
 

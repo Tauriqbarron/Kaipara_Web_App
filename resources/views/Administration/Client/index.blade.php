@@ -38,8 +38,10 @@
                 @endforeach
                 </tbody>
             </table>
-
         </div>
+    <div class="text-right">
+        {!! $clients->links() !!}
+    </div>
 
 
 @endsection

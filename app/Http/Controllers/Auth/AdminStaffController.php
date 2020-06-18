@@ -22,7 +22,7 @@ class AdminStaffController extends Controller
 {
     //Get the staff list.
     public function getIndex() {
-        $staffs = Staff::all();
+        $staffs = Staff::paginate(10);
         return view('Administration.staff.index', ['staffs' => $staffs]);
     }
 

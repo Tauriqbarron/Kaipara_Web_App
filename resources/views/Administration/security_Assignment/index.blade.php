@@ -16,6 +16,7 @@
                 <th>Booking Type</th>
                 <th>Description</th>
                 <th>Client name</th>
+                <th>Price</th>
                 <th>Status</th>
                 <th></th>
                 <th></th>
@@ -33,6 +34,7 @@
                         {{$assignment->client->first_name}}
                         {{$assignment->client->last_name}}
                     </td>
+                    <td>{{$assignment->price}}</td>
                     <td>{{$assignment->status}}</td>
                     <td><a class="btn btn-success" href="{{route('security_assignment.view', ['id' => $assignment->id])}}">view</a></td>
                     <td><a class="btn btn-primary" href="{{route('security_assignment.edit', ['id' => $assignment->id])}}">Edit</a></td>
@@ -46,5 +48,8 @@
             @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="float-right mr-1">
+        {!! $assignments->links() !!}
     </div>
 @endsection

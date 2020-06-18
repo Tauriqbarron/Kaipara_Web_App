@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Clients;
 use App\Http\Controllers\Controller;
+use App\Job_Type;
 use App\Service_Provider_Job;
 use App\Staff;
 use Illuminate\Http\Request;
@@ -33,21 +34,23 @@ class AdminServiceAssignmentController extends Controller
     }
 
     public function getCreate() {
-        return view('Administration.service_Assignment.ser_create');
+        $types = Job_Type::all();
+        return view('Administration.service_Assignment.ser_create', ['types' => $types]);
     }
 
     public function postCreate(Request $request) {
         $validator = Validator::make($request->all(), [
             'client_id' => 'required|numeric',
             'title' => 'required',
+            'job_type' => 'required',
+            'price' => 'numeric',
             'description' => 'required',
             'date' => 'required|after:today',
-            'start_time' => 'required|date_format:H:i',
-            'finish_time' => 'required|date_format:H:i',
             'street' => 'required',
             'suburb' => 'required',
             'city' => 'required',
             'postcode' => 'required',
+            'job_type' => 'required'
         ]);
 
         if($validator->fails()) {
@@ -67,19 +70,62 @@ class AdminServiceAssignmentController extends Controller
             'description' => $request->input('description'),
             'price' => $request->input('price'),
             'date' => $request->input('date'),
-            'start_time' => date("H:i:s", strtotime(request('start_time'))),
-            'finish_time' => date("H:i:s", strtotime(request('finish_time'))),
             'street' => $request->input('street'),
             'suburb' => $request->input('suburb'),
             'city' => $request->input('city'),
-            'postcode' => $request->input('postcode'),
+            'postCode' => $request->input('postcode'),
             'status' => 1,
+            'job__type_id' => $request->input('job_type')
         ]);
         $assignment->save();
-        return redirect()->route('admin.service.index');
+        return redirect()->route('admin.service.index')->with('message', 'Update successfully.');
 
     }
 
+    //Update property service assignment//
+    public function getEdit($id) {
+        $assignment = applications::find($id);
+        $types = Job_Type::all();
+        return view('Administration.service_Assignment.ser_edit', ['assignment' => $assignment, 'types' => $types]);
+    }
+
+    public function postEdit(Request $request, $id) {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'job_type' => 'required',
+            'price' => 'numeric',
+            'description' => 'required',
+            'date' => 'required|after:today',
+            'street' => 'required',
+            'suburb' => 'required',
+            'city' => 'required',
+            'postcode' => 'required',
+        ]);
+        if($validator->fails()) {
+            return redirect()->back()
+                ->withErrors('Please enter valid data to all blank')
+                ->withInput($request->all());
+        }
+
+        $assignment = applications::find($id);
+        $assignment->title = $request->input('title');
+        $assignment->job__type_id = $request->input('job_type');
+        $assignment->price = $request->input('price');
+        $assignment->description = $request->input('description');
+        $assignment->date = $request->input('date');
+        $assignment->end_date = $request->input('end_date');
+        $assignment->street = $request->input('street');
+        $assignment->suburb = $request->input('suburb');
+        $assignment->city = $request->input('city');
+        $assignment->postCode = $request->input('postcode');
+        $assignment->save();
+
+        return redirect()->route('admin.service.index')->with('message', 'New assignment created.');
+
+    }
+
+
+    //Delete property service assignment//
     public function getDelete($id) {
         $assignment = applications::find($id);
         return view('Administration.service_Assignment.ser_delete', ['assignment' => $assignment]);
