@@ -132,15 +132,99 @@ class ClientController extends Controller
         }
     }
     public function getSecurity(){
-        $user = Session::has('user') ? Session::get('user'): null;
+        $user = auth()->guard('client')->user();
         $booking_types = Booking_Types::all();
         return view('Client.security',['user'=>$user, 'booking_types'=>$booking_types]);
     }
 
     public function getProperty(){
-        $user = Session::has('user') ? Session::get('user'): null;
+        $user = auth()->guard('client')->user();
         $job_types = Job_Type::all();
         return view('Client.property',['user'=>$user, 'job_types'=>$job_types]);
+    }
+
+    public function getClientBookings(){
+        $user = auth()->guard('client')->user();
+        $bookings = Booking::query()->where('client_id', '=', $user->id)->get();
+        return view('Client.bookings',['user'=>$user, 'bookings'=>$bookings]);
+    }
+
+    public function getClientJobs(){
+        $user = auth()->guard('client')->user();
+        $applications = applications::query()->where('client_id', '=', $user->id)->get();
+        return view('Client.jobs',['user'=>$user, 'applications'=>$applications]);
+    }
+
+    public function getAvailableJobs(){
+        $user = auth()->guard('client')->user();
+        $applications = applications::query()->where('client_id', '=', $user->id)
+            ->where('status', '=', 1)->get();
+        $filtered = true;
+        return view('Client.jobs',['user'=>$user, 'applications'=>$applications, 'filtered'=>$filtered]);
+    }
+
+    public function getAssignedJobs(){
+        $user = auth()->guard('client')->user();
+        $applications = applications::query()->where('client_id', '=', $user->id)
+            ->where('status', '!=', 1)->get();
+        $filtered = true;
+        return view('Client.jobs',['user'=>$user, 'applications'=>$applications, 'filtered'=>$filtered]);
+    }
+
+    public function getOlderJobs(){
+        $user = auth()->guard('client')->user();
+        $applications = applications::query()->where('client_id', '=', $user->id)
+            ->where('date', '<', today('NZ')->format('Y-m-d'))->get();
+        $filtered = true;
+        return view('Client.jobs',['user'=>$user, 'applications'=>$applications, 'filtered'=>$filtered]);
+    }
+
+    public function getNewerJobs(){
+        $user = auth()->guard('client')->user();
+        $applications = applications::query()->where('client_id', '=', $user->id)
+            ->where('date', '>=', today('NZ')->format('Y-m-d'))->get();
+        $filtered = true;
+        return view('Client.jobs',['user'=>$user, 'applications'=>$applications, 'filtered'=>$filtered]);
+    }
+
+    public function getAvailableBookings(){
+        $user = auth()->guard('client')->user();
+        $bookings = Booking::query()->where('client_id', '=', $user->id)
+            ->where('status', '=', 'available')->get();
+        $filtered = true;
+        return view('Client.bookings',['user'=>$user, 'bookings'=>$bookings, 'filtered'=>$filtered]);
+    }
+
+    public function getAssignedBookings(){
+        $user = auth()->guard('client')->user();
+        $bookings = Booking::query()->where('client_id', '=', $user->id)
+            ->where('status', '=', 'assigned')->get();
+        $filtered = true;
+        return view('Client.bookings',['user'=>$user, 'bookings'=>$bookings, 'filtered'=>$filtered]);
+    }
+
+    public function getCompletedBookings(){
+        $user = auth()->guard('client')->user();
+        $bookings = Booking::query()->where('client_id', '=', $user->id)
+            ->where('status', '=', 'completed')->get();
+        $filtered = true;
+        return view('Client.bookings',['user'=>$user, 'bookings'=>$bookings, 'filtered'=>$filtered]);
+    }
+
+    public function getOlderBookings(){
+        $user = auth()->guard('client')->user();
+        $bookings = Booking::query()->where('client_id', '=', $user->id)
+            ->where('date', '<', today('NZ')->format('Y-m-d'))->get();
+        $filtered = true;
+        return view('Client.bookings',['user'=>$user, 'bookings'=>$bookings, 'filtered'=>$filtered]);
+    }
+
+    public function getNewerBookings(){
+        $user = auth()->guard('client')->user();
+        $bookings = Booking::query()->where('client_id', '=', $user->id)
+            ->where('date', '>=', today('NZ')->format('Y-m-d'))->get();
+        $filtered = true;
+        return view('Client.bookings',['user'=>$user, 'bookings'=>$bookings, 'filtered'=>$filtered]);
     }
 
 

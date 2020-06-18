@@ -29,13 +29,13 @@
                                     <a class="dropdown-item" href="{{route('admin.index')}}">Administration Center</a>
                                     <a class="dropdown-item" href="{{route('admin.logout')}}">Logout</a>
                                 @else
-                                    <a class="dropdown-item" href="{{route('client.index')}}">My Profile</a>
+                                    <a class="dropdown-item" href="{{route('client.home')}}">My Profile</a>
                                     <a class="dropdown-item" href="{{url('client/logout')}}">Logout</a>
                                 @endif
                             </div>
                         </li>
                         <li class="nav-item" id="headerProfileImage">
-                            <img class="float-right rounded-circle shadow dropdown-toggle text-nowrap" style="display: block; width: 54px; height: 54px" src="@if($guard === 'admin' || $guard == 'clients' || $guard === 'service_provider'){{url('images/Profile_Placeholder.png')}}@else{{auth()->guard($guard)->user()->imgPath}}@endif" alt="profileImage">
+                            <img class="float-right rounded-circle shadow dropdown-toggle text-nowrap" style="display: block; width: 54px; height: 54px" src="@if($guard === 'admin' || $guard == 'client' || $guard === 'service_provider'){{url('images/Profile_Placeholder.png')}}@else{{auth()->guard($guard)->user()->imgPath}}@endif" alt="profileImage">
                         </li>
                     </ul>
 

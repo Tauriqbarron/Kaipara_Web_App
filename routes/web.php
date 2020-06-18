@@ -34,9 +34,11 @@ Route::get('/service_provider/login', function () {
 
 
 /* Client Routes  */
-Route::get('/client/index', function () {
-    return view('Client.index');
-}) ->name('client.home');
+
+Route::get('/client/index', [
+    'uses' => 'ClientController@getDashboard',
+    'as' => 'client.home'
+]);
 
 Route::get('/client/security', [
     'uses' => 'ClientController@getSecurity',
@@ -51,6 +53,70 @@ Route::get('/client/property', [
 Route::get('/client/dashboard', [
     'uses' => 'ClientController@getDashboard',
     'as' => 'client.dashboard'
+]);
+
+Route::get('/client/bookings', [
+    'uses' => 'ClientController@getClientBookings',
+    'as' => 'client.bookings'
+]);
+
+
+Route::get('/client/jobs', [
+    'uses' => 'ClientController@getClientJobs',
+    'as' => 'client.jobs'
+]);
+
+
+Route::get('/client/jobs_filter=available', [
+    'uses' => 'ClientController@getAvailableJobs',
+    'as' => 'client.getAvailableJobs'
+]);
+
+
+Route::get('/client/jobs_filter=assigned', [
+    'uses' => 'ClientController@getAssignedJobs',
+    'as' => 'client.getAssignedJobs'
+]);
+
+
+Route::get('/client/jobs_filter=older', [
+    'uses' => 'ClientController@getOlderJobs',
+    'as' => 'client.getOlderJobs'
+]);
+
+
+Route::get('/client/jobs_filter=newer', [
+    'uses' => 'ClientController@getNewerJobs',
+    'as' => 'client.getNewerJobs'
+]);
+
+
+Route::get('/client/bookings_filter=available', [
+    'uses' => 'ClientController@getAvailableBookings',
+    'as' => 'client.getAvailableBookings'
+]);
+
+
+Route::get('/client/bookings_filter=assigned', [
+    'uses' => 'ClientController@getAssignedBookings',
+    'as' => 'client.getAssignedBookings'
+]);
+
+Route::get('/client/bookings_filter=completed', [
+    'uses' => 'ClientController@getCompletedBookings',
+    'as' => 'client.getCompletedBookings'
+]);
+
+
+Route::get('/client/bookings_filter=older', [
+    'uses' => 'ClientController@getOlderBookings',
+    'as' => 'client.getOlderBookings'
+]);
+
+
+Route::get('/client/bookings_filter=newer', [
+    'uses' => 'ClientController@getNewerBookings',
+    'as' => 'client.getNewerBookings'
 ]);
 
 Route::post('/client/createBooking', [

@@ -44,7 +44,6 @@
 
     </head>
     <body id="bod">
-{{--TODO create one modal and change it based on which button is pressed rather than creating one for each booking--}}
     @foreach($completedBookings as $booking)
         @if($staff_assignment = $booking->staff_assignments->where('staff_id', '=', $staff->id)->first())
             <div class="modal" id="f{{$booking->id}}" tabindex="-1" role="dialog" aria-labelledby="modalTestLabel" aria-hidden="true">

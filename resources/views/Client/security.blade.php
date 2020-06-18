@@ -2,9 +2,6 @@
 @section('nav')
     <a href="{{route('client.dashboard')}}" id="profileBtn"><img  src="{{url('images/Dashboard_active.png')}}" class="navbar-brand d-flex mr-auto text-light">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
-        <span class="navbar-toggler-icon"></span>
-    </button>
     <h4 class="navbar-brand w-25"></h4>
     <div class="navbar-collapse collapse w-100 " id="collapsingNavbar3">
         <ul class="navbar-nav w-100 h-100 justify-content-center text-nowrap align-items-end">
@@ -15,10 +12,10 @@
                 <a class="nav-link" href="{{route('client.property')}}">Property Management</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Service Jobs</a>
+                <a class="nav-link" href="{{route('client.jobs')}}">Service Jobs</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Security Bookings</a>
+                <a class="nav-link" href="{{route('client.bookings')}}">Security Bookings</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Quotes</a>

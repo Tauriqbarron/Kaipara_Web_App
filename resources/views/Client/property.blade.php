@@ -18,7 +18,7 @@
                 <a class="nav-link" href="#">Service Jobs</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Security Bookings</a>
+                <a class="nav-link" href="{{route('client.bookings')}}">Security Bookings</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Quotes</a>

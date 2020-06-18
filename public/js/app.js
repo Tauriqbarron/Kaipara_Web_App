@@ -105,23 +105,65 @@ function leadingZero(num) {
     else return '' + num;
 }
 
+function floatToHhmm(val) {
+    val = val.toFixed(2);
+    return "00:00".substr(0, (5-val.length)) + val.replace(".", ":");
+}
+
 
 function createTimetable() {
 
     timetable = [];
-    //Filter out the records to display
+    /*Filter out the records to display
     filteredArray = timetableArray.filter(function (value) {
         var date = new Date(value['date']);
         return date >= week[0] && date <= week[1];
 
     });
+    */
+    filteredArray = [];
+    for (var assignment of timetableArray){
+        assignmentStart = new Date(assignment['date']);
+        assignmentEnd = new Date(assignment['end_date']);
+        weekStart = week[0];
+        weekEnd = week[1];
+        starthhmm = floatToHhmm(assignment['start_time']);
+        finishhhmm = floatToHhmm(assignment['finish_time']);
+
+        //Calculate number of days between the start and end dates
+        days = 1+((assignmentEnd-assignmentStart)/1000/60/60/24);
+        //Iterate through the date range and create array records to populate the table
+        for (i = 0; i < days; i++){
+            //TODO better variable name
+            bleh = new Date(assignmentStart);
+            bleh.setDate(bleh.getDate()+i);
+
+            if (bleh >= weekStart && bleh <= weekEnd && bleh <= assignmentEnd){
+                filteredArray.push([
+                    (Math.floor(assignment['finish_time'] - assignment['start_time'])+1),
+                    starthhmm + " - " + finishhhmm,
+                    'Type: ' + assignment['booking_type_id'],
+                    bleh.getFullYear() + "-" + (bleh.getMonth()+1) + "-" + bleh.getDate(),
+                    "#dd504c",
+                    assignment['start_time'],
+                    assignment['finish_time'],
+
+                ]);
+            }
+
+        }
+
+
+
+    }
+
 
     start = Math.floor(Math.min.apply(Math, filteredArray.map(function (record) {
-        return record['start_time'];
+        return record[5];
     })))-1;
 
     finish = Math.ceil(Math.max.apply(Math,filteredArray.map(function (record) {
-        return record['finish_time'];
+        return record[6];
     })))+1;
 
     hours = (finish - start);
@@ -207,22 +249,11 @@ function createTimetable() {
     $.each(filteredArray, function (key, value) {
 
 
-        hours = Math.floor(value['finish_time'] - value['start_time'])+1;
-        j = new Date(value['date']).getDay()+1;
-        i = Math.floor(value['start_time']-start);
-        leading = '0';
-        if( (value['start_time']) >= 10){
-            leading = '';
-        }
-        starthhmm = (leading + value['start_time'].toFixed(2)).replace('.', ':');
-        leading = '0';
-        if( (value['finish_time']) >= 10){
-            leading = '';
-        }
-        finishhhmm = (leading + value['finish_time'].toFixed(2)).replace('.', ':');
-        date = new Date(value['date']);
+        hours = value[0];
+        j = new Date(value[3]).getDay()+1;
+        i = Math.floor(value[5]-start);
 
-        timetable[i][j] = [hours, starthhmm + " - " + finishhhmm, value['description'], date, "#dd504c"];
+        timetable[i][j] = [value[0], value[1], value[2], value[3], value[4]];
 
 
         for(k = 1; k < hours; k++){

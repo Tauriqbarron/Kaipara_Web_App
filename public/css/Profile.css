@@ -92,6 +92,49 @@ body, html{
     opacity: 1;
 }
 
+.toggle-btn input{
+    display: none;
+}
+
+.toggle-btn label{
+    display: block;
+    cursor: pointer;
+    width: 21px;
+    height: 21px;
+
+}/*
+.toggle-btn label:before{
+    content: '\f078';
+    font-family: FontAwesome;
+    font-weight: 400;
+    position: relative;
+    display: block;
+    font-size: 10pt;
+    color: white;
+}*/
+.toggle-btn label:after{
+    content: '\f078';
+    font-family: FontAwesome, sans-serif;
+    position: absolute;
+    display: block;
+    font-size: 10pt;
+    color: white;
+    top: 2px;
+    left: 19px;
+    transform: rotate(0deg);
+    transition: 0.5s;
+    font-weight: 400;
+}
+
+
+.toggle-btn input:checked ~ label:after{
+    transform: rotate(180deg);
+}
+
+.toggle-btn input.collapsed ~ label:after{
+    transform: rotate(0deg);
+}
+
 .al-hidden{
     display: none;
 }
@@ -137,6 +180,7 @@ a.disabled{
 .caption > h1{
     font-size: 90pt;
     opacity: .9;
+    font-family: Asap, sans-serif;
 }
 
 .container-fluid{

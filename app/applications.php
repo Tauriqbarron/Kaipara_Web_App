@@ -20,7 +20,7 @@ class applications extends Model
     }
 
     public function quotes() {
-        return $this->hasMany('App\quote');
+        return $this->hasMany('App\quote', 'job_id', 'id');
     }
 
 

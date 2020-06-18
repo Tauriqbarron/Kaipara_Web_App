@@ -37,7 +37,8 @@ class StaffController extends Controller
 
 
             $staff_bookings = $bookings->whereIn('id', $staff_assignments)
-                ->where('date','=', Carbon::parse(Session::get('date1'))->format('Y-m-d'))
+                ->where('date','<=', Carbon::parse(Session::get('date1'))->format('Y-m-d'))
+                ->where('end_date','>=', Carbon::parse(Session::get('date1'))->format('Y-m-d'))
                 ->sortBy('date',1)
                 ->sortBy('start_time', 1);
 
@@ -62,6 +63,14 @@ class StaffController extends Controller
     }
 
     public function postFeedback(Request $request){
+        $validator = Validator::make($request->all(), [
+           'rating' => 'required|numeric|max:5|min:1',
+           'message' => 'required|max:300',
+           'staff_assignment_id' => 'required|numeric'
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator);
+        }
 
         $feedback = new Feedback([
 
@@ -110,17 +119,31 @@ class StaffController extends Controller
         foreach($staff_assignments as $staff_assignment){
 
             $theBooking = $staff_assignment->booking;
-            $theBookingDate = $theBooking->date;
-            $bookingDate = $booking->date;
+            $theBookingDate = Carbon::parse($theBooking->date);
+            $theBookingEndDate = Carbon::parse($theBooking->end_date);
+            $bookingDate = Carbon::parse($booking->date);
+            $bookingEndDate = Carbon::parse($booking->end_date);
             $theBookingStartTime = $theBooking->start_time;
             $bookingStartTime = $booking->start_time;
             $theBookingFinishTime = $theBooking->finish_time;
             $bookingFinishTime = $theBooking->finish_time;
-            $sameDate = $theBookingDate == $bookingDate;
+            $sameDate = ($theBookingDate->lessThanOrEqualTo($bookingEndDate) && $bookingDate->lessThanOrEqualTo($theBookingEndDate));
             $sameStartTime = ($theBookingStartTime >= $bookingStartTime) && ($theBookingStartTime <= $bookingFinishTime);
             $sameFinishTime = ($theBookingFinishTime <= $bookingFinishTime) && ($theBookingFinishTime >= $bookingStartTime);
 
             if($sameDate && ($sameStartTime || $sameFinishTime)){
+                return redirect()->back()->with('error', 'Could not accept booking due to Roster conflict');
+            }
+        }
+        foreach($staff->leave_requests as $request){
+
+            $requestDate = Carbon::parse($request->start_date);
+            $requestEndDate = Carbon::parse($request->end_date);
+            $bookingDate = Carbon::parse($booking->date);
+            $bookingEndDate = Carbon::parse($booking->end_date);
+            $sameDate = ($requestDate->lessThanOrEqualTo($bookingEndDate) && $bookingDate->lessThanOrEqualTo($requestEndDate));
+
+            if($sameDate){
                 return redirect()->back()->with('error', 'Could not accept booking due to Roster conflict');
             }
         }
@@ -209,7 +232,7 @@ class StaffController extends Controller
                 $row->booking->booking_type->description,
                 false,
                 new \DateTime($row->booking->date . ' ' . $start_time),
-                new \DateTime($row->booking->date . ' ' . $finish_time),
+                new \DateTime($row->booking->end_date . ' ' . $finish_time),
                 $row->staff_id,
                 [
                     'url' => route('security.dateChange',['i'=>count(\Carbon\Carbon::parse('1970-01-01')->daysUntil($row->booking->date)->toArray()) - count(\Carbon\Carbon::Parse('1970-01-01')->daysUntil(\Illuminate\Support\Facades\Session::get('date1'))->toArray())]),
