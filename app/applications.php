@@ -16,11 +16,8 @@ class applications extends Model
     }
 
     public function service_provider_job() {
-<<<<<<< HEAD
         return $this->hasOne('App\Service_Provider_Job', 'job_id', 'id');
-=======
-        return $this->hasOne('\App\Service_Provider_job', 'job_id', 'id');
->>>>>>> dbdb78d13d714ad30677a3b1a9fa64916a3ca026
+
     }
 
     public function quotes() {
