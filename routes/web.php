@@ -66,6 +66,11 @@ Route::get('/client/jobs', [
     'as' => 'client.jobs'
 ]);
 
+Route::get('/client/settings', [
+    'uses' => 'ClientController@getClientSettings',
+    'as' => 'client.settings'
+]);
+
 
 Route::get('/client/jobs_filter=available', [
     'uses' => 'ClientController@getAvailableJobs',
@@ -120,6 +125,18 @@ Route::get('/client/quotes_filter={id}', [
 ]);
 
 
+Route::get('/client/quotes_accepted', [
+    'uses' => 'ClientController@getAcceptedQuotes',
+    'as' => 'client.acceptedQuotes'
+]);
+
+
+Route::get('/client/quotes_declined', [
+    'uses' => 'ClientController@getDeclinedQuotes',
+    'as' => 'client.declinedQuotes'
+]);
+
+
 Route::get('/client/quotes', [
     'uses' => 'ClientController@getQuotes',
     'as' => 'client.quotes'
@@ -144,6 +161,11 @@ Route::get('/client/bookings_filter=newer', [
 Route::post('/client/createBooking', [
     'uses' => 'ClientController@postCreateBooking',
     'as' => 'client.postCreateBooking'
+]);
+
+Route::post('/client/settings/edit', [
+    'uses' => 'ClientController@postEdit',
+    'as' => 'client.postEdit'
 ]);
 
 Route::post('/client/createApplication', [

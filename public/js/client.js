@@ -407,6 +407,27 @@ function calcPrice(rate, guards,date1,date2,startTime,endTime){
 window.addEventListener('load', function () {
 
     try{
+        var editBtns = document.getElementsByClassName('edit-toggle');
+
+        for(var i = 0; i < editBtns.length; i++){
+            editBtns[i].addEventListener('click', function (event) {
+                var btn = event.target;
+                var id = btn.getAttribute('data-target');
+                var input = document.getElementById(id);
+                input.classList.remove('form-control-plaintext');
+                input.removeAttribute('readonly');
+                document.getElementById('btnEditClient').classList.remove('disabled');
+                document.getElementById('btnEditClient').style.pointerEvents = 'all';
+                btn.classList.remove('text-secondary');
+                btn.style.pointerEvents = 'none';
+            });
+        }
+    }catch (e) {
+
+    }
+
+
+    try{
         observer.observe(document.getElementById('collapseTwo'), config);
     }catch (typeError) {
 

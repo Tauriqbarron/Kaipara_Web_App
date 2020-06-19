@@ -13,7 +13,7 @@
                 <a class="nav-link" href="{{route('client.property')}}">Property Management</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('client.jobs')}}">Service Jobs</a>
+                <a class="nav-link active" href="{{route('client.jobs')}}">Service Jobs</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('client.bookings')}}">Security Bookings</a>
@@ -24,7 +24,7 @@
         </ul>
         <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end">
             <li class="nav-item">
-                <a class="nav-link" href="#">Settings</a>
+                <a class="nav-link" href="{{route('client.settings')}}">Settings</a>
             </li>
         </ul>
     </div>
@@ -105,7 +105,7 @@
                                                     <strong>Address</strong>
                                                 </div>
                                                 <div class="col-4">
-                                                    {{$application->street}}<br>{{$application->suburb}}<br>{{$application->city}}, {{$application->postcode}}
+                                                    {{$application->street}}<br>{{$application->suburb}}<br>{{$application->city}}, {{$application->postCode}}
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="row">

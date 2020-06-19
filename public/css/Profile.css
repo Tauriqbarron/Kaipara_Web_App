@@ -88,6 +88,7 @@ body, html{
 .quote-provider-image{
     width: 40px;
     height: 40px;
+    object-fit: cover;
 }
 .rating label:hover:after,
 .rating label:hover ~ label:after,

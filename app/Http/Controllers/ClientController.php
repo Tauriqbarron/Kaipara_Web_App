@@ -11,6 +11,7 @@ use App\quote;
 use App\service_provider;
 use App\Service_Provider_Job;
 use Carbon\Carbon;
+use http\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -26,10 +27,37 @@ class ClientController extends Controller
 
     public function getDashboard(){
         $client = Clients::query()->find(auth()->guard('client')->user()->id);
-        $bookings = Booking::query()->where('client_id', '=', $client->id)->get();
-        $applications = applications::query()->where('client_id', '=', $client->id)->get();
+        $bookings = Booking::query()->where('client_id', '=', $client->id)
+            ->where('date', '>=', today()->format('Y-m-d'))->get();
+        $applications = applications::query()->where('client_id', '=', $client->id)
+            ->where('date', '=', null)
+            ->orWhere('date', '>=',  today()->format('Y-m-d'))->get();
         return view('Client.dashboard', ['client' => $client, 'bookings' => $bookings, 'applications' => $applications]);
     }
+    //Update a client details.
+    public function postEdit(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'pNumber'=>'required|max:11',
+            'street'=>'required',
+            'suburb'=>'required',
+            'city'=>'required',
+            'postcode'=>'required'
+        ]);
+        if($validator->fails()) {
+            return redirect()->route('security.index')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $client = Clients::query()->find(Auth::guard('client')->user()->id);
+        $client->phone_number = $request->input('pNumber');
+        $client->street = $request->input('street');
+        $client->suburb = $request->input('suburb');
+        $client->city = $request->input('city');
+        $client->postcode = $request->input('postcode');
+        $client->save();
+        return redirect()->route('client.dashboard')->with('message', 'Details updated');
+    }
+
 
     public function postCreateBooking(Request $request){
 
@@ -232,22 +260,46 @@ class ClientController extends Controller
     public function getQuotes(){
         $user = auth()->guard('client')->user();
         $quotes = quote::query()->whereIn('job_id',
-            applications::query()->select('id')->where('client_id', '=', $user->id)->get())->get();
+            applications::query()->select('id')->where('client_id', '=', $user->id)->get())
+            ->where('status', '=',1)->get();
         $applications = applications::query()->where('client_id', '=', $user->id)->get();
         return view('Client.quotes',['user'=>$user, 'quotes'=>$quotes, 'applications'=>$applications]);
     }
 
     public function getQuoteFilter($id){
         $user = auth()->guard('client')->user();
-        $quotes = quote::query()->where('job_id', '=' , $id)->get();
+        $quotes = quote::query()->where('job_id', '=' , $id)
+            ->where('status', '=', 1)->get();
         $applications = applications::query()->where('client_id', '=', $user->id)->get();
         $filtered = true;
         return view('Client.quotes',['user'=>$user, 'quotes'=>$quotes, 'filtered'=>$filtered, 'applications'=>$applications]);
     }
 
+    public function getAcceptedQuotes(){
+        $user = auth()->guard('client')->user();
+        $quotes = quote::query()->whereIn('job_id',
+            applications::query()->select('id')->where('client_id', '=', $user->id)->get())
+            ->where('status', '=',2)->get();
+        $applications = applications::query()->where('client_id', '=', $user->id)->get();
+        $filtered = true;
+        $accepted = true;
+        return view('Client.quotes',['user'=>$user, 'quotes'=>$quotes, 'applications'=>$applications, 'filtered' => $filtered, 'accepted' => $accepted]);
+    }
+
+    public function getDeclinedQuotes(){
+        $user = auth()->guard('client')->user();
+        $quotes = quote::query()->whereIn('job_id',
+            applications::query()->select('id')->where('client_id', '=', $user->id)->get())
+            ->where('status', '=',3)->get();
+        $applications = applications::query()->where('client_id', '=', $user->id)->get();
+        $filtered = true;
+        $accepted = false;
+        return view('Client.quotes',['user'=>$user, 'quotes'=>$quotes, 'filtered'=>$filtered, 'applications'=>$applications, 'accepted' => $accepted]);
+    }
+
     public function declineQuote($id){
         $quote = quote::query()->find($id);
-        $quote->delete();
+        $quote->status = 3;
         return redirect()->back();
     }
     public function postAcceptQuote(Request $request){
@@ -268,9 +320,14 @@ class ClientController extends Controller
                 'job_id'=>$quote->job_id
             ]);
             $service_provider_job->save();
-            $quote->delete();
+            $quote->status = 2;
             return redirect()->route('client.jobs')->with('message', 'Quote Accepted');
         }
+    }
+
+    public function getClientSettings(){
+        $client = Clients::query()->find(Auth::guard('client')->user()->id);
+        return view('Client.settings', ['client' => $client]);
     }
 
 

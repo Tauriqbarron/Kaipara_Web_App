@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class applications extends Model
 {
-    protected $fillable = ['client_id','title','imagePath','description','price','street', 'suburb', 'city', 'postcode', 'date', 'end_date','job__type_id', 'status'];
+    protected $fillable = ['client_id','title','imagePath','description','price','street', 'suburb', 'city', 'postCode', 'date', 'end_date','job__type_id', 'status'];
 
     public $timestamps = false;
 
@@ -16,7 +16,7 @@ class applications extends Model
     }
 
     public function service_provider_job() {
-        return $this->hasOne('app\Service_Provider_job', 'job_id', 'id');
+        return $this->hasOne('App\Service_Provider_Job', 'job_id', 'id');
     }
 
     public function quotes() {

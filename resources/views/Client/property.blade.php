@@ -26,7 +26,7 @@
         </ul>
         <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end">
             <li class="nav-item">
-                <a class="nav-link" href="#">Settings</a>
+                <a class="nav-link" href="{{route('client.settings')}}">Settings</a>
             </li>
         </ul>
     </div>
