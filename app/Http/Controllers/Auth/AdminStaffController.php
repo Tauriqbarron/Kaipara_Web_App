@@ -45,25 +45,25 @@ class AdminStaffController extends Controller
     //Save the new staff detail to database.
     public function postCreate(Request $request) {
         $validator = Validator::make($request->all(), [
-            'fName'=>'required|max:50',
-            'lName'=>'required|max:50',
-            'email'=>'required|email|unique:staff',
-            'pNumber'=>'required|max:20',
-            'password' => 'required|confirmed|min:6',
-            'street'=>'required',
-            'suburb'=>'required',
-            'city'=>'required',
-            //'country'=>'required',
-            'postcode'=>'required'
+            'first_name'=>'required|max:50|regex:/[a-zA-Z]/',
+            'last_name'=>'required|max:50|regex:/[A-Za-z]/',
+            'email'=>'required|email|unique:clients',
+            'phone_number1'=>'required|regex:/(02[0-9])/',
+            'phone_number2'=>'required|digits_between:7, 10/',
+            'password'=>'required|min:6|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/|confirmed',
+            'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/',
+            'suburb'=>'required|regex:/[A-Za-z]/',
+            'city'=>'required|regex:/[A-Za-z]/',
+            'postcode'=>'required|digits:4'
         ]);
         if($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
         $staff = new Staff([
-            'first_name' => $request->input('fName'),
-            'last_name' => $request->input('lName'),
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
             'email' => $request->input('email'),
-            'phone_number' => $request->input('pNumber'),
+            'phone_number' => '('.$request->input('phone_number1').')-'.$request->input('phone_number2'),
             'password' => Hash::make($request->input('password')),
             'street' => $request->input('street'),
             'suburb' => $request->input('suburb'),
@@ -90,30 +90,27 @@ class AdminStaffController extends Controller
     //Update a staff details.
     public function postEdit(Request $request, $id) {
         $validator = Validator::make($request->all(), [
-            'fName'=>'required|max:50',
-            'lName'=>'required|max:50',
-            'email'=>'required|email',
-            'pNumber'=>'required|max:11',
-            'street'=>'required',
-            'suburb'=>'required',
-            'city'=>'required',
-            //'country'=>'required',
-            'postcode'=>'required'
+            'first_name'=>'required|max:50|regex:/[A-Za-z]/',
+            'last_name'=>'required|max:50|regex:/[A-Za-z]/',
+            'phone_number1'=>'required|regex:/(02[0-9])/',
+            'phone_number2'=>'required|digits_between:7, 10/',
+            'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(\s?)/',
+            'suburb'=>'required|regex:/[A-Za-z]/',
+            'city'=>'required|regex:/[A-Za-z]/',
+            'postcode'=>'required|digits:4'
         ]);
         if($validator->fails()) {
-            return redirect()->route('staff.edit', ['id' => $id])
+            return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
         }
         $staff = Staff::query()->find($id);
-        $staff->first_name = $request->input('fName');
-        $staff->last_name = $request->input('lName');
-        $staff->email = $request->input('email');
-        $staff->phone_number = $request->input('pNumber');
+        $staff->first_name = $request->input('first_name');
+        $staff->last_name = $request->input('last_name');
+        $staff->phone_number = '('.$request->input('phone_number1').')-'.$request->input('phone_number2');
         $staff->street = $request->input('street');
         $staff->suburb = $request->input('suburb');
         $staff->city = $request->input('city');
-        //$staff->country = $request->input('country');
         $staff->postcode = $request->input('postcode');
         $staff->save();
         return redirect()->route('staff.index');

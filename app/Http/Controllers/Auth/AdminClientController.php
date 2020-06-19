@@ -48,27 +48,28 @@ class AdminClientController extends Controller
     //save the new client to the database.
     public function postCreate(Request $request) {
         $validator = Validator::make($request->all(), [
-            'fName'=>'required|max:50',
-            'lName'=>'required|max:50',
+            'first_name'=>'required|max:50|regex:/[a-zA-Z]/',
+            'last_name'=>'required|max:50|regex:/[A-Za-z]/',
             'email'=>'required|email|unique:clients',
-            'pNumber'=>'required|max:50',
-            'password'=>'required|confirmed|min:6',
-            'street'=>'required',
-            'suburb'=>'required',
-            'city'=>'required',
-            'postcode'=>'required'
+            'phone_number1'=>'required|regex:/(02[0-9])/',
+            'phone_number2'=>'required|digits_between:7, 10/',
+            'password'=>'required|min:6|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/|confirmed',
+            'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/',
+            'suburb'=>'required|regex:/[A-Za-z]/',
+            'city'=>'required|regex:/[A-Za-z]/',
+            'postcode'=>'required|digits:4'
         ]);
         if($validator->fails()) {
-            return redirect()->route('client.create')
+            return redirect()->back()
                 ->withErrors($validator)
                 ->withInput($request->all());
         }
 
         $client = new Clients([
-            'first_name' => $request->input('fName'),
-            'last_name' => $request->input('lName'),
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
             'email' => $request->input('email'),
-            'phone_number' => $request->input('pNumber'),
+            'phone_number' => '('.$request->input('phone_number1').')-'.$request->input('phone_number2'),
             'password' => Hash::make($request->input('password')),
             'street' => $request->input('street'),
             'suburb' => $request->input('suburb'),
@@ -94,15 +95,14 @@ class AdminClientController extends Controller
     //update the client.
     public function postEdit(Request $request, $id) {
         $validator = Validator::make($request->all(), [
-            'fName'=>'required|max:50',
-            'lName'=>'required|max:50',
-            'email'=>'required|email',
-            'pNumber'=>'required|max:50',
-            'street'=>'required',
-            'suburb'=>'required',
-            'city'=>'required',
-            //'country'=>'required',
-            'postcode'=>'required'
+            'first_name'=>'required|max:50|regex:/[A-Za-z]/',
+            'last_name'=>'required|max:50|regex:/[A-Za-z]/',
+            'phone_number1'=>'required|regex:/(02[0-9])/',
+            'phone_number2'=>'required|digits_between:7, 10/',
+            'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(\s?)/',
+            'suburb'=>'required|regex:/[A-Za-z]/',
+            'city'=>'required|regex:/[A-Za-z]/',
+            'postcode'=>'required|digits:4'
         ]);
         if($validator->fails()) {
             return redirect()->route('client.edit', ['id' => $id])
@@ -110,14 +110,12 @@ class AdminClientController extends Controller
                 ->withInput();
         }
         $client = Clients::find($id);
-        $client->first_name = $request->input('fName');
-        $client->last_name = $request->input('lName');
-        $client->email = $request->input('email');
-        $client->phone_number = $request->input('pNumber');
+        $client->first_name = $request->input('first_name');
+        $client->last_name = $request->input('last_name');
+        $client->phone_number = '('.$request->input('phone_number1').')-'.$request->input('phone_number2');
         $client->street = $request->input('street');
         $client->suburb = $request->input('suburb');
         $client->city = $request->input('city');
-        //$client->country = $request->input('country');
         $client->postcode = $request->input('postcode');
         $client->save();
 

@@ -4,50 +4,89 @@
     <div class="w-75 mx-auto bg-light p-2 mt-2 rounded">
         <h1>Update client</h1>
     <h2 class="ml-5">Client id: {{ $client->id }}</h2>
-    @if(count($errors) > 0)
-        <div class="alert alert-danger">
-            @foreach($errors->all() as $error)
-                <p>{{$error}}</p>
-            @endforeach
-        </div>
-    @endif
     <hr/>
     <form class="ml-2" method="post" action="{{route('client.edit', ['id' => $client->id])}}" >
         @csrf
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputEmail4">First Name</label>
-                <input name="fName" class="form-control" value="{{$client->first_name}}">
+                <label for="first_name">First Name</label>
+                <input name="first_name" class="form-control @error('first_name') is-invalid @enderror" value="{{$client->first_name}}">
+                @error('first_name')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
+
             <div class="form-group col-md-6">
-                <label for="inputPassword4">Last Name</label>
-                <input name="lName" class="form-control" value="{{$client->last_name}}" />
+                <label for="last_name">Last Name</label>
+                <input name="last_name" class="form-control @error('last_name') is-invalid @enderror" value="{{$client->last_name}}" />
+                @error('last_name')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
         </div>
-        <div class="form-group">
-            <label for="inputAddress">Email</label>
-            <input name="email" class="form-control" value="{{$client->email}}" />
+
+        <label for="phone_number">Phone Number:</label>
+        <div class="form-group row ml-0">
+            <input name="phone_number1" style="width: 60px" class="form-control @error('phone_number1') is-invalid @enderror"
+                   value="{{substr($client->phone_number, 1, 3)}}"/>
+            @error('phone_number1')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+            <div class="col-md-4">
+                <input name="phone_number2" class="form-control @error('phone_number2') is-invalid @enderror" value="{{substr($client->phone_number, 6)}}" />
+                @error('phone_number2')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
         </div>
+
         <div class="form-group">
-            <label for="inputAddress2">Phone Number</label>
-            <input name="pNumber" class="form-control" value="{{$client->phone_number}}" />
+            <label for="street">Street</label>
+            <input name="street" class="form-control @error('street') is-invalid @enderror" value="{{$client->street}}" />
+            @error('street')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
-        <div class="form-group">
-            <label for="inputAddress2">Street</label>
-            <input name="street" class="form-control" value="{{$client->street}}" />
-        </div>
+
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputCity">Suburb</label>
-                <input name="suburb" class="form-control" value="{{$client->suburb}}" />
+                <label for="suburb">Suburb</label>
+                <input name="suburb" class="form-control @error('suburb') is-invalid @enderror" value="{{$client->suburb}}" />
+                @error('suburb')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
+
             <div class="form-group col-md-4">
-                <label for="inputState">City</label>
-                <input name="city" class="form-control" value="{{$client->city}}" />
+                <label for="city">City</label>
+                <input name="city" class="form-control @error('city') is-invalid @enderror" value="{{$client->city}}" />
+                @error('city')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
+
             <div class="form-group col-md-2">
-                <label for="inputZip">Zip</label>
-                <input name="postcode" class="form-control" value="{{$client->postcode}}" />
+                <label for="postcode">Zip</label>
+                <input name="postcode" class="form-control @error('postcode') is-invalid @enderror" value="{{$client->postcode}}" />
+                @error('postcode')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
         </div>
         <a type="button" class="btn btn-danger" href="{{route('client.index')}}">Back</a>
