@@ -106,11 +106,12 @@
                                                 <div class="col text-right">
                                                     <form method="POST" action="{{route('client.acceptQuote')}}">
                                                         @csrf
-                                                        <input type="hidden" value="{{$quote->service_provider_id}}">
-                                                        <input type="hidden" value="{{$quote->price}}">
+                                                        <input type="hidden" name="service_provider_id" value="{{$quote->service_provider_id}}">
+                                                        <input type="hidden" name="quote_id" value="{{$quote->id}}">
+                                                        <input type="hidden" name="price" value="{{$quote->price}}">
 
                                                         <button onclick="window.location.href = '{{route('client.declineQuote', ['id'=>$quote->id])}}'" class="btn btn-danger">Decline</button>
-                                                        <input type="submit" class="btn btn-success">Accept</input>
+                                                        <input type="submit" class="btn btn-success" value="Accept">
                                                     </form>
                                                 </div>
                                             </div>

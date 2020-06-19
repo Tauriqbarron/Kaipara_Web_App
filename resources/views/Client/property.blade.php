@@ -15,7 +15,7 @@
                 <a class="nav-link active" href="{{route('client.property')}}">Property Management</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Service Jobs</a>
+                <a class="nav-link" href="{{route('client.jobs')}}">Service Jobs</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('client.bookings')}}">Security Bookings</a>

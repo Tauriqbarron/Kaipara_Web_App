@@ -125,6 +125,16 @@ Route::get('/client/quotes', [
     'as' => 'client.quotes'
 ]);
 
+Route::get('/client/declineQuote?id={id}', [
+    'uses' => 'ClientController@declineQuote',
+    'as' => 'client.declineQuote'
+]);
+
+Route::post('/client/acceptQuote', [
+    'uses' => 'ClientController@postAcceptQuote',
+    'as' => 'client.acceptQuote'
+]);
+
 
 Route::get('/client/bookings_filter=newer', [
     'uses' => 'ClientController@getNewerBookings',

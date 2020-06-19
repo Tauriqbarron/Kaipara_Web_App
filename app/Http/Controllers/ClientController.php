@@ -9,6 +9,7 @@ use App\Clients;
 use App\Job_Type;
 use App\quote;
 use App\service_provider;
+use App\Service_Provider_Job;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -242,6 +243,34 @@ class ClientController extends Controller
         $applications = applications::query()->where('client_id', '=', $user->id)->get();
         $filtered = true;
         return view('Client.quotes',['user'=>$user, 'quotes'=>$quotes, 'filtered'=>$filtered, 'applications'=>$applications]);
+    }
+
+    public function declineQuote($id){
+        $quote = quote::query()->find($id);
+        $quote->delete();
+        return redirect()->back();
+    }
+    public function postAcceptQuote(Request $request){
+        $quote = quote::query()->find($request->input('quote_id'));
+        $application = $quote->application;
+        $validator = Validator::make($request->all(), [
+           'service_provider_id'=>'required|numeric',
+           'quote_id' => 'required|exists:App\quote,id',
+        ]);
+        if($validator->fails() ){
+            return redirect()->back()->withErrors($validator);
+        }else{
+            $application->price = $quote->price;
+            $application->status = 2;
+            $application->save();
+            $service_provider_job = new Service_Provider_Job([
+                'service_provider_id'=>$request->input('service_provider_id'),
+                'job_id'=>$quote->job_id
+            ]);
+            $service_provider_job->save();
+            $quote->delete();
+            return redirect()->route('client.jobs')->with('message', 'Quote Accepted');
+        }
     }
 
 

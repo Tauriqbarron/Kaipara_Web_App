@@ -30,6 +30,7 @@
     </div>
 @endsection
 @section('mainContent')
+
     <div class="row">
         <div class="container ml-3">
             <div class="row">
