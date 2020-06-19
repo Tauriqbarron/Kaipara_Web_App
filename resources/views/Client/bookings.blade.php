@@ -19,7 +19,7 @@
                 <a class="nav-link active" href="{{route('client.bookings')}}">Security Bookings</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Quotes</a>
+                <a class="nav-link" href="{{route('client.quotes')}}">Quotes</a>
             </li>
         </ul>
         <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end">
@@ -61,12 +61,12 @@
                                 <div class="col">
                                     <div class="row">
                                         <div class="col-2">
-                                            {{substr('00:00', 0, (-(strlen(number_format($booking->start_time ,2 , ':','')))) ) . number_format($booking->start_time ,2 , ':','')}}
+                                            {{\Carbon\Carbon::parse(substr('00:00', 0, (-(strlen(number_format($booking->start_time ,2 , ':','')))) ) . number_format($booking->start_time ,2 , ':',''))->isoFormat('LT')}}
                                         </div>
                                         <div class="col-4">
-                                            {{\Carbon\Carbon::parse($booking->date)->format('d/m/Y')}} - {{\Carbon\Carbon::parse($booking->end_date)->format('d/m/Y')}}
+                                            {{\Carbon\Carbon::parse($booking->date)->isoFormat('dddd Do MMM')}} - {{\Carbon\Carbon::parse($booking->end_date)->isoFormat('dddd Do MMM')}}
                                         </div>
-                                        <div class="col-5 text-capitalize">
+                                        <div class="col-5 text-capitalize text-{{$booking->status == 'available' ? 'success': 'danger'}}">
                                             Status: {{$booking->status}}
                                         </div>
                                         <div class="col-1 btn-group-toggle  toggle-btn">
@@ -79,7 +79,7 @@
                                         <div class="col">
                                             <div class="row">
                                                 <div class="col text-center">
-                                                    <h5>{{$booking->booking_type->description}} on {{\Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}</h5>
+                                                    <h5>{{$booking->booking_type->description}} on {{\Carbon\Carbon::parse($booking->date)->isoFormat('dddd Do MMM')}}</h5>
                                                 </div>
 
                                             </div>
@@ -93,8 +93,8 @@
                                                     <strong>Time</strong>
                                                 </div>
                                                 <div class="col-4">
-                                                    {{substr('00:00', 0, (-(strlen(number_format($booking->start_time ,2 , ':','')))) ) . number_format($booking->start_time ,2 , ':','')}} -
-                                                    {{substr('00:00', 0, (-(strlen(number_format($booking->finish_time ,2 , ':','')))) ) . number_format($booking->finish_time ,2 , ':','')}}
+                                                    {{\Carbon\Carbon::parse(substr('00:00', 0, (-(strlen(number_format($booking->start_time ,2 , ':','')))) ) . number_format($booking->start_time ,2 , ':',''))->isoFormat('LT')}} -
+                                                    {{\Carbon\Carbon::parse(substr('00:00', 0, (-(strlen(number_format($booking->finish_time ,2 , ':','')))) ) . number_format($booking->finish_time ,2 , ':',''))->isoFormat('LT')}}
                                                 </div>
                                                 <div class="col-3 text-right">
                                                     <strong>Staff Required</strong>
@@ -108,7 +108,7 @@
                                                     <strong>Date</strong>
                                                 </div>
                                                 <div class="col-4">
-                                                    {{\Carbon\Carbon::parse($booking->date)->format('d/m/Y')}} - {{\Carbon\Carbon::parse($booking->end_date)->format('d/m/Y')}}
+                                                    {{\Carbon\Carbon::parse($booking->date)->isoFormat('dddd Do MMM')}} - {{\Carbon\Carbon::parse($booking->end_date)->isoFormat('dddd Do MMM')}}
                                                 </div>
                                                 <div class="col-3 text-right">
                                                     <strong>Staff Assigned</strong>
@@ -127,7 +127,7 @@
                                                 <div class="col-3 text-right">
                                                     <strong>Status</strong>
                                                 </div>
-                                                <div class="col-3 text-capitalize">
+                                                <div class="col-3 text-capitalize text-{{$booking->status == 'available' ? 'success': 'danger'}}">
                                                     <em>{{$booking->status}}</em>
                                                 </div>
                                             </div>

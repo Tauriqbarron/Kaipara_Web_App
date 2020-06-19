@@ -12,7 +12,7 @@ class service_provider extends Authenticatable
 {
     use Notifiable;
     protected $guard = 'service_provider';
-    protected $fillable = ['firstname','lastname','username','email','password','phone_number','street', 'suburb', 'city', 'postcode'];
+    protected $fillable = ['firstname','lastname','username','email','password','phone_number','street', 'suburb', 'city', 'postcode', 'imgPath'];
     public $timestamps = false;
     protected $hidden = ['password', 'remember_token'];
 

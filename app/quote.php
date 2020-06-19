@@ -12,4 +12,7 @@ class quote extends Model
     public function application() {
         return $this->belongsTo('App\applications', 'job_id', 'id');
     }
+    public function service_provider(){
+        return $this->belongsTo('App\service_provider', 'service_provider_id', 'id');
+    }
 }

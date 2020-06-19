@@ -114,6 +114,18 @@ Route::get('/client/bookings_filter=older', [
 ]);
 
 
+Route::get('/client/quotes_filter={id}', [
+    'uses' => 'ClientController@getQuoteFilter',
+    'as' => 'client.filterQuotes'
+]);
+
+
+Route::get('/client/quotes', [
+    'uses' => 'ClientController@getQuotes',
+    'as' => 'client.quotes'
+]);
+
+
 Route::get('/client/bookings_filter=newer', [
     'uses' => 'ClientController@getNewerBookings',
     'as' => 'client.getNewerBookings'

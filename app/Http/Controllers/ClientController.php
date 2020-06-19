@@ -7,6 +7,7 @@ use App\Booking;
 use App\Booking_Types;
 use App\Clients;
 use App\Job_Type;
+use App\quote;
 use App\service_provider;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -225,6 +226,22 @@ class ClientController extends Controller
             ->where('date', '>=', today('NZ')->format('Y-m-d'))->get();
         $filtered = true;
         return view('Client.bookings',['user'=>$user, 'bookings'=>$bookings, 'filtered'=>$filtered]);
+    }
+
+    public function getQuotes(){
+        $user = auth()->guard('client')->user();
+        $quotes = quote::query()->whereIn('job_id',
+            applications::query()->select('id')->where('client_id', '=', $user->id)->get())->get();
+        $applications = applications::query()->where('client_id', '=', $user->id)->get();
+        return view('Client.quotes',['user'=>$user, 'quotes'=>$quotes, 'applications'=>$applications]);
+    }
+
+    public function getQuoteFilter($id){
+        $user = auth()->guard('client')->user();
+        $quotes = quote::query()->where('job_id', '=' , $id)->get();
+        $applications = applications::query()->where('client_id', '=', $user->id)->get();
+        $filtered = true;
+        return view('Client.quotes',['user'=>$user, 'quotes'=>$quotes, 'filtered'=>$filtered, 'applications'=>$applications]);
     }
 
 

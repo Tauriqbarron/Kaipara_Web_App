@@ -2,7 +2,7 @@
 @section('nav')
     <a class="nav-link active btn-lg mx-5 pt-2 bg-secondary text-white" href="{{ url('/service/applications')}}">Applications</a>
     <a class="nav-link active btn-lg mx-5 pt-2 " href="{{ url('/service/jobs')}}">Jobs</a>
-    <a class="nav-link active btn-lg mx-5 pt-2" href="#">Quotes</a>
+    <a class="nav-link active btn-lg mx-5 pt-2" href="{{route('client.quotes')}}">Quotes</a>
     <a class="nav-link active btn-lg mx-5 pt-2" href="#">Availability Schedule</a>
     <a class="nav-link active btn-lg mx-5 pt-2" href="#">Profile</a>
 @endsection
@@ -20,7 +20,7 @@
                 @foreach($applications as $app)
                     <div class="card w-75 mx-auto my-4 bg-light border-0 shadow-sm">
                         <div class="card-body ">
-                            <img src="{{$app->imagePath}}" class="card-img-top w-75" alt="...">
+                            <img src="{{url($app->job_type->imgPath)}}" class="card-img-top w-75" alt="...">
                             <h5 class="card-title my-2">{{$app->title}}</h5>
                             <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#{{$app->id}}" aria-expanded="false" aria-controls="collapseExample">
                                 <h6>View Details</h6>

@@ -15,7 +15,7 @@
                             <form method="post" action="{{route('service.canceljob', ['id' => $job->id])}}">
                                 @csrf
                                 <div class="card w-75 cards">
-                                    <img src="{{$job->application->imagePath}}" class="card-img-top" alt="...">
+                                    <img src="{{url($job->application->job_type->imgPath)}}" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <label><strong>Title: </strong></label> {{$job->application->title}}<br/>
                                         <label><strong>Price: </strong></label>{{$job->application->price}}$ &nbsp;&nbsp;  <strong>Job type: </strong>{{$job->application->job_type->description}}<br/>

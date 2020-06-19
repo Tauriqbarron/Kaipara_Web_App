@@ -18,7 +18,7 @@
                 <a class="nav-link" href="{{route('client.bookings')}}">Security Bookings</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Quotes</a>
+                <a class="nav-link" href="{{route('client.quotes')}}">Quotes</a>
             </li>
         </ul>
         <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end">

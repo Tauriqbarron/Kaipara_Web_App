@@ -19,7 +19,7 @@
                 <a class="nav-link" href="{{route('client.bookings')}}">Security Bookings</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Quotes</a>
+                <a class="nav-link" href="{{route('client.quotes')}}">Quotes</a>
             </li>
         </ul>
         <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end">
@@ -42,11 +42,11 @@
                             <div class="col-4">
                                 <div class="row">
                                     <div class="col-4 text-right">
-                                        <a class="" href="{{route('client.jobs')}}">{{isset($filtered) ? 'Show All' : ''}}</a>
+                                        <a class="" href="{{isset($filtered) ? route('client.jobs') : "#"}}">{{isset($filtered) ? 'Show All' : ''}}</a>
                                     </div>
                                     <div class="col-8">
-                                        <select id="filter" class="form-control" onchange="window.location.href = this.options[selectedIndex].value">
-                                            <option class="text-secondary" disabled selected hidden>Filter Results</option>
+                                        <label for="filter" hidden>Filter Results</label><select id="filter" class="form-control" onchange="window.location.href = this.options[selectedIndex].value">
+                                            <option class="text-secondary font-italic" disabled selected hidden>Filter Results</option>
                                             <option value="{{route('client.getAvailableJobs')}}">Available</option>
                                             <option value="{{route('client.getAssignedJobs')}}">Assigned</option>
                                             <option value="{{route('client.getOlderJobs')}}">Older Jobs</option>
@@ -61,7 +61,7 @@
                                 <div class="col">
                                     <div class="row">
                                         <div class="col-3">
-                                            {{isset($application->date) ? \Carbon\Carbon::parse($application->date)->format('d/m/Y'): 'Date: Pending' }}
+                                            {{isset($application->date) ? \Carbon\Carbon::parse($application->date)->isoFormat('dddd Do MMMM'): 'Date: Pending' }}
                                         </div>
                                         <div class="col-8 text-center">
                                             {{$application->title}}
@@ -89,8 +89,8 @@
                                                 <div class="col-2 text-right">
                                                     <strong>Status</strong>
                                                 </div>
-                                                <div class="col-4">
-                                                    {{$application->status == 1 ? 'Available':'Assigned'}}
+                                                <div class="col-4 text-{{$application->status == 1 ? 'success': ($application->status == 4 ? 'secondary' : 'danger')}}">
+                                                    {{$application->status == 1 ? 'Available': ($application->status == 4 ? 'Completed' : "Assigned")}}
                                                 </div>
                                                 <div class="col-3 text-right">
                                                     <strong>Quotes</strong>

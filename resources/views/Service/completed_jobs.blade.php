@@ -14,11 +14,11 @@
                     <form method="post" action="#">
                         @csrf
                         <div class="card w-75 cards">
-                            <img src="{{$job->application->imagePath}}" class="card-img-top" alt="...">
+                            <img src="{{url($job->application->job_type->imgPath)}}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <label><strong>Title: </strong></label> {{$job->application->title}}<br/>
                                 <label><strong>Price: </strong></label>
-                                {{$job->application->price}}$ &nbsp;&nbsp;
+                                ${{$job->application->price}}&nbsp;&nbsp;
                                 <strong>Job type: </strong>{{$job->application->job_type->description}}<br/>
                                 <label><strong>Description: </strong></label>
                                 <p class="card-text">{{$job->application->description}}</p>

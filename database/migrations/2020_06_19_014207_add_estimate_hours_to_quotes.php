@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddJobTypeToApplications extends Migration
+class AddEstimateHoursToQuotes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddJobTypeToApplications extends Migration
      */
     public function up()
     {
-        Schema::table('applications', function (Blueprint $table) {
-            $table->foreignId('job__type_id')->references('id')->on('job__types')->onDelete('cascade');
+        Schema::table('quotes', function (Blueprint $table) {
+            $table->integer('estimate_hours');
         });
     }
 
@@ -25,8 +25,8 @@ class AddJobTypeToApplications extends Migration
      */
     public function down()
     {
-        Schema::table('applications', function (Blueprint $table) {
-            $table->dropColumn("job__type_id");
+        Schema::table('quotes', function (Blueprint $table) {
+            $table->dropColumn('estimate_hours');
         });
     }
 }

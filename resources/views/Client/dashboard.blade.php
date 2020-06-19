@@ -17,7 +17,7 @@
                 <a class="nav-link" href="{{route('client.bookings')}}">Security Bookings</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Quotes</a>
+                <a class="nav-link" href="{{route('client.quotes')}}">Quotes</a>
             </li>
         </ul>
         <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end">
@@ -31,7 +31,7 @@
 <div class="row">
     <div class="container ml-3">
         <div class="row">
-            <div class="col-4">
+            <div class="col-4 mt-5">
                 <div class="card bg-light w-100 shadow-sm">
                     <div class="card-header">
                         <h5>Jump to:</h5>
@@ -62,7 +62,7 @@
                                     <div class="col-4">
                                         {{\Carbon\Carbon::parse($booking->date)->format('d/m/Y')}} - {{\Carbon\Carbon::parse($booking->end_date)->format('d/m/Y')}}
                                     </div>
-                                    <div class="col-5 text-capitalize">
+                                    <div class="col-5 text-capitalize text-{{$booking->status == 'available' ? 'success': 'danger'}}">
                                         Status: {{$booking->status}}
                                     </div>
                                     <div class="col-1 btn-group-toggle  toggle-btn">
@@ -123,7 +123,7 @@
                                             <div class="col-3 text-right">
                                                 <strong>Status</strong>
                                             </div>
-                                            <div class="col-3 text-capitalize">
+                                            <div class="col-3 text-capitalize text-{{$booking->status == 'available' ? 'success': 'danger'}}">
                                                 <em>{{$booking->status}}</em>
                                             </div>
                                         </div>
@@ -170,7 +170,7 @@
                                             <div class="col-2 text-right">
                                                 <strong>Status</strong>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-4 text-{{$application->status == 1 ? 'success': 'danger'}}">
                                                 {{$application->status == 1 ? 'Available':'Assigned'}}
                                             </div>
                                             <div class="col-3 text-right">

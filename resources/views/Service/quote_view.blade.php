@@ -10,7 +10,7 @@
                         <form method="post" action="{{route('service.cancel_quote', ['id' => $quote->id])}}">
                             @csrf
                     <div class="card w-75 cards">
-                        <img src="{{$quote->application->imagePath}}" class="card-img-top" alt="...">
+                        <img src="{{url($quote->application->job_type->imgPath)}}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <label><strong>Title: </strong></label> {{$quote->application->title}}<br/>
                             <label><strong>Price: </strong></label> &nbsp;null&nbsp;&nbsp;
