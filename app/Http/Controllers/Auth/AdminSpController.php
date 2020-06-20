@@ -33,28 +33,28 @@ class AdminSpController extends Controller
 
     public function postCreate(Request $request) {
         $validator = Validator::make($request->all(), [
-            'fName'=>'required|max:50',
-            'lName'=>'required|max:50',
+            'first_name'=>'required|max:50|regex:/[a-zA-Z]/',
+            'last_name'=>'required|max:50|regex:/[A-Za-z]/',
             'email'=>'required|email|max:50|unique:service_providers',
             'uName'=>'required|max:50',
-            'pNumber'=>'required|max:20',
-            'password' => 'required|confirmed|max:20',
-            'street'=>'required',
-            'suburb'=>'required',
-            'city'=>'required',
-            //'country'=>'required',
-            'postcode'=>'required'
+            'phone_number1'=>'required|regex:/(02[0-9])/',
+            'phone_number2'=>'required|digits_between:7, 10/',
+            'password'=>'required|min:8|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/|confirmed',
+            'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/',
+            'suburb'=>'required|regex:/[A-Za-z]/',
+            'city'=>'required|regex:/[A-Za-z]/',
+            'postcode'=>'required|digits:4'
         ]);
         if($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
 
         $serviceProvider = new service_provider([
-            'firstname' => $request->input('fName'),
-            'lastname' => $request->input('lName'),
+            'firstname' => $request->input('first_name'),
+            'lastname' => $request->input('last_name'),
             'email' => $request->input('email'),
             'username' => $request->input('uName'),
-            'phone_number' => $request->input('pNumber'),
+            'phone_number' => '('.$request->input('phone_number1').')-'.$request->input('phone_number2'),
             'password'=> Hash::make($request->input('password')),
             'street' => $request->input('street'),
             'suburb' => $request->input('suburb'),
@@ -62,7 +62,7 @@ class AdminSpController extends Controller
             'postcode' => $request->input('postcode')
         ]);
         $serviceProvider->save();
-        return redirect()->route('sp.index');
+        return redirect()->route('sp.index')->with('message', 'New service provider created.');
     }
 
     public function viewSp($id) {
@@ -77,15 +77,14 @@ class AdminSpController extends Controller
 
     public function postEdit(Request $request, $id) {
         $validator = Validator::make($request->all(), [
-            'fName'=>'required|max:50',
-            'lName'=>'required|max:50',
-            'email'=>'required|email',
-            'pNumber'=>'required|max:11',
-            'street'=>'required',
-            'suburb'=>'required',
-            'city'=>'required',
-            //'country'=>'required',
-            'postcode'=>'required'
+            'first_name'=>'required|max:50|regex:/[A-Za-z]/',
+            'last_name'=>'required|max:50|regex:/[A-Za-z]/',
+            'phone_number1'=>'required|regex:/(02[0-9])/',
+            'phone_number2'=>'required|digits_between:7, 10/',
+            'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(\s?)/',
+            'suburb'=>'required|regex:/[A-Za-z]/',
+            'city'=>'required|regex:/[A-Za-z]/',
+            'postcode'=>'required|digits:4'
         ]);
         if($validator->fails()) {
             return redirect()->route('sp.edit', ['id' => $id])
@@ -94,17 +93,16 @@ class AdminSpController extends Controller
         }
 
         $sp = service_provider::find($id);
-        $sp->firstname = $request->input('fName');
-        $sp->lastname = $request->input('lName');
-        $sp->email = $request->input('email');
-        $sp->phone_number = $request->input('pNumber');
+        $sp->firstname = $request->input('first_name');
+        $sp->lastname = $request->input('last_name');
+        $sp->phone_number = '('.$request->input('phone_number1').')-'.$request->input('phone_number2');
         $sp->street = $request->input('street');
         $sp->suburb = $request->input('suburb');
         $sp->city = $request->input('city');
         //$sp->country = $request->input('country');
         $sp->postcode = $request->input('postcode');
         $sp->save();
-        return redirect()->route('sp.index');
+        return redirect()->route('sp.index')->with('message', 'Update successfully.');
     }
 
     public function getDelete($id) {

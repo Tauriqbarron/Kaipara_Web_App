@@ -47,10 +47,10 @@ class AdminStaffController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name'=>'required|max:50|regex:/[a-zA-Z]/',
             'last_name'=>'required|max:50|regex:/[A-Za-z]/',
-            'email'=>'required|email|unique:clients',
+            'email'=>'required|email|unique:staff',
             'phone_number1'=>'required|regex:/(02[0-9])/',
             'phone_number2'=>'required|digits_between:7, 10/',
-            'password'=>'required|min:6|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/|confirmed',
+            'password'=>'required|min:8|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/|confirmed',
             'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/',
             'suburb'=>'required|regex:/[A-Za-z]/',
             'city'=>'required|regex:/[A-Za-z]/',
@@ -71,7 +71,7 @@ class AdminStaffController extends Controller
             'postcode' => $request->input('postcode')
         ]);
         $staff->save();
-        return redirect()->route('staff.index');
+        return redirect()->route('staff.index')->with('message', 'New staff created.');
     }
 
     //View a staff
@@ -113,7 +113,7 @@ class AdminStaffController extends Controller
         $staff->city = $request->input('city');
         $staff->postcode = $request->input('postcode');
         $staff->save();
-        return redirect()->route('staff.index');
+        return redirect()->route('staff.index')->with('message', 'Update successfully.');
     }
 
     //Get the delete staff page

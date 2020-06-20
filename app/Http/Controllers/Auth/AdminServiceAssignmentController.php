@@ -41,27 +41,24 @@ class AdminServiceAssignmentController extends Controller
     public function postCreate(Request $request) {
         $validator = Validator::make($request->all(), [
             'client_id' => 'required|numeric',
-            'title' => 'required',
+            'title' => 'required|regex:/[A-Za-z0-9\-?]/',
             'job_type' => 'required',
             'price' => 'numeric',
             'description' => 'required',
-            'date' => 'required|after:today',
-            'street' => 'required',
-            'suburb' => 'required',
-            'city' => 'required',
-            'postcode' => 'required',
-            'job_type' => 'required'
+            'date' => 'required|date|after:today',
+            'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(\s?)/',
+            'suburb'=>'required|regex:/[A-Za-z]/',
+            'city'=>'required|regex:/[A-Za-z]/',
+            'postcode'=>'required|digits:4',
         ]);
-
         if($validator->fails()) {
             return redirect()->back()
-                ->withErrors('Please enter valid data to all blank')
+                ->withErrors($validator)
                 ->withInput($request->all());
         }
 
-        $client = Clients::where('id', '=', $request->input('client_id'));
-        if($client == null) {
-            return redirect()->back()->withErrors('The client does not exist.');
+        if(!Clients::where('id', '=', $request->input('client_id'))->exists()) {
+            return redirect()->back()->with('message', 'The client does not exist.')->withInput($request->all());
         }
 
         $assignment = new applications([
@@ -78,7 +75,7 @@ class AdminServiceAssignmentController extends Controller
             'job__type_id' => $request->input('job_type')
         ]);
         $assignment->save();
-        return redirect()->route('admin.service.index')->with('message', 'Update successfully.');
+        return redirect()->route('admin.service.index')->with('message', 'New security assignment created.');
 
     }
 
@@ -91,19 +88,19 @@ class AdminServiceAssignmentController extends Controller
 
     public function postEdit(Request $request, $id) {
         $validator = Validator::make($request->all(), [
-            'title' => 'required',
+            'title' => 'required|regex:/[A-Za-z0-9\-?]/',
             'job_type' => 'required',
             'price' => 'numeric',
             'description' => 'required',
-            'date' => 'required|after:today',
-            'street' => 'required',
-            'suburb' => 'required',
-            'city' => 'required',
-            'postcode' => 'required',
+            'date' => 'required|date|after:today',
+            'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(\s?)/',
+            'suburb'=>'required|regex:/[A-Za-z]/',
+            'city'=>'required|regex:/[A-Za-z]/',
+            'postcode'=>'required|digits:4',
         ]);
         if($validator->fails()) {
             return redirect()->back()
-                ->withErrors('Please enter valid data to all blank')
+                ->withErrors($validator)
                 ->withInput($request->all());
         }
 
@@ -120,7 +117,7 @@ class AdminServiceAssignmentController extends Controller
         $assignment->postCode = $request->input('postcode');
         $assignment->save();
 
-        return redirect()->route('admin.service.index')->with('message', 'New assignment created.');
+        return redirect()->route('admin.service.index')->with('message', 'Update successfully.');
 
     }
 

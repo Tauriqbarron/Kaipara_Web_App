@@ -2,8 +2,8 @@
 @section('mainContent')
     <div class="w-75 mx-auto bg-light p-2 mt-2 rounded">
     <h1 class="ml-5">Create client</h1>
-
     <hr/>
+
     <form class="ml-2" method="post" action="{{route('client.create')}}" >
         @csrf
         <div class="form-row">
@@ -63,7 +63,7 @@
 
         <label for="phone_number">Phone Number:</label>
         <div class="form-group row ml-0">
-            <input name="phone_number1" style="width: 60px" class="form-control @error('phone_number1') is-invalid @enderror" placeholder="xxx" value="{{old('phone_number')}}"/>
+            <input name="phone_number1" style="width: 100px" class="form-control @error('phone_number1') is-invalid @enderror" placeholder="02x" value="{{old('phone_number')}}"/>
             @error('phone_number')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>

@@ -77,7 +77,7 @@ class AdminClientController extends Controller
             'postcode' => $request->input('postcode')
         ]);
         $client->save();
-        return redirect()->route('client.index');
+        return redirect()->route('client.index')->with('message', 'New client created.');
     }
 
     //view a client detail.
@@ -119,7 +119,7 @@ class AdminClientController extends Controller
         $client->postcode = $request->input('postcode');
         $client->save();
 
-        return redirect()->route('client.index');
+        return redirect()->route('client.index')->with('message', 'Update successfully.');
     }
 
     //get the delete client page.

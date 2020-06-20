@@ -32,7 +32,7 @@
 
         <label for="phone_number">Phone Number:</label>
         <div class="form-group row ml-0">
-            <input name="phone_number1" style="width: 60px" class="form-control @error('phone_number1') is-invalid @enderror"
+            <input name="phone_number1" style="width: 100px" class="form-control @error('phone_number1') is-invalid @enderror"
                    value="{{substr($staff->phone_number, 1, 3)}}"/>
             @error('phone_number1')
             <span class="invalid-feedback" role="alert">

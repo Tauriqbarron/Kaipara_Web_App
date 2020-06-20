@@ -47,29 +47,28 @@ class AdminSecurityAssignmentController extends Controller
     }
 
     public function postCreate(Request $request) {
+
         $validator = Validator::make($request->all(), [
-            'client_id' => 'required',
+            'client_id' => 'required|numeric',
             'booking_type' => 'required',
             'price' => 'required|numeric',
             'description' => 'required',
             'date' => 'required|date|date_format:Y-m-d|after:today',
             'end_date' => 'required|date|date_format:Y-m-d|after:today',
-            'street' => 'required',
-            'suburb' => 'required',
-            'city' => 'required',
-            'postcode' => 'required',
+            'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(\s?)/',
+            'suburb'=>'required|regex:/[A-Za-z]/',
+            'city'=>'required|regex:/[A-Za-z]/',
+            'postcode'=>'required|digits:4',
             'numOfStaff' => 'required'
         ]);
-
         if($validator->fails()) {
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput($request->all());
         }
 
-        $client = Clients::where('id', '=', $request->input('client_id'));
-        if($client == null) {
-            return redirect()->back()->withErrors('The client does not exist.');
+        if(!Clients::where('id', '=', $request->input('client_id'))->exists()) {
+            return redirect()->back()->with('message', 'The client does not exist.')->withInput($request->all());
         }
 
         $booking = new Booking([
@@ -86,12 +85,20 @@ class AdminSecurityAssignmentController extends Controller
             'status' => 'available',
             'staff_needed' => $request->input('numOfStaff'),
             'available_slots' => $request->input('numOfStaff'),
-            'start_time' => '9.30',
-            'finish_time' => '16.30',
         ]);
+        if ($request->input('start_time') != null) {
+            $booking->start_time = $request->input('start_time');
+        }else{
+            $booking->start_time = '9.30';
+        }
+        if ($request->input('end_time') != null) {
+            $booking->finish_time = $request->input('finish_time');
+        }else{
+            $booking->finish_time = '16.30';
+        }
 
         $booking->save();
-        return redirect()->route('security_assignment.index');
+        return redirect()->route('security_assignment.index')->with('message', 'New security assignment created.');
 
     }
 
@@ -148,10 +155,10 @@ class AdminSecurityAssignmentController extends Controller
             'start_time' => 'required',
             'finish_time' => 'required',
             'numOfStaff' => 'required',
-            'street' => 'required',
-            'suburb' => 'required',
-            'city' => 'required',
-            'postcode' => 'required',
+            'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(\s?)/',
+            'suburb'=>'required|regex:/[A-Za-z]/',
+            'city'=>'required|regex:/[A-Za-z]/',
+            'postcode'=>'required|digits:4',
             'status' => 'required'
         ]);
 
@@ -199,7 +206,7 @@ class AdminSecurityAssignmentController extends Controller
             $assignment->save();
         }
 
-        return redirect()->route('security_assignment.index');
+        return redirect()->route('security_assignment.index')->with('message', 'Update successfully.');
     }
 
 
