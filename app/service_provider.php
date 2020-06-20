@@ -24,4 +24,12 @@ class service_provider extends Authenticatable
     public function service_provider_jobs() {
         return $this->hasMany('App\service_provider_job');
     }
+
+    public function client_service_feedback(){
+        $this->hasMany('App\Client_Service_Feedback');
+    }
+
+    public function service_feedback(){
+        $this->hasMany('App\Service_Feedback');
+    }
 }

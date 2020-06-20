@@ -16,6 +16,9 @@
             <li class="nav-item">
                 <a class="nav-link page-toggle-btn" href="#Roster" id="rosterBtn" data-target="rosterContainer">Roster</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link page-toggle-btn" href="#Timesheets" id="timesheetBtn" data-target="timesheetContainer">Timesheets</a>
+            </li>
         </ul>
         <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end">
             <li class="nav-item">

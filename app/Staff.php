@@ -13,7 +13,7 @@ class Staff extends Authenticatable
     use Notifiable;
     protected $guard = 'staff';
     protected $primaryKey = 'id';
-    protected  $fillable = ['first_name', 'last_name', 'email', 'phone_number', 'password', 'imgPath', 'street', 'suburb', 'city', 'postcode'];
+    protected  $fillable = ['first_name', 'last_name', 'email', 'phone_number', 'password', 'imgPath', 'street', 'suburb', 'city', 'postcode', 'current_timesheet_id'];
     protected $hidden = ['password'];
     protected $dispatchesEvents = [
         'created' => Events\CreateStaff::class
@@ -34,6 +34,13 @@ class Staff extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new StaffResetPasswordNotification($token));
+    }
+
+    public function feedback(){
+        return $this->hasMany('App\Feedback');
+    }
+    public function client_feedback(){
+        return $this->hasMany('App\Client_Feedback');
     }
 
 

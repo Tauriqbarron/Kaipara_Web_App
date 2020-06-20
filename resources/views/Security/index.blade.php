@@ -17,6 +17,9 @@
     <div class="page-toggle-page" id="settingsContainer" style="display: none">
         @include('Security.settings')
     </div>
+    <div class="page-toggle-page" id="timesheetContainer" style="display: none">
+        @include('Security.timesheets')
+    </div>
     <script type="text/javascript">
         loaded()
     </script>

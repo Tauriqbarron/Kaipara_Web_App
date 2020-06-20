@@ -8,6 +8,8 @@ class Client_Feedback extends Model
 {
     protected $fillable = ['rating', 'message', 'staff__assignment_id', 'status','staff_id', 'client_id'];
 
+    public $timestamps = false;
+
     public function staff_assignment(){
         return $this->belongsTo('App\Staff_Assignment', 'staff__assignment_id', 'id');
     }

@@ -28,4 +28,17 @@ class Clients extends Authenticatable
         $this->notify(new ClientResetPasswordNotification($token));
     }
 
+    public function  feedback(){
+        $this->hasMany('App\Feedback');
+    }
+    public function  client_feedback(){
+        $this->hasMany('App\Client_Feedback');
+    }
+    public function  client_service_feedback(){
+        $this->hasMany('App\Client_Service_Feedback');
+    }
+    public function  service_feedback(){
+        $this->hasMany('App\Service_Feedback');
+    }
+
 }

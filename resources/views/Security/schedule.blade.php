@@ -28,9 +28,9 @@
                             </thead>
                             <tbody>
 
-                            @if($firstBookings = $bookings->first())
-
+                            @isset($bookings)
                                 @foreach($bookings as $booking )
+                                    @php($staff_assignment = $booking->staff_assignments->where('staff_id', '=', $staff->id)->first())
 
                                     <tr>
                                         <td class="text-center">
@@ -48,16 +48,13 @@
                                         </td>
                                         <td style="width: 20%;">
                                             <a href="#" class="table-link float-right" data-toggle="collapse" data-target="#p{{$booking->id}}" id="downButton" onmouseup="f('{{$booking->id}}p','p{{$booking->id}}')" >
-
                                                 <span class="fa-stack">
-                                                            <i class="fa fa-square fa-stack-2x"></i>
-                                                            <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}p"></i>
-                                                        </span>
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-chevron-down fa-stack-1x fa-inverse more-info" id="{{$booking->id}}p"></i>
+                                                </span>
                                             </a>
-
                                         </td>
                                     </tr>
-
                                     <tr >
                                         <td colspan="4" style="padding: 0px" class="bg-white">
                                             <span class="collapse" id="p{{$booking->id}}"></span>
@@ -101,18 +98,16 @@
                                         </td>
                                         <td style="padding: 0px" class="bg-white">
                                             <div class="collapse btn-group-lg"  id="p{{$booking->id}}" style="padding: 10px">
-                                                @if(\Carbon\Carbon::parse($booking->date)->format('d/m/Y') == \Carbon\Carbon::parse(today('NZ'))->format('d/m/Y') && $booking->finish_time > (now("NZ")->hour)+(now("NZ")->minute*.01))
-                                                    @if(Session::has('inProgress'))
-
+                                                @if((\Carbon\Carbon::parse($booking->date)->format('d/m/Y') <= \Carbon\Carbon::parse(today('NZ'))->format('d/m/Y')) && (\Carbon\Carbon::parse($booking->end_date)->format('d/m/Y') >= \Carbon\Carbon::parse(today('NZ'))->format('d/m/Y')) && session()->get('date1') == today("NZ"))
+                                                    @if(isset($staff->current_timesheet_id) && $staff_assignment->timesheet->contains('id', $staff->current_timesheet_id))
                                                         <form role="form" method="POST" action="{{route('staff.stopJob')}}">
                                                             @csrf
-                                                            <button type="submit" class="btn btn-danger w-100" name="bookingId" value="Stop">Stop</button>
+                                                            <button type="submit" class="btn btn-danger w-100" name="timesheet_id" value="{{$staff->current_timesheet_id}}">Stop</button>
                                                         </form>
                                                     @else
-
                                                         <form role="form" method="POST" action="{{route('staff.startJob')}}">
                                                             @csrf
-                                                            <button type="submit" name="bookingId" value="{{$booking->id}}" class="btn btn-primary w-100">Start</button>
+                                                            <button type="submit"  name="staff_assignment_id" value="{{$staff_assignment->id}}" class="btn btn-primary w-100">Start</button>
                                                         </form>
                                                     @endif
                                                 @endif
@@ -123,8 +118,6 @@
                             @else
                                 <tr><th colspan="5" class="text-center">Nothing to show</th></tr>
                             @endif
-
-
                             </tbody>
                         </table>
                     </div>

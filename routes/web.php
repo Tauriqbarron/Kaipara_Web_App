@@ -158,6 +158,11 @@ Route::get('/client/bookings_filter=newer', [
     'as' => 'client.getNewerBookings'
 ]);
 
+Route::post('/client/bookings/sendFeedback', [
+    'uses' => 'ClientController@postFeedback',
+    'as' => 'client.postFeedback'
+]);
+
 Route::post('/client/createBooking', [
     'uses' => 'ClientController@postCreateBooking',
     'as' => 'client.postCreateBooking'

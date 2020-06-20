@@ -50,7 +50,7 @@ class StaffController extends Controller
 
             $completedBookings = $bookings->whereIn('id', $staff_assignments)
                 ->where('date', '<=', today("NZ"))
-                ->where('status', '=', today("complete"))
+                ->where('status', '=', "complete")
                 ->sortBy('date',1)
                 ->sortBy('start_time', 1);
 
@@ -59,7 +59,11 @@ class StaffController extends Controller
                 ->sortBy('date',1)
                 ->sortBy('start_time', 1);
 
-            return view('Security.index', $this->getCalendar(),['staff_assignments' => $staff_assignments, 'staff' => $currentStaff, 'bookings' => $staff_bookings,'completedBookings' => $completedBookings, 'availableBookings' => $availableBookings, 'timetable' => $timetable, 'allBookings' => $bookings]);
+            $timesheets = Timesheet::query()->whereIn('staff__assignment_id',
+                Staff_Assignment::query()->select('id')->where('staff_id','=', $currentStaff->id)->get())
+                ->orderBy('id', 'desc')->get();
+
+            return view('Security.index', $this->getCalendar(),['timesheets'=>$timesheets, 'staff_assignments' => $staff_assignments, 'staff' => $currentStaff, 'bookings' => $staff_bookings,'completedBookings' => $completedBookings, 'availableBookings' => $availableBookings, 'timetable' => $timetable, 'allBookings' => $bookings]);
 
     }
 
@@ -67,17 +71,21 @@ class StaffController extends Controller
         $validator = Validator::make($request->all(), [
            'rating' => 'required|numeric|max:5|min:1',
            'message' => 'required|max:300',
-           'staff_assignment_id' => 'required|numeric'
+           'staff_assignment_id' => 'required|numeric|exists:App\Staff_Assignment,id'
         ]);
         if($validator->fails()){
             return redirect()->back()->withErrors($validator);
         }
+        $staff_assignment = Staff_Assignment::query()->find($request->input('staff_assignment_id'));
+        $client = $staff_assignment->booking->client;
 
         $feedback = new Feedback([
 
             'rating' => $request->get('star'),
             'message'=> $request->get('message'),
             'staff__assignment_id'=> $request->get('staff_assignment_id'),
+            'staff_id' => auth()->guard('staff')->user()->id,
+            'client_id' => $client->id
         ]);
         $feedback->save();
 

@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\applications;
 use App\Booking;
 use App\Booking_Types;
+use App\Client_Feedback;
 use App\Clients;
 use App\Job_Type;
 use App\quote;
 use App\service_provider;
 use App\Service_Provider_Job;
+use App\Staff_Assignment;
 use Carbon\Carbon;
 use http\Client;
 use Illuminate\Http\Request;
@@ -237,7 +239,7 @@ class ClientController extends Controller
     public function getCompletedBookings(){
         $user = auth()->guard('client')->user();
         $bookings = Booking::query()->where('client_id', '=', $user->id)
-            ->where('status', '=', 'completed')->get();
+            ->where('status', '=', 'complete')->get();
         $filtered = true;
         return view('Client.bookings',['user'=>$user, 'bookings'=>$bookings, 'filtered'=>$filtered]);
     }
@@ -364,6 +366,29 @@ class ClientController extends Controller
             return redirect('/client/login')->withErrors(['Please log in with your new password']);
         }
         return back()->with('message', 'Password change successfully');
+    }
+
+    public function postFeedback(Request $request){
+        $validator = Validator::make($request->all(), [
+            'rating' => 'required|numeric|max:5|min:1',
+            'message' => 'required|max:300',
+            'staff_assignment_id' => 'required|numeric'
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator);
+        }
+        $staff_assignment = Staff_Assignment::query()->find($request->input('staff_assignment_id'));
+        $staff = $staff_assignment->staff;
+
+        $clientFeedback = new Client_Feedback([
+            'rating' => $request->get('star'),
+            'message'=> $request->get('message'),
+            'staff__assignment_id'=> $request->get('staff_assignment_id'),
+            'staff_id' => auth()->guard('client')->user()->id,
+            'client_id' => $staff->id
+        ]);
+        $clientFeedback->save();
+        return redirect()->back()->with('message', 'Feedback Posted');
     }
 
 
