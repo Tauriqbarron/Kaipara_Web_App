@@ -50,6 +50,7 @@ class StaffController extends Controller
 
             $completedBookings = $bookings->whereIn('id', $staff_assignments)
                 ->where('date', '<=', today("NZ"))
+                ->where('status', '=', today("complete"))
                 ->sortBy('date',1)
                 ->sortBy('start_time', 1);
 

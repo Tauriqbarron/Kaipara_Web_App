@@ -12,7 +12,7 @@
                 <a class="nav-link" href="{{route('client.property')}}">Property Management</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="{{route('client.jobs')}}">Service Jobs</a>
+                <a class="nav-link" href="{{route('client.jobs')}}">Service Jobs</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('client.bookings')}}">Security Bookings</a>
@@ -172,7 +172,7 @@
                     </div>
                     <div class="mt-2 row w-100">
                         <div class="col-3">
-                            <a href="">Change your password</a>
+                            <a href="{{route('client.password.change')}}">Change your password</a>
                         </div>
                         <div class="col-9">
                             <input type="submit" id="btnEditClient" class="btn btn-success disabled float-right" value="Save Changes" style="pointer-events: none">

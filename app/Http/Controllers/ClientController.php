@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use http\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use SebastianBergmann\Comparator\Book;
@@ -328,6 +329,41 @@ class ClientController extends Controller
     public function getClientSettings(){
         $client = Clients::query()->find(Auth::guard('client')->user()->id);
         return view('Client.settings', ['client' => $client]);
+    }
+
+    public function changePasswordForm(){
+        return view('Client.change_password');
+    }
+
+    public function changePassword(Request $request) {
+        if(!(Hash::check($request->input('current_password'), Auth::guard('client')->user()->getAuthPassword()))) {
+            return back()->withErrors('The current password of your account does not match with what you provided.');
+        }
+
+        if(strcmp($request->input('current_password'), $request->input('new_password')) == 0) {
+            return back()->withErrors('The new password can not be the same as the current password.');
+        }
+
+        $validator = Validator::make($request->all(), [
+            'current_password' => 'required',
+            'new_password' => 'required|min:6|max:15|confirmed'
+        ]);
+        if($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $user = Auth::guard('client')->user();
+        $user->password = Hash::make($request->input('new_password'));
+        $user->save();
+
+        Auth::guard('client')->logout();
+        Session::flush();
+        if(!(Auth::guard('client')->check())){
+            return redirect('/client/login')->withErrors(['Please log in with your new password']);
+        }
+        return back()->with('message', 'Password change successfully');
     }
 
 

@@ -69,8 +69,4 @@ class TimesheetController extends Controller
         }
 
     }
-
-    function getStaffTimeSheets(){
-
-    }
 }

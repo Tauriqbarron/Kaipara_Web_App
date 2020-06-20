@@ -248,7 +248,6 @@ class AdminStaffController extends Controller
         return view('login.securitylogin');
     }
 
-    /*Currently not finish*/
     public function postLogin(Request $request) {
         $this->validate($request, [
             'email' => 'required|email',

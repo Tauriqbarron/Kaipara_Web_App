@@ -174,6 +174,18 @@ Route::post('/client/createApplication', [
 ]);
 
 
+//Service provider change password
+Route::get('client/password/change', [
+    'uses' => 'ClientController@changePasswordForm',
+    'as' => 'client.password.change'
+]);
+
+Route::post('client/password/change', [
+    'uses' => 'ClientController@changePassword',
+    'as' => 'client.password.change'
+]);
+
+
 Route::prefix('client')->group(function (){
     /*Client Registration*/
     Route::get('/registration/getClientRegPage1',[
@@ -197,7 +209,7 @@ Route::prefix('client')->group(function (){
     ]);
     /*Client Registration End*/
 
-    /*Service provider reset password part*/
+    /*Client reset password part*/
     Route::post('/password/email', [
         'uses' => 'Auth\ClientForgotPasswordController@sendResetLinkEmail',
         'as' => 'client.password.email'
@@ -217,6 +229,7 @@ Route::prefix('client')->group(function (){
         'uses' => 'Auth\ClientResetPasswordController@showResetForm',
         'as' => 'client.password.reset'
     ]);
+
 
 });
 
