@@ -65,6 +65,10 @@
                                                 <input type="text" class="form-control w-25" id="price" name="price">
                                             </div>
                                             <div class="form-group row">
+                                                <label for="hour">Enter estimate hours: </label>
+                                                <input type="text" class="form-control w-25" id="hour" name="hour">
+                                            </div>
+                                            <div class="form-group row">
                                                 <label for="message">Please include a short message with your quote:</label>
                                                 <textarea class="form-control" id="message" name="message" rows="3"></textarea>
                                             </div>

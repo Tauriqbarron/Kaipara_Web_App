@@ -24,7 +24,8 @@
                                 <p class="card-text">{{$job->application->description}}</p>
                                 <strong>Client: </strong>{{$job->application->client->first_name}} {{$job->application->client->last_name}}&nbsp;&nbsp;
                                 <strong>Phone Number: </strong>{{$job->application->client->phone_number}}<br/>
-                                <strong>Address: </strong>{{$job->application->street}}, {{$job->application->suburb}}, {{$job->application->city}}
+                                <strong>Address: </strong>{{$job->application->street}}, {{$job->application->suburb}}, {{$job->application->city}}<br/>
+                                <strong>Start Date: </strong>{{$job->application->date}}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Finish Date: </strong>{{$job->application->end_date}}
                                 <br/><label><strong>Status: </strong></label>
                                     Completed
                                 <a href="#" class="btn btn-secondary disabled float-right">Completed</a>

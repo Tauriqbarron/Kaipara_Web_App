@@ -53,7 +53,7 @@ class AdminClientController extends Controller
             'email'=>'required|email|unique:clients',
             'phone_number1'=>'required|regex:/(02[0-9])/',
             'phone_number2'=>'required|digits_between:7, 10/',
-            'password'=>'required|min:6|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/|confirmed',
+            'password'=>'required|min:8|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/|confirmed',
             'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/',
             'suburb'=>'required|regex:/[A-Za-z]/',
             'city'=>'required|regex:/[A-Za-z]/',

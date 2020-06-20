@@ -23,7 +23,8 @@
                                         <p class="card-text">{{$job->application->description}}</p>
                                         <strong>Client: </strong>{{$job->application->client->first_name}} {{$job->application->client->last_name}}&nbsp;&nbsp;
                                         <strong>Phone Number: </strong>{{$job->application->client->phone_number}}<br/>
-                                        <strong>Address: </strong>{{$job->application->street}}, {{$job->application->suburb}}, {{$job->application->city}}
+                                        <strong>Address: </strong>{{$job->application->street}}, {{$job->application->suburb}}, {{$job->application->city}}<br/>
+                                        <strong>Start Date: </strong>{{$job->application->date}}
                                         <br/><label><strong>Status: </strong></label>
                                         @if($job->application->status == 2)
                                             Accepted
