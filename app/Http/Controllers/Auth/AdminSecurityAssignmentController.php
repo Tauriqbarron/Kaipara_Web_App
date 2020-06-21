@@ -56,9 +56,9 @@ class AdminSecurityAssignmentController extends Controller
             'description' => 'required',
             'date' => 'required|date|date_format:Y-m-d|after:today',
             'end_date' => 'required|date|date_format:Y-m-d|after:today',
-            'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(\s?)/',
-            'suburb'=>'required|regex:/^[A-Za-z]+$/',
-            'city'=>'required|regex:/^[A-Za-z]+$/',
+            'street'=>'required|regex:/^[A-Za-z0-9\s?]+$/',
+            'suburb'=>'required|regex:/^[A-Za-z\s?]+$/',
+            'city'=>'required|regex:/^[A-Za-z\s?]+$/',
             'postcode'=>'required|digits:4',
             'numOfStaff' => 'required'
         ]);
@@ -156,9 +156,9 @@ class AdminSecurityAssignmentController extends Controller
             'start_time' => 'required',
             'finish_time' => 'required',
             'numOfStaff' => 'required',
-            'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(\s?)/',
-            'suburb'=>'required|regex:/^[A-Za-z]+$/',
-            'city'=>'required|regex:/^[A-Za-z]+$/',
+            'street'=>'required|regex:/^[A-Za-z0-9\s?]+$/',
+            'suburb'=>'required|regex:/^[A-Za-z\s?]+$/',
+            'city'=>'required|regex:/^[A-Za-z\s?]+$/',
             'postcode'=>'required|digits:4',
             'status' => 'required'
         ]);

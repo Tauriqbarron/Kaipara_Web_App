@@ -38,11 +38,11 @@ class AdminSpController extends Controller
             'email'=>'required|email|max:50|unique:service_providers',
             'uName'=>'required|max:50',
             'phone_number1'=>'required|regex:/(02[0-9])/',
-            'phone_number2'=>'required|digits_between:7, 10/',
+            'phone_number2'=>'required|digits_between:7, 10',
             'password'=>'required|min:8|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/|confirmed',
-            'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/',
-            'suburb'=>'required|regex:/^[A-Za-z]+$/',
-            'city'=>'required|regex:/^[A-Za-z]+$/',
+            'street'=>'required|regex:/^[A-Za-z0-9\s?]+$/',
+            'suburb'=>'required|regex:/^[A-Za-z\s?]+$/',
+            'city'=>'required|regex:/^[A-Za-z\s?]+$/',
             'postcode'=>'required|digits:4'
         ]);
         if($validator->fails()) {
@@ -80,10 +80,10 @@ class AdminSpController extends Controller
             'first_name'=>'required|max:50|regex:/^[A-Za-z]+$/',
             'last_name'=>'required|max:50|regex:/^[A-Za-z]+$/',
             'phone_number1'=>'required|regex:/(02[0-9])/',
-            'phone_number2'=>'required|digits_between:7, 10/',
-            'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(\s?)/',
-            'suburb'=>'required|regex:/^[A-Za-z]+$',
-            'city'=>'required|regex:/^[A-Za-z]+$/',
+            'phone_number2'=>'required|digits_between:7, 10',
+            'street'=>'required|regex:/^[A-Za-z0-9\s?]+$/',
+            'suburb'=>'required|regex:/^[A-Za-z\s?]+$/',
+            'city'=>'required|regex:/^[A-Za-z\s?]+$/',
             'postcode'=>'required|digits:4'
         ]);
         if($validator->fails()) {

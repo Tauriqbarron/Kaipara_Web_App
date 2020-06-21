@@ -63,14 +63,14 @@
 
         <label for="phone_number">Phone Number:</label>
         <div class="form-group row ml-0">
-            <input name="phone_number1" style="width: 100px" class="form-control @error('phone_number1') is-invalid @enderror" placeholder="02x" value="{{old('phone_number')}}"/>
+            <input name="phone_number1" style="width: 100px" class="form-control @error('phone_number1') is-invalid @enderror" placeholder="02x" value="{{old('phone_number1')}}"/>
             @error('phone_number1')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
                 </span>
             @enderror
             <div class="col-md-4">
-                <input name="phone_number2" class="form-control @error('phone_number2') is-invalid @enderror" placeholder="xxxxxxx" value="{{old('phone_number')}}"/>
+                <input name="phone_number2" class="form-control @error('phone_number2') is-invalid @enderror" placeholder="xxxxxxx" value="{{old('phone_number2')}}"/>
                 @error('phone_number2')
                 <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
