@@ -72,24 +72,24 @@ class Applications{
     }
         public function getAvailableApplications(){
         $query = 'SELECT 
-        p.id,
-        p.client_id,
-        p.status,
-        p.imagePath,
-        p.title,
-        p.description,
-        p.price,
-        p.date,
-        p.street,
-        p.suburb,
-        p.city,
-        c.first_name,
-        c.last_name,
-        c.phone_number
+        applications.id,
+        applications.client_id,
+        applications.status,
+        applications.imagePath,
+        applications.title,
+        applications.description,
+        applications.price,
+        applications.date,
+        applications.street,
+        applications.suburb,
+        applications.city,
+        clients.first_name,
+        clients.last_name,
+        clients.phone_number
     FROM
     ' . $this->table .' p
     LEFT JOIN 
-        clients c ON p.client_id = c.id
+        clients ON applications.client_id = clients.id
     WHERE 
         status = 1
     ORDER BY p.date';
