@@ -72,7 +72,6 @@ class Applications{
     }
         public function getAvailableApplications(){
         $query = 'SELECT 
-        applications.id,
         applications.client_id,
         applications.status,
         applications.imagePath,
