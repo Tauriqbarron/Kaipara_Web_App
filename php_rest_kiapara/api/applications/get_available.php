@@ -9,7 +9,7 @@ $database = new Database();
 $db = $database->connect();
 
 $applications = new Applications($db);
-$result = $applications->getApplications();
+$result = $applications->getAvailableApplications();
 
 $num = $result->rowCount();
 
