@@ -24,7 +24,7 @@ $service->getId();
 $service_arr = array();
 
 $service_arr = array(
-    'id'=> service->id
+    'id'=> $service->id
 );
 
 print_r(json_encode($service_arr));
