@@ -33,6 +33,7 @@
             <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -47,6 +48,7 @@
                 <td><a class="btn btn-primary" href="{{route('staff.edit', ['id' => $staff->id])}}">Edit</a></td>
                 <td><a class="btn btn-danger" href="{{route('staff.delete', ['id' => $staff->id])}}">Delete</a></td>
                 <td><a class="btn btn-primary" href="{{route('staff.roster', ['id' => $staff->id])}}">Roster</a></td>
+                <td><a class="btn btn-warning" href="{{route('security.getUploadImage', ['id' => $staff->id])}}">Upload Image</a></td>
             </tr>
             @endforeach
         </tbody>

@@ -8,7 +8,6 @@ var _bookings = [];
 var timetableArray = [];
 var week = [];
 var leaveArray = [];
-//TODO get nav buttons by custom class name and set active
 window.addEventListener('load', function() {
     createTimetable();
     var monthbtn = document.getElementsByClassName('fc-month-button')[0];
@@ -134,7 +133,6 @@ function createTimetable() {
         days = 1+((assignmentEnd-assignmentStart)/1000/60/60/24);
         //Iterate through the date range and create array records to populate the table
         for (i = 0; i < days; i++){
-            //TODO better variable name
             bleh = new Date(assignmentStart);
             bleh.setDate(bleh.getDate()+i);
 
@@ -187,7 +185,6 @@ function createTimetable() {
         //Iterate through the date range and create array records to populate the table
         if (leave['absence_status_id'] === 2){
             for (i = 0; i < days; i++){
-                //TODO better variable name
                 bleh = new Date(leaveStart);
                 bleh.setDate(bleh.getDate()+i);
 

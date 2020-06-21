@@ -14,17 +14,6 @@ use Illuminate\Support\Facades\Validator;
 
 class TimesheetController extends Controller
 {
-    /*TODO: Rules:
-        Define criteria around starting and finishing a job
-            - When is it too early to start
-            - When is it too late to start
-            - When is it too early to finish
-            - When is it too late to finish:
-                -- Should there be a cut off time where a job finishes automatically
-            - Should the job automatically finish if the user gets too far away from the job location
-            - Should the job only start if the user is in proximity of the job location
-            - Should a time sheet allow for multiple stops/starts and record all of them
-    */
     function start(Request $request){
         $user = Staff::query()->find(Auth::guard('staff')->user()->id);
         $userId = $user->id;

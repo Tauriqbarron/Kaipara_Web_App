@@ -413,5 +413,39 @@ class ClientController extends Controller
         return redirect()->back()->with('message', 'Feedback Posted');
     }
 
+    public function getImageUpload(){
+        return view("Client.upload_image");
+    }
+
+    public function postImageUpload(){
+
+        $userId = Auth::guard('client')->user()->id;
+        $user = Clients::query()->find($userId);
+
+        request()->validate([
+
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        ]);
+
+
+
+        $imageName = time().'.'.request()->image->getClientOriginalExtension();
+
+
+
+
+        request()->image->move(public_path('images'), $imageName);
+        $user->imgPath = 'images/' . $imageName;
+        $user->save();
+
+        return back()
+
+            ->with('success','You have successfully upload image.')
+
+            ->with('image',$imageName);
+
+    }
+
 
 }

@@ -222,7 +222,6 @@
                                                                     </div>
                                                                     <div style="width: 300px; float: right">
                                                                         <h5 class="modal-title" id="modalTestLabel">{{$service_provider->firstname}} {{$service_provider->lastname}}</h5>
-                                                                        {{--TODO service provider feedback--}}
                                                                         <h5 class="modal-title">Score: {{count($service_provider->client_service_feedback)>0 ? $service_provider->client_service_feedback->avg('rating') : 'Pending'}} </h5>
                                                                     </div>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

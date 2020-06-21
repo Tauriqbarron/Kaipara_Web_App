@@ -16,7 +16,7 @@
                             </div>
                         </li>
                         <li class="nav-item" id="headerProfileImage">
-                            <img class="float-right rounded-circle shadow dropdown-toggle" style="display: block; width: 54px; height: 54px" src="{{url('images/Profile_Placeholder_large.jpg')}}" alt="profileImage">
+                            <img class="float-right rounded-circle shadow dropdown-toggle" style="display: block; width: 54px; height: 54px" src="{{url(isset($staff->imgPath) ? $staff->imgPath : 'images/Profile_Placeholder.png' )}}" alt="profileImage">
                         </li>
                     </ul>
 

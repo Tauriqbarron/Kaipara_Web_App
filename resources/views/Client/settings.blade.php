@@ -37,6 +37,7 @@
                     <img class="w-100 align-top" src="{{url('images/Card_Header.png')}}" alt="Card top">
                 </div>
                 <img id="card-img-top" class="card-img-top rounded-circle border-light shadow border-3 mr-auto ml-auto mb-auto" src="{{isset($client->imgPath) ? url($client->imgPath): url('images/Profile_Placeholder_Large.png')}}" alt="Card image cap">
+                <a href="{{route('client.getUploadImage')}}" title="Change Profile Picture"><span class="fa fa-pencil position-relative" style="bottom:30px; left: 120px;"></span></a>
                 <div class="mt-4 card-body text-light">
                     <h5 class="card-title text-center">{{$client->first_name}} {{$client->last_name}}</h5>
                     <h5 class="card-title text-center">Ph: {{$client->phone_number}}</h5>

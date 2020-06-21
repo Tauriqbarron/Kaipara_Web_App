@@ -43,7 +43,7 @@
                             </div>
                         </li>
                         <li class="nav-item" id="headerProfileImage">
-                            <img class="float-right rounded-circle shadow dropdown-toggle text-nowrap" style="display: block; width: 54px; height: 54px" src="@if($guard == 'admin' || $guard == 'client' || $guard === 'service_provider'){{url('images/Profile_Placeholder.png')}}@else{{auth()->guard($guard)->user()->imgPath}}@endif" alt="clientProfileImage">
+                            <img class="float-right rounded-circle shadow dropdown-toggle text-nowrap" style="display: block; width: 54px; height: 54px" src="{{isset(auth()->guard($guard)->user()->imgPath) ? url(auth()->guard($guard)->user()->imgPath) : url('images/Profile_Placeholder.png')}}" alt="clientProfileImage">
                         </li>
                     </ul>
                 @else
