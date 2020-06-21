@@ -32,7 +32,9 @@ if($num > 0 ){
             'street'=>$street,
             'suburb'=>$suburb,
             'city'=>$city,
-            'postcode'=>$postcode
+            'phone_number'=>$number
+            'first_name'=>$fname
+            'last_name'=>$lname
         );
         array_push($applications_arr,$applications_item);
     }
