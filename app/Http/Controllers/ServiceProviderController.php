@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\applications;
 use App\quote;
+use App\Service_Feedback;
 use App\service_provider;
 use App\Service_Provider_Job;
 use Illuminate\Support\Facades\Auth;
@@ -246,4 +247,28 @@ class ServiceProviderController extends Controller
         $user->save();
         return back()->with('message', 'Password change successfully');
     }
+
+    public function postFeedback(Request $request){
+        $validator = Validator::make($request->all(), [
+            'star' => 'required|numeric|max:5|min:1',
+            'message' => 'required|max:300',
+            'service_provider_job_id' => 'required|numeric|exists:App\Service_Provider_Job,id'
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator);
+        }
+        $service_provider_job = Service_Provider_Job::query()->find($request->input('service_provider_job_id'));
+        $client = $service_provider_job->application->client;
+
+        $clientFeedback = new Service_Feedback([
+            'rating' => $request->get('star'),
+            'message'=> $request->get('message'),
+            'service__provider__job_id'=> $request->get('service_provider_job_id'),
+            'service_provider_id' => auth()->guard('service_provider')->user()->id,
+            'client_id' => $client->id
+        ]);
+        $clientFeedback->save();
+        return redirect()->back()->with('message', 'Feedback Posted');
+    }
+
 }

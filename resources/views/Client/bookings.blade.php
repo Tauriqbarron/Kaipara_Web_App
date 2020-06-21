@@ -58,56 +58,7 @@
                             </div>
                         </div>
                         @foreach($bookings as $booking)
-                            @if($booking->status == 'complete')
-                                <div class="modal" id="f{{$booking->id}}" tabindex="-1" role="dialog" aria-labelledby="modalTestLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <form  method="POST" action="{{route('client.postFeedback')}}">
-                                            @csrf
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <div class="modal-client-image">
-                                                        <img src="{{url('images/Profile_Placeholder_Large.jpg')}}" class="rounded-circle w-100" alt="Client Image" >
-                                                    </div>
-                                                    <div style="width: 300px; float: right">
-                                                        <h5 class="modal-title" id="modalTestLabel">{{$booking->description}}</h5>
-                                                        <h5 class="modal-title" id="modalTestLabel">Client: {{$booking->client->first_name}} {{$booking->client->last_name}}</h5>
-                                                        <label for="staff_assignment_id">Staff Assignment ID: {{$booking->staff_assignment->id}} </label><input id="staff_assignment_id" name="staff_assignment_id" value="{{$client_assignment->id}}" type="hidden">
-                                                    </div>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div>
-                                                        <label for="rating">Rating:</label>
-                                                    </div>
-                                                    <div class="rating btn-group form-group" id="rating" role="group">
-                                                        <input type="radio" name="star" id="{{$booking->id}}star5" value="5"><label for="{{$booking->id}}star5"></label>
-                                                        <input type="radio" name="star" id="{{$booking->id}}star4" value="4"><label for="{{$booking->id}}star4"></label>
-                                                        <input type="radio" name="star" id="{{$booking->id}}star3" value="3"><label for="{{$booking->id}}star3"></label>
-                                                        <input type="radio" name="star" id="{{$booking->id}}star2" value="2"><label for="{{$booking->id}}star2"></label>
-                                                        <input type="radio" name="star" id="{{$booking->id}}star1" value="1"><label for="{{$booking->id}}star1"></label>
-                                                    </div>
-                                                    <div>
-                                                        <label for="messageBox">Message:</label>
-                                                    </div>
-                                                    <div>
-                                                        <textarea name="message" class="float-left w-100" id="messageBox" rows="5" maxlength="300"></textarea>
-                                                    </div>
 
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-success">Submit Feedback</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-
-                                <button class="">asdasdasd</button>
-                            @endif
                             <div class="row bg-light shadow m-2 p-2">
                                 <div class="col">
                                     <div class="row">
@@ -182,6 +133,105 @@
                                                     <em>{{$booking->status}}</em>
                                                 </div>
                                             </div>
+                                            @if($booking->status != 'available')
+                                                @foreach($booking->staff_assignments as $staff_assignment)
+                                                    <div class="modal" id="f{{$booking->id}}" tabindex="-1" role="dialog" aria-labelledby="modalTestLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <form  method="POST" action="{{route('client.postFeedback')}}">
+                                                                @csrf
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <div class="modal-client-image">
+                                                                            <img src="{{url('images/Profile_Placeholder_Large.jpg')}}" class="rounded-circle w-100" alt="Client Image" >
+                                                                        </div>
+                                                                        <div style="width: 300px; float: right">
+                                                                            <h5 class="modal-title" id="modalTestLabel">{{$booking->description}}</h5>
+                                                                            <h5 class="modal-title" id="modalTestLabel">Client: {{$booking->client->first_name}} {{$booking->client->last_name}}</h5>
+                                                                            <label for="staff_assignment_id">Staff Assignment ID: {{$staff_assignment->id}} </label><input id="staff_assignment_id" name="staff_assignment_id" value="{{$staff_assignment->id}}" type="hidden">
+                                                                        </div>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div>
+                                                                            <label for="rating">Rating:</label>
+                                                                        </div>
+                                                                        <div class="rating btn-group form-group" id="rating" role="group">
+                                                                            <input type="radio" name="star" id="{{$booking->id}}star5" value="5"><label for="{{$booking->id}}star5"></label>
+                                                                            <input type="radio" name="star" id="{{$booking->id}}star4" value="4"><label for="{{$booking->id}}star4"></label>
+                                                                            <input type="radio" name="star" id="{{$booking->id}}star3" value="3"><label for="{{$booking->id}}star3"></label>
+                                                                            <input type="radio" name="star" id="{{$booking->id}}star2" value="2"><label for="{{$booking->id}}star2"></label>
+                                                                            <input type="radio" name="star" id="{{$booking->id}}star1" value="1"><label for="{{$booking->id}}star1"></label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <label for="messageBox">Message:</label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <textarea name="message" class="float-left w-100" id="messageBox" rows="5" maxlength="300"></textarea>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                        <button type="submit" class="btn btn-success">Submit Feedback</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col my-1 border-light border-bottom font-weight-bold">
+                                                            <img src="{{isset($staff_assignment->staff->imgPath) ? url($staff_assignment->staff->imgPath) : url('images/Profile_Placeholder.png')}}" class="rounded-circle quote-provider-image" alt="profile image">
+                                                            {{$staff_assignment->staff->first_name}} {{$staff_assignment->staff->last_name}}
+                                                        </div>
+                                                        <div class="col text-right">
+                                                            <button class="btn btn-primary" data-toggle="modal" data-target="#f{{$booking->id}}" {{($booking->status == 'complete' && !(count($staff_assignment->client_feedback) > 0)) ? '' : 'disabled' }}>Feedback</button>
+                                                        </div>
+                                                    </div>
+                                                    @isset($staff_assignment->timesheet)
+                                                        <div class="row py-2 border-bottom border-light bg-light">
+                                                            <div class="col-2 font-weight-bold">
+                                                                Date
+                                                            </div>
+                                                            <div class="col-6 font-weight-bold">
+                                                                Time
+                                                            </div>
+                                                            <div class="col-4 text-right font-weight-bold">
+                                                                Hours
+                                                            </div>
+                                                        </div>
+                                                    @php($total = 0)
+                                                        @foreach($staff_assignment->timesheet as $timesheet)
+                                                            @if($timesheet->status == 2)
+                                                                <div class="row my-2 border-bottom border-light">
+                                                                    <div class="col-2">
+                                                                        {{Carbon\Carbon::parse($timesheet->date)->isoFormat('dddd Do MMM')}}
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        {{Carbon\Carbon::parse($timesheet->start_time)->isoFormat('LT')}} -
+                                                                        {{Carbon\Carbon::parse($timesheet->stop_time)->isoFormat('LT')}}
+                                                                    </div>
+                                                                    <div class="col-4 text-right">
+                                                                        {{number_format((floor($timesheet->stop_time) + (($timesheet->stop_time - floor($timesheet->stop_time))/.6)) - (floor($timesheet->start_time) + (($timesheet->start_time - floor($timesheet->start_time))/.6)),2)}}
+                                                                        @php($total += (floor($timesheet->stop_time) + (($timesheet->stop_time - floor($timesheet->stop_time))/.6)) - (floor($timesheet->start_time) + (($timesheet->start_time - floor($timesheet->start_time))/.6)))
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                        <div class="row my-2 border-bottom border-light">
+                                                            <div class="col-2">
+                                                            </div>
+                                                            <div class="col-6">
+                                                            </div>
+                                                            <div class="col-4 text-right font-weight-bold">
+                                                                Total: {{number_format($total,2)}}
+                                                            </div>
+                                                        </div>
+                                                    @endisset
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

@@ -18,7 +18,6 @@ class CreateClientFeedbackTable extends Migration
             $table->integer('rating');
             $table->string('message');
             $table->foreignId('staff__assignment_id')->references('id')->on('staff__assignments')->onDelete('cascade');
-            $table->integer('status');
             $table->foreignId('staff_id')->references('id')->on('staff')->onDelete('cascade');
             $table->foreignId('client_id')->references('id')->on('clients')->onDelete('cascade');
         });

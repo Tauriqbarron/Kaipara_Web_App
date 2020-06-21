@@ -142,7 +142,7 @@
                             <div class="col">
                                 <div class="row">
                                     <div class="col-3">
-                                        {{isset($application->date) ? \Carbon\Carbon::parse($application->date)->isoFormat('dddd Do MMM'): 'Date: Pending' }}
+                                        {{isset($application->date) ? \Carbon\Carbon::parse($application->date)->isoFormat('ddd Do MMMM'): 'Date: Pending' }}
                                     </div>
                                     <div class="col-8 text-center">
                                         {{$application->title}}
@@ -150,6 +150,9 @@
                                     <div class="col-1 btn-group-toggle  toggle-btn">
                                         <input type="radio" class="" id="btna{{$application->id}}" data-toggle="collapse" data-target="#a{{$application->id}}" aria-errormessage="false" aria-controls="a{{$application->id}}">
                                         <label class="rounded bg-secondary text-center" for="btna{{$application->id}}"></label>
+                                        @if($application->status == 4 && count($application->service_provider_job->client_service_feedback)<1)
+                                            <span style="position: absolute; font-size: 6pt; bottom:20px;left: 8px;" title="Post Feedback" class="font-weight-bold rounded-circle badge-danger badge-pill">!</span>
+                                        @endif
                                     </div>
                                 </div>
                                 {{--Application Info--}}
@@ -170,8 +173,8 @@
                                             <div class="col-2 text-right">
                                                 <strong>Status</strong>
                                             </div>
-                                            <div class="col-4 text-{{$application->status == 1 ? 'success': 'danger'}}">
-                                                {{$application->status == 1 ? 'Available':'Assigned'}}
+                                            <div class="col-4 text-{{$application->status == 1 ? 'success': ($application->status == 4 ? 'secondary' : 'danger')}}">
+                                                {{$application->status == 1 ? 'Available': ($application->status == 4 ? 'Completed' : "Assigned")}}
                                             </div>
                                             <div class="col-3 text-right">
                                                 <strong>Quotes</strong>
@@ -197,26 +200,30 @@
                                                     </div>
                                                 </div>
                                                 @if(isset($application->service_provider_job))
-                                                <div class="row">
-                                                    <div class="col text-right">
-                                                        <strong>Worker</strong>
+                                                    <div class="row">
+                                                        <div class="col text-right">
+                                                            <strong>Worker</strong>
+                                                        </div>
+                                                        <div class="col">
+                                                            <button class="btn-link border-0 bg-white " data-toggle="modal" data-target="#f{{$application->id}}">{{$application->service_provider_job->service_provider->firstname}} {{$application->service_provider_job->service_provider->lastname }}
+                                                                @if($application->status == 4 && count($application->service_provider_job->client_service_feedback)<1)
+                                                                    <span style="position: relative; font-size: 6pt; bottom:7px;right: 8px;" title="Post Feedback" class="font-weight-bold rounded-circle badge-danger badge-pill">!</span>
+                                                                @endif
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                    <div class="col">
-                                                        <button class="btn-link border-0 bg-white " data-toggle="modal" data-target="#f{{$application->id}}">{{$application->service_provider_job->service_provider->firstname}} {{$application->service_provider_job->service_provider->lastname }}</button>
-                                                    </div>
-                                                </div>
-                                                @php($service_provider = $application->service_provider_job->service_provider)
+                                                    @php($service_provider = $application->service_provider_job->service_provider)
                                                     <div class="modal" id="f{{$application->id}}" tabindex="-1" role="dialog" aria-labelledby="modalTestLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <div class="modal-client-image">
-                                                                        <img src="{{url('images/Profile_Placeholder_Large.jpg')}}" class="rounded-circle w-100" alt="Worker Image" >
+                                                                        <img src="{{isset($service_provider->imgPath) ? url($service_provider->imgPath) : url('images/Profile_Placeholder_Large.jpg')}}" class="rounded-circle w-100" alt="Worker Image" >
                                                                     </div>
                                                                     <div style="width: 300px; float: right">
                                                                         <h5 class="modal-title" id="modalTestLabel">{{$service_provider->firstname}} {{$service_provider->lastname}}</h5>
                                                                         {{--TODO service provider feedback--}}
-                                                                        <h5 class="modal-title">Score: 5</h5>
+                                                                        <h5 class="modal-title">Score: {{count($service_provider->client_service_feedback)>0 ? $service_provider->client_service_feedback->avg('rating') : 'Pending'}} </h5>
                                                                     </div>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
@@ -240,7 +247,36 @@
                                                                                 {{$service_provider->phone_number}}
                                                                             </div>
                                                                         </div>
+                                                                    </div>
+                                                                    <div class="container rounded bg-light mt-3 py-3">
+                                                                        @if($application->status == 4 && count($application->service_provider_job->client_service_feedback)<1)
+                                                                            <form method="post" class="" action="{{route('client.service.postFeedback')}}">
+                                                                                @csrf
+                                                                                <h5>Job Feedback</h5>
+                                                                                <input type="hidden" name="service_provider_job_id" value="{{$application->service_provider_job->id}}">
 
+                                                                                <label for="rating">Rating:</label>
+                                                                                <div class="rating btn-group form-group" id="rating" role="group">
+                                                                                    <input type="radio" name="star" id="{{$application->id}}star5" value="5"><label for="{{$application->id}}star5"></label>
+                                                                                    <input type="radio" name="star" id="{{$application->id}}star4" value="4"><label for="{{$application->id}}star4"></label>
+                                                                                    <input type="radio" name="star" id="{{$application->id}}star3" value="3"><label for="{{$application->id}}star3"></label>
+                                                                                    <input type="radio" name="star" id="{{$application->id}}star2" value="2"><label for="{{$application->id}}star2"></label>
+                                                                                    <input type="radio" name="star" id="{{$application->id}}star1" value="1"><label for="{{$application->id}}star1"></label>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <label for="messageBox">Message:</label>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <textarea name="message" class="float-left w-100 form-control" id="messageBox" rows="5" maxlength="300"></textarea>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col text-right">
+                                                                                        <input class="btn btn-success mt-2" type="submit" value="Submit Feedback">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                        @endif
+                                                                        {{count($application->service_provider_job->client_service_feedback)<1 ? '' : 'Feedback Posted' }}
                                                                     </div>
                                                                 </div>
 

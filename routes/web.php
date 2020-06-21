@@ -162,6 +162,10 @@ Route::post('/client/bookings/sendFeedback', [
     'uses' => 'ClientController@postFeedback',
     'as' => 'client.postFeedback'
 ]);
+Route::post('/client/jobs/sendFeedback', [
+    'uses' => 'ClientController@postServiceFeedback',
+    'as' => 'client.service.postFeedback'
+]);
 
 Route::post('/client/createBooking', [
     'uses' => 'ClientController@postCreateBooking',
@@ -369,6 +373,11 @@ Route::get('/service_provider/setting', [
 Route::post('/service_provider/setting', [
     'uses' => 'ServiceProviderController@postEdit',
     'as' => 'service.postEdit'
+]);
+
+Route::post('/service_provider/jobs/completed_jobs/postFeedback', [
+    'uses' => 'ServiceProviderController@postFeedback',
+    'as' => 'service.jobs.postFeedback'
 ]);
 
 /*Service Provider Booking Application Page*/

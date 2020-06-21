@@ -22,5 +22,8 @@ class Staff_Assignment extends Model
     public function feedback() {
         return $this->hasMany('App\Feedback');
     }
+    public function client_feedback() {
+        return $this->hasMany('App\Client_Feedback');
+    }
 
 }

@@ -6,6 +6,7 @@ use App\applications;
 use App\Booking;
 use App\Booking_Types;
 use App\Client_Feedback;
+use App\Client_Service_Feedback;
 use App\Clients;
 use App\Job_Type;
 use App\quote;
@@ -32,9 +33,7 @@ class ClientController extends Controller
         $client = Clients::query()->find(auth()->guard('client')->user()->id);
         $bookings = Booking::query()->where('client_id', '=', $client->id)
             ->where('date', '>=', today()->format('Y-m-d'))->get();
-        $applications = applications::query()->where('client_id', '=', $client->id)
-            ->where('date', '=', null)
-            ->orWhere('date', '>=',  today()->format('Y-m-d'))->get();
+        $applications = applications::query()->where('client_id', '=', $client->id)->get();
         return view('Client.dashboard', ['client' => $client, 'bookings' => $bookings, 'applications' => $applications]);
     }
     //Update a client details.
@@ -124,7 +123,7 @@ class ClientController extends Controller
                 'street' => $request->input('street'),
                 'suburb' => $request->input('suburb'),
                 'city' => $request->input('city1'),
-                'postcode' => $request->input('postcode1'),
+                'postCode' => $request->input('postcode1'),
                 'description' => $request->input('description'),
                 'price' => $request->input('price'),
                 'date' => $request->input('startDate'),
@@ -370,9 +369,9 @@ class ClientController extends Controller
 
     public function postFeedback(Request $request){
         $validator = Validator::make($request->all(), [
-            'rating' => 'required|numeric|max:5|min:1',
+            'star' => 'required|numeric|max:5|min:1',
             'message' => 'required|max:300',
-            'staff_assignment_id' => 'required|numeric'
+            'staff_assignment_id' => 'required|numeric|exists:App\Staff_Assignment,id'
         ]);
         if($validator->fails()){
             return redirect()->back()->withErrors($validator);
@@ -386,6 +385,29 @@ class ClientController extends Controller
             'staff__assignment_id'=> $request->get('staff_assignment_id'),
             'staff_id' => auth()->guard('client')->user()->id,
             'client_id' => $staff->id
+        ]);
+        $clientFeedback->save();
+        return redirect()->back()->with('message', 'Feedback Posted');
+    }
+
+    public function postServiceFeedback(Request $request){
+        $validator = Validator::make($request->all(), [
+            'star' => 'required|numeric|max:5|min:1',
+            'message' => 'required|max:300',
+            'service_provider_job_id' => 'required|numeric|exists:App\Service_Provider_Job,id'
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator);
+        }
+        $service_provider_job = Service_Provider_Job::query()->find($request->input('service_provider_job_id'));
+        $service_provider = $service_provider_job->service_provider;
+
+        $clientFeedback = new Client_Service_Feedback([
+            'rating' => $request->get('star'),
+            'message'=> $request->get('message'),
+            'service__provider__job_id'=> $request->get('service_provider_job_id'),
+            'client_id' => auth()->guard('client')->user()->id,
+            'service_provider_id' => $service_provider->id
         ]);
         $clientFeedback->save();
         return redirect()->back()->with('message', 'Feedback Posted');

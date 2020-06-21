@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client_Feedback extends Model
 {
-    protected $fillable = ['rating', 'message', 'staff__assignment_id', 'status','staff_id', 'client_id'];
+    protected $fillable = ['rating', 'message', 'staff__assignment_id','staff_id', 'client_id'];
 
     public $timestamps = false;
 

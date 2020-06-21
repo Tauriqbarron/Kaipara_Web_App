@@ -37,11 +37,7 @@
             }
 
 
-        </style>
-
-        <!--<script src="https://kit.fontawesome.com/c3929064ae.js" crossorigin="anonymous"></script>-->
-
-
+    </style>
     </head>
     <body id="bod">
     @foreach($completedBookings as $booking)

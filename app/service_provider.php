@@ -26,10 +26,10 @@ class service_provider extends Authenticatable
     }
 
     public function client_service_feedback(){
-        $this->hasMany('App\Client_Service_Feedback');
+        return $this->hasMany('App\Client_Service_Feedback');
     }
 
     public function service_feedback(){
-        $this->hasMany('App\Service_Feedback');
+        return $this->hasMany('App\Service_Feedback');
     }
 }

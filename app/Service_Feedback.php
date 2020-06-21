@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Service_Feedback extends Model
 {
-    protected $fillable = ['rating', 'message', 'service__provider__job_id', 'status','service_provider_id', 'client_id'];
+    protected $fillable = ['rating', 'message', 'service__provider__job_id','service_provider_id', 'client_id'];
 
     public $timestamps = false;
 

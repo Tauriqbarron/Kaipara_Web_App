@@ -15,5 +15,11 @@ class Service_Provider_Job extends Model
     public function service_provider() {
         return $this->belongsTo('App\service_provider', 'service_provider_id', 'id');
     }
+    public function client_service_feedback(){
+        return $this->hasMany('App\Client_Service_Feedback');
+    }
+    public function service_feedback(){
+        return $this->hasMany('App\Service_Feedback');
+    }
 
 }

@@ -23,8 +23,6 @@ class CreateServiceFeedbackTable extends Migration
                 ->on('service__provider__jobs')
                 ->onDelete('cascade');
 
-            $table->integer('status');
-
             $table->foreignId('service_provider_id')
                 ->references('id')
                 ->on('service_providers')

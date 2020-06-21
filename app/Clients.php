@@ -29,16 +29,16 @@ class Clients extends Authenticatable
     }
 
     public function  feedback(){
-        $this->hasMany('App\Feedback');
+        return $this->hasMany('App\Feedback', 'client_id', 'id');
     }
     public function  client_feedback(){
-        $this->hasMany('App\Client_Feedback');
+        return $this->hasMany('App\Client_Feedback', 'client_id', 'id');
     }
     public function  client_service_feedback(){
-        $this->hasMany('App\Client_Service_Feedback');
+        return $this->hasMany('App\Client_Service_Feedback', 'client_id', 'id');
     }
     public function  service_feedback(){
-        $this->hasMany('App\Service_Feedback');
+        return $this->hasMany('App\Service_Feedback', 'client_id', 'id');
     }
 
 }
