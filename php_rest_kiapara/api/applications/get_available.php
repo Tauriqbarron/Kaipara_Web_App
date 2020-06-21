@@ -19,7 +19,6 @@ if($num > 0 ){
     while($row = $result->fetch(PDO::FETCH_ASSOC)){
         extract($row);
         $applications_item = array(
-            'id'=>$id,
             'client_id'=>$client_id,
             'title'=>$title,
             'description'=>$description,
