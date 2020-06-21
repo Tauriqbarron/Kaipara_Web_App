@@ -72,6 +72,7 @@ class Applications{
     }
         public function getAvailableApplications(){
         $query = 'SELECT 
+        applications.id,
         applications.client_id,
         applications.status,
         applications.imagePath,
@@ -86,7 +87,7 @@ class Applications{
         clients.last_name,
         clients.phone_number
     FROM
-    ' . $this->table .' p
+    ' . $this->table .'
     LEFT JOIN 
         clients ON applications.client_id = clients.id
     WHERE 
