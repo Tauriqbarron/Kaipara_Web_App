@@ -68,27 +68,31 @@ class Applications{
     }
         public function getAvailableApplications(){
         $query = 'SELECT 
-        id,
-        client_id,
-        status,
-        imagePath,
-        title,
-        description,
-        price,
-        date,
-        start_time,
-        finish_time,
-        street,
-        suburb,
-        city,
-        postcode
+        p.id,
+        p.client_id,
+        p.status,
+        p.imagePath,
+        p.title,
+        p.description,
+        p.price,
+        p.date,
+        p.start_time,
+        p.finish_time,
+        p.street,
+        p.suburb,
+        p.city,
+        c.fname as first_name,
+        c.lname as last_name,
+        c.number as phone_number
+
     FROM
-    ' . $this->table .'
+    ' . $this->table .' p
+    LEFT JOIN 
+        clients c ON p.client_id = c.id
     WHERE 
         status = 1';
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
-
     }
 }
