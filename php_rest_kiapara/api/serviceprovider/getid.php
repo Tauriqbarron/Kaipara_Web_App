@@ -10,7 +10,7 @@ $db = $database->connect();
 
 $service = new ServiceProvider($db);
 if(isset($_GET['email'])){
-    $service->client_id = $_GET['email'];
+    $service->email = $_GET['email'];
 }else{
     echo json_encode(
         array('message'=>'email not set')
