@@ -91,7 +91,8 @@ class Applications{
     LEFT JOIN 
         clients c ON p.client_id = c.id
     WHERE 
-        status = 1';
+        status = 1
+    ORDER BY p.date';
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
