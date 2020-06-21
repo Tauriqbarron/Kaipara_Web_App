@@ -48,15 +48,15 @@ class AdminClientController extends Controller
     //save the new client to the database.
     public function postCreate(Request $request) {
         $validator = Validator::make($request->all(), [
-            'first_name'=>'required|max:50|regex:/[a-zA-Z]/',
-            'last_name'=>'required|max:50|regex:/[A-Za-z]/',
+            'first_name'=>'required|max:50|regex:/^[A-Za-z]+$/',
+            'last_name'=>'required|max:50|regex:/^[A-Za-z]+$/',
             'email'=>'required|email|unique:clients',
             'phone_number1'=>'required|regex:/(02[0-9])/',
             'phone_number2'=>'required|digits_between:7, 10/',
             'password'=>'required|min:8|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/|confirmed',
             'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/',
-            'suburb'=>'required|regex:/[A-Za-z]/',
-            'city'=>'required|regex:/[A-Za-z]/',
+            'suburb'=>'required|regex:/^[A-Za-z]+$/',
+            'city'=>'required|regex:/^[A-Za-z]+$/',
             'postcode'=>'required|digits:4'
         ]);
         if($validator->fails()) {
@@ -95,13 +95,13 @@ class AdminClientController extends Controller
     //update the client.
     public function postEdit(Request $request, $id) {
         $validator = Validator::make($request->all(), [
-            'first_name'=>'required|max:50|regex:/[A-Za-z]/',
-            'last_name'=>'required|max:50|regex:/[A-Za-z]/',
+            'first_name'=>'required|max:50|regex:/^[A-Za-z]+$/',
+            'last_name'=>'required|max:50|regex:/^[A-Za-z]+$/',
             'phone_number1'=>'required|regex:/(02[0-9])/',
             'phone_number2'=>'required|digits_between:7, 10/',
             'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(\s?)/',
-            'suburb'=>'required|regex:/[A-Za-z]/',
-            'city'=>'required|regex:/[A-Za-z]/',
+            'suburb'=>'required|regex:/^[A-Za-z]+$/',
+            'city'=>'required|regex:/^[A-Za-z]+$/',
             'postcode'=>'required|digits:4'
         ]);
         if($validator->fails()) {
