@@ -19,7 +19,7 @@ class Applications{
     public $start_time;
     public $finish_time;
     public $fname;
-    public $lname
+    public $lname;
     public $number;
     
 
