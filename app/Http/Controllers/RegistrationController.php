@@ -27,8 +27,8 @@ class RegistrationController extends Controller
     public function createClient(Request $request) {
         //create function to store results validated so far
         $validator = Validator::make($request->all(), [
-            'first_name' => 'required|max:50|regex:/[a-zA-Z]/',
-            'last_name' => 'required|max:50|regex:/[a-zA-Z]/',
+            'first_name' => 'required|max:50|regex:/^[A-Za-z]+$/',
+            'last_name' => 'required|max:50|regex:/^[A-Za-z]+$/',
             'email' => 'required|email|max:50|unique:clients',
             'phone_number1'=>'required|regex:/(02[0-9])/',
             'phone_number2'=>'required|digits_between:7, 10/',
@@ -60,8 +60,8 @@ class RegistrationController extends Controller
         $userinfo = Session::has('userinfo') ? Session::get('userinfo'): null;
         $validator = Validator::make($request->all(),[
             'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/',
-            'suburb'=>'required|regex:/[A-Za-z]/',
-            'city'=>'required|regex:/[A-Za-z]/',
+            'suburb'=>'required|regex:/^[A-Za-z]+$/',
+            'city'=>'required|regex:/^[A-Za-z]+$/',
             'postcode'=>'required|digits:4'
         ]);
         if ($validator->fails()) {
@@ -98,8 +98,8 @@ class RegistrationController extends Controller
     {
         //create function to store results validated so far
         $validator = Validator::make($request->all(), [
-            'first_name' => 'required|max:50|regex:/[a-zA-Z]/',
-            'last_name' => 'required|max:50|regex:/[a-zA-Z]/',
+            'first_name' => 'required|max:50|regex:/^[A-Za-z]+$/',
+            'last_name' => 'required|max:50|regex:/^[A-Za-z]+$/',
             'email' => 'required|email|max:50|unique:service_providers',
             'username' => 'required|max:50',
             'phone_number1'=>'required|regex:/(02[0-9])/',
@@ -134,8 +134,8 @@ class RegistrationController extends Controller
         $userinfo = Session::has('userinfo') ? Session::get('userinfo'): null;
         $validator = Validator::make($request->all(),[
             'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/',
-            'suburb'=>'required|regex:/[A-Za-z]/',
-            'city'=>'required|regex:/[A-Za-z]/',
+            'suburb'=>'required|regex:/^[A-Za-z]+$/',
+            'city'=>'required|regex:/^[A-Za-z]+$/',
             'postcode'=>'required|digits:4'
         ]);
         if ($validator->fails()) {

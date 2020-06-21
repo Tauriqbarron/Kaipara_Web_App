@@ -26,6 +26,7 @@ class AdminSecurityAssignmentController extends Controller
     public function Search(Request $request) {
         $search = $request->input('search');
         $assignments = Booking::where('id', 'like', '%'.$search.'%')
+            ->orWhere('client_id', 'like', '%'.$search.'%')
             ->paginate(5);
         $assignments->appends(['search' => $search]);
         return view('Administration.security_Assignment.index', ['assignments' => $assignments]);
@@ -56,8 +57,8 @@ class AdminSecurityAssignmentController extends Controller
             'date' => 'required|date|date_format:Y-m-d|after:today',
             'end_date' => 'required|date|date_format:Y-m-d|after:today',
             'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(\s?)/',
-            'suburb'=>'required|regex:/[A-Za-z]/',
-            'city'=>'required|regex:/[A-Za-z]/',
+            'suburb'=>'required|regex:/^[A-Za-z]+$/',
+            'city'=>'required|regex:/^[A-Za-z]+$/',
             'postcode'=>'required|digits:4',
             'numOfStaff' => 'required'
         ]);
@@ -156,8 +157,8 @@ class AdminSecurityAssignmentController extends Controller
             'finish_time' => 'required',
             'numOfStaff' => 'required',
             'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(\s?)/',
-            'suburb'=>'required|regex:/[A-Za-z]/',
-            'city'=>'required|regex:/[A-Za-z]/',
+            'suburb'=>'required|regex:/^[A-Za-z]+$/',
+            'city'=>'required|regex:/^[A-Za-z]+$/',
             'postcode'=>'required|digits:4',
             'status' => 'required'
         ]);

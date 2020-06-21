@@ -47,8 +47,8 @@ class AdminServiceAssignmentController extends Controller
             'description' => 'required',
             'date' => 'required|date|after:today',
             'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(\s?)/',
-            'suburb'=>'required|regex:/[A-Za-z]/',
-            'city'=>'required|regex:/[A-Za-z]/',
+            'suburb'=>'required|regex:/^[A-Za-z]+$/',
+            'city'=>'required|regex:/^[A-Za-z]+$/',
             'postcode'=>'required|digits:4',
         ]);
         if($validator->fails()) {
@@ -94,8 +94,8 @@ class AdminServiceAssignmentController extends Controller
             'description' => 'required',
             'date' => 'required|date|after:today',
             'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(\s?)/',
-            'suburb'=>'required|regex:/[A-Za-z]/',
-            'city'=>'required|regex:/[A-Za-z]/',
+            'suburb'=>'required|regex:/^[A-Za-z]+$/',
+            'city'=>'required|regex:/^[A-Za-z]+$/',
             'postcode'=>'required|digits:4',
         ]);
         if($validator->fails()) {
