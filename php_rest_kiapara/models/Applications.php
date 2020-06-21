@@ -16,8 +16,6 @@ class Applications{
     public $suburb;
     public $city;
     public $postcode;
-    public $start_time;
-    public $finish_time;
     public $fname;
     public $lname;
     public $number;
@@ -82,8 +80,6 @@ class Applications{
         p.description,
         p.price,
         p.date,
-        p.start_time,
-        p.finish_time,
         p.street,
         p.suburb,
         p.city,
