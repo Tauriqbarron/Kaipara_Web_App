@@ -16,6 +16,12 @@ class Applications{
     public $suburb;
     public $city;
     public $postcode;
+    public $start_time;
+    public $finish_time;
+    public $fname;
+    public $lname
+    public $number;
+    
 
     public function __construct($db){
         $this->conn = $db;
