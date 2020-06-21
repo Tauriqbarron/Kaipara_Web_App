@@ -182,6 +182,23 @@ Route::post('/client/createApplication', [
     'as' => 'client.postCreateApplication'
 ]);
 
+Route::get('/client/uploadImage', [
+    'uses' => 'ClientController@getImageUpload',
+    'as' => 'client.getUploadImage'
+]);
+
+
+Route::post('/client/uploadImage', [
+    'uses' => 'ClientController@postImageUpload',
+    'as' => 'client.postUploadImage'
+]);
+
+Route::post('/service_provider/jobs/completed_jobs/postFeedback', [
+    'uses' => 'ServiceProviderController@postFeedback',
+    'as' => 'service.jobs.postFeedback'
+]);
+
+
 
 //Service provider change password
 Route::get('client/password/change', [
@@ -193,6 +210,7 @@ Route::post('client/password/change', [
     'uses' => 'ClientController@changePassword',
     'as' => 'client.password.change'
 ]);
+
 
 
 Route::prefix('client')->group(function (){
@@ -279,6 +297,16 @@ Route::get('/security/date{i}', [
 
 Route::get('/security/week{i}', [
     'uses' => "StaffController@setWeek", 'as' => 'security.setWeek'
+]);
+
+Route::get('admin/security/uploadImage{id}', [
+    'uses' => 'Auth\AdminStaffController@getImageUpload',
+    'as' => 'security.getUploadImage'
+]);
+
+Route::post('admin/security/uploadImage', [
+    'uses' => 'Auth\AdminStaffController@postImageUpload',
+    'as' => 'security.postUploadImage'
 ]);
 
 
@@ -373,6 +401,16 @@ Route::get('/service_provider/setting', [
 Route::post('/service_provider/setting', [
     'uses' => 'ServiceProviderController@postEdit',
     'as' => 'service.postEdit'
+]);
+
+Route::get('/service_provider/uploadImage', [
+    'uses' => 'ServiceProviderController@getImageUpload',
+    'as' => 'service.getUploadImage'
+]);
+
+Route::post('/service_provider/uploadImage', [
+    'uses' => 'ServiceProviderController@postImageUpload',
+    'as' => 'service.postUploadImage'
 ]);
 
 Route::post('/service_provider/jobs/completed_jobs/postFeedback', [

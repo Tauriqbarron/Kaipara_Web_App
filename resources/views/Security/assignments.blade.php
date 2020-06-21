@@ -85,8 +85,6 @@
                             </a>
                         </td>
                     </tr>
-
-                    <!--TODO create a css class for cell backgrounds and padding, get rid of inline style defs-->
                     @if(count($booking->staff_assignments) > 0)
                         @foreach($booking->staff_assignments as $sa)
 
@@ -101,8 +99,6 @@
                                     </td>
                                     <td style="padding: 0px" class="bg-light">
                                         <div style="padding: 10px"  class="collapse" id="sa{{$booking->id}}">
-                                            <!--TODO feedback only for completed jobs, check if feedback has been sent already by the staff member and grey out button if it has
-                                                    - figure out a way to distinguish between staff and client feedback -->
                                             @if(!(count($sa->feedback) > 0))
                                                 <button type="button" class="btn btn-primary w-100" data-toggle="modal" data-target="#f{{$booking->id}}">
                                                     Feedback

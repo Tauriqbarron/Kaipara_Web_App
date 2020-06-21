@@ -66,4 +66,29 @@ class Applications{
         $stmt->execute();
         return $stmt;    
     }
+        public function getAvailableApplications(){
+        $query = 'SELECT 
+        id,
+        client_id,
+        status,
+        imagePath,
+        title,
+        description,
+        price,
+        date,
+        start_time,
+        finish_time,
+        street,
+        suburb,
+        city,
+        postcode
+    FROM
+    ' . $this->table .'
+    WHERE 
+        status = 1';
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+
+    }
 }

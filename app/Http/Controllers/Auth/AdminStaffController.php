@@ -326,5 +326,29 @@ class AdminStaffController extends Controller
     }
 
 
+    public function getImageUpload($id){
+        $staff = Staff::query()->find($id);
+        return view("Security.upload_image")->with('staff',$staff);
+    }
+
+    public function postImageUpload(Request $request){
+        request()->validate([
+            'staff_id'=>'required|exists:App\Staff,id',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        ]);
+        $user = Staff::query()->find($request->input('staff_id'));
+        $imageName = time().'.'.request()->image->getClientOriginalExtension();
+        request()->image->move(public_path('images'), $imageName);
+        $user->imgPath = 'images/' . $imageName;
+        $user->save();
+
+        return redirect()->route('staff.index')
+            ->with('success','You have successfully uploaded an image.')
+            ->with('image',$imageName);
+
+    }
+
+
 
 }

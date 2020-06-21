@@ -28,7 +28,6 @@ class StaffController extends Controller
 
     public function getHome() {
 
-            //TODO: Only access database when something changes rather than reloading the same data
             $currentStaff = Staff::query()->find(Auth::guard('staff')->user()->id);
             $staff_assignments = $currentStaff->staff_assignments->pluck('booking_id');
 
@@ -122,7 +121,6 @@ class StaffController extends Controller
         $staff_id = $user->id;
         $staff = Staff::query()->find($staff_id);
         $staff_assignments = $staff->staff_Assignments;
-        //TODO: Tidy this up
         $booking = Booking::query()->find($booking_id);
 
         foreach($staff_assignments as $staff_assignment){
@@ -281,5 +279,6 @@ class StaffController extends Controller
         $calendar = \Calendar::addEvents($event);
         return compact('events', 'calendar');
     }
+
 
 }

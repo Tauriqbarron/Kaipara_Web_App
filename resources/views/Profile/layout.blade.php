@@ -40,6 +40,7 @@
                             </ul>
                         </div>
                     @endif
+
                     @yield('mainContent')
                 </div>
                 @include('footer')

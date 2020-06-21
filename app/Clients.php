@@ -13,7 +13,7 @@ class Clients extends Authenticatable
 {
     use Notifiable;
     protected $guard = 'client';
-    protected $fillable = ['first_name', 'last_name', 'email', 'phone_number', 'password', 'street', 'suburb', 'city', 'postcode'];
+    protected $fillable = ['first_name', 'last_name', 'email', 'phone_number', 'password', 'street', 'suburb', 'city', 'postcode', 'imgPath'];
 
     public function bookings() {
         return $this->hasMany('App\Booking');

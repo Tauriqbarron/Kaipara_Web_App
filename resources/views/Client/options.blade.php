@@ -21,7 +21,6 @@
                             </button>
                         </h5>
                     </div>
-                    {{-- TODO uncheck checboxes when closed, add start and end time to day picker--}}
                     <div id="collapseOne" class=" collapse-observe collapse" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body">
                             <div class="form-row">
