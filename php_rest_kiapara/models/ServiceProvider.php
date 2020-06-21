@@ -37,5 +37,21 @@ class ServiceProvider{
         $this->password = $row['password'];
 
         }
+        public function getId(){
+        $query = 'SELECT 
+            id
+        FROM
+        ' . $this->table .'
+        WHERE
+            email = ?';
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1,$this->email);
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->id = $row['id'];
+        }
 
 }
