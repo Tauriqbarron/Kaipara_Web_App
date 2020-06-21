@@ -27,8 +27,6 @@ if($num > 0 ){
             'imagePath'=>$imagePath,
             'price'=>$price,
             'date'=>$date,
-            'start_time'=>$start_time,
-            'finish_time'=>$finish_time,
             'street'=>$street,
             'suburb'=>$suburb,
             'city'=>$city,
