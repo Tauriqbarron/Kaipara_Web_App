@@ -83,10 +83,9 @@ class Applications{
         p.street,
         p.suburb,
         p.city,
-        c.first_name as first_name,
-        c.last_name as last_name,
-        c.phone_number as phone_number
-
+        c.first_name,
+        c.last_name,
+        c.phone_number
     FROM
     ' . $this->table .' p
     LEFT JOIN 
