@@ -3,13 +3,6 @@
     <div class="w-75 mx-auto bg-light p-2 mt-2 rounded">
         <h1>Update assignment</h1>
     <h2 class="ml-5">Security assignment id: {{$assignment->id}}</h2>
-    @if(count($errors) > 0)
-        <div class="alert alert-danger">
-            @foreach($errors->all() as $error)
-                <p>{{$error}}</p>
-            @endforeach
-        </div>
-    @endif
     <hr/>
 
     <form class="ml-2" method="post" action="{{route('security_assignment.edit', ['id' => $assignment->id])}}">
@@ -33,64 +26,69 @@
                     @endforeach
                 </select>
             </div>
+
             <div class="form-group col-md-4">
-                <label for="inputAddress2">Price:</label>
-                <input class="form-control" name="price" value="{{$assignment->price}}">
+                <label for="price">Price:</label>
+                <input class="form-control @error('price') is-invalid @enderror" name="price" value="{{$assignment->price}}">
+                @error('price')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
         </div>
+
         <div class="form-group">
-            <label for="descripyion">Description:</label>
-            <textarea type="text" class="form-control" name="description" rows="3">{{$assignment->description}}</textarea>
+            <label for="description">Description:</label>
+            <textarea type="text" class="form-control @error('description') is-invalid @enderror" name="description" rows="3">{{$assignment->description}}</textarea>
+            @error('description')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
 
-        <!--The date, time, number of staff and the address-->
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="date">Start Date:</label>
-                <input type="date" name="date" class="form-control" value="{{$assignment->date}}">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="date">End date:</label>
-                <input type="date" name="end_date" class="form-control" value="{{$assignment->end_date}}">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="start_time">Start Time:</label>
-                <input type="text" name="start_time" class="form-control" value="{{$assignment->start_time}}">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="finish_time">End Time:</label>
-                <input type="text" name="finish_time" class="form-control" value="{{$assignment->finish_time}}">
+                <input type="date" name="date" class="form-control @error('date') is-invalid @enderror" value="{{$assignment->date}}">
+                @error('date')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
 
             <div class="form-group col-md-6">
-                <label for="numOfStaff">Number of Officer:</label>
-                <select class="form-control" name="numOfStaff">
-                    @for($i = 1; $i <= 5; $i++)
-                        @if($i == $assignment->staff_needed)
-                            <option value="{{$i}}" selected="selected">{{$i}}</option>
-                        @else
-                            <option value="{{$i}}">{{$i}}</option>
-                        @endif
-                        @endfor
-                </select>
+                <label for="date">End date:</label>
+                <input type="date" name="end_date" class="form-control @error('end_date') is-invalid @enderror" value="{{$assignment->end_date}}">
+                @error('end_date')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="start_time">Start Time:</label>
+                <input type="text" name="start_time" class="form-control @error('start_time') is-invalid @enderror" value="{{$assignment->start_time}}">
+                @error('start_time')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
             <div class="form-group col-md-6">
-                <label for="inputAddress2">Street:</label>
-                <input name="street" class="form-control" value="{{$assignment->street}}" />
-            </div>
-            <div class="form-group col-md-4">
-                <label for="inputCity">Suburb:</label>
-                <input name="suburb" class="form-control" value="{{$assignment->suburb}}" />
-            </div>
-            <div class="form-group col-md-4">
-                <label for="inputState">City:</label>
-                <input name="city" class="form-control" value="{{$assignment->city}}" />
-            </div>
-            <div class="form-group col-md-2">
-                <label for="inputZip">Zip:</label>
-                <input name="postcode" class="form-control" value="{{$assignment->postcode}}" />
+                <label for="finish_time">End Time:</label>
+                <input type="text" name="finish_time" class="form-control @error('finish_time') is-invalid @enderror" value="{{$assignment->finish_time}}">
+                @error('finish_time')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
         </div>
+
             <div class="form-group w-25">
                 <label for="inputAddress2">Status:</label>
                 <select class="form-control" name="status">
@@ -104,7 +102,61 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                <label for="street">Street</label>
+                <input name="street" class="form-control @error('street') is-invalid @enderror" value="{{$assignment->street}}" />
+                @error('street')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
 
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="suburb">Suburb</label>
+                    <input name="suburb" class="form-control @error('suburb') is-invalid @enderror" value="{{$assignment->suburb}}" />
+                    @error('suburb')
+                    <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="city">City</label>
+                    <input name="city" class="form-control @error('city') is-invalid @enderror" value="{{$assignment->city}}" />
+                    @error('city')
+                    <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                    @enderror
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="postcode">Zip</label>
+                    <input name="postcode" class="form-control @error('postcode') is-invalid @enderror" value="{{$assignment->postcode}}" />
+                    @error('postcode')
+                    <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                    @enderror
+                </div>
+            </div>
+
+            <!--The date, time, number of staff and the address-->
+                <div class="form-group w-25">
+                    <label for="numOfStaff">Number of Officer:</label>
+                    <select class="form-control" name="numOfStaff">
+                        @for($i = 1; $i <= 5; $i++)
+                            @if($i == $assignment->staff_needed)
+                                <option value="{{$i}}" selected="selected">{{$i}}</option>
+                            @else
+                                <option value="{{$i}}">{{$i}}</option>
+                            @endif
+                        @endfor
+                    </select>
+                </div>
 
         <!--Change staff-->
         <div class="form-group w-25">

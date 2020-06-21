@@ -89,23 +89,6 @@ class ServiceProviderController extends Controller
         return view('Service.jobs', ['jobs' => $jobs]);
     }
 
-    //Start job//
-    public function startJob($id) {
-        $assignment = applications::find($id);
-        $assignment->status = 3;
-        $assignment->save();
-        return redirect()->back();
-    }
-
-    public function completeJob(Request $request, $id) {
-        $assignment = applications::find($id);
-        $assignment->end_date = date('Y-m-d');
-        $assignment->status = 4;
-        $assignment->save();
-        return redirect()->back();
-
-    }
-
     //Accept a job.
     public function acceptJob($id){
         $sp_id = auth()->guard('service_provider')->id();
@@ -139,6 +122,26 @@ class ServiceProviderController extends Controller
         return redirect()->route('service.jobs', ['jobs' => $jobs]);
     }
 
+    //Start job//
+    public function startJob($id) {
+        $assignment = applications::find($id);
+        if($assignment->date == null){
+            $assignment->date = date('Y-m-d');
+        }
+        $assignment->status = 3;
+        $assignment->save();
+        return redirect()->back();
+    }
+
+    public function completeJob(Request $request, $id) {
+        $assignment = applications::find($id);
+        $assignment->end_date = date('Y-m-d');
+        $assignment->status = 4;
+        $assignment->save();
+        return redirect()->back();
+
+    }
+
     //View completed jobs//
     public function getCompletedJobs(){
         $id = auth()->guard('service_provider')->id();
@@ -151,6 +154,7 @@ class ServiceProviderController extends Controller
     public function quote($id, Request $request){
         $validator = Validator::make($request->all(), [
             'price' => 'required|numeric',
+            'hour' => 'required|numeric',
             'message' => 'required',
         ]);
 
@@ -164,7 +168,9 @@ class ServiceProviderController extends Controller
             'service_provider_id' => auth()->guard('service_provider')->id(),
             'job_id' => $id,
             'price' => $request->input('price'),
+            'estimate_hours' => $request->input('hour'),
             'message' => $request->input('message'),
+            'status' => 2,
         ]);
         $quote->save();
 

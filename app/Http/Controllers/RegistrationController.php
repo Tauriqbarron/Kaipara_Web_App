@@ -27,22 +27,23 @@ class RegistrationController extends Controller
     public function createClient(Request $request) {
         //create function to store results validated so far
         $validator = Validator::make($request->all(), [
-            'firstname' => 'required|max:50',
-            'lastname' => 'required|max:50',
+            'first_name' => 'required|max:50|regex:/[a-zA-Z]/',
+            'last_name' => 'required|max:50|regex:/[a-zA-Z]/',
             'email' => 'required|email|max:50|unique:clients',
-            'pNumber' => 'required|max:20',
-            'password' => 'required|confirmed|max:20'
+            'phone_number1'=>'required|regex:/(02[0-9])/',
+            'phone_number2'=>'required|digits_between:7, 10/',
+            'password' => 'required|min:8|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/|confirmed'
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors('Please fill in the form with valid information')->withInput($request->all());
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
         else{
             $user = array(
-                'firstname' => $request->input('firstname'),
-                'lastname' => $request->input('lastname'),
+                'firstname' => $request->input('first_name'),
+                'lastname' => $request->input('last_name'),
                 'email' => $request->input('email'),
                 'password' => $request->input('password'),
-                'phone_number' => $request->input('pNumber'),
+                'phone_number' => '('.$request->input('phone_number1').')-'.$request->input('phone_number2'),
             );
             $request->session()->put('userinfo',$user);
             return redirect()->route('reg.client.2');
@@ -58,13 +59,13 @@ class RegistrationController extends Controller
     public function storeClient(Request $request){
         $userinfo = Session::has('userinfo') ? Session::get('userinfo'): null;
         $validator = Validator::make($request->all(),[
-            'street'=>'required',
-            'suburb' => 'required',
-            'city'=>'required',
-            'postcode'=>'required'
+            'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/',
+            'suburb'=>'required|regex:/[A-Za-z]/',
+            'city'=>'required|regex:/[A-Za-z]/',
+            'postcode'=>'required|digits:4'
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors('Please fill in the form with valid information')->withInput($request->all());
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
         else{
             $client = new Clients([
@@ -97,24 +98,25 @@ class RegistrationController extends Controller
     {
         //create function to store results validated so far
         $validator = Validator::make($request->all(), [
-            'firstname' => 'required|max:50',
-            'lastname' => 'required|max:50',
+            'first_name' => 'required|max:50|regex:/[a-zA-Z]/',
+            'last_name' => 'required|max:50|regex:/[a-zA-Z]/',
             'email' => 'required|email|max:50|unique:service_providers',
             'username' => 'required|max:50',
-            'pNumber' => 'required|max:20',
-            'password' => 'required|confirmed|max:20'
+            'phone_number1'=>'required|regex:/(02[0-9])/',
+            'phone_number2'=>'required|digits_between:7, 10/',
+            'password' => 'required|min:8|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/|confirmed'
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors('Please fill in the form with valid information')->withInput($request->all());
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
         else{
             $user = array(
-                    'firstname' => $request->input('firstname'),
-                    'lastname' => $request->input('lastname'),
+                    'firstname' => $request->input('first_name'),
+                    'lastname' => $request->input('last_name'),
                     'username' => $request->input('username'),
                     'email' => $request->input('email'),
                     'password' => $request->input('password'),
-                    'phone_number' => $request->input('pNumber'),
+                    'phone_number' => '('.$request->input('phone_number1').')-'.$request->input('phone_number2'),
                     'service' => $request->input('service')
             );
             $request->session()->put('userinfo',$user);
@@ -131,13 +133,13 @@ class RegistrationController extends Controller
     public function storeServiceProvider(Request $request){
         $userinfo = Session::has('userinfo') ? Session::get('userinfo'): null;
         $validator = Validator::make($request->all(),[
-            'street'=>'required',
-            'suburb' => 'required',
-            'city'=>'required',
-            'postcode'=>'required'
+            'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/',
+            'suburb'=>'required|regex:/[A-Za-z]/',
+            'city'=>'required|regex:/[A-Za-z]/',
+            'postcode'=>'required|digits:4'
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors('Please fill in the form with valid information')->withInput($request->all());
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
         else{
             $service_provider = new service_provider([

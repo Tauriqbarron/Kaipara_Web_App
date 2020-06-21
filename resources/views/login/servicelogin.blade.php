@@ -9,7 +9,7 @@
 </head>
     <body>
         <form class="w-75 mx-auto mt-3" role="form" method="POST" action="{{route('service.login.submit')}}">
-            <a class="btn btn-secondary" href="{{URL::previous()}}">Back</a>
+            <a class="btn btn-secondary" href="{{url('/selectuser')}}">Back</a>
             <h1 class="form-group ">Service Provider Login</h1>
             {{csrf_field()}}
             @if ($message = Session::get('error'))

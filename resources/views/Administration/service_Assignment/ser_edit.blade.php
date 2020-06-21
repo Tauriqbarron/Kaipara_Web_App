@@ -4,13 +4,7 @@
     <div class="w-75 mx-auto bg-light p-2 mt-2 rounded">
         <h1 class="ml-5">Update property service assignment</h1>
         <h2 class="ml-5">Property service assignment id: {{$assignment->id}}</h2>
-        @if(count($errors) > 0)
-            <div class="alert alert-danger">
-                @foreach($errors->all() as $error)
-                    <p>{{$error}}</p>
-                @endforeach
-            </div>
-        @endif
+
         <hr/>
 
         <form class="ml-2" method="post" action="{{route('admin.service.edit', ['id' => $assignment->id])}}">
@@ -22,8 +16,14 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="booking_type">Title:</label>
-                    <input type="text" name="title" class="form-control" value="{{$assignment->title}}">
+                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{$assignment->title}}">
+                    @error('title')
+                    <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
+
                 <div class="form-group col-md-4">
                     <label>Job type:</label>
                     <select class="form-control" name="job_type">
@@ -36,12 +36,23 @@
                         @endforeach
                     </select>
                 </div>
+
                 <div class="form-group col-md-4">
                     <label for="price">Price:</label>
                     @if($assignment->price == null)
-                        <input type="text" class="form-control" name="price" placeholder="No price currently">
+                        <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" placeholder="No price currently">
+                        @error('price')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     @else
-                        <input type="text" class="form-control" name="price" value="{{$assignment->price}}">
+                        <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{$assignment->price}}">
+                        @error('price')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     @endif
                 </div>
                 <div class="form-group col-md-4">
@@ -55,37 +66,85 @@
             </div>
 
             <div class="form-group">
-                <label for="descripyion">Description:</label>
-                <textarea type="text" class="form-control" name="description" rows="3">{{$assignment->description}}</textarea>
+                <label for="description">Description:</label>
+                <textarea type="text" class="form-control @error('description') is-invalid @enderror" name="description" rows="3">{{$assignment->description}}</textarea>
+                @error('description')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
+
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="date">Start Date:</label>
-                    <input type="date" name="date" class="form-control" value="{{$assignment->date}}">
+                    <input type="date" name="date" class="form-control @error('date') is-invalid @enderror" value="{{$assignment->date}}">
+                    @error('description')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
+
                 <div class="form-group col-md-6">
-                    <label for="date">End Date:</label>
+                    <label for="end_date">End Date:</label>
                     @if($assignment->end_date != null)
-                        <input type="date" name="end_date" class="form-control" value="{{$assignment->end_date}}">
+                        <input type="date" name="end_date" class="form-control @error('end_date') is-invalid @enderror" value="{{$assignment->end_date}}">
+                        @error('end_date')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     @else
-                        <input type="date" name="end_date" class="form-control" placeholder="Processing">
+                        <input type="date" name="end_date" class="form-control @error('end_date') is-invalid @enderror" placeholder="Processing">
+                        @error('end_date')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     @endif
                 </div>
-                <div class="form-group col-9">
-                    <label for="inputAddress2">Street:</label>
-                    <input name="street" class="form-control" value="{{$assignment->street}}" />
+            </div>
+
+            <div class="form-group">
+                <label for="street">Street</label>
+                <input name="street" class="form-control @error('street') is-invalid @enderror" value="{{$assignment->street}}" />
+                @error('street')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="suburb">Suburb</label>
+                    <input name="suburb" class="form-control @error('suburb') is-invalid @enderror" value="{{$assignment->suburb}}" />
+                    @error('suburb')
+                    <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
+
                 <div class="form-group col-md-4">
-                    <label for="inputCity">Suburb:</label>
-                    <input name="suburb" class="form-control" value="{{$assignment->suburb}}" />
+                    <label for="city">City</label>
+                    <input name="city" class="form-control @error('city') is-invalid @enderror" value="{{$assignment->city}}" />
+                    @error('city')
+                    <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="inputState">City:</label>
-                    <input name="city" class="form-control" value="{{$assignment->city}}" />
-                </div>
+
                 <div class="form-group col-md-2">
-                    <label for="inputZip">Zip:</label>
-                    <input name="postcode" class="form-control" value="{{$assignment->postCode}}" />
+                    <label for="postcode">Zip</label>
+                    <input name="postcode" class="form-control @error('postcode') is-invalid @enderror" value="{{$assignment->postCode}}" />
+                    @error('postcode')
+                    <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
 

@@ -2,64 +2,125 @@
 @section('mainContent')
     <div class="w-75 mx-auto bg-light p-2 mt-2 rounded">
     <h1 class="ml-5">Create service provider</h1>
-    @if(count($errors) > 0)
-        <div class="alert alert-danger">
-            @foreach($errors->all() as $error)
-                <p>{{$error}}</p>
-            @endforeach
-        </div>
-    @endif
     <hr/>
     <form class="justify-content-center" method="post" action="{{route('sp.create')}}" >
         @csrf
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputEmail4">First Name</label>
-                <input name="fName" class="form-control" placeholder="First Name">
+                <label for="first_name">First Name:</label>
+                <input name="first_name" class="form-control @error('first_name') is-invalid @enderror" placeholder="First Name" value="{{old('first_name')}}">
+                @error('first_name')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
+
             <div class="form-group col-md-6">
-                <label for="inputPassword4">Last Name</label>
-                <input name="lName" class="form-control" placeholder="Last Name" />
+                <label for="last_name">Last Name:</label>
+                <input name="last_name" class="form-control @error('last_name') is-invalid @enderror" placeholder="Last Name" value="{{old('last_name')}}" />
+                @error('last_name')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
         </div>
+
         <div class="form-group">
-            <label for="inputAddress">Username</label>
-            <input name="uName" type="text" class="form-control" placeholder="Username" />
+            <label for="uName">Username</label>
+            <input name="uName" type="text" class="form-control" placeholder="Username" value="{{old('uName')}}"/>
+
         </div>
+
         <div class="form-group">
-            <label for="inputAddress">Email</label>
-            <input name="email" type="email" class="form-control" placeholder="Email" />
+            <label for="inputAddress">Email:</label>
+            <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" value="{{old('email')}}" />
+            @error('email')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
+
         <div class="form-group">
-            <label for="inputAddress">Password</label>
-            <input name="password" type="password" class="form-control" placeholder="password" />
+            <label for="inputAddress">Password:</label>
+            <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="password"/>
+            @error('password')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+            <p style="font-size: 13px">Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters.</p>
         </div>
+
         <div class="form-group">
-            <label for="inputAddress">Confirm Password</label>
-            <input name="password_confirmation" type="password" class="form-control" placeholder="confirm password" />
+            <label for="inputAddress">Confirm Password:</label>
+            <input name="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" placeholder="confirm password" />
+            @error('password_confirmation')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
 
 
-        <div class="form-group">
-            <label for="inputAddress2">Phone Number</label>
-            <input name="pNumber" class="form-control" placeholder="Phone Number" />
+        <label for="phone_number">Phone Number:</label>
+        <div class="form-group row ml-0">
+            <input name="phone_number1" style="width: 100px" class="form-control @error('phone_number1') is-invalid @enderror" placeholder="02x" value="{{old('phone_number')}}"/>
+            @error('phone_number1')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+            <div class="col-md-4">
+                <input name="phone_number2" class="form-control @error('phone_number2') is-invalid @enderror" placeholder="xxxxxxx" value="{{old('phone_number')}}"/>
+                @error('phone_number2')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
         </div>
+
         <div class="form-group">
-            <label for="inputAddress2">Street</label>
-            <input name="street" class="form-control" placeholder="Street" />
+            <label for="street">Street:</label>
+            <input name="street" class="form-control @error('street') is-invalid @enderror" placeholder="Street" value="{{old('street')}}" />
+            @error('street')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputCity">Suburb</label>
-                <input name="suburb" class="form-control" placeholder="Suburb" />
+                <label for="suburb">Suburb:</label>
+                <input name="suburb" class="form-control @error('suburb') is-invalid @enderror" placeholder="Suburb" value="{{old('suburb')}}" />
+                @error('suburb')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
+
             <div class="form-group col-md-4">
-                <label for="inputState">City</label>
-                <input name="city" class="form-control" placeholder="City" />
+                <label for="city">City:</label>
+                <input name="city" class="form-control @error('city') is-invalid @enderror" placeholder="City" value="{{old('city')}}" />
+                @error('city')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
+
             <div class="form-group col-md-2">
-                <label for="inputZip">Zip</label>
-                <input name="postcode" class="form-control" placeholder="Postcode" />
+                <label for="postcode">Zip:</label>
+                <input name="postcode" class="form-control @error('postcode') is-invalid @enderror" placeholder="Postcode" value="{{old('postcode')}}" />
+                @error('postcode')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
         </div>
         <a type="button" class="btn btn-danger" href="{{route('sp.index')}}">Back</a>

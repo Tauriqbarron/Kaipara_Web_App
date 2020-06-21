@@ -20,7 +20,8 @@
                             <p class="card-text">{{$quote->application->description}}</p>
                             <strong>Client: </strong>{{$quote->application->client->first_name}} {{$quote->application->client->last_name}}&nbsp;&nbsp;
                             <strong>Phone Number: </strong>{{$quote->application->client->phone_number}}<br/>
-                            <strong>Address: </strong>{{$quote->application->street}}, {{$quote->application->suburb}}, {{$quote->application->city}}
+                            <strong>Address: </strong>{{$quote->application->street}}, {{$quote->application->suburb}}, {{$quote->application->city}}<br/>
+                            <strong>Start Date: </strong>{{$quote->application->date}}
                             <br/><br/><button class="btn btn-success mx-1" type="button" data-toggle="collapse" data-target="#{{$quote->application->title}}" aria-expanded="false" aria-controls="collapseExample">
                                 View Quote
                             </button>
