@@ -85,7 +85,7 @@ class Applications{
         a.street,
         a.suburb,
         a.city,
-        a.job__type_id
+        a.job__type_id,
         c.first_name as fname,
         c.last_name as lname,
         c.phone_number as number,
