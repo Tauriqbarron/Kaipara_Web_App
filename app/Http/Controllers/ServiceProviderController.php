@@ -114,12 +114,10 @@ class ServiceProviderController extends Controller
     public function canceljob($id){
         $job = Service_Provider_Job::find($id);
         $application = applications::find($job->job_id);
-        $application->status = '1';
+        $application->status = 1;
         $application->save();
         $job->delete();
-        $sp_id = auth()->guard('service_provider')->id();
-        $jobs = Service_Provider_Job::where('service_provider_id', '=', $sp_id)->get();
-        return redirect()->route('service.jobs', ['jobs' => $jobs]);
+        return redirect()->back();
     }
 
     //Start job//
@@ -203,11 +201,11 @@ class ServiceProviderController extends Controller
 
     public function postEdit(Request $request) {
         $validator = Validator::make($request->all(), [
-            'phone_number'=>'required|max:11',
-            'street'=>'required',
-            'suburb'=>'required',
-            'city'=>'required',
-            'postcode'=>'required'
+            'phone_number'=>'required|max:13|regex:/^(\(02[0-9]{1}\)\-)([0-9]{7})/',
+            'street'=>'required|regex:/^[A-Za-z0-9\s?]+$/',
+            'suburb'=>'required|regex:/^[A-Za-z\s?]+$/',
+            'city'=>'required|regex:/^[A-Za-z\s?]+$/',
+            'postcode'=>'required|digits:4'
         ]);
         if($validator->fails()) {
             return redirect()->back()
@@ -240,7 +238,7 @@ class ServiceProviderController extends Controller
 
         $validator = Validator::make($request->all(), [
             'current_password' => 'required',
-            'new_password' => 'required|min:6|max:15|confirmed'
+            'new_password' => 'required|min:8|confirmed'
         ]);
         if($validator->fails()) {
             return redirect()->back()

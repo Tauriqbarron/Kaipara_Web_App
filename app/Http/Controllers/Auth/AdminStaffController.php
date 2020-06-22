@@ -48,7 +48,7 @@ class AdminStaffController extends Controller
             'first_name'=>'required|max:50|regex:/^[A-Za-z]+$/',
             'last_name'=>'required|max:50|regex:/^[A-Za-z]+$/',
             'email'=>'required|email|unique:staff',
-            'phone_number1'=>'required|regex:/(02[0-9])/',
+            'phone_number1'=>'required|max:3|regex:/(02[0-9])/',
             'phone_number2'=>'required|digits_between:7, 10',
             'password'=>'required|min:8|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/|confirmed',
             'street'=>'required|regex:/^[A-Za-z0-9\s?]+$/',
@@ -92,7 +92,7 @@ class AdminStaffController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name'=>'required|max:50|regex:/^[A-Za-z]+$/',
             'last_name'=>'required|max:50|regex:/^[A-Za-z]+$/',
-            'phone_number1'=>'required|regex:/(02[0-9])/',
+            'phone_number1'=>'required|max:3|regex:/(02[0-9])/',
             'phone_number2'=>'required|digits_between:7, 10',
             'street'=>'required|regex:/^[A-Za-z0-9\s?]+$/',
             'suburb'=>'required|regex:/^[A-Za-z\s?]+$/',

@@ -1,4 +1,4 @@
-@extends('Client.layout')
+    @extends('Client.layout')
 @section('nav')
     <a href="{{route('client.dashboard')}}" id="profileBtn"><img  src="{{url('images/Dashboard_active.png')}}" class="navbar-brand d-flex mr-auto text-light">
     </a>

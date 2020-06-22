@@ -46,7 +46,7 @@ class AdminServiceAssignmentController extends Controller
             'price' => 'numeric',
             'description' => 'required',
             'date' => 'required|date|after:today',
-            'street'=>'required|regex:/regex:/^[A-Za-z0-9\s?]+$/',
+            'street'=>'required|regex:/^[A-Za-z0-9\s?]+$/',
             'suburb'=>'required|regex:/^[A-Za-z\s?]+$/',
             'city'=>'required|regex:/^[A-Za-z\s?]+$/',
             'postcode'=>'required|digits:4',
