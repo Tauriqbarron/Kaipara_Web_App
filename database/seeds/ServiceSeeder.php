@@ -19,7 +19,7 @@ class ServiceSeeder extends Seeder
                 'username' => 'Jstorm',
                 'email'=>'johnstorm@hotmail.co.nz',
                 'password' => Hash::make('storm123') ,
-                'phone_number'=>'0213456782',
+                'phone_number'=>'(021)-3456782',
                 'street' => '67  Caroni Way',
                 'suburb' => 'Ohariu',
                 'city' => 'Wellington',
