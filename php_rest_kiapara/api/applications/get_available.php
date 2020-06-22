@@ -29,9 +29,9 @@ if($num > 0 ){
             'street'=>$street,
             'suburb'=>$suburb,
             'city'=>$city,
-            'first_name'=>$fname,
-            'last_name'=>$lname,
-            'phone_number'=>$number
+            'f_name'=>$fname,
+            'l_name'=>$lname,
+            'number'=>$number
         );
         array_push($applications_arr,$applications_item);
     }
