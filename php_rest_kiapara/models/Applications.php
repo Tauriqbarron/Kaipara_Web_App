@@ -19,6 +19,8 @@ class Applications{
     public $fname;
     public $lname;
     public $number;
+    public $job__type_id;
+    public $type;
     
 
     public function __construct($db){
@@ -83,13 +85,17 @@ class Applications{
         a.street,
         a.suburb,
         a.city,
+        a.job__type_id
         c.first_name as fname,
         c.last_name as lname,
-        c.phone_number as number
+        c.phone_number as number,
+        j.description as type
     FROM
     ' . $this->table .' a
     JOIN 
         clients c ON a.client_id = c.id
+    JOIN
+        job__types j ON a.job__type_id = j.id
     WHERE 
         a.status = 1
     ORDER BY a.date';
