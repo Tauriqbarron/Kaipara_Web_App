@@ -31,7 +31,7 @@ class RegistrationController extends Controller
             'last_name' => 'required|max:50|regex:/^[A-Za-z]+$/',
             'email' => 'required|email|max:50|unique:clients',
             'phone_number1'=>'required|regex:/(02[0-9])/',
-            'phone_number2'=>'required|digits_between:7, 10/',
+            'phone_number2'=>'required|digits_between:7, 10',
             'password' => 'required|min:8|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/|confirmed'
         ]);
         if ($validator->fails()) {
@@ -59,9 +59,9 @@ class RegistrationController extends Controller
     public function storeClient(Request $request){
         $userinfo = Session::has('userinfo') ? Session::get('userinfo'): null;
         $validator = Validator::make($request->all(),[
-            'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/',
-            'suburb'=>'required|regex:/^[A-Za-z]+$/',
-            'city'=>'required|regex:/^[A-Za-z]+$/',
+            'street'=>'required|regex:/^[A-Za-z0-9\s?]+$/',
+            'suburb'=>'required|regex:/^[A-Za-z\s?]+$/',
+            'city'=>'required|regex:/^[A-Za-z\s?]+$/',
             'postcode'=>'required|digits:4'
         ]);
         if ($validator->fails()) {
@@ -103,7 +103,7 @@ class RegistrationController extends Controller
             'email' => 'required|email|max:50|unique:service_providers',
             'username' => 'required|max:50',
             'phone_number1'=>'required|regex:/(02[0-9])/',
-            'phone_number2'=>'required|digits_between:7, 10/',
+            'phone_number2'=>'required|digits_between:7, 10',
             'password' => 'required|min:8|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/|confirmed'
         ]);
         if ($validator->fails()) {
@@ -133,9 +133,9 @@ class RegistrationController extends Controller
     public function storeServiceProvider(Request $request){
         $userinfo = Session::has('userinfo') ? Session::get('userinfo'): null;
         $validator = Validator::make($request->all(),[
-            'street'=>'required|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/',
-            'suburb'=>'required|regex:/^[A-Za-z]+$/',
-            'city'=>'required|regex:/^[A-Za-z]+$/',
+            'street'=>'required|regex:/^[A-Za-z0-9\s?]+$/',
+            'suburb'=>'required|regex:/^[A-Za-z\s?]+$/',
+            'city'=>'required|regex:/^[A-Za-z\s?]+$/',
             'postcode'=>'required|digits:4'
         ]);
         if ($validator->fails()) {
