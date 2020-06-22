@@ -37,20 +37,47 @@
                             </a>
                         </td>
                     </tr>
+                    <tr >
+                        <td colspan="4" style="padding: 0px" class="bg-white">
+                            <span class="collapse" id="p{{$booking->id}}"></span>
+                            <div class="collapse container px-5"  id="p{{$booking->id}}">
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0 mt-2">{{$booking->booking_type->description}} on {{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        {{$booking->description}}
+                                    </div>
+                                </div>
+                                <div class="row pl-2">
+                                    <div class="col-2">
+                                        <strong>Time</strong>
+                                    </div>
+                                    <div class="col-10">
+                                        {{substr('00:00', 0, (-(strlen(number_format($booking->start_time ,2 , ':','')))) ) . number_format($booking->start_time ,2 , ':','')}} - {{substr('00:00', 0, (-(strlen(number_format($booking->finish_time ,2 , ':','')))) ) . number_format($booking->finish_time ,2 , ':','')}}
+                                    </div>
+                                </div>
+                                <div class="row pl-2">
+                                    <div class="col-2">
+                                        <strong>Date</strong>
+                                    </div>
+                                    <div class="col-10">
+                                        {{\Carbon\Carbon::parse($booking->date)->format('d/m/Y')}} - {{\Carbon\Carbon::parse($booking->end_date)->format('d/m/Y')}}
+                                    </div>
+                                </div>
+                                <div class="row pl-2">
+                                    <div class="col-2">
+                                        <strong>Address</strong>
+                                    </div>
+                                    <div class="col-10">
+                                        {{$booking->street}}<br>{{$booking->suburb}}<br>{{$booking->city}}, {{$booking->postcode}}
+                                    </div>
+                                </div>
 
-                        <tr >
-                            <td colspan="4" style="padding: 0px" class="bg-white">
-                                <span class="collapse" id="a{{$booking->id}}"></span>
-                                <div class="collapse"  id="a{{$booking->id}}" style="padding: 10px">
-                                    {{$booking->description}} required at {{$booking->street}}, {{$booking->suburb}}, {{$booking->city}} at {{number_format($booking->start_time, 2, ":","")}} on {{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}
-                                </div>
-                            </td>
-                            <td style="padding: 0px" class="bg-white">
-                                <div class="collapse btn-group-lg"  id="a{{$booking->id}}" style="padding: 10px">
-                                    <a type="button" class="btn-primary text-white w-100 rounded border-0 text-center text-decoration-none" href="{{route('security.acceptBooking', ['booking_id' => $booking->id])}}"><h6>Accept</h6></a>
-                                </div>
-                            </td>
-                        </tr>
+                            </div>
+                        </td>
                 @endforeach
                 </tbody>
             </table>

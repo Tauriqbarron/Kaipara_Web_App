@@ -72,10 +72,11 @@
                         <input type="text" name="name" class="form-control" placeholder="Name">
                     </div>
                     <div class="form-row my-2">
-                        <input type="text" name="phone" class="form-control" placeholder="Phone">
+                        <input type="text" name="phone1" class="form-control w-25" minlength="3" maxlength="3" placeholder="021">
+                        <input type="text" name="phone2" class="form-control w-75" maxlength="7" minlength="5" placeholder="Phone#">
                     </div>
                     <div class="form-row my-2">
-                        <input type="text" name="email" class="form-control" placeholder="Email">
+                        <input type="email" name="email" class="form-control" placeholder="Email">
                     </div>
                     <div class="form-row my-2">
                         <textarea type="text" name="message" class="form-control" placeholder="Message"></textarea>

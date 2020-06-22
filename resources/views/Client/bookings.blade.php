@@ -142,7 +142,7 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <div class="modal-client-image">
-                                                                            <img src="{{url('images/Profile_Placeholder_Large.jpg')}}" class="rounded-circle w-100" alt="Client Image" >
+                                                                            <img src="{{isset($staff_assignment->staff->imgPath) ? url($staff_assignment->staff->imgPath) : url('images/Profile_Placeholder_Large.jpg')}}" class="rounded-circle w-100" alt="Client Image" >
                                                                         </div>
                                                                         <div style="width: 300px; float: right">
                                                                             <h5 class="modal-title" id="modalTestLabel">{{$booking->description}}</h5>

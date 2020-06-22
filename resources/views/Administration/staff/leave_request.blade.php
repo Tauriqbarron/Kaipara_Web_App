@@ -13,7 +13,7 @@
                     <div class="modal-header container">
                         <div class="row">
                             <div class="modal-client-image col-4">
-                                <img src="{{url($leave->staff->imgPath)}}" class="rounded-circle border border-white shadow" style="width: 110px; height: 110px; object-fit: cover" alt="Client Image" >
+                                <img src="{{isset($leave->staff->imgPath) ? url($leave->staff->imgPath) : url('images/Profile_Placeholder.png')}}" class="rounded-circle border border-white shadow" style="width: 110px; height: 110px; object-fit: cover" alt="Client Image" >
                             </div>
                             <div style="width: 300px; float: right" class="col-8">
                                 <div class="row">
