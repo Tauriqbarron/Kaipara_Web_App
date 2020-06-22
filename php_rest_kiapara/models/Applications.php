@@ -92,7 +92,7 @@ class Applications{
         clients ON applications.client_id = clients.id
     WHERE 
         status = 1
-    ORDER BY p.date';
+    ORDER BY applications.date';
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
