@@ -214,11 +214,16 @@ a.disabled{
     background-size: cover;
 }
 
+.about-span{
+    min-width:20px ;
+}
+
 .service-img{
     width:200px;
     height: 200px;
     margin-left: 30px;
     margin-right: 30px;
+    object-fit: cover;
 }
 
 .service-container{

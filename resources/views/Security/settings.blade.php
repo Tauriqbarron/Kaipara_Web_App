@@ -90,7 +90,7 @@
                 </div>
                 <div class="col-8">
                     <label>
-                        <input type="text" id="editPhoneNumber" name="pNumber" class="form-control form-control-plaintext can-edit" value="{{$staff->phone_number}}" readonly required>
+                        <input type="text" pattern="\(\d{3}\)[- ]\d{7,8}" id="editPhoneNumber" name="pNumber" class="form-control form-control-plaintext can-edit" value="{{$staff->phone_number}}" readonly required>
                     </label>
                 </div>
                 <div class="col-1">

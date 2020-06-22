@@ -275,6 +275,18 @@ Route::get('/', function () {
     return view('Index');
 });
 
+Route::get('/our_services', function (){
+    return view('services');
+});
+
+Route::get('/news', function (){
+    return view('news');
+});
+
+Route::get('/about', function (){
+    return view('about');
+});
+
 Route::get('/test', function () {
     phpinfo();
 });

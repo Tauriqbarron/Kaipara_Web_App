@@ -1,4 +1,4 @@
-@extends('Profile.layout')
+@extends('Client.layout')
 
 @section('mainContent')
     <div class="container">

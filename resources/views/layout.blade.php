@@ -11,11 +11,11 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Asap:700&display=swap" rel="stylesheet">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-        <script src="{{url('js/app.js')}}"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <script src="{{url('js/indexMap.js')}}" type="text/javascript"></script>
 
-        <script src="https://kit.fontawesome.com/c3929064ae.js" crossorigin="anonymous"></script>
 
-        <title>@yield('title') - KSPMS</title>
+        <title>@yield('title')  | KSPMS</title>
         @yield('styles')
     </head>
 <body style="margin-top: 0px">
@@ -26,7 +26,7 @@
                 <img src="https://live.staticflickr.com/932/40955356234_efc310429f_k.jpg" id="img_waterfall" class="img-fluid " alt="Responsive image">
 
                 <div class="caption">
-                    <h1 class="text-center">Our Services</h1>
+                    <h1 class="text-center">@yield('title2')</h1>
                 </div>
         </div>
 
@@ -37,6 +37,8 @@
         @include('footer')
         </div>
     </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoA571QZSNmBnGSO2B0AO6hA1XSlcgicI&callback=initMap" async defer></script>
 </body>
 </html>
 

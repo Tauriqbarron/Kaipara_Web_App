@@ -49,11 +49,12 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <div class="modal-client-image">
-                                    <img src="{{url('images/Profile_Placeholder_Large.jpg')}}" class="rounded-circle w-100" alt="Client Image" >
+                                    <img src="{{isset($booking->client->imgPath) ? url($booking->client->imgPath) : url('images/Profile_Placeholder_Large.png')}}" class="rounded-circle w-100" alt="Client Image" >
                                 </div>
                                 <div style="width: 300px; float: right">
                                     <h5 class="modal-title" id="modalTestLabel">{{$booking->description}}</h5>
                                     <h5 class="modal-title" id="modalTestLabel">Client: {{$booking->client->first_name}} {{$booking->client->last_name}}</h5>
+                                    <h5 class="modal-title" id="modalTestLabel">Score: {{count($booking->client->feedback)>0 ? $booking->client->feedback->avg('rating') : 'Pending'}}</h5>
                                     <label for="staff_assignment_id">Staff Assignment ID: {{$staff_assignment->id}} </label><input id="staff_assignment_id" name="staff_assignment_id" value="{{$staff_assignment->id}}" type="hidden">
                                 </div>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

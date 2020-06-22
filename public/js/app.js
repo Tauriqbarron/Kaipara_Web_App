@@ -9,7 +9,10 @@ var timetableArray = [];
 var week = [];
 var leaveArray = [];
 window.addEventListener('load', function() {
-    createTimetable();
+    try{
+        createTimetable();
+    }catch (e) {
+    }
     var monthbtn = document.getElementsByClassName('fc-month-button')[0];
     monthbtn.click();
 

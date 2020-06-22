@@ -15,7 +15,6 @@ $num = $result->rowCount();
 
 if($num > 0 ){
     $applications_arr = array();
-
     while($row = $result->fetch(PDO::FETCH_ASSOC)){
         extract($row);
         $applications_item = array(
@@ -30,9 +29,10 @@ if($num > 0 ){
             'street'=>$street,
             'suburb'=>$suburb,
             'city'=>$city,
-            'phone_number'=>$number,
-            'first_name'=>$fname,
-            'last_name'=>$lname
+            'f_name'=>$fname,
+            'l_name'=>$lname,
+            'number'=>$number,
+            'type'=>$type
         );
         array_push($applications_arr,$applications_item);
     }

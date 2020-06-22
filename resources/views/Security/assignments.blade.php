@@ -17,13 +17,16 @@
                     </script>
                     <tr>
                         <td class="text-center">
-                            <a href="#" onclick="setCenter('{{$booking->street}} {{$booking->suburb}} {{$booking->city}} New Zealand')"><i class="fa fa-map-marker fa-2x fa-light float-left"></i></a><h6>{{number_format($booking->start_time, 2, ":","")}}</h6>
-                        </td>
-                        <td>
-                            <h6>{{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}</h6>
+                            <a href="#" onclick="setCenter('{{$booking->street}} {{$booking->suburb}} {{$booking->city}} New Zealand')"><i class="fa fa-map-marker fa-2x fa-light"></i></a>
                         </td>
                         <td class="text-center">
-                            <h6 class="label label-default">{{$booking->description}}</h6>
+                            <h6>{{\Carbon\Carbon::parse(number_format($booking->start_time, 2, ":",""))->isoFormat('LT')}}</h6>
+                        </td>
+                        <td>
+                            <h6>{{ \Carbon\Carbon::parse($booking->date)->isoFormat('ddd Do MMM')}}</h6>
+                        </td>
+                        <td class="text-center">
+                            <h6 class="label label-default">{{$booking->booking_type->description}}</h6>
                         </td>
                         <td>
                             <h6>{{$booking->city}}</h6>
@@ -37,20 +40,53 @@
                             </a>
                         </td>
                     </tr>
+                    <tr >
+                        <td colspan="5" style="padding: 0px" class="bg-white">
+                            <span class="collapse" id="a{{$booking->id}}"></span>
+                            <div class="collapse container px-5"  id="a{{$booking->id}}">
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0 mt-2">{{$booking->booking_type->description}} on {{ \Carbon\Carbon::parse($booking->date)->isoFormat('ddd Do MMM')}}</h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        {{$booking->description}}
+                                    </div>
+                                </div>
+                                <div class="row pl-2">
+                                    <div class="col-2">
+                                        <strong>Time</strong>
+                                    </div>
+                                    <div class="col-10">
+                                        {{Carbon\Carbon::parse(substr('00:00', 0, (-(strlen(number_format($booking->start_time ,2 , ':','')))) ) . number_format($booking->start_time ,2 , ':',''))->isoFormat('LT')}} - {{\Carbon\Carbon::parse(substr('00:00', 0, (-(strlen(number_format($booking->finish_time ,2 , ':','')))) ) . number_format($booking->finish_time ,2 , ':',''))->isoFormat('LT')}}
+                                    </div>
+                                </div>
+                                <div class="row pl-2">
+                                    <div class="col-2">
+                                        <strong>Date</strong>
+                                    </div>
+                                    <div class="col-10">
+                                        {{\Carbon\Carbon::parse($booking->date)->isoFormat('ddd Do MMM')}} - {{\Carbon\Carbon::parse($booking->end_date)->isoFormat('ddd Do MMM')}}
+                                    </div>
+                                </div>
+                                <div class="row pl-2">
+                                    <div class="col-2">
+                                        <strong>Address</strong>
+                                    </div>
+                                    <div class="col-10">
+                                        {{$booking->street}}<br>{{$booking->suburb}}<br>{{$booking->city}}, {{$booking->postcode}}
+                                    </div>
+                                </div>
 
-                        <tr >
-                            <td colspan="4" style="padding: 0px" class="bg-white">
-                                <span class="collapse" id="a{{$booking->id}}"></span>
-                                <div class="collapse"  id="a{{$booking->id}}" style="padding: 10px">
-                                    {{$booking->description}} required at {{$booking->street}}, {{$booking->suburb}}, {{$booking->city}} at {{number_format($booking->start_time, 2, ":","")}} on {{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}
-                                </div>
-                            </td>
-                            <td style="padding: 0px" class="bg-white">
-                                <div class="collapse btn-group-lg"  id="a{{$booking->id}}" style="padding: 10px">
-                                    <a type="button" class="btn-primary text-white w-100 rounded border-0 text-center text-decoration-none" href="{{route('security.acceptBooking', ['booking_id' => $booking->id])}}"><h6>Accept</h6></a>
-                                </div>
-                            </td>
-                        </tr>
+                            </div>
+                        </td>
+                        <td style="padding: 0px" class="bg-white">
+                            <div class="collapse btn-group-lg"  id="a{{$booking->id}}" style="padding: 10px">
+                                <a type="button" class="btn-primary text-white w-100 rounded border-0 text-center text-decoration-none" href="{{route('security.acceptBooking', ['booking_id' => $booking->id])}}"><h6>Accept</h6></a>
+                            </div>
+                        </td>
+                    </tr>
                 @endforeach
                 </tbody>
             </table>
@@ -68,10 +104,10 @@
                         <td class="text-center">
                         </td>
                         <td>
-                            <h6>{{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}</h6>
+                            <h6>{{ \Carbon\Carbon::parse($booking->date)->isoFormat('ddd Do MMM')}}</h6>
                         </td>
                         <td class="text-center">
-                            <h6 class="label label-default">{{number_format($booking->start_time, 2, ":","")}}</h6>
+                            <h6 class="label label-default">{{\Carbon\Carbon::parse(number_format($booking->start_time, 2, ":",""))->isoFormat('LT')}}</h6>
                         </td>
                         <td>
                             <h6>{{$booking->city}}</h6>
@@ -94,7 +130,7 @@
                                     <td colspan="4" style="padding: 0px" class="bg-light">
                                         <span class="collapse" id="sa{{$booking->id}}"></span>
                                         <div style="padding: 10px"  class="collapse" id="sa{{$booking->id}}">
-                                            {{$booking->description}} required at {{$booking->street}}, {{$booking->suburb}}, {{$booking->city}} at {{number_format($booking->start_time, 2, ":","")}} on {{ \Carbon\Carbon::parse($booking->date)->format('d/m/Y')}}
+                                            {{$booking->description}} required at {{$booking->street}}, {{$booking->suburb}}, {{$booking->city}} at {{\Carbon\Carbon::parse(number_format($booking->start_time, 2, ":",""))->isoFormat('LT')}} on {{ \Carbon\Carbon::parse($booking->date)->isoFormat('ddd Do MMM')}}
                                         </div>
                                     </td>
                                     <td style="padding: 0px" class="bg-light">
@@ -160,23 +196,23 @@
                                             </td>
                                             <td style="padding: 0"  class="border-0 bg-white" >
                                                 <div class="collapse" id="sa{{$booking->id}}" style="padding:10px">
-                                                    {{\Carbon\Carbon::parse($timesheet->date)->format('d/m/Y')}}
+                                                    {{\Carbon\Carbon::parse($timesheet->date)->isoFormat('ddd Do MMM')}}
                                                 </div>
                                             </td>
                                             <td style="padding: 0" class="border-0 bg-white" >
                                                 <div class="collapse" id="sa{{$booking->id}}" style="padding:10px">
-                                                    {{number_format($timesheet->start_time, 2, ":", "")}}
+                                                    {{\Carbon\Carbon::parse(number_format($timesheet->start_time, 2, ":", ""))->isoFormat('LT')}}
                                                 </div>
                                             </td>
                                             <td style="padding: 0"  class="border-0 bg-white" >
                                                 <div class="collapse" id="sa{{$booking->id}}" style="padding:10px">
-                                                    {{number_format($timesheet->stop_time, 2, ":", "")}}
+                                                    {{\Carbon\Carbon::parse(number_format($timesheet->stop_time, 2, ":", ""))->isoFormat('LT')}}
                                                 </div>
                                             </td>
                                             <td style="padding: 0" colspan="2"  class="border-0 bg-white">
                                                 <div class="collapse" id="sa{{$booking->id}}"  style="padding:10px; text-align: right">
-                                                    {{$timesheet->stop_time - $timesheet->start_time}}
-                                                    @php($totalHours += ($timesheet->stop_time - $timesheet->start_time))
+                                                    {{number_format((floor($timesheet->stop_time) + (($timesheet->stop_time - floor($timesheet->stop_time))/.6)) - (floor($timesheet->start_time) + (($timesheet->start_time - floor($timesheet->start_time))/.6)),2)}}
+                                                    @php($totalHours += (floor($timesheet->stop_time) + (($timesheet->stop_time - floor($timesheet->stop_time))/.6)) - (floor($timesheet->start_time) + (($timesheet->start_time - floor($timesheet->start_time))/.6)))
                                                 </div>
                                             </td>
 

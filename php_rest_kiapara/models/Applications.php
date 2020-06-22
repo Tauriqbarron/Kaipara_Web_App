@@ -19,6 +19,8 @@ class Applications{
     public $fname;
     public $lname;
     public $number;
+    public $job__type_id;
+    public $type;
     
 
     public function __construct($db){
@@ -72,27 +74,31 @@ class Applications{
     }
         public function getAvailableApplications(){
         $query = 'SELECT 
-        p.id,
-        p.client_id,
-        p.status,
-        p.imagePath,
-        p.title,
-        p.description,
-        p.price,
-        p.date,
-        p.street,
-        p.suburb,
-        p.city,
-        c.first_name as first_name,
-        c.last_name as last_name,
-        c.phone_number as phone_number
-
+        a.id,
+        a.client_id,
+        a.status,
+        a.imagePath,
+        a.title,
+        a.description,
+        a.price,
+        a.date,
+        a.street,
+        a.suburb,
+        a.city,
+        a.job__type_id,
+        c.first_name as fname,
+        c.last_name as lname,
+        c.phone_number as number,
+        j.description as type
     FROM
-    ' . $this->table .' p
-    LEFT JOIN 
-        clients c ON p.client_id = c.id
+    ' . $this->table .' a
+    JOIN 
+        clients c ON a.client_id = c.id
+    JOIN
+        job__types j ON a.job__type_id = j.id
     WHERE 
-        status = 1';
+        a.status = 1
+    ORDER BY a.date';
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;

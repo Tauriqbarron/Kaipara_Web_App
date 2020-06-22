@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" href="{{url('css/Index.css')}}" type="text/css"/>
     <link rel="stylesheet" href="{{url('css/Profile.css')}}" type="text/css"/>
-    <title>@yield('title') - KSPMS</title>
+    <title>@yield('title')  | KSPMS</title>
 </head>
 <body>
 <div class="MainCon">
