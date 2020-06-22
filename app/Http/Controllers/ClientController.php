@@ -117,9 +117,10 @@ class ClientController extends Controller
             return redirect()->back()
                 ->withErrors($validator);
         }else{
+            $jobtype = Job_Type::query()->where('description', '=', $request->input('type'))->firstOrFail();
             $application = new applications([
                 'client_id' => auth()->guard('client')->user()->id,
-                'job__type_id' => Job_Type::query()->select('id')->where('description', '=', $request->input('type'))->firstOrFail()->id,
+                'job__type_id' => $jobtype->id,
                 'street' => $request->input('street'),
                 'suburb' => $request->input('suburb'),
                 'city' => $request->input('city1'),
@@ -128,6 +129,7 @@ class ClientController extends Controller
                 'price' => $request->input('price'),
                 'date' => $request->input('startDate'),
                 'title' => $request->input('title'),
+                'imagePath' =>$jobtype->imgPath,
                 'status' => 1,
 
             ]);

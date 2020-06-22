@@ -1,7 +1,7 @@
 <div class="shadow w-100 header-bar">
     <div class="container-fluid">
         <nav class="navbar navbar-light navbar-expand-lg navbar-expand-md navbar-expand-sm justify-content-left"  style="padding: 5px">
-            <a href="/" class="navbar-brand d-flex w-50 mr-auto" onclick="clearSession()" >
+            <a href="{{url('/')}}" class="navbar-brand d-flex w-50 mr-auto" onclick="clearSession()" >
                 <img id="kaiparaLogo" src="{{url('images/KaiparaLogo.png')}}" class="mr-auto float-left">
             </a>
                 @if(auth()->guard('staff')->check())
