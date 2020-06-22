@@ -2,7 +2,7 @@
 
 @section('title','Home')
 
-@section('title2','News')
+@section('title2','About Us')
 
 @section('about', 'active')
 
