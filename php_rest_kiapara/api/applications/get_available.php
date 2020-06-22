@@ -31,7 +31,8 @@ if($num > 0 ){
             'city'=>$city,
             'f_name'=>$fname,
             'l_name'=>$lname,
-            'number'=>$number
+            'number'=>$number,
+            'type'=>$type
         );
         array_push($applications_arr,$applications_item);
     }
