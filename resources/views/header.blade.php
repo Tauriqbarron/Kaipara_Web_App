@@ -41,10 +41,6 @@
 
                 @else
                     <ul class="nav navbar-nav ml-auto w-100 justify-content-end align-items-end">
-
-                        <li class="nav-item border-0">
-                            <a href="{{route('admin.index')}}" class="text-dark mx-1 align-self-start ">Admin</a>
-                        </li>
                         <li class="nav-item border-0">
                             <a href="{{ url('/selectuser') }}" class="text-dark mx-1 align-self-start ">Login</a>
                         </li>
