@@ -88,7 +88,7 @@ class Applications{
         clients.phone_number
     FROM
     ' . $this->table .'
-    LEFT JOIN 
+    INNER JOIN 
         clients ON applications.client_id = clients.id
     WHERE 
         applications.status = 1
