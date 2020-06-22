@@ -72,27 +72,27 @@ class Applications{
     }
         public function getAvailableApplications(){
         $query = 'SELECT 
-        applications.id,
-        applications.client_id,
-        applications.status,
-        applications.imagePath,
-        applications.title,
-        applications.description,
-        applications.price,
-        applications.date,
-        applications.street,
-        applications.suburb,
-        applications.city,
-        clients.first_name,
-        clients.last_name,
-        clients.phone_number
+        a.id,
+        a.client_id,
+        a.status,
+        a.imagePath,
+        a.title,
+        a.description,
+        a.price,
+        a.date,
+        a.street,
+        a.suburb,
+        a.city,
+        c.first_name,
+        c.last_name,
+        c.phone_number
     FROM
-    ' . $this->table .'
-    INNER JOIN 
-        clients ON applications.client_id = clients.id
+    ' . $this->table .' a
+    JOIN 
+        clients c ON a.client_id = c.id
     WHERE 
-        applications.status = 1
-    ORDER BY applications.date';
+        a.status = 1
+    ORDER BY a.date';
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
