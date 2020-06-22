@@ -8,7 +8,7 @@
     {{--<script src="https://kit.fontawesome.com/5228898521.js" crossorigin="anonymous"></script>--}}
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     @yield('styles')
-    <title>@yield('title') - KSPMS</title>
+    <title>@yield('title')  | KSPMS</title>
 </head>
     <body>
 

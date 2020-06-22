@@ -15,7 +15,7 @@
         <script src="{{url('js/indexMap.js')}}" type="text/javascript"></script>
 
 
-        <title>@yield('title') - KSPMS</title>
+        <title>@yield('title')  | KSPMS</title>
         @yield('styles')
     </head>
 <body style="margin-top: 0px">

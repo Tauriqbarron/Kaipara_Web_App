@@ -203,7 +203,7 @@ class StaffController extends Controller
     //Update a staff details.
     public function postEdit(Request $request) {
         $validator = Validator::make($request->all(), [
-            'pNumber'=>'required|max:11',
+            'pNumber'=>'required|max:14',
             'street'=>'required',
             'suburb'=>'required',
             'city'=>'required',
