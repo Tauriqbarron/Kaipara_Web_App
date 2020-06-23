@@ -10,6 +10,7 @@ class Bookings{
     public $price;
     public $date;
     public $end_date;
+    public $end_date;
     public $start_time;
     public $finish_time;
     public $street;
@@ -47,6 +48,7 @@ class Bookings{
         $query = 'SELECT
             b.id,
             b.date,
+            b.end_date,
             b.description,
             b.start_time,
             b.finish_time,
