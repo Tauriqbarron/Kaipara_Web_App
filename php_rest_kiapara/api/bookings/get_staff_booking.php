@@ -39,7 +39,7 @@ if($num > 0){
             'fname'=>$fname,
             'lname'=>$lname,
             'number'=>$number
-
+            'date'=>$date
         );
         array_push($bookings_arr,$bookings_item);
     }
