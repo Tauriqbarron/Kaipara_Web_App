@@ -10,7 +10,6 @@ class Bookings{
     public $price;
     public $date;
     public $end_date;
-    public $end_date;
     public $start_time;
     public $finish_time;
     public $street;
