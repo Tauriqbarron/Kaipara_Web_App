@@ -70,7 +70,7 @@ class Bookings{
         AND
             b.id = s.staff_id
         GROUP BY
-            b.id
+            b.id,t.id,c.id,s.staff_id
         ORDER BY b.start_time';
     $stmt = $this->conn->prepare($query);
     $stmt->bindParam(1,$this->id);
