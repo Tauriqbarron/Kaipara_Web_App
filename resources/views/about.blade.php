@@ -27,7 +27,7 @@
                 <span class="fa-stack mx-4">
                     <i class="fa fa-square fa-stack-2x text-secondary"></i>
                     <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                </span>service@KSPMS.co.nz
+                </span>helpdesk@kspms.co.nz
             </div>
             <div class="col">
                 <div class="row">
@@ -66,7 +66,9 @@
             <div class="col-3 mr-4 bg-light rounded">
                 <form>
                     <div class="form-row">
-                        <h3 class="form-text">Query</h3>
+                        <div class="col text-center">
+                            <h3 class="form-text">Contact Us</h3>
+                        </div>
                     </div>
                     <div class="form-row my-2">
                         <input type="text" name="name" class="form-control" placeholder="Name">
@@ -82,7 +84,7 @@
                         <textarea type="text" name="message" class="form-control" placeholder="Message"></textarea>
                     </div>
                     <div class="form-row my-2">
-                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <input type="submit" class="btn btn-primary w-100" value="Submit">
                     </div>
                 </form>
             </div>

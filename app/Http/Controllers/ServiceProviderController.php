@@ -282,33 +282,20 @@ class ServiceProviderController extends Controller
     }
 
     public function postImageUpload(){
-
         $userId = Auth::guard('service_provider')->user()->id;
         $user = service_provider::query()->find($userId);
-
         request()->validate([
 
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
         ]);
-
-
-
         $imageName = time().'.'.request()->image->getClientOriginalExtension();
-
-
-
-
         request()->image->move(public_path('images'), $imageName);
         $user->imgPath = 'images/' . $imageName;
         $user->save();
-
         return back()
-
             ->with('success','You have successfully upload image.')
-
             ->with('image',$imageName);
-
     }
 
 }
