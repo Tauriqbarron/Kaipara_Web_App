@@ -61,8 +61,12 @@ class Bookings{
             booking__types t ON b.booking_type_id = t.id
         JOIN
             clients c ON b.client_id = c.id
+       JOIN
+            staff__assignments s ON b.id = s.staff_id
         WHERE
             b.id = ?
+        AND
+            b.id = s.staff_id
         ORDER BY b.start_time';
     $stmt = $this->conn->perpare($query);
     $stmt->bindParam(1,$this->id);
