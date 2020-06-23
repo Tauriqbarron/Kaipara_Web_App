@@ -46,7 +46,6 @@ class Bookings{
         public function getStaffBookings(){
         $query = '
             b.id,
-            b.client_id,
             b.description,
             b.start_time,
             b.finish_time,
