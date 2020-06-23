@@ -45,6 +45,12 @@
                                     <p class="card-text">{{$app->description}}</p>
                                     <strong>Address: </strong>
                                     <p class="card-text">{{$app->street}}, {{$app->suburb}}, {{$app->city}}</p>
+                                    <strong>Date: </strong>
+                                    @if($app->date != null)
+                                        <p class="card-text">{{$app->date}}</p>
+                                        @else
+                                    <p class="card-text">Pending</p>
+                                        @endif
                                 </div>
                             </div>
                             <br/>
@@ -86,6 +92,9 @@
                 @endforeach
             </div>
         </div>
+    </div>
+    <div class="float-right" style="margin-top: 450px">
+        {!! $applications->links() !!}
     </div>
 
     <script>
