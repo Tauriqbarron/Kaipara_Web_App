@@ -44,7 +44,7 @@ class Bookings{
         return $stmt;
     }
         public function getStaffBookings(){
-        $query = '
+        $query = 'SELECT
             b.id,
             b.description,
             b.start_time,
