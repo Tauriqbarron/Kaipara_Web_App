@@ -20,22 +20,10 @@ if(isset($_GET['email'])){
 
 
 $result = $staff->getId();
-$num = $result->rowCount();
+$service_arr = array();
 
+$service_arr = array(
+    'id'=> $service->id
+);
 
-if($num > 0 ){
-    $staff_arr = array();
-
-    while($row = $result->fetch(PDO::FETCH_ASSOC)){
-        extract($row);
-        $staff_item = array(
-            'id'=>$id,
-        );
-        array_push($staff_arr,$staff_item);
-    }
-    echo json_encode($staff_arr);
-}else{
-    echo josn_encode(
-        array('message'=>'No Applications Found')
-    );
-}
+print_r(json_encode($service_arr));
