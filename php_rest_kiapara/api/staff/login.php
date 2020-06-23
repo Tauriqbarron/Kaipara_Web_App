@@ -29,7 +29,7 @@ if(isset($_GET['password'])){
 
 $staff->login();
 
-if (password_verify($passCheck,$client->password)){
+if (password_verify($passCheck,$staff->password)){
     echo json_encode(
    array('message'=>'Pass')
 );
