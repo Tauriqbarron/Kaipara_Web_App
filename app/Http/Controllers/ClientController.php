@@ -39,14 +39,14 @@ class ClientController extends Controller
     //Update a client details.
     public function postEdit(Request $request) {
         $validator = Validator::make($request->all(), [
-            'pNumber'=>'required|max:11',
-            'street'=>'required',
-            'suburb'=>'required',
-            'city'=>'required',
+            'pNumber'=>'required|max:13|regex:/^(\(02[0-9]{1}\)\-)([0-9]{7})/',
+            'street'=>'required|regex:/^[A-Za-z0-9\s?]+$/',
+            'suburb'=>'required|regex:/^[A-Za-z\s?]+$/',
+            'city'=>'required|regex:/^[A-Za-z\s?]+$/',
             'postcode'=>'required'
         ]);
         if($validator->fails()) {
-            return redirect()->route('security.index')
+            return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -57,7 +57,7 @@ class ClientController extends Controller
         $client->city = $request->input('city');
         $client->postcode = $request->input('postcode');
         $client->save();
-        return redirect()->route('client.dashboard')->with('message', 'Details updated');
+        return redirect()->back()->with('message', 'Details updated');
     }
 
 
