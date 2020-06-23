@@ -68,7 +68,7 @@ class Bookings{
         AND
             b.id = s.staff_id
         ORDER BY b.start_time';
-    $stmt = $this->conn->perpare($query);
+    $stmt = $this->conn->prepare($query);
     $stmt->bindParam(1,$this->id);
     $stmt->execute();
     return $stmt;
