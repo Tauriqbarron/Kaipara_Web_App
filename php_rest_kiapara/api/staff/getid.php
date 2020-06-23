@@ -20,10 +20,10 @@ if(isset($_GET['email'])){
 
 
 $result = $staff->getId();
-$service_arr = array();
+$staff_arr = array();
 
-$service_arr = array(
-    'id'=> $service->id
+$staff_arr = array(
+    'id'=> $staff->id
 );
 
-print_r(json_encode($service_arr));
+print_r(json_encode($staff_arr));
