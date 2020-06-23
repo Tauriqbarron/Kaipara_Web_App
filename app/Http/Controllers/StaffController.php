@@ -38,7 +38,6 @@ class StaffController extends Controller
             $staff_bookings = $bookings->whereIn('id', $staff_assignments)
                 ->where('date','<=', Carbon::parse(Session::get('date1'))->format('Y-m-d'))
                 ->where('end_date','>=', Carbon::parse(Session::get('date1'))->format('Y-m-d'))
-                ->where('status', '=', 'assigned')
                 ->sortBy('date',1)
                 ->sortBy('start_time', 1);
 
