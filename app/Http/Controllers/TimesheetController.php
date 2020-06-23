@@ -62,8 +62,10 @@ class TimesheetController extends Controller
             $timesheet->stop_time = now("NZ")->hour+(now("NZ")->minute*0.01);
             $timesheet->status = 2;
             $booking = Booking::query()->find($timesheet->staff_assignment->booking_id);
-            if(today('NZ') == Carbon::parse($booking->end_date)){
+
+            if(today('NZ')->format('Y-m-d') == Carbon::parse($booking->end_date)->format('Y-m-d')){
                 $booking->status = 'complete';
+                $booking->save();
             }
             $user = Staff::query()->find(Auth::guard('staff')->user()->id);
             $user->current_timesheet_id = null;

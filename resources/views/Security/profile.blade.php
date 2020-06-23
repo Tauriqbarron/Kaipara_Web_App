@@ -123,6 +123,22 @@
                                                     {{$booking->street}}<br>{{$booking->suburb}}<br>{{$booking->city}}, {{$booking->postcode}}
                                                 </div>
                                             </div>
+                                            <div class="row pl-2">
+                                                <div class="col-3">
+                                                    <strong>Client Name</strong>
+                                                </div>
+                                                <div class="col-9">
+                                                    {{$booking->client->first_name}} {{$booking->client->last_name}}
+                                                </div>
+                                            </div>
+                                            <div class="row pl-2">
+                                                <div class="col-3">
+                                                    <strong>Phone</strong>
+                                                </div>
+                                                <div class="col-9">
+                                                    {{$booking->client->phone_number}}
+                                                </div>
+                                            </div>
 
                                         </div>
                                     </td>
