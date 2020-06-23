@@ -56,7 +56,7 @@ class AdminSecurityAssignmentController extends Controller
             'description' => 'required',
             'date' => 'required|date|date_format:Y-m-d|after:today',
             'end_date' => 'required|date|date_format:Y-m-d|after:today',
-            'street'=>'required|regex:/^[A-Za-z0-9\s?]+$/',
+            'street'=>'required|regex:/^[A-Za-z0-9\s?\-?\.?]+$/',
             'suburb'=>'required|regex:/^[A-Za-z\s?]+$/',
             'city'=>'required|regex:/^[A-Za-z\s?]+$/',
             'postcode'=>'required|digits:4',

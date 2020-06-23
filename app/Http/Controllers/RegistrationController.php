@@ -30,7 +30,7 @@ class RegistrationController extends Controller
             'first_name' => 'required|max:50|regex:/^[A-Za-z]+$/',
             'last_name' => 'required|max:50|regex:/^[A-Za-z]+$/',
             'email' => 'required|email|max:50|unique:clients',
-            'phone_number1'=>'required|regex:/(02[0-9])/',
+            'phone_number1'=>'required|max:3|regex:/(02[0-9])/',
             'phone_number2'=>'required|digits_between:7, 10',
             'password' => 'required|min:8|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/|confirmed'
         ]);
@@ -102,7 +102,7 @@ class RegistrationController extends Controller
             'last_name' => 'required|max:50|regex:/^[A-Za-z]+$/',
             'email' => 'required|email|max:50|unique:service_providers',
             'username' => 'required|max:50',
-            'phone_number1'=>'required|regex:/(02[0-9])/',
+            'phone_number1'=>'required|max:3|regex:/(02[0-9])/',
             'phone_number2'=>'required|digits_between:7, 10',
             'password' => 'required|min:8|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/|confirmed'
         ]);
