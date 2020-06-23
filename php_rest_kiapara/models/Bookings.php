@@ -59,11 +59,11 @@ class Bookings{
             c.phone_number as number
         From
             ' . $this->table .' b
-        JOIN
+        LEFT JOIN
             booking__types t ON b.booking_type_id = t.id
-        JOIN
+        LEFT JOIN
             clients c ON b.client_id = c.id
-       JOIN
+        LEFT JOIN
             staff__assignments s ON b.id = s.staff_id
         WHERE
             b.id = ?
