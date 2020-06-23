@@ -1,6 +1,6 @@
 <?php
 
-class Applications{
+class Staff{
     private $conn;
     private $table = 'staff';
     public  $id;
