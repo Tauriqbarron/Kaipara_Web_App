@@ -44,6 +44,7 @@ class StaffController extends Controller
             $availableBookings = $bookings->whereNotIn('id', $staff_assignments)
                 ->where('date', '>=', today("NZ"))
                 ->where('available_slots','>','0')
+                ->where('status', '=', 'available')
                 ->sortBy('date',1)
                 ->sortBy('start_time', 1);
 

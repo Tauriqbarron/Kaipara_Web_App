@@ -43,4 +43,37 @@ class Bookings{
         $stmt->execute();
         return $stmt;
     }
+        public function getStaffBookings(){
+        $query = 'SELECT
+            b.id,
+            b.date,
+            b.end_date,
+            b.description,
+            b.start_time,
+            b.finish_time,
+            b.street,
+            b.suburb,
+            t.description as type,
+            c.first_name as fname,
+            c.last_name as lname,
+            c.phone_number as number
+        From
+            ' . $this->table .' b
+        JOIN
+            booking__types t ON b.booking_type_id = t.id
+        JOIN
+            clients c ON b.client_id = c.id
+       JOIN
+            staff__assignments s ON b.id = s.staff_id
+        WHERE
+            b.id = ?
+        AND
+            b.id = s.staff_id
+        ORDER BY b.start_time';
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(1,$this->id);
+    $stmt->execute();
+    return $stmt;
+
+    }
 }

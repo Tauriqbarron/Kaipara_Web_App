@@ -93,6 +93,22 @@
                                                         {{$booking->street}}<br>{{$booking->suburb}}<br>{{$booking->city}}, {{$booking->postcode}}
                                                     </div>
                                                 </div>
+                                                <div class="row pl-2">
+                                                    <div class="col-2">
+                                                        <strong>Client Name</strong>
+                                                    </div>
+                                                    <div class="col-10">
+                                                        {{$booking->client->first_name}} {{$booking->client->last_name}}
+                                                    </div>
+                                                </div>
+                                                <div class="row pl-2">
+                                                    <div class="col-2">
+                                                        <strong>Phone</strong>
+                                                    </div>
+                                                    <div class="col-10">
+                                                        {{$booking->client->phone_number}}
+                                                    </div>
+                                                </div>
 
                                             </div>
                                         </td>
