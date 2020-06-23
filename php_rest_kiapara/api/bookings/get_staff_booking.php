@@ -12,7 +12,7 @@ $bookings = new Bookings($db);
 
 
 if(isset($_GET['id'])){
-    $bookings->id = $_GET['id'];
+    $bookings->s_id = $_GET['id'];
 }else{
     echo json_encode(
         array('message'=>'id not set')
