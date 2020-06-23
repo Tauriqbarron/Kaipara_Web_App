@@ -51,7 +51,7 @@ class Bookings{
             b.finish_time,
             b.street,
             b.suburb,
-            t.descriptione as type,
+            t.description as type,
             c.first_name as fname,
             c.last_name as lname,
             c.phone_number as number
