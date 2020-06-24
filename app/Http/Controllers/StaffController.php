@@ -71,11 +71,12 @@ class StaffController extends Controller
 
     public function postFeedback(Request $request){
         $validator = Validator::make($request->all(), [
-           'rating' => 'required|numeric|max:5|min:1',
+           'star' => 'required|numeric|max:5|min:1',
            'message' => 'required|max:300|regex:/^[A-Za-z0-9\s?]+$/',
            'staff_assignment_id' => 'required|numeric|exists:App\Staff_Assignment,id'
         ]);
         if($validator->fails()){
+            error_log($validator->getMessageBag());
             return redirect()->back()->withErrors($validator);
         }
         $staff_assignment = Staff_Assignment::query()->find($request->input('staff_assignment_id'));
@@ -90,6 +91,7 @@ class StaffController extends Controller
             'client_id' => $client->id
         ]);
         $feedback->save();
+        error_log('------------------------------success-------------------');
 
         return redirect()->back()->with('message', 'Feedback Sent');
     }
