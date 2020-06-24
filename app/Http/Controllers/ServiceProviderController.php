@@ -168,7 +168,7 @@ class ServiceProviderController extends Controller
             'price' => $request->input('price'),
             'estimate_hours' => $request->input('hour'),
             'message' => $request->input('message'),
-            'status' => 2,
+            'status' => 1,
         ]);
         $quote->save();
 
