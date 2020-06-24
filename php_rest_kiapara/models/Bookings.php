@@ -16,6 +16,7 @@ class Bookings{
     public $suburb;
     public $city;
     public $s_id;
+    public $type;
 
     public function __construct($db){
         $this->conn = $db;
@@ -24,20 +25,23 @@ class Bookings{
     
     public function getClientBookings(){
         $query = 'SELECT 
-            id,
-            client_id,
-            status,
-            description,
-            price,
-            date,
-            end_date,
-            start_time,
-            finish_time,
-            street,
-            suburb,
-            city
+            b.id,
+            b.client_id,
+            b.status,
+            b.description,
+            b.price,
+            b.date,
+            b.end_date,
+            b.start_time,
+            b.finish_time,
+            b.street,
+            b.suburb,
+            b.city
+            t.description as type
         FROM
         ' . $this->table .'
+        JOIN 
+            booking__types t ON b.booking_type_id = t.id
         WHERE
             client_id = ?';
         $stmt = $this->conn->prepare($query);
