@@ -325,6 +325,7 @@ class ClientController extends Controller
             ]);
             $service_provider_job->save();
             $quote->status = 2;
+            $quote->save();
             return redirect()->route('client.jobs')->with('message', 'Quote Accepted');
         }
     }
