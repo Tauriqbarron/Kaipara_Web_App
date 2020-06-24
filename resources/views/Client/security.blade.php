@@ -54,7 +54,7 @@
                         <label for="message"><h4>Description</h4></label>
                     </div>
                     <div class="form-row my-1 mb-2">
-                        <textarea name="message" placeholder="The cat was playing in the garden." rows="6" class="form-control w-100" onchange="document.getElementById('description').innerHTML = this.value" required></textarea>
+                        <textarea name="message" placeholder="Please include any important details." rows="6" class="form-control w-100" onchange="document.getElementById('description').innerHTML = this.value" required></textarea>
                     </div>
                     <div class="form-group my-3">
                         <div class="form-check">

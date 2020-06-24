@@ -60,7 +60,7 @@
                 </div>
                 <div class="form-row my-2">
                     <div class="col">
-                        <textarea id="message"rows="6" cols="30" class="form-control" maxlength="300" placeholder="The cat was playing in the garden." onchange="document.getElementById('description').innerHTML = this.value" required></textarea>
+                        <textarea id="message"rows="6" cols="30" class="form-control" maxlength="300" placeholder="Please include any important details." onchange="document.getElementById('description').innerHTML = this.value" required></textarea>
                     </div>
                 </div>
                 <div class="form-group my-3">
