@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Query\Builder;
 use App\Staff;
 use MaddHatter\LaravelFullcalendar\Calendar;
+use Illuminate\Support\Str;
 
 class AdminStaffController extends Controller
 {
@@ -64,7 +65,7 @@ class AdminStaffController extends Controller
             'last_name' => $request->input('last_name'),
             'email' => $request->input('email'),
             'phone_number' => '('.$request->input('phone_number1').')-'.$request->input('phone_number2'),
-            'password' => Hash::make(str_random(8)),
+            'password' => Hash::make(Str::random(8)),
             'street' => $request->input('street'),
             'suburb' => $request->input('suburb'),
             'city' => $request->input('city'),
