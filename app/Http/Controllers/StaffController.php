@@ -41,12 +41,13 @@ class StaffController extends Controller
                 ->sortBy('date',1)
                 ->sortBy('start_time', 1);
 
-            $availableBookings = $bookings->whereNotIn('id', $staff_assignments)
+            $availableBookings = Booking::query()->whereNotIn('id', $staff_assignments)
                 ->where('date', '>=', today("NZ"))
                 ->where('available_slots','>','0')
                 ->where('status', '=', 'available')
-                ->sortBy('date',1)
-                ->sortBy('start_time', 1);
+                ->orderBy('date','asc')
+                ->orderBy('start_time', 'asc')
+                ->paginate(10);
 
             $completedBookings = $bookings->whereIn('id', $staff_assignments)
                 ->where('date', '<=', today("NZ"))

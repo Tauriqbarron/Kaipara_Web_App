@@ -243,11 +243,11 @@
                                     </tr>
 
                                 @endif
-                                @break
                             @endif
                         @endforeach
                     @endif
                 @endforeach
+                <tr><td colspan="6" class="text-right">{{$availableAssignments->links()}}</td></tr>
                 </tbody>
             </table>
         </div>
