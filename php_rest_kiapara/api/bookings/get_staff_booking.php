@@ -46,7 +46,7 @@ if($num > 0){
     }
     echo json_encode($bookings_arr);
 }else{
-    echo josn_encode(
+    echo json_encode(
         array('message'=>'No Bookings Found')
     );
 }
