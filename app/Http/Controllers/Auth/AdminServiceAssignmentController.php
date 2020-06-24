@@ -75,7 +75,7 @@ class AdminServiceAssignmentController extends Controller
             'job__type_id' => $request->input('job_type')
         ]);
         $assignment->save();
-        return redirect()->route('admin.service.index')->with('message', 'New security assignment created.');
+        return redirect()->route('admin.service.index')->with('message', 'New property service assignment created.');
 
     }
 

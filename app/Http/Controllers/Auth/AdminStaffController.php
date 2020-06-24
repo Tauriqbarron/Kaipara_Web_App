@@ -207,7 +207,7 @@ class AdminStaffController extends Controller
     //Update the existing roster.
     public function uRoster(Request $request) {
         $validator = Validator::make($request->all(), [
-            'date' => 'required|date|date_format:Y-m-d'
+            'date' => 'required|date|date_format:Y-m-d|after_or_equal:date'
         ]);
         if($validator->fails()) {
             return redirect()->back()

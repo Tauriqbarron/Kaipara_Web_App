@@ -35,8 +35,8 @@
                                         @endif
                                         <br/><input type="hidden" name="end_date" value="{{date('Y-m-d')}}">
                                         @if($job->application->status == 2)
-                                            <a href="{{route('service.job.start', ['id' => $job->application->id])}}" class="btn btn-success float-right mx-auto">Start Job</a>
-                                            <button type="submit" class="btn btn-primary float-right mx-1">Cancel</button>
+                                                <a href="{{route('service.job.start', ['id' => $job->application->id])}}" class="btn btn-success float-right mx-auto">Start Job</a>
+                                                <button type="submit" class="btn btn-primary float-right mx-1">Cancel</button>
                                         @elseif($job->application->status == 3)
                                             <a href="{{route('service.job.complete', ['id' => $job->application->id])}}" class="btn btn-success float-right">Complete</a>
                                             <button type="submit" class="btn btn-primary float-right mx-1">Cancel</button>
