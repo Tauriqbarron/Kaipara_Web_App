@@ -38,7 +38,7 @@ if($num > 0 ){
     }
     echo json_encode($applications_arr);
 }else{
-    echo josn_encode(
+    echo json_encode(
         array('message'=>'No Applications Found')
     );
 }

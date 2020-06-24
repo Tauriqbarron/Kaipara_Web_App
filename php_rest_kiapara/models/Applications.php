@@ -103,4 +103,34 @@ class Applications{
         $stmt->execute();
         return $stmt;
     }
+        public function getCurrentApplications(){
+        $query ='SELECT
+        p.status,
+        p.imagePath,
+        p.title,
+        p.description,
+        p.end_date,
+        p.price,
+        p.date,
+        p.street,
+        p.suburb,
+        p.city,
+        c.fname as first_name,
+        c.lname as last_name,
+        c.number as phone_number
+    FROM
+        ' . $this->table .' p
+    JOIN 
+        clients c ON p.client_id = c.id
+    JOIN
+        service__provider__jobs j ON p.id = j.job_id
+    JOIN
+        service_providers s ON j.service_provider_id = s.id
+    WHERE
+        s.id = ?';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1,$this->s_id);
+        $stmt->execute();
+        return $stmt;
+    }
 }
