@@ -153,7 +153,7 @@ class ServiceProviderController extends Controller
         $validator = Validator::make($request->all(), [
             'price' => 'required|numeric',
             'hour' => 'required|numeric',
-            'message' => 'required',
+            'message' => 'required|regex:/^[A-Za-z0-9\s?]+$/',
         ]);
 
         if($validator->fails()) {
@@ -168,7 +168,7 @@ class ServiceProviderController extends Controller
             'price' => $request->input('price'),
             'estimate_hours' => $request->input('hour'),
             'message' => $request->input('message'),
-            'status' => 2,
+            'status' => 1,
         ]);
         $quote->save();
 
@@ -255,7 +255,7 @@ class ServiceProviderController extends Controller
     public function postFeedback(Request $request){
         $validator = Validator::make($request->all(), [
             'star' => 'required|numeric|max:5|min:1',
-            'message' => 'required|max:300',
+            'message' => 'required|max:300|regex:/^[A-Za-z0-9\s?]+$/',
             'service_provider_job_id' => 'required|numeric|exists:App\Service_Provider_Job,id'
         ]);
         if($validator->fails()){

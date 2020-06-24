@@ -17,7 +17,7 @@ class ApplicationsController extends Controller
         $applications = applications::where('status','=','1')->whereNotIn('id', function ($query) {
             $sp_id = auth()->guard('service_provider')->id();
             $query->select('job_id')->where('service_provider_id', '=', $sp_id)->from('quotes');
-        })->get();
+        })->paginate(5);
 
         return view('Service.applications',['applications' => $applications]);
     }

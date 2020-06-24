@@ -372,7 +372,7 @@ class ClientController extends Controller
     public function postFeedback(Request $request){
         $validator = Validator::make($request->all(), [
             'star' => 'required|numeric|max:5|min:1',
-            'message' => 'required|max:300',
+            'message' => 'required|max:300|regex:/^[A-Za-z0-9\s?]+$/',
             'staff_assignment_id' => 'required|numeric|exists:App\Staff_Assignment,id'
         ]);
         if($validator->fails()){
@@ -395,7 +395,7 @@ class ClientController extends Controller
     public function postServiceFeedback(Request $request){
         $validator = Validator::make($request->all(), [
             'star' => 'required|numeric|max:5|min:1',
-            'message' => 'required|max:300',
+            'message' => 'required|max:300|regex:/^[A-Za-z0-9\s?]+$/',
             'service_provider_job_id' => 'required|numeric|exists:App\Service_Provider_Job,id'
         ]);
         if($validator->fails()){

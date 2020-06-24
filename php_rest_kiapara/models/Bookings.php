@@ -15,6 +15,7 @@ class Bookings{
     public $street;
     public $suburb;
     public $city;
+    public $s_id;
 
     public function __construct($db){
         $this->conn = $db;
@@ -63,12 +64,12 @@ class Bookings{
             booking__types t ON b.booking_type_id = t.id
         JOIN
             clients c ON b.client_id = c.id
-       JOIN
-            staff__assignments s ON b.id = s.staff_id
-        WHERE
-            b.id = ?
-        AND
-            b.id = s.staff_id
+        JOIN
+            staff__assignments s ON b.id = s.booking_id
+        JOIN
+            staff g ON s.staff_id = g.id
+        Where 
+            g.id = ?
         ORDER BY b.start_time';
     $stmt = $this->conn->prepare($query);
     $stmt->bindParam(1,$this->id);
