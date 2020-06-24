@@ -46,34 +46,15 @@ class Bookings{
         return $stmt;
     }
         public function getStaffBookings(){
-        $query = 'SELECT
-            b.id,
-            b.date,
-            b.end_date,
-            b.description,
-            b.start_time,
-            b.finish_time,
-            b.street,
-            b.suburb,
-            t.description as type,
-            c.first_name as fname,
-            c.last_name as lname,
-            c.phone_number as number,
-            g.id
-        From
-            ' . $this->table .' b
-        JOIN
-            booking__types t ON b.booking_type_id = t.id
-        JOIN
-            clients c ON b.client_id = c.id
-        JOIN
-            staff__assignments s ON b.id = s.booking_id
-        JOIN
-            staff g ON s.staff_id = g.id
-        Where 
-            g.id = ?';
+        $query = 'SELECT `bookings`.*, `booking__types`.`description`, `clients`.`first_name`, `staff__assignments`.`booking_id`, `staff__assignments`.`staff_id`, `staff`.`id`
+FROM `bookings` 
+	LEFT JOIN `booking__types` ON `bookings`.`booking_type_id` = `booking__types`.`id` 
+	LEFT JOIN `clients` ON `bookings`.`client_id` = `clients`.`id` 
+	LEFT JOIN `staff__assignments` ON `staff__assignments`.`booking_id` = `bookings`.`id` 
+	LEFT JOIN `staff` ON `staff__assignments`.`staff_id` = `staff`.`id`
+    WHERE staff.id = ?';
     $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(1,$this->id);
+    $stmt->bindParam(1,$this->s_id);
     $stmt->execute();
     return $stmt;
 
