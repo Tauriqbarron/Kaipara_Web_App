@@ -57,7 +57,7 @@ class Bookings{
             t.description as type,
             c.first_name as fname,
             c.last_name as lname,
-            c.phone_number as number,
+            c.phone_number as number
         From
             ' . $this->table .' b
         JOIN
