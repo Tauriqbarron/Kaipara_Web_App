@@ -2,8 +2,8 @@
 <html>
     <head>
         <title>@yield('pageTitle') | Kaipara Security and Property Management Services</title>
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href={{url('/favicon.ico')}} type="image/x-icon">
+        <link rel="icon" href={{url('/favicon.ico')}} type="image/x-icon">
         <link rel="stylesheet" href="{{url('css/Profile.css')}}" type="text/css"/>
         <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -113,9 +113,9 @@
                 @yield('mainContent')
             </div>
 
-
-            @include('Security.footer')
-
+            <div class="container-fluid">
+                @include('Security.footer')
+            </div>
 
         </div>
 

@@ -38,12 +38,12 @@
                     </div>
                     <div class="card-body container w-100">
                         <a href="#" class="row nav-link">Dashboard</a>
-                        <a href="#" class="row nav-link">Book a Security Job</a>
-                        <a href="#" class="row nav-link">Book a Property Service</a>
-                        <a href="#" class="row nav-link">Your Security Bookings</a>
-                        <a href="#" class="row nav-link">Your Service Applications</a>
-                        <a href="#" class="row nav-link">Your Quotes</a>
-                        <a href="#" class="row nav-link">Your Information</a>
+                        <a href="{{route('client.security')}}" class="row nav-link">Book a Security Job</a>
+                        <a href="{{route('client.property')}}" class="row nav-link">Book a Property Service</a>
+                        <a href="{{route('client.bookings')}}" class="row nav-link">Your Security Bookings</a>
+                        <a href="{{route('client.jobs')}}" class="row nav-link">Your Service Applications</a>
+                        <a href="{{route('client.quotes')}}" class="row nav-link">Your Quotes</a>
+                        <a href="{{route('client.settings')}}" class="row nav-link">Your Information</a>
                     </div>
                 </div>
             </div>
