@@ -36,7 +36,7 @@ class Bookings{
             b.finish_time,
             b.street,
             b.suburb,
-            b.city
+            b.city,
             t.description as type
         FROM
         ' . $this->table .'
