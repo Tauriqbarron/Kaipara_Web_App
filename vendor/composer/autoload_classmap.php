@@ -4688,6 +4688,7 @@ return array(
     'Whoops\\Util\\TemplateHelper' => $vendorDir . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
     'XdgBaseDir\\Xdg' => $vendorDir . '/dnoegel/php-xdg-base-dir/src/Xdg.php',
     'add_completed_assignments_and_timesheets' => $baseDir . '/database/seeds/add_completed_assignments_and_timesheets.php',
+    'add_records_to_staff' => $baseDir . '/database/seeds/add_records_to_staff.php',
     'applicationsTableSeeder' => $baseDir . '/database/seeds/applicationsTableSeeder.php',
     'phpDocumentor\\Reflection\\DocBlock' => $vendorDir . '/phpdocumentor/reflection-docblock/src/DocBlock.php',
     'phpDocumentor\\Reflection\\DocBlockFactory' => $vendorDir . '/phpdocumentor/reflection-docblock/src/DocBlockFactory.php',

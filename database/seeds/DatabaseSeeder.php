@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
+        /*
         $this->call(AdminTableSeeder::class);
         $this->call(StaffTableSeeder::class);
         $this->call(ServiceSeeder::class);
@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call(BookingTypesTableSeeder::class);
         $this->call(add_completed_assignments_and_timesheets::class);
         $this->call(AbsenceTypesSeeder::class);
-        $this->call(AbsenceStatusSeeder::class);
+        $this->call(AbsenceStatusSeeder::class);*/
+        $this->call(add_records_to_staff::class);
 
 
 

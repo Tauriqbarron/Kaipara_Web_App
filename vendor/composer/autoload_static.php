@@ -5211,6 +5211,7 @@ class ComposerStaticInit62d9ea2a1f53928317c40ca3a96bceed
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
         'XdgBaseDir\\Xdg' => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src/Xdg.php',
         'add_completed_assignments_and_timesheets' => __DIR__ . '/../..' . '/database/seeds/add_completed_assignments_and_timesheets.php',
+        'add_records_to_staff' => __DIR__ . '/../..' . '/database/seeds/add_records_to_staff.php',
         'applicationsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/applicationsTableSeeder.php',
         'phpDocumentor\\Reflection\\DocBlock' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock.php',
         'phpDocumentor\\Reflection\\DocBlockFactory' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactory.php',

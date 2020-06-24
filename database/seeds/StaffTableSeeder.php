@@ -63,5 +63,21 @@ class StaffTableSeeder extends Seeder
             'postcode' => 6037
         ]);
         $staff->save();
+
+        $staff = new \App\Staff([
+            "first_name" => "Henry",
+            "last_name" => "Kuhlman",
+            "email" => "Christian.Kulas@hotmail.com",
+            "password" => "wnYuYiLrjSGNTx8",
+            "street" => "46331 Elizabeth Loop",
+            "suburb" => "Port Anna",
+            "city" => "Berkshire",
+            "postcode" => 6270
+        ]);
+        $staff->save();
+
+
     }
+
+
 }
