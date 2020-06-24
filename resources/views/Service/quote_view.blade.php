@@ -33,7 +33,13 @@
                                 <p class="card-text">{{$quote->price}}$</p>
                                 <label><strong>Message sent: </strong></label>
                                 <p class="card-text">{{$quote->message}}</p>
-                                <button type="submit" class="btn btn-secondary float-right">Cancel</button>
+                                <label><strong>Message sent: </strong></label>
+                                @if($quote->status == 1)
+                                    <p class="card-text">pending</p>
+                                    <button type="submit" class="btn btn-secondary float-right">Cancel</button>
+                                @elseif($quote->status == 2)
+                                    <p class="card-text">accepted</p>
+                                    <button type="submit" class="btn btn-secondary disabled float-right">Cancel</button>
                             </div>
                             <!--Quote detail end-->
                         </div>
