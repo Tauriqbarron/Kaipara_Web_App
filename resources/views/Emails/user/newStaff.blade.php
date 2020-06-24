@@ -7,8 +7,8 @@ Welcome to Kaipara security and property management company, thank you for joini
     The email address you are using is {{$staff->email}}.
 @endcomponent
 
-@component('mail::button', ['url' => '/'])
-Button Text
+@component('mail::button', ['url' => route('staff.password.request')])
+Reset Password
 @endcomponent
 
 Thanks,<br>

@@ -37,27 +37,6 @@
             @enderror
         </div>
 
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="password" />
-            @error('password')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-            <p style="font-size: 13px">Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters.</p>
-        </div>
-
-        <div class="form-group">
-            <label for="password_confirmation">Confirm Password:</label>
-            <input name="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" placeholder="confirm password" />
-            @error('password_confirmation')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
-
         <label for="phone_number">Phone Number:</label>
         <div class="form-group row ml-0">
             <input name="phone_number1" style="width: 100px" class="form-control @error('phone_number1') is-invalid @enderror" placeholder="02x" value="{{old('phone_number1')}}"/>
@@ -117,6 +96,9 @@
                 @enderror
             </div>
         </div>
+        <div class="float-right text-danger">Staff will receive email to setting their password.</div>
+        <br/>
+        <br/>
         <a type="button" class="btn btn-danger" href="{{route('staff.index')}}">Back</a>
         <button type="submit" class="btn btn-primary float-right">Submit</button>
     </form>
