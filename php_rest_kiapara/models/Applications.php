@@ -116,9 +116,9 @@ class Applications{
         p.suburb,
         p.city,
         p.end_date,
-        c.fname as first_name,
-        c.lname as last_name,
-        c.number as phone_number
+        c.first_name as fname,
+        c.last_name as lname,
+        c.phone_number as number
     FROM
         ' . $this->table .' p
     JOIN 
