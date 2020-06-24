@@ -113,9 +113,9 @@
                 @yield('mainContent')
             </div>
 
-
-            @include('Security.footer')
-
+            <div class="container-fluid">
+                @include('Security.footer')
+            </div>
 
         </div>
 
