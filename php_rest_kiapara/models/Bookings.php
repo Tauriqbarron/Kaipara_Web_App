@@ -39,7 +39,7 @@ class Bookings{
             b.city,
             t.description as type
         FROM
-        ' . $this->table .'
+        ' . $this->table .' b
         JOIN 
             booking__types t ON b.booking_type_id = t.id
         WHERE
