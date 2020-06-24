@@ -71,7 +71,7 @@ class StaffController extends Controller
 
     public function postFeedback(Request $request){
         $validator = Validator::make($request->all(), [
-           'rating' => 'required|numeric|max:5|min:1',
+            'star' => 'required|numeric|max:5|min:1',
            'message' => 'required|max:300',
            'staff_assignment_id' => 'required|numeric|exists:App\Staff_Assignment,id'
         ]);
