@@ -40,6 +40,7 @@ if($num > 0){
             'suburb'=>$suburb,
             'city'=>$city,
             'end_date'=>$end_date
+            'type'=>$type
         );
         array_push($bookings_arr,$bookings_item);
     }
