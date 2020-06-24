@@ -57,7 +57,8 @@ class Bookings{
             t.description as type,
             c.first_name as fname,
             c.last_name as lname,
-            c.phone_number as number
+            c.phone_number as number,
+            g.id
         From
             ' . $this->table .' b
         JOIN
@@ -69,8 +70,7 @@ class Bookings{
         JOIN
             staff g ON s.staff_id = g.id
         Where 
-            g.id = ?
-        ORDER BY b.start_time';
+            g.id = ?';
     $stmt = $this->conn->prepare($query);
     $stmt->bindParam(1,$this->id);
     $stmt->execute();
