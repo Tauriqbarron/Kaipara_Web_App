@@ -153,7 +153,7 @@ class ServiceProviderController extends Controller
         $validator = Validator::make($request->all(), [
             'price' => 'required|numeric',
             'hour' => 'required|numeric',
-            'message' => 'required|regex:/^[A-Za-z0-9\s?]+$/',
+            'message' => 'required|max:300',
         ]);
 
         if($validator->fails()) {

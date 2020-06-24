@@ -64,7 +64,7 @@ class AdminStaffController extends Controller
             'last_name' => $request->input('last_name'),
             'email' => $request->input('email'),
             'phone_number' => '('.$request->input('phone_number1').')-'.$request->input('phone_number2'),
-            'password' => Hash::make('123456456'),
+            'password' => Hash::make(str_random(8)),
             'street' => $request->input('street'),
             'suburb' => $request->input('suburb'),
             'city' => $request->input('city'),
