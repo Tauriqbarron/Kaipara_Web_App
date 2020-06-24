@@ -21,6 +21,7 @@ class Bookings{
         $this->conn = $db;
     }
 
+    
     public function getClientBookings(){
         $query = 'SELECT 
             id,
@@ -57,7 +58,8 @@ class Bookings{
             t.description as type,
             c.first_name as fname,
             c.last_name as lname,
-            c.phone_number as number
+            c.phone_number as number,
+            g.id as staff_id
         From
             ' . $this->table .' b
         JOIN
@@ -65,14 +67,13 @@ class Bookings{
         JOIN
             clients c ON b.client_id = c.id
         JOIN
-            staff__assignments s ON b.id = s.booking_id
+            staff__assignments s ON s.booking_id = b.id
         JOIN
             staff g ON s.staff_id = g.id
         Where 
-            g.id = ?
-        ORDER BY b.start_time';
+            g.id = ?';
     $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(1,$this->id);
+    $stmt->bindParam(1,$this->s_id);
     $stmt->execute();
     return $stmt;
 
