@@ -21,6 +21,7 @@ class Bookings{
         $this->conn = $db;
     }
 
+    
     public function getClientBookings(){
         $query = 'SELECT 
             id,
