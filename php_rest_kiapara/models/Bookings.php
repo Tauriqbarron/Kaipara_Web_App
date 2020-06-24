@@ -69,7 +69,7 @@ class Bookings{
         JOIN
             staff g ON s.staff_id = g.id
         Where 
-            id = ?
+            g.id = ?
         ORDER BY b.start_time';
     $stmt = $this->conn->prepare($query);
     $stmt->bindParam(1,$this->id);
