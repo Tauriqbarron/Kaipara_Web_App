@@ -6,7 +6,7 @@
             <div id="cardHeader" class="card-header bg-light border-0 rounded">
                 <img class="w-100 align-top" src="{{url('images/Card_Header.png')}}" alt="Card top">
             </div>
-            <img id="card-img-top" class="card-img-top rounded-circle border-light shadow border-3 mr-auto ml-auto mb-auto" src="{{Auth()->guard('service_provider')->user()->imgPath}}" alt="Card image cap">
+            <img id="card-img-top" class="card-img-top rounded-circle border-light shadow border-3 mr-auto ml-auto mb-auto" src="{{isset(Auth()->guard('service_provider')->user()->imgPath) ? url(Auth()->guard('service_provider')->user()->imgPath) : url('images/Profile_Placeholder_Large.png')}}" alt="Card image cap">
             <div class="mt-4 card-body text-light">
                 <h5 class="card-title text-center">{{Auth()->guard('service_provider')->user()->firstname}} {{Auth()->guard('service_provider')->user()->lastname}}</h5>
                 <h5 class="card-title text-center">Ph: {{Auth()->guard('service_provider')->user()->phone_number}}</h5>
