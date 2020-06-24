@@ -115,6 +115,7 @@ class Applications{
         p.street,
         p.suburb,
         p.city,
+        p.end_date,
         c.fname as first_name,
         c.lname as last_name,
         c.number as phone_number
