@@ -304,6 +304,7 @@ class ClientController extends Controller
     public function declineQuote($id){
         $quote = quote::query()->find($id);
         $quote->status = 3;
+        $quote->save();
         return redirect()->back();
     }
     public function postAcceptQuote(Request $request){
