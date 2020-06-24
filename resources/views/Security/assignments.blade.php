@@ -106,6 +106,10 @@
                 @endforeach
                 </tbody>
             </table>
+
+            <div class="float-right mr-1 links">
+                {!! $availableBookings->links() !!}
+            </div>
         </div>
     </div>
     <h2 class="text-center" id="completed">Completed Assignments</h2>

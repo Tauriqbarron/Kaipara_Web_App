@@ -218,6 +218,10 @@ a.disabled{
     min-width:20px ;
 }
 
+.links li{
+    padding: 0;
+}
+
 .service-img{
     width:200px;
     height: 200px;
